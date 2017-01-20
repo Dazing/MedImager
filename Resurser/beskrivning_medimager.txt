@@ -1,0 +1,20 @@
+MedImager – sökning och organisering av kliniska bilder
+Projektkod: CIUX03-17-​13
+MedView är ett projekt som sedan slutet av 90-talet arbetat med att utveckla programvara för att stödja kliniskt arbete med fokus på området oral medicin. Projektet är ett samarbeta mellan Institutionen för Tillämpad IT vid Chalmers/Göteborgs universitet, Oral medicin vid Sahlgrenska akademin och Högskolan i Skövde. Projektet har också resulterat i en del kommersiell programvara som förvaltas av Spectacon AB. En hörnsten i MedView har varit att systematiskt dokumentera patienters hälsa med bild och text enligt givna formulär. Detta har resulterat i en unik databas bestående av närmare 70 000 bilder från ca 60 000 patientbesök. Ett problem är dock att det saknas verktyg som gör det möjligt att använda den kunskaps- och informationsbank som denna samling kliniska bilder utgör på ett effektivt sätt.
+
+Projekt- /problembeskrivning​
+Projekt MedImager går ut på att designa och bygga ett system som gör det möjligt att använda MedViews stora bilddatabank på ett effektivt sätt för kunskapsdelning och lärande. Systemet bör kunna fungera på flera nivåer. Dels för att låta enskilda personer organisera och lära sig från sina egna och andras bilder, dels för att låta flera personer samarbeta kring en bildsamling och göra den tillgänglig för andra på olika sätt. Det är avgörande att systemet får en ren och enkel design som gör det lätt att komma igång och jobba med bildmaterialet utan särskild utbildning eller stor datorvana. Projektet är öppet för olika val av teknisk lösning. Det finns ett existerande bibliotek skrivet i Java för grundläggande datahantering som kan utnyttjas.
+
+Litteraturförslag
+För tidigare arbete och mer information se:
+http://www.medview.se
+L. Gustavsson Christiernin, F. Lindahl, och O. Torgersson. 2004. Designing a multi-layered image viewer. (NordiCHI '04). DOI=http://dx.doi.org/10.1145/1028014.1028041
+Förkunskapskrav
+DAT216 Design och konstruktion av grafiska gränssnitt och/eller TDA289 Människa-datorinteraktion. Erfarenhet av webbutveckling är också en fördel.
+Gruppstorlek
+4-6
+
+Målgrupp
+DV, D, IT.
+Handledare
+Olof Torgersson (olof.torgersson@chalmers.se)
