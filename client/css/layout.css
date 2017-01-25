@@ -1,0 +1,14 @@
+/* Load when window is smaller then 600px */
+@media (max-width: 600px) {
+
+}
+
+/* Load when window is between then 600px and 800px */
+@media (min-width: 601px) and (max-width: 800px) {
+
+}
+
+/* Load when window is larger then 800px */
+@media (min-width: 801px) {
+
+}
