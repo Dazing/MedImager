@@ -1,2 +1,54 @@
-@import url("bootstrap/bootstrap.min.css");@import url("bootstrap/bootstrap-theme.min.css")
+/* @import url(''); */
+/* Bootstrap Imports */
+@import url("bootstrap/bootstrap.min.css");
+@import url("bootstrap/bootstrap-theme.min.css");
+/* Variables (Fonts, Colors etc) */
+/* Colors */
+/* Fonts */
+@font-face {
+  font-family: sspLight;
+  src: url("../fonts/SourceSansPro-Light.ttf"); }
+@font-face {
+  font-family: ssp;
+  src: url("../fonts/SourceSansPro-Regular.ttf"); }
+@font-face {
+  font-family: sspBold;
+  src: url("../fonts/SourceSansPro-Bold.ttf"); }
+/* Default Values */
+/* Reset */
+* {
+  padding: 0;
+  margin: 0; }
+
+/* Default font */
+p, h1, h2, h3, h4, h5 {
+  font-family: ssp; }
+
+/* Layout Styling */
+html, body {
+  width: 100%;
+  height: 100%; }
+
+/* Load when window is smaller then 600px */
+/* Load when window is between then 600px and 800px */
+/* Load when window is larger then 800px */
+/* Element Classes */
+/* Divs etc */
+#mainWrapper {
+  background-color: #EEE;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important; }
+
+#mainHeader {
+  background-color: #FFF;
+  height: 50px;
+  font-family: sspLight; }
+
+/* Buttons */
+/* Lists */
+/* Table */
+/* Images */
+/* Headings, Paragraphs etc */
+
 /*# sourceMappingURL=master.css.map */

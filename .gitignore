@@ -14,3 +14,6 @@ hs_err_pid*
 # OS X
 *.DS_Store
 .DS_Store
+
+# Sass #
+.sass-cache/

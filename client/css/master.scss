@@ -4,8 +4,12 @@
 @import url('bootstrap/bootstrap.min.css');
 @import url('bootstrap/bootstrap-theme.min.css');
 
+
 /* Variables (Fonts, Colors etc) */
 @import 'variables';
+
+/* Default Values */
+@import 'default_values';
 
 /* Layout Styling */
 @import 'layout';
