@@ -24,6 +24,8 @@
 	height: 50px;
 	background-image: url('../img/menu.png');
 	float: right;
+	border-radius: 10px;
+	border: 2px solid $light-blue;
 }
 
 /* Lists */
@@ -35,12 +37,31 @@
 /* Forms */
 .large-text-input {
 	width: 200px;
-	height: 50px;
+	height: 40px;
 }
 
 .large-submit-input {
-	width: 50px;
-	height: 50px;
+	width: 60px;
+	height: 40px;
+	background-color: $primary-white;
+	border-radius: 10px;
+	border: 2px solid $light-blue;
+	color: $blue;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #ccc;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #ccc;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #ccc;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #ccc;
 }
 
 /* Headings, Paragraphs etc */
