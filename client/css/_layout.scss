@@ -3,17 +3,78 @@ html, body {
 	height: 100%;
 }
 
+body {
+	min-width: $window-min-size; /* suppose you want minimun width of 1000px */
+	width: auto !important;  /* Firefox will set width as auto */
+	width: $window-min-size;
+}
+
 /* Load when window is smaller then 600px */
 @media (max-width: 600px) {
+	#searchWrapper {
+		width: 400px;
+		margin: 20px auto;
+	}
+
+	#basicSearch {
+		width: 260px;
+		margin: 0px auto;
+	}
+
+	#advancedSearch {
+
+	}
 
 }
 
 /* Load when window is between then 600px and 800px */
-@media (min-width: 601px) and (max-width: 800px) {
+@media (min-width: 601px) and (max-width: 900px) {
+	#searchWrapper {
+		width: 400px;
+		margin: 20px auto;
+	}
 
+	#basicSearch {
+		width: auto;
+		margin: 0px auto;
+	}
+
+	#advancedSearch {
+
+	}
 }
 
 /* Load when window is larger then 800px */
-@media (min-width: 801px) {
+@media (min-width: 900px) {
+	/* Index */
+	#loginWrapper{
+		width: 500px;
+		height: 100%;
+		float: left;
+	}
+	#searchSideWrapper {
+		min-width: 400px;
+		height: 100%;
+		float: left;
+	}
+	#quickSearch {
+		width: 400px;
+		margin: 200px auto;
+	}
 
+	/* Search */
+	#searchWrapper {
+		width: 400px;
+		margin: 20px auto;
+	}
+
+	#basicSearch {
+		width: 260px;
+		margin: 10px auto;
+	}
+
+	#advancedSearch {
+		width: 380px;
+		margin: 10px;
+	}
 }

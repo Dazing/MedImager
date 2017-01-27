@@ -9,23 +9,49 @@
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/master.js"></script>
 
+		<script src="https://use.typekit.net/fix8hel.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
 	</head>
 	<body>
 
 		<div id="mainWrapper" class="container-fluid">
 
-			<header id="mainHeader">
-				<a href="#">MED IMAGER</a>
+			<div id="loginWrapper">
+				<h2><span>MED</span>Imager</h2>
 
-			</header>
+				<form action="login" method="post">
+					<input class="large-text-input" type="text" name="username" placeholder="Username">
+					<input class="large-text-input" type="password" name="password" placeholder="Password">
+			
+					<input class="large-submit-input button" type="submit" name="submit" value="Login">
+					<button class="button extraLargeButton submitButton">Register</button>
+					
+					
+				</form>
+			</div>
+	
+			<div id="searchSideWrapper">
+				
+				<div class="elementDiv" id="quickSearch">
+					<h2>Quick Search</h2> 
+					
+					<form class="" action="search.html" method="post">
+						<div id="basicSearch">
+							<input class="large-text-input" type="text" name="searchTerm" placeholder="Search for term">
 
-			<form class="" action="search.html" method="post">
-				<input class="large-text-input" type="text" name="" placeholder="Search for term">
-				<input class="large-submit-input" type="submit" name="" value="Submit">
-				<div class="button" id="search-div"></div>
-			</form>
+							<input class="large-submit-input" type="submit" name="submit" value="Submit">
+							
+						</div>
+
+					</form>
+
+				</div>
+
+			</div>
 
 		</div>
 
 	</body>
+
 </html>

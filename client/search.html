@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MedImager</title>
+
+		<link rel="stylesheet" href="css/master.css">
+
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/master.js"></script>
+	
+		<script src="https://use.typekit.net/fix8hel.js"></script>
+		<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+	</head>
+	<body>
+
+		<div id="mainWrapper" class="container-fluid">
+
+			<header class="" id="mainHeader">
+				<a href="#"><h2 class="logo"><span>MED</span>Imager</h2></a>
+			</header>
+
+			<div class="elementDiv" id="searchWrapper">
+				<form class="" action="search.html" method="post">
+					<div id="basicSearch">
+						<input class="large-text-input" type="text" name="searchTerm" placeholder="Search for term">
+
+						<input class="large-submit-input" type="submit" name="submit" value="Submit">
+
+						<p class="button" id="toggleAdvSearch">Advanced Search</p>
+						
+					</div>
+					
+
+					<div id="advancedSearch">
+						<select name="year" id="">
+							<option value="2015">2015</option>
+							<option value="2014">2014</option>
+							<option value="2013">2013</option>
+						</select>
+						<select name="month" id="">
+							<option value="1">Januari</option>
+							<option value="2">Febuari</option>
+							<option value="3">Mars</option>
+						</select>
+						<input class="large-text-input" type="range" name="" min="1" max="50">
+					</div>
+
+				</form>
+
+
+
+			</div>
+
+
+		</div>
+
+	</body>
+
+</html>
