@@ -20,10 +20,6 @@ var index = require('./routes/index');
 var app = express();
 
 
-
-
-
-
 app.use(cookieParser());
 app.use(session({
     secret: 'shhhhhhhhhh', name: 'todolistcookie',
