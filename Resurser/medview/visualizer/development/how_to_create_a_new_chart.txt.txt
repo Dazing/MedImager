@@ -1,0 +1,49 @@
+1. Make a new View-class that extends View. Name it "YourChartNameView".
+    In the constructor of your class, make sure to call the constructor
+    of the View class.
+
+2. Implement the abstract methods in View:
+    
+    protected String getViewName():
+        This method should return the name of the type of chart.
+        For example: barchart, scatterplot, table...
+    
+    protected void invalidateView():
+        This method is called for every dataelement that is selected, so nothing
+        heavy should be done here.
+    
+    public void updateTermChoosers():
+        This method is called when a new term is created or when the user has
+        changed the choosen terms in the preferences.
+
+    And if you need to get informed of Aggregation changes then also implement the
+    following method:
+
+    protected void updateAggregation(Aggregation agg):
+        This method is called whenever the View needs to change its contents
+        because the active aggregation has changed.
+
+3. Create a new factory class that implements ViewFactory. Name it "YourChartNameViewFactory".
+
+4. Implement the abstract method in ViewFactory:
+    
+    public View createView(ExaminationDataSet dataSet):
+        This is called when the user wants to create a new view.
+
+5. Add to ChartButtonFactory a factory method:
+    
+    public static ChartButton createChartButton(YourChartNameViewFactory viewFactory)
+
+    ..that creates a ChartButton from the ViewFactory of your class.
+
+6. Write your chart.
+    
+7. Override the View method:
+    
+    public void validateView()
+
+    ...if needed, and don't forget to call super.validateView().
+
+8. Add your chartbutton on the appropriate place in initComponents() in ApplicationFrame.
+
+    

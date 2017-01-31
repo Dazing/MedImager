@@ -1,0 +1,39 @@
+BZ = Inlagd i bugzilla.
+
+00001. Om man försöker läsa in ett andra dataset efter ett dataset så kommer ändå det första att läsas in igen.
+00003. Filväljaren slö (ikoner läses in) när man skall läsa in MedViewdatabas
+00006. Om man klickar "Cancel" eller stänger ProgressMonitorn när data eller session laddas så försvinner ApplicationFrame
+        till bakgrunden. Ett workaround har gjorts så att ApplicationFrame kommer tillbaka, men den blinkar ändå till.
+00008. Gruppruta fastnade när vi var hos mats
+00013. ImageView: Displaying images.... försvinner aldrig ur statusraden.
+00014. (Kanske samma som 00013)
+       ImageView: Statusbaren uppdateras inte vid drag'n'drop. Tråda ut inläsning av bilder!
+00015. (HÖG) Soptunnan och procent-knappen ligger för nära varandra, Mats blandar ofta ihop dem.
+       Flytta soptunnan längre bort. 
+00016. (låg) Statusbar:ens layout är lite kass, vissa komponenter skriver över andra ibland.
+00017. (BZ 003) (HÖG) Term-sortering är case sensitive. Ex kommer DF före Datum.
+00018. Tablevyn tuggar i sig mouseevents n?r man draggar ?ver.
+00020. (HÖG) Numeriska axlar sorteras alfabetiskt, detta fuckar upp statistiken i t ex BarChart (Ålder 67, 69, 7, 72)
+00023. Progress-baren verkar vara trasig vid summary-generering (hos mats).
+00024. Vid byte av fönstersystem kan vyer hamna utanför skärmen så att det ej går att stänga eller flytta.
+00025. Första musklicket går inte alltid fram (i imagevyn och i grupppanelen).
+00026. (HÖG) Summaryn repaintas inte alltid efter generering, får ibland till följd att scrollbaren ej fungerar. Svårlöst pga trådning.
+00027. Vid query-selektion uppdateras inte scatterplotten omedelbart.
+00029. (BZ 010) ImageView: Förstorade bilder är modala, fixa det
+
+FIXED
+-----
+00002. Om man dubbelklickar i en tom jlist i termväljaren så får man exception
+00004. StatisticsView: Aggregeringen i vyn ändras inte när man byter aggregering med kontrollen i View.
+00007. Ålder rapporteras negativ för vissa undersökningar i OM.MVD
+00011. Om man klickar på bakgrunden i bildvyn avselekteras inte bilderna förrän man ändrar storlek på fönstret.
+        Det saknas alltså en DataManager.getInstance().validateViews() någonstans efter att bilderna avselekterats.
+00012. Om man flyttar en databas som var öppen när sessionen sparades så kraschar programmet
+        vid uppstart.
+00021. Summary: Undersökningar sorteras inte i datumordning i trädvyn
+00028. Ta bort aggregeringsruta i bildvyn
+00019. (HÖG) Gör tablevyn scrollbar - just nu blir fälten väldigt smala och ohanterliga när många termer visas.
+00022. (BZ 014) Det går väldigt långsamt att ta bort grupper(/stora mängder element?). Fixa det eller lägg åtminstone till en statusbar.
+00005. Programmets huvudstatusbar visar alltid 0 antal element efter att sessionen lästs in.
+00009. (BZ 006) Vissa bilder fick width = -1 när vi var hos mats (OM.MVD)
+00010. (BZ 002) Look and feel dialogen är för liten så texten i den syns inte.

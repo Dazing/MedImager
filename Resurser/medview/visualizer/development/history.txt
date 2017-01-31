@@ -1,0 +1,70 @@
+Vecka 23:
+    Läste artiklar, diskuterade med Olof.
+
+Vecka 24:
+    Semester
+
+Vecka 25:
+    Läste artiklar och diskuterade funktionalitet. Visage.
+    Lekte med gamla visualiseringsverktyget på laptop:en.
+Vecka 26:
+    Design (klassdiagram, UML) och påbörjad prototyp.
+Vecka 27:    
+    Prototyp:   Multipel selektion (selektion i flera fönster samtidigt).
+                Datahantering. Treefil och termhantering.
+Vecka 28:
+    Prototyp:   Drag'n'drop infördes.
+    Torsdag:    Nils hjälpte Nader med CVS och synkronisering med ny datahandling.    
+Vecka 29:
+    Måndag: Möte med Mats, Fredrik, Nader, Olof. Utveckling, CVS, kodsynkronisering.
+    Tisdag: Kunde inte kompilera pga MedSummary saknades. Göran undersökte UML-verktyg.
+            Flytt av kod från ScatterPlot till Chart, generalisering.
+    Onsdag: Förmiddagen gick bort pga NFS var nere. Eftermiddag, refactoring av
+            dataset och hur de lyssnar på varandra.
+    Torsdag:Koden kompilerar fortfarande inte pga bristande kodsynkronisering och incheckning.
+            Gjorde en egen renderare för scatterplotten som väljer färg baserat på om dataelementet
+            är selected eller ej.
+    Fredag: Diskuterade fram en hyffsat omstrukturering av dataset:en vilken påbörjades.
+            Införde begreppet datagrupper och implementerade klasser för dessa.
+
+Vecka 30:
+    Måndag: Group-dialog, arbete på datasets.
+    Tisdag: Slutlig omarbetning av XYGraphDataset. Nu går äntligen visualizern att kompilera igen!!!
+            Drag and drop mellan graf och grupper fungerar.
+Vecka 33:   
+            Lediga för tentastudier.
+Vecka 34:
+    Tisdag: Möte med Olof. Diskuterade exjobbsbiten och inriktning.
+    Onsdag: Möte med Mats. Fick mycket intressant feedback som gav en hel del nytt i ToDo-listan.
+    Fredag: Omstrukturerade hur View, Chart och de olika dataset:en och elementen lyssnar
+            på varandra. Resulterade i viss uppsnyggning av koden och ett par "samarbetsdiagram"
+            för att snabbt kunna överblicka hur anropen sker.
+Vecka 35:
+    Tisdag: Tog bort buggen i CategoryGraphDataSet som gjorde att det blev dubbla staplar
+            i BarCharten för samma kategori.
+    Onsdag: Gjorde en omskrivning av drag'n'drop så att det som transporteras är
+            ExaminationDataElementVector och DataGroupVector och inte ExaminationDataSet.
+            Detta var nödvändigt dels för att få drag'n'drop av flera datagrupper att
+            fungera smidigt, och dels för att vi inte hade något smidigt sätt att ta bort
+            lyssnare från dataelementen i ExaminationDataSet.
+            Nils ledig för tentastudier.
+    Torsdag:Fick selektion och d'n'd av flera datagrupper att fungera bra. Implementerade 
+            d'n'd för knapparna i datagruppspanelen.
+            Nils ledig för tentastudier.
+Vecka 36:
+    Måndag: Lade till "<n/a>" i ScatterPlot:en och BarChart:en för element som saknar värden
+            för en term.
+
+Vecka 39:
+    Tisdag: Möte med Olof, Fredrik, Nader, Göran och Nils.
+    Onsdag: Optimerade tilläggning av undersökningar i ExaminationDataSet från O(n^2) till O(n).
+            Möte med Mats, Göran och Nils. Mats fick den första versionen där undersökningar
+            kan tillhöra flera grupper samtidigt och den nya ScatterPlot:en.
+    Torsdag:Lade till scrollbars och zoom i ScatterPlot:en.
+    Fredag: Lade till scrollbars och zoom i BarChart:en.
+
+Vecka 41:
+    Tisdag: Började skapa ett query-verktyg. Möte med Olof, Fredrik, Nader, Göran och Nils.
+    Onsdag: Utökade implementeringen av query-verktyget.
+    Torsdag:Fortsatte med query-verktyget, lade till aggregates till det. Upptäckte sak som
+            slöade ner inläsningen kraftigt, efter lösning erhölls stor prestandaökning.

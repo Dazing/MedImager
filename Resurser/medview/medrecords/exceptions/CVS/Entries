@@ -1,0 +1,16 @@
+/CouldNotGeneratePreviewException.java/1.2/Tue Sep  9 07:49:45 2008//
+/CouldNotObtainTemplateException.java/1.2/Tue Sep  9 07:49:45 2008//
+/CouldNotObtainTranslatorException.java/1.2/Tue Sep  9 07:49:45 2008//
+/CouldNotSaveExaminationException.java/1.2/Tue Sep  9 07:49:45 2008//
+/InvalidExaminationModelException.java/1.2/Tue Nov 11 14:40:37 2003//
+/NoPatientIdentifierTermException.java/1.2/Tue Sep  9 07:49:45 2008//
+/NoTranslatorSetException.java/1.2/Tue Sep  9 07:49:45 2008//
+/PCodeNRGeneratorLocationNotSetException.java/1.2/Tue Sep  9 07:49:45 2008//
+/TermDefinitionLocationNotSetException.java/1.2/Tue Sep  9 07:49:45 2008//
+/TermNotInTranslatorException.java/1.2/Tue Sep  9 07:49:45 2008//
+/TermValueLocationNotSetException.java/1.2/Tue Sep  9 07:49:45 2008//
+/UnknownTypeException.java/1.2/Tue Nov 11 14:40:37 2003//
+/UserIDNotSetException.java/1.2/Tue Sep  9 07:49:45 2008//
+/UserNameNotSetException.java/1.2/Tue Sep  9 07:49:45 2008//
+/ValueInputException.java/1.4/Tue Nov 11 14:40:37 2003//
+D

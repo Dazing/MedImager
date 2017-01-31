@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : MyXMLFile.xml
+    Created on : den 05 Aug 2009, 13:00
+    Author     : Marie Lindgren
+    Description: XMLFile that fills a treetable
+
+    Datatypes available
+    Combobox
+    Boolean
+    String
+    Progressbar
+    Radiobutton
+
+-->
+<treetable noofcols="3" colname0="Orals and symptoms" colname1="Value" colname2="Detailed Question">
+<!-- Här startar själva trädet -->
+   <node value0="Oral Symptoms"                             risk="high" datatype="Progressbar" value1="80" value2="">
+        <node value0="Need moisten"                         risk="high" datatype="Radiobutton" value1="Yes" value2="Do you need to moisten your mouth frequently or sip liquids often?"/>
+        <node value0="Feel Dry"                             risk="norm" datatype="Radiobutton" value1="No" value2="Does your mouth feel dry at mealtime?"/>
+        <node value0="Decreased saliva"                     risk="high" datatype="Radiobutton" value1="Yes" value2="Do you have less saliva than you used to? "/>
+        <node value0="Swallowing problem"                   risk="norm" datatype="Radiobutton" value1="No" value2="Do you have trouble swallowing?"/>
+        <node value0="Dry food problem"                     risk="high" datatype="Radiobutton" value1="Yes" value2="Is it difficult to eat dry foods such as crackers or toast?"/>
+   </node>
+   <node value0="General Symptoms"                          risk="norm" datatype="Progressbar" value1="50" value2="">
+        <node value0="Feel healty"                          risk="norm" datatype="Radiobutton" value1="No" value2="Do you feel healthy?"/>
+        <node value0="Smoke"                                risk="norm" datatype="Radiobutton" value1="No" value2="Do you smoke or have been smoking regularly?"/>
+        <node value0="Choug/Hoarsness"                      risk="norm" datatype="Radiobutton" value1="No" value2="Have you had any persistent periods of dry cough or hoarseness? "/>
+        <node value0="Dry nose"                             risk="norm" datatype="Radiobutton" value1="No" value2="Have you felt any dryness or frequent crust formation in your nose?"/>
+        <node value0="Eye"                                  risk="norm" datatype="Progressbar" value1="50" value2="Have you felt any of the following symptoms from your eyes: ">
+            <node value0="Dry"                              risk="norm" datatype="Radiobutton" value1="No" value2=" - dryness?"/>
+            <node value0="Burning"                          risk="norm" datatype="Radiobutton" value1="No" value2="- burning?"/>
+            <node value0="Itching"                          risk="norm" datatype="Radiobutton" value1="No" value2="- itching?"/>
+            <node value0="Gritty"                           risk="norm" datatype="Radiobutton" value1="No" value2="- gritty sensation?"/>
+            <node value0="Lids stick together"              risk="norm" datatype="Radiobutton" value1="No" value2="- feeling that the lids stick together?"/>
+            <node value0="Blurred"                          risk="norm" datatype="Radiobutton" value1="No" value2="- blurred vision?"/>
+            <node value0="Sensitivity"                      risk="norm" datatype="Radiobutton" value1="No" value2="- sensitivity to light?"/>
+        </node>
+        <node value0="Joints"                               risk="norm" datatype="Progressbar" value1="50" value2="Have you felt any of the following symptoms from your joints: ">
+            <node value0="Pain"                             risk="norm" datatype="Radiobutton" value1="No" value2="- pain?"/>
+            <node value0="Swelling"                         risk="norm" datatype="Radiobutton" value1="No" value2="- swelling?"/>
+            <node value0="Stiffness"                        risk="norm" datatype="Radiobutton" value1="No" value2="- stiffness?"/>
+        </node>
+   </node>
+   <node value0="Latrogenic"                                risk="high" datatype="Progressbar" value1="80" value2="">
+        <node value0="Drugs"                                risk="high" datatype="Progressbar" value1="80" value2="">
+                <node value0="Started to take?"             risk="high" datatype="Radiobutton" value1="Yes" value2="Have you started to take any drug during the last year?"/>
+                <node value0="Taking any drugs?"            risk="high" datatype="Progressbar" value1="80" value2="Are you currently taking any of the following drugs: ">
+                        <node value0="Atropine"             risk="high" datatype="Radiobutton" value1="Yes" value2="- Atropine and analogs (antimuscarinics)?"/>
+                        <node value0="Tricyclic"            risk="high" datatype="Radiobutton" value1="Yes" value2="- Tricyclic antidepressants?"/>
+                        <node value0="Serotonin"            risk="high" datatype="Radiobutton" value1="Yes" value2="- Serotonin reuptake inhibitors?"/>
+                </node>
+                <node value0="3 drugs or more?"             risk="high" datatype="Radiobutton" value1="Yes" value2="Are you currently taking 3 drugs or more?"/>
+         </node>
+        <node value0="Local radiaton"                       risk="high" datatype="Progressbar" value1="80" value2="">
+                <node value0="Radiation?"                   risk="high" datatype="Radiobutton" value1="Yes" value2="Have you been subjected to therapeutical radiation against your head-and-neck region?"/>
+        </node>
+        <node value0="Chemotherapy"                         risk="norm" datatype="Progressbar" value1="50" value2="">
+                <node value0="Chemotherapy?"                risk="norm" datatype="Radiobutton" value1="No" value2="Have you received chemotherapy?"/>
+        </node>
+        <node value0="Chronic graft-versus-host-disease"    risk="norm" datatype="Progressbar" value1="50" value2="">
+                <node value0="Bone marrow?"                 risk="norm" datatype="Radiobutton" value1="No" value2="Have you received a new bone marrow as part of a cancer therapy?"/>
+        </node>
+   </node>
+   <node value0="Diseases"                                  risk="high" datatype="Progressbar" value1="80" value2="Do you have any of the following diseases or disorders?">
+        <node value0="Sjögrens"                             risk="high" datatype="Radiobutton" value1="Yes" value2="- Sögrens Syndrome?"/>
+        <node value0="Sarcoidosis"                          risk="norm" datatype="Radiobutton" value1="No" value2="- Sarcoidosis?"/>
+        <node value0="HIV"                                  risk="high" datatype="Radiobutton" value1="Yes" value2="- HIV disease?"/>
+   </node>
+   <node value0="Status and Signs"                          risk="norm" datatype="Progressbar" value1="50" value2="">
+        <node value0="Status and Signs1"                    risk="norm" datatype="Radiobutton" value1="Yes" value2=""/>
+        <node value0="Status and Signs2"                    risk="norm" datatype="Radiobutton" value1="Yes" value2=""/>
+        <node value0="Status and Signs3"                    risk="norm" datatype="Radiobutton" value1="Yes" value2=""/>
+        <node value0="Status and Signs4"                    risk="norm" datatype="Radiobutton" value1="Yes" value2=""/>
+        <node value0="Status and Signs5"                    risk="norm" datatype="Radiobutton" value1="Yes" value2=""/>
+   </node>
+</treetable>
+
+
+  <!--
+<treetable noofcols="4" colname0="Trädnamn" colname1="Fältvärde" colname2="Dagens datum" colname3="Aktuell klockslag">
+    <node value0="Första" value1="1" value2="2009-07-28">
+        <node value0="Första / Första" value1="1/1" value2="2009-07-28"/>
+        <node value0="Första / Andra" value1="1/2" value2="2009-07-28"/>
+        <node value0="Första / Tredje" value1="1/3" value2="2009-07-28"/>
+    </node>
+    <node value0="Andra" value1="2" value2="2009-07-31" value3="5"/>
+    <node value0="Tredje" value1="3" value2="2009-07-28" value3="6"/>
+    <node value0="Fjärde" value1="4" value2="2009-07-28" value3="7"/>
+    <node value0="Femte" value1="5" value2="2009-07-28" value3="8">
+        <node value0="Femte / Första" value1="5/5" value2="2009-07-28" value3="9"/>
+        <node value0="Femte / Andra" value1="1/2" value2="2009-07-28" value3="10"/>
+        <node value0="Femte / Tredje" value1="1/3" value2="2009-07-28" value3="11">
+            <node value0="Femte / Tredje / Första" value1="1/3" value2="2009-07-28" value3="12"/>
+            <node value0="Femte / Tredje / Andra" value1="1/3" value2="2009-07-28" value3="13">
+                <node value0="Femte / Tredje / Andra / Tobbe" value1="Tobbe" value2="2009-07-28" value3="14"/>
+                <node value0="Femte / Tredje / Andra / Marie" value1="Marie" value2="2009-07-28" value3="15"/>
+                <node value0="Femte / Tredje / Andra / Victoria" value1="Victoria" value2="2009-07-28" value3="16"/>
+                <node value0="Femte / Tredje / Andra / Sebastian" value1="Sebastian" value2="2009-07-28" value3="17"/>
+                <node value0="Femte / Tredje / Andra / Rolex" value1="Rolex" value2="2009-07-28" value3="18"/>
+            </node>
+            <node value0="Femte / Tredje / Tredje" value1="1/3" value2="2009-07-28" value3="19"/>
+        </node>
+        <node value0="Femte / Fjärde" value1="1/3" value2="2009-07-28" value3="20"/>
+        <node value0="Femte / Femte" value1="1/3" value2="2009-07-28" value3="21"/>
+    </node>
+    <node value0="Sjätte" value1="6" value2="2009-07-28" value3="22">
+        <node value0="Sjätte / Första" value1="6/1" value2="2009-07-28" value3="23"/>
+        <node value0="Sjätte / Andra" value1="6/2" value2="2009-07-28" value3="24"/>
+        <node value0="Sjätte / Tredje" value1="6/3" value2="2009-07-28" value3="25"/>
+        <node value0="Sjätte / Fjärde" value1="6/4" value2="2009-07-28" value3="26"/>
+    </node>
+    <node value0="Sjunde" value1="7" value2="2009-07-28" value3="27"/>
+</treetable>
+-->
