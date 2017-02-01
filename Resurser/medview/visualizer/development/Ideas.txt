@@ -1,0 +1,15 @@
+Ideer:
+
+"Klustra" examination-områden i scatterplot:en, de som har allting gemensamt, till större block
+
+Kunna ha flera dataset per scatterplot för att lättare kunna jämföra datamaengder. Kraever viss
+omstrukturering av View (det aer daer dataset:et lagras nu, hårdkodat till endast ett).
+
+Kopplade dataset. Tillägg av data i en vy påverkar även en annan vy.
+
+Dra element till en grupp: ändrar deras tillhörighet till denna grupp.
+Dra element från en grupp: som att dra en selekterad grupp.
+Texten kan se ut som hypertext foer att markera alla element i gruppen.
+Dubbelklicka for att aendra namn, eller popup-meny med hoger musknapp.
+
+...

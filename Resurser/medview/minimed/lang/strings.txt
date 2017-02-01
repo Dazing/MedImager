@@ -1,0 +1,158 @@
+#-------------------------------------------------------
+# Menu options
+#-------------------------------------------------------
+[Menu]
+svenska = Meny
+
+[Close]
+svenska = Återgå
+
+[Save]
+svenska = Spara
+
+[Save And Close]
+svenska = Spara och återgå
+
+[Close Without Saving]
+svenska = Återgå utan att spara
+
+[Delete]
+svenska = Radera
+
+[Add Exam]
+svenska = Lägg till undersökning
+
+[Open]
+svenska = Öppna
+
+[Open As New]
+svenska = Öppna som ny
+
+[Quit]
+svenska = Avsluta
+
+[About MiniMed]
+svenska = Om MiniMed
+
+
+#-------------------------------------------------------
+# MAIN screen
+#-------------------------------------------------------
+[Journals]
+svenska = Journaler
+
+[Settings]
+svenska = Inställningar
+
+[Help]
+svenska = Hjälp
+
+
+#-------------------------------------------------------
+# ABOUT MINIMED screen
+#-------------------------------------------------------
+[MiniMed was developed as a D3 project during the school year of 2005 and 2006 at Chalmers University of Technology, under the guidance of Olof Torgersson.]
+svenska = MiniMed utvecklades som ett D3-projekt under läsåret 2005-2006 på Chalmers Tekniska Högskola under handledning av Olof Torgersson.
+
+[The members of the project group, in alphabetical order:]
+svenska = Projektgruppens medlemmar, i bokstavsordning:
+
+
+#-------------------------------------------------------
+# JOURNALS and EXAM screens
+#-------------------------------------------------------
+[Created On PDA]
+svenska = Skapade på PDA
+
+[Transferred From PC]
+svenska = Överförda från PC
+
+[The exam has been deleted]
+svenska = Undersökningen är raderad
+
+[Are you sure you want to delete the exam?]
+svenska = Vill du verkligen radera undersökningen?
+
+[Are you sure you want to delete the patient?]
+svenska = Vill du verkligen radera patienten?
+
+[The exam save dir is not properly configured!]
+svenska = Sparningskatalogen är ej korrekt inställd!
+
+[The exam database dir is not properly configured!]
+svenska = Undersökningskatalogen är ej korrekt inställd!
+
+[Reading of tree file failed]
+svenska = Trädfilsinläsning misslyckades
+
+[The path to the Term Values, Term Definitions, or Template file is incorrectly configured!]
+svenska = Sökvägen till Termvalues, Termdefinitions eller Formulär är felinställd!
+
+[The exam could not be saved. Make sure that PID (Person ID) is filled in.]
+svenska = Undersökningen gick ej att spara. Kontrollera att PID (personnummer) är ifyllt.
+
+[Could not delete the file.]
+Svenska = Filen gick inte att radera.
+
+[Fatal error, tree file reading failed. MiniMed will exit.]
+Svenska = Allvarligt fel, trädfilsläsning misslyckades. MiniMed kommer att avslutas.
+
+[The exam is empty and has not been saved.]
+svenska = Undersökningen är tom och sparades inte.
+
+[Are you sure you want to close the exam without saving?]
+svenska = Är du säker på att du vill avsluta undersökningen utan att spara?
+
+[Category]
+svenska = Kategori
+
+[page]
+svenska = sida
+
+
+#-------------------------------------------------------
+# SETTINGS screen
+#-------------------------------------------------------
+[Term Values File]
+svenska = Term values-fil
+
+[Term Definitions File]
+svenska = Term definitions-fil
+
+[Template File]
+svenska = Formulär-fil
+
+[Show Mucos Form]
+svenska = Visa Mucos-formulär
+
+[Choose]
+svenska = Välj
+
+[Choose Language]
+svenska = Välj språk
+
+[Yes]
+svenska = Ja
+
+[No]
+svenska = Nej
+
+
+#-------------------------------------------------------
+# HELP screen
+#-------------------------------------------------------
+[The path to help.xml is invalid!]
+svenska = Sökvägen till help.xml är felinställd!
+
+[Contents]
+svenska = Innehåll
+
+[Index]
+svenska = Index
+
+[Article]
+svenska = Artikel
+
+[No Article to Display]
+svenska = Ingen artikel att visa
+

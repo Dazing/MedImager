@@ -1,0 +1,16 @@
+
+$Id: Changelog.txt,v 1.1 2004/05/18 08:59:10 d97nix Exp $
+
+Aggregator version 1.2
+----------------------
+* Term values are now sorted by the TermValueComparator (numeric sorting has prio 1, after that alphabetic)
+* Multiple selection enabled for both lists
+* Context menus added
+* Add/remove buttons added
+
+Gui overhaul?
+Icons?
+
+Aggregator version 1.1
+----------------------
+Updated to fix complaints from London....

@@ -1,0 +1,15 @@
+/CouldNotActivateException.java/1.1/Tue Aug 19 17:59:59 2003//
+/CouldNotDeactivateException.java/1.1/Tue Aug 19 17:59:59 2003//
+/CouldNotRetrieveExaminationsException.java/1.1/Tue Aug 19 18:00:00 2003//
+/CouldNotRetrievePatientsException.java/1.1/Tue Aug 19 18:00:00 2003//
+/CouldNotRetrieveTermsException.java/1.1/Tue Aug 19 18:00:00 2003//
+/CouldNotRetrieveTypeDescriptionException.java/1.1/Tue Aug 19 18:00:00 2003//
+/CouldNotRetrieveValuesException.java/1.1/Tue Aug 19 18:00:00 2003//
+/MedServerCommunicationEvent.java/1.3/Thu Nov  4 12:04:42 2004//
+/MedServerCommunicationListener.java/1.6/Fri Sep  9 15:40:58 2005//
+/MedServerModel.java/1.14/Mon Apr 24 14:16:53 2006//
+/MedServerModelConstants.java/1.4/Mon Apr 24 14:16:53 2006//
+/MedServerModelEvent.java/1.2/Thu Nov  4 12:04:42 2004//
+/MedServerModelListener.java/1.3/Fri Nov 19 12:32:34 2004//
+/MedServerModelUserProperties.java/1.2/Thu Nov  4 12:04:42 2004//
+D

@@ -1,0 +1,18 @@
+Problem:    selectionChanged() orsakar generatePlot() som bygger om dataSet:et.
+Lösning:    Byt ut generatePlot() mot repaint() och låt XYGraphDataSet:et lyssna
+            på ExaminationDataSet:et och själv uppdatera sig vid behov.
+
+Problem:    Selection som en "series" suger, vi vill kunna ha riktiga series.
+Lösning:    Egna charts och renderers kom kollar isSelected() på ExaminationDataElement.
+            Spara undan de selectade i första passet och rita ut sist.
+
+Problem:    Att datan är undersöknings(element)-baserad, inte patientbaserad.
+            Mats: "Hur gör jag för att få alla den här patientens undersökningar?" När
+            han valt en bild i ImageView t ex.
+
+Problem:    Kopplad selektion, kan vara svårt för användaren att förstå. Går det att förtydliga? (Hos Mats)
+
+Problem:    Mats blandar ofta ihop saker som ligger nära varandra, t ex trashcan och procent-knappen.
+
+Problem:    Tabbarna i summaryn - svårt att veta när summaryn uppdateras när man har tomt etc.
+Lösning:    Ta bort tabbarna

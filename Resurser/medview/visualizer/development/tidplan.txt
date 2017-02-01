@@ -1,0 +1,26 @@
+
+Tidplan f?r resten av projektet.
+
+Vi kommer att slutf?ra projektet i tre faser/iterationer:
+
+1. September:
+
+    * Spara session och inst?llningar
+    * G?ra om datagrupperna till ickedisjunkta m?ngder
+    * Skapa en ny typ av plot som uppfyller kraven p? informationens tydlighet
+    * Integrera nader's Aggregates, om m?jligt
+    * Enkel export av data
+
+2. Oktober:
+
+    * Query-verktyg
+    * History-funktion
+    * Integrera MedSummary och bildvisare (f?rutsatt att Fredrik ?r villig att l?mna ut koden)
+    * JAR-fil
+    (* Mer avancerad export)
+
+3. November:
+
+    * Testning/utv?rdering
+    * Rapportskrivning
+    * ev. lokalisering av gr?nssnittet (om tid finns)

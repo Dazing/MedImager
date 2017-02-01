@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : MyXMLFile.xml
+    Created on : den 05 Aug 2009, 13:00
+    Author     : Marie Lindgren
+    Description: XMLFile that fills a treetable
+-->
+<treetable noofcols="4" colname0="Orals and symptoms" colname1="JComponents" colname2="Detaljerade frågor" colname3="????">
+<!-- Här startar själva trädet -->
+   <node value0="Oral Symptoms" value1="Progressbar" value2="" value3="">
+        <node value0="Need moisten" value1="Radiobutton" value2="Do you need to moisten your mouth frequently or sip liquids often?" value3=""/>
+        <node value0="Feel Dry" value1="Radiobutton" value2="Does your mouth feel dry at mealtime?" value3=""/>
+        <node value0="Decreased saliva" value1="Radiobutton" value2="Do you have less saliva than you used to? " value3=""/>
+        <node value0="Swalloing problem" value1="Radiobutton" value2="Do you have trouble swallowing?" value3=""/>
+        <node value0="Dry food problem" value1="Radiobutton" value2="Is it difficult to eat dry foods such as crackers or toast?" value3=""/>
+   </node>
+   <node value0="General Symptoms" value1="Progressbar" value2="" value3="">
+        <node value0="Feel healty" value1="Radiobutton" value2="Do you feel healthy?" value3=""/>
+        <node value0="Smoke" value1="Radiobutton" value2="Do you smoke or have been smoking regularly?" value3=""/>
+        <node value0="Choug/Hoarsness" value1="Radiobutton" value2="Have you had any persistent periods of dry cough or hoarseness? " value3=""/>
+        <node value0="Dry nose" value1="Radiobutton" value2="Have you felt any dryness or frequent crust formation in your nose?" value3=""/>
+        <node value0="Eye" value1="Progressbar" value2="Have you felt any of the following symptoms from your eyes: " value3="">
+            <node value0="Dry" value1="Radiobutton" value2=" - dryness?" value3=""/>
+            <node value0="Burning" value1="Radiobutton" value2="- burning?" value3=""/>
+            <node value0="Itching" value1="Radiobutton" value2="- itching?" value3=""/>
+            <node value0="Gritty" value1="Radiobutton" value2="- gritty sensation?" value3=""/>
+            <node value0="Lids stick together" value1="Radiobutton" value2="- feeling that the lids stick together?" value3=""/>
+            <node value0="Blurred" value1="Radiobutton" value2="- blurred vision?" value3="true"/>
+            <node value0="Sensitivity" value1="Radiobutton" value2="- sensitivity to light?" value3="true"/>
+        </node>
+        <node value0="Joints" value1="Progressbar" value2="Have you felt any of the following symptoms from your joints: " value3="">
+            <node value0="Pain" value1="Radiobutton" value2="- pain?" value3=""/>
+            <node value0="Swelling" value1="Radiobutton" value2="- swelling?" value3=""/>
+            <node value0="Stiffness" value1="Radiobutton" value2="- stiffness?" value3=""/>
+        </node>
+        <node value0="Someting???" value1="Progressbar" value2="" value3="">
+            <node value0="Someting1???" value1="Radiobutton" value2="" value3=""/>
+            <node value0="Someting2???" value1="Radiobutton" value2="" value3=""/>
+            <node value0="Someting3???" value1="Radiobutton" value2="" value3=""/>
+        </node>
+   </node>
+   <node value0="Latrogenic" value1="Progressbar" value2="" value3="">
+        <node value0="Drugs" value1="Progressbar" value2="" value3="">
+                <node value0="Started to take?" value1="Radiobutton" value2="Have you started to take any drug during the last year?" value3=""/>
+                <node value0="Taking any drugs?" value1="Progressbar" value2="Are you currently taking any of the following drugs: " value3="">
+                        <node value0="Atropine" value1="Radiobutton" value2="- Atropine and analogs (antimuscarinics)?" value3=""/>
+                        <node value0="Tricyclic" value1="Radiobutton" value2="- Tricyclic antidepressants?" value3=""/>
+                        <node value0="Serotonin" value1="Radiobutton" value2="- Serotonin reuptake inhibitors?" value3=""/>
+                </node>
+                <node value0="3 drugs or more?" value1="Radiobutton" value2="Are you currently taking 3 drugs or more?" value3=""/>
+         </node>
+        <node value0="Local radiaton" value1="Progressbar" value2="" value3="">
+                <node value0="Radiation?" value1="Radiobutton" value2="Have you been subjected to therapeutical radiation against your head-and-neck region?" value3=""/>
+        </node>
+        <node value0="Chemotherapy" value1="Progressbar" value2="" value3="">
+                <node value0="Chemotherapy?" value1="Radiobutton" value2="Have you received chemotherapy?" value3=""/>
+        </node>
+        <node value0="Chronic graft-versus-host-disease" value1="Progressbar" value2="" value3="">
+                <node value0="Bone marrow?" value1="Radiobutton" value2="Have you received a new bone marrow as part of a cancer therapy?" value3=""/>
+        </node>
+   </node>
+   <node value0="Diseases" value1="Progressbar" value2="Do you have any of the following diseases or disorders?" value3="">
+        <node value0="Sjögrens" value1="Radiobutton" value2="- Sögrens Syndrome?" value3=""/>
+        <node value0="Sarcoidosis" value1="Radiobutton" value2="- Sarcoidosis?" value3=""/>
+        <node value0="HIV" value1="Radiobutton" value2="- HIV disease?" value3=""/>
+   </node>
+   <node value0="Status and Signs" value1="Progressbar" value2="" value3="">
+        <node value0="Status and Signs1" value1="Radiobutton" value2="" value3=""/>
+        <node value0="Status and Signs2" value1="Radiobutton" value2="" value3=""/>
+        <node value0="Status and Signs3" value1="Radiobutton" value2="" value3=""/>
+        <node value0="Status and Signs4" value1="Radiobutton" value2="" value3=""/>
+        <node value0="Status and Signs5" value1="Radiobutton" value2="" value3=""/>
+   </node>
+</treetable>

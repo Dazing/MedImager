@@ -1,0 +1,157 @@
+$Id: MVisualizer_release_notes.txt,v 1.13 2006/03/30 21:26:26 erichson Exp $
+
+----------------------
+MVisualizer 1.0 Beta 11
+----------------------
+Released: 2006-03-30
+
+  -: Added settings for MedView User ID in the preferences.
+  -: Changed OldPCodeFormatRawPIDValidator to allow for lower-case pcodes.
+
+----------------------
+MVisualizer 1.0 Beta 10
+----------------------
+Released: 2005-?
+CVS tag: MVISUALIZER_1_0_BETA10
+
+Uppdaterad för att funka med nya docgen-paketet.
+MedServer support.
+
+Fixed bugs:
+
+445: Globala termer-ändring uppdaterar inte termer i öppna vyer
+  -: Preferences standardiserade
+  -: Om en undersökning redan innehåller Age eller Gender kommer dessa inte deriveras
+
+
+----------------------
+MVisualizer 1.0 Beta 9
+----------------------
+Released: 2005-01-?
+CVS tag: MVISUALIZER_1_0_BETA9
+
+Bugfix-release av Beta 8.
+
+Fixed bugs:
+
+ --: Inläsning kraschade om derivering av termer misslyckades
+ --: Termer från förra körningen laddades inte in ordentligt
+   : Kunde ej exportera till nätverksdrives
+
+
+----------------------
+MVisualizer 1.0 Beta 8
+----------------------
+Released: 2005-01-26
+CVS tag: -
+
+Ny release med förbättrat gränssnitt för export. 
+
+TableView förbättrad:
+ * Tabeller har egen termväljare, och varnar nu om att man bör aggregera
+   eller minska mängden termer om man har för många för att exportera till excel.
+ * Kan exportera "as-is" eller konverterat till SPSS-kompatibel vy.
+ * Statusbar tillagd och anpassad till tabellvyn
+
+Fixade buggar:
+
+ --: Export skrev över filer utan att fråga
+
+----------------------
+MVisualizer 1.0 Beta 7
+----------------------
+Released: 2004-11-30
+CVS tag: MVISUALIZER_1_0_BETA7
+
+Till sist en release med export och anonymisering, tack vare minnesoptimeringen i MVDhandler.
+Trasig release, installeraren fungerade inte.
+
+
+----------------------
+MVisualizer 1.0 Beta 6
+----------------------
+Released: 2004-11-16
+CVS tag: MVISUALIZER_1_0_BETA6
+
+Release för användning i Visualizer-utbildning. Export är färdigt, men finns ej 
+tillgängligt i denna version pga att MVDHandler använder så mycket minne att det
+inte går att läsa in hela databasen.
+
+Nytt
+* Bättre progress-dialoger för sökning och export
+* Export nu "säker" dvs skriver aldrig över undersökningar eller bilder.
+* Anonymisering av undersökningar går att göra via exporten (MVDHandler)
+
+Fixed bugs:
+
+405:    Kan inte öppna sökvägar med mellanslag i
+ --:    Summaryn låg "ett steg efter" (summarytexten uppdaterades inte förrän man ändrade något annat)
+ --:    Session-sparning misslyckades om en vy utan aggregeringar visades
+
+----------------------
+MVisualizer 1.0 Beta 5
+----------------------
+Released: 2004-10-20
+CVS tag: MVISUALIZER_1_0_BETA5
+
+Nytt:
+* Stöd för SQL Server
+* Aggregator uppdaterad så att den automatiskt har samtliga undersökningar som
+  är laddade i Visualizern vid start. (Tidigare behövde man ladda MVD:n en extra gång).
+  Detta var nödvändigt för att kunna aggregera termer/värden ifrån SQL-databaser, 
+  eftersom Aggregator i sig inte har stöd för SQL.
+  (Detta fixar även Bugzilla #41)
+* Försökt göra Aggregator användarvänligare. Till exempel behandlades 
+  högerklickningar på ett konstigt sätt. Har även försökt lägga till felmeddelanden.
+* Stöd för export av MVD:er. (Bugzilla #42)
+* ImagePanel kan nu endast innehålla undersökningar som har bilder. Ett meddelande
+  ges i statusraden när undersökningar utan bilder skippas.
+* Enkel fritextsökning finns nu (BZ #347)
+
+Fixed bugs:
+3:      Alfabetisk sortering av termer är case sensitive
+20:     Numeriska axlar sorteras alfabetiskt
+24:     Språkblandning
+137:    Ok vs OK
+195:    Läsning av andra slags data
+375:    Delar av yttersta punkter i pie-scatterplot ritas utanför grafen
+383:    Långa termvärden gör att grafen försvinner (axlarna tar över)
+385:    Export-filväljare i Table och Statisticsview visar ej mappar
+ --:    Trasig aggregationLibrary  
+ 
+Known bugs:
+        Export does not work (Changed to SafeMVDhandler since MVDhandler could not open OM.MVD)
+
+ 
+----------------------
+MVisualizer 1.0 Beta 4
+----------------------
+Released: 04-02-??
+CVS tag: MVISUALIZER_1_0_BETA4
+
+Pre-release version for testing SQL DB at mun-h-center.
+
+
+----------------------
+MVisualizer 1.0 Beta 3
+----------------------
+Released: 04-02-??
+CVS tag: MVISUALIZER_1_0_BETA3
+
+Nytt:
+
+* Uppdaterat till senaste datahanteringslagret (PID-Stöd)
+* Kommer med en installerare
+* Egna inställningar för heap size, vilket löser OutOfMemory-problemen
+* Uppdaterat Aggregator pga att vissa trädfiler ej kunde läsas in
+* Minnesdisplay tillagd
+
+Fixed bugs:
+-----------
+335:    Really Quit? (Y/N): Programmet stängs ner även vid nej-svar
+
+
+Övrigt
+------
+
+

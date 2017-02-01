@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<DBINFO
+	url = "jdbc:microsoft:sqlserver://"
+	servername = "140.166.104.11"
+	portnumber = "1433"
+	databaseName= "ODUTBT4_8"
+	userName = "MVTest"
+	password = "OlofTorgersson">
+	<SQL><![CDATA[declare	@pnr varchar(12),@pid int,@cid int,@cot int
+set	@pnr='$PNUMBER$'
+set	@pid=(select person_id from patient where ssn=@pnr)
+set	@cid=(select clinic_id from patient where ssn=@pnr)
+set	@cot=(select top 1 courseoftreatment_id from courseoftreatment where person_id=@pid and clinic_id=@cid and enddate is null order by courseoftreatment_id desc)
+create	table #stat (
+	StatusCode	int,
+	StatusSubCode	int,
+	StatusParam	int,
+	SurfaceCarries	char,
+	DistalFilling	smallint,
+	BuckalFilling	smallint,
+	MesialFilling	smallint,
+	LingualFilling	smallint,
+	PalatinalFilling	smallint,
+	OcklusalFilling	smallint,
+	IncisalFilling	smallint,
+	Tooth		varchar(2),
+	Type		varchar(3),
+	Carries		varchar(2))
+insert	into #stat
+select	dtil.Code,
+	dtil.SubCode,
+	dtil.Param,
+	case when dtil.Code in (101,102) then case when dtil.SubCode = 0 then 'D' when dtil.SubCode = 1 then 'B' when dtil.SubCode = 2 then 'M' when dtil.SubCode = 3 then 'L' when dtil.SubCode = 4 then 'P' when dtil.SubCode = 5 then 'O' else '' end else '' end,
+	case when exists (select Code from DentalTreatmentCode where Code=dtil.Code and SubCode_ID=dtil.SubCode and Description like '%distal%') then 1 when exists (select Code from Surface where Code=dtil.Code and SubCode=dtil.SubCode and Description like '%distal%') then 1 else 0 end,
+	case when exists (select Code from DentalTreatmentCode where Code=dtil.Code and SubCode_ID=dtil.SubCode and Description like '%buckal%') then 1 when exists (select Code from Surface where Code=dtil.Code and SubCode=dtil.SubCode and Description like '%buckal%') then 1 else 0 end,
+	case when exists (select Code from DentalTreatmentCode where Code=dtil.Code and SubCode_ID=dtil.SubCode and Description like '%mesial%') then 1 when exists (select Code from Surface where Code=dtil.Code and SubCode=dtil.SubCode and Description like '%mesial%') then 1 else 0 end,
+	case when exists (select Code from DentalTreatmentCode where Code=dtil.Code and SubCode_ID=dtil.SubCode and Description like '%lingual%') then 1 when exists (select Code from Surface where Code=dtil.Code and SubCode=dtil.SubCode and Description like '%lingual%') then 1 else 0 end,
+	case when exists (select Code from DentalTreatmentCode where Code=dtil.Code and SubCode_ID=dtil.SubCode and Description like '%palatinal%') then 1 when exists (select Code from Surface where Code=dtil.Code and SubCode=dtil.SubCode and Description like '%palatinal%') then 1 else 0 end,
+	case when exists (select Code from DentalTreatmentCode where Code=dtil.Code and SubCode_ID=dtil.SubCode and Description like '%ocklusal%') then 1 when exists (select Code from Surface where Code=dtil.Code and SubCode=dtil.SubCode and Description like '%ocklusal%') then 1 else 0 end,
+	case when exists (select Code from DentalTreatmentCode where Code=dtil.Code and SubCode_ID=dtil.SubCode and Description like '%incisal%') then 1 when exists (select Code from Surface where Code=dtil.Code and SubCode=dtil.SubCode and Description like '%incisal%') then 1 else 0 end,
+	case when dtil.Teeth1_16 > 0 then case when (dtil.Teeth1_16 & 1) > 0 then '18' when (dtil.Teeth1_16 & 2) > 0 then '17' when (dtil.Teeth1_16 & 4) > 0 then '16' when (dtil.Teeth1_16 & 8) > 0 then '15' when (dtil.Teeth1_16 & 16) > 0 then '14' when (dtil.Teeth1_16 & 32) > 0 then '13' when (dtil.Teeth1_16 & 64) > 0 then '12' when (dtil.Teeth1_16 & 128) > 0 then '11' when (dtil.Teeth1_16 & 256) > 0 then '21' when (dtil.Teeth1_16 & 512) > 0 then '22' when (dtil.Teeth1_16 & 1024) > 0 then '23' when (dtil.Teeth1_16 & 2048) > 0 then '24' when (dtil.Teeth1_16 & 4096) > 0 then '25' when (dtil.Teeth1_16 & 8192) > 0 then '26' when (dtil.Teeth1_16 & 16384) > 0 then '27' when (dtil.Teeth1_16 & 32768) > 0 then '28' else '' end	
+	when dtil.Teeth17_32 > 0 then case when (dtil.Teeth17_32 & 1) > 0 then '38' when (dtil.Teeth17_32 & 2) > 0 then '37' when (dtil.Teeth17_32 & 4) > 0 then '36' when (dtil.Teeth17_32 & 8) > 0 then '35' when (dtil.Teeth17_32 & 16) > 0 then '34' when (dtil.Teeth17_32 & 32) > 0 then '33' when (dtil.Teeth17_32 & 64) > 0 then '32' when (dtil.Teeth17_32 & 128) > 0 then '31' when (dtil.Teeth17_32 & 256) > 0 then '41' when (dtil.Teeth17_32 & 512) > 0 then '42' when (dtil.Teeth17_32 & 1024) > 0 then '43' when (dtil.Teeth17_32 & 2048) > 0 then '44' when (dtil.Teeth17_32 & 4096) > 0 then '45' when (dtil.Teeth17_32 & 8192) > 0 then '46' when (dtil.Teeth17_32 & 16384) > 0 then '47' when (dtil.Teeth17_32 & 32768) > 0 then '48' else '' end	
+	when dtil.Teeth33_48 > 0 then case when (dtil.Teeth33_48 & 1) > 0 then '58' when (dtil.Teeth33_48 & 2) > 0 then '57' when (dtil.Teeth33_48 & 4) > 0 then '56' when (dtil.Teeth33_48 & 8) > 0 then '55' when (dtil.Teeth33_48 & 16) > 0 then '54' when (dtil.Teeth33_48 & 32) > 0 then '53' when (dtil.Teeth33_48 & 64) > 0 then '52' when (dtil.Teeth33_48 & 128) > 0 then '51' when (dtil.Teeth33_48 & 256) > 0 then '61' when (dtil.Teeth33_48 & 512) > 0 then '62' when (dtil.Teeth33_48 & 1024) > 0 then '63' when (dtil.Teeth33_48 & 2048) > 0 then '64' when (dtil.Teeth33_48 & 4096) > 0 then '65' when (dtil.Teeth33_48 & 8192) > 0 then '66' when (dtil.Teeth33_48 & 16384) > 0 then '67' when (dtil.Teeth33_48 & 32768) > 0 then '68' else '' end	
+	when dtil.Teeth49_64 > 0 then case when (dtil.Teeth49_64 & 1) > 0 then '78' when (dtil.Teeth49_64 & 2) > 0 then '77' when (dtil.Teeth49_64 & 4) > 0 then '76' when (dtil.Teeth49_64 & 8) > 0 then '75' when (dtil.Teeth49_64 & 16) > 0 then '74' when (dtil.Teeth49_64 & 32) > 0 then '73' when (dtil.Teeth49_64 & 64) > 0 then '72' when (dtil.Teeth49_64 & 128) > 0 then '71' when (dtil.Teeth49_64 & 256) > 0 then '81' when (dtil.Teeth49_64 & 512) > 0 then '82' when (dtil.Teeth49_64 & 1024) > 0 then '83' when (dtil.Teeth49_64 & 2048) > 0 then '84' when (dtil.Teeth49_64 & 4096) > 0 then '85' when (dtil.Teeth49_64 & 8192) > 0 then '86' when (dtil.Teeth49_64 & 16384) > 0 then '87' when (dtil.Teeth49_64 & 32768) > 0 then '88' else '' end else '' end,
+	case when dtil.isBaseline = 1 then 'S/D' else 'Åtg' end,
+	case when dtil.Code = 102 then case when dtil.Param = 1 then 'D1' when dtil.Param = 2 then 'D2' when dtil.Param = 3 then 'D3' when dtil.Param = 4 then 'S' when dtil.Param = 5 then 'D' else '' end else '' end 
+from	DentitionTreatmentItemList dtil,Dentition d
+where	d.Person_ID=@pid and d.Clinic_ID=@cid and d.dentition_id=dtil.dentition_id and dtil.isCancelled=0 and (d.courseoftreatment_id=@cot or dtil.code not in (101,102))
+order	by dtil.RecordedDate,dtil.DentitionList_id
+select	* from (select
+	(select count(*) from #stat where SurfaceCarries='B' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D3','D')) as 'prim_ds-b',
+	(select count(*) from #stat where SurfaceCarries in ('L','P') and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D3','D')) as 'prim_ds-l',
+	(select count(*) from #stat where SurfaceCarries='O' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D3','D')) as 'prim_ds-o',
+	(select count(*) from #stat where SurfaceCarries='M' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D3','D')) as 'prim_ds-m',
+	(select count(*) from #stat where SurfaceCarries='D' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D3','D')) as 'prim_ds-d',
+	(select count(*) from (select distinct Tooth from #stat where BuckalFilling=1 and substring(Tooth,1,1) in ('5','6','7','8') and Carries = '') as ax1) as 'prim_fs-b',
+	(select count(*) from (select distinct Tooth from #stat where (LingualFilling=1 or PalatinalFilling=1) and substring(Tooth,1,1) in ('5','6','7','8') and Carries = '') as ax2) as 'prim_fs-l',
+	(select count(*) from (select distinct Tooth from #stat where OcklusalFilling=1 and substring(Tooth,1,1) in ('5','6','7','8') and Carries = '') as ax3) as 'prim_fs-o',
+	(select count(*) from (select distinct Tooth from #stat where MesialFilling=1 and substring(Tooth,1,1) in ('5','6','7','8') and Carries = '') as ax4) as 'prim_fs-m',
+	(select count(*) from (select distinct Tooth from #stat where DistalFilling=1 and substring(Tooth,1,1) in ('5','6','7','8') and Carries = '') as ax5) as 'prim_fs-d',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D3','D')) as xx1) as 'prim_dt',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('5','6','7','8') and Carries = '' and StatusCode in (9001,9002,9003,9010,9012,9020,9022,9024,9026,25001,25002,25010,31080,31081,31082,31090,31091,31092,90001,90015,90016,90017,90018,90019)) as xx2) as 'prim_et',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('5','6','7','8') and Carries = '' and (DistalFilling=1 or BuckalFilling=1 or MesialFilling=1 or LingualFilling=1 or PalatinalFilling=1 or OcklusalFilling=1)) as xx3) as 'prim_ft',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('5','6','7','8') and (Carries in ('D3','D') or (Carries = '' and StatusCode in (9001,9002,9003,9010,9012,9020,9022,9024,9026,25001,25002,25010,31080,31081,31082,31090,31091,31092,90001,90015,90016,90017,90018,90019)) or (Carries = '' and (DistalFilling=1 or BuckalFilling=1 or MesialFilling=1 or LingualFilling=1 or PalatinalFilling=1 or OcklusalFilling=1)))) as xx4) as 'prim_deft',
+	(select count(*) from #stat where SurfaceCarries='B' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D3','D')) as 'Perm_Ds-b',
+	(select count(*) from #stat where SurfaceCarries in ('L','P') and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D3','D')) as 'Perm_Ds-l',
+	(select count(*) from #stat where SurfaceCarries='O' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D3','D')) as 'Perm_Ds-o',
+	(select count(*) from #stat where SurfaceCarries='M' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D3','D')) as 'Perm_Ds-m',
+	(select count(*) from #stat where SurfaceCarries='D' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D3','D')) as 'Perm_Ds-d',
+	(select count(*) from (select distinct Tooth from #stat where BuckalFilling=1 and substring(Tooth,1,1) in ('1','2','3','4') and Carries = '') as bx1) as 'Perm_Fs-b',
+	(select count(*) from (select distinct Tooth from #stat where (LingualFilling=1 or PalatinalFilling=1) and substring(Tooth,1,1) in ('1','2','3','4') and Carries = '') as bx2) as 'Perm_Fs-l',
+	(select count(*) from (select distinct Tooth from #stat where OcklusalFilling=1 and substring(Tooth,1,1) in ('1','2','3','4') and Carries = '') as bx3) as 'Perm_Fs-o',
+	(select count(*) from (select distinct Tooth from #stat where MesialFilling=1 and substring(Tooth,1,1) in ('1','2','3','4') and Carries = '') as bx4) as 'Perm_Fs-m',
+	(select count(*) from (select distinct Tooth from #stat where DistalFilling=1 and substring(Tooth,1,1) in ('1','2','3','4') and Carries = '') as bx5) as 'Perm_Fs-d',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D3','D')) as xx5) as 'Perm_DT',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('1','2','3','4') and Carries = '' and StatusCode in (9001,9002,9003,9010,9012,9020,9022,9024,9026,25001,25002,25010,31080,31081,31082,31090,31091,31092,90001,90015,90016,90017,90018,90019)) as xx6) as 'Perm_ET',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('1','2','3','4') and Carries = '' and (DistalFilling=1 or BuckalFilling=1 or MesialFilling=1 or LingualFilling=1 or PalatinalFilling=1 or OcklusalFilling=1)) as xx7) as 'Perm_FT',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('1','2','3','4') and (Carries in ('D3','D') or (Carries = '' and StatusCode in (9001,9002,9003,9010,9012,9020,9022,9024,9026,25001,25002,25010,31080,31081,31082,31090,31091,31092,90001,90015,90016,90017,90018,90019)) or (Carries = '' and (DistalFilling=1 or BuckalFilling=1 or MesialFilling=1 or LingualFilling=1 or PalatinalFilling=1 or OcklusalFilling=1)))) as xx8) as 'Perm_DEFT',
+	(select count(*) from #stat where SurfaceCarries='B' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D1','D2')) as 'prim_dis-b',
+	(select count(*) from #stat where SurfaceCarries in ('L','P') and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D1','D2')) as 'prim_dis-l',
+	(select count(*) from #stat where SurfaceCarries='O' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D1','D2')) as 'prim_dis-o',
+	(select count(*) from #stat where SurfaceCarries='M' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D1','D2')) as 'prim_dis-m',
+	(select count(*) from #stat where SurfaceCarries='D' and substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D1','D2')) as 'prim_dis-d',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('5','6','7','8') and Carries in ('D1','D2')) as xx9) as 'prim_dit',
+	(select count(*) from #stat where SurfaceCarries='B' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D1','D2')) as 'Perm_Dis-b',
+	(select count(*) from #stat where SurfaceCarries in ('L','P') and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D1','D2')) as 'Perm_Dis-l',
+	(select count(*) from #stat where SurfaceCarries='O' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D1','D2')) as 'Perm_Dis-o',
+	(select count(*) from #stat where SurfaceCarries='M' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D1','D2')) as 'Perm_Dis-m',
+	(select count(*) from #stat where SurfaceCarries='D' and substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D1','D2')) as 'Perm_Dis-d',
+	(select count(*) from (select distinct Tooth from #stat where substring(Tooth,1,1) in ('1','2','3','4') and Carries in ('D1','D2')) as xxA) as 'Perm_DiT') as innerselect
+drop	table #stat
+
+]]></SQL>
+</DBINFO>

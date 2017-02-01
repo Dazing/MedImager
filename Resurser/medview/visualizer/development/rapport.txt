@@ -1,0 +1,654 @@
+\documentclass[swedish,twoside]{article}
+\usepackage{a4}
+\usepackage[dvips]{graphicx}
+\usepackage{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{url}
+
+\setlength\parskip{\medskipamount}
+\setlength\parindent{0pt}
+
+\begin{document}
+
+\title{Visualisering av klinisk data}
+\author{Nils Erichson, Göran Zachrisson}
+\date {Januari 2003}
+
+\large
+
+\maketitle
+
+\newpage
+
+\section*{Abstract}
+
+This report details the development of a graphical tool for visualization of formalized clinical data. The data to be visualized 
+
+\section*{Sammanfattning}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduktion}
+
+Denna rapport sammanfattar det arbete vi utfört under perioden Juni 2002-Januari 2003.
+Arbetet gick ut på att utveckla ett grafiskt verktyg
+för visualisering och utforskning av klinisk patientdata.
+Detta har skett som en del av MedView-projektet, som är
+ett pågående samarbete mellan institutionen för datavetenskap på Chalmers
+Tekniska Högskola och Odontologiska Fakulteten vid Göteborgs Universitet.
+
+Verktyget hanterar patientdata som matats in av läkare då en patient gjort ett besök. Verktyget läser in inmatad patientdata och presenterar denna grafiskt för användaren, och erbjuder ett flertal sätt att interagera med 
+Verktyget baserar sig på ideer som lagts fram av forskarna i ``The SAGE visualization group'' vid Carnegie-Mellonuniversitetet, i rapporten {\em Visage: A User Interface Environment for Exploring Information} \cite{visage_96}.
+
+Användaren använder s k  ``drill-down''-teknik eller ett Query-verktyg för att välja ut den data han/hon är intresserad av att studera, och kan sedan visualisera sin datamängd genom ett antal olika vyer. 
+Datamängder kan grupperas och visualiseras jämte varandra för jämförelser. Enkel statistikfunktionalitet finns,
+och möjlighet finns även för export av data för vidare bearbetning t ex i Excel eller något statistikverktyg.
+
+I rapporten detaljerar vi de problem vi stött på och de val vi behövt göra. Det svåraste har varit att skapa konsistens mellan vyerna och behålla en känsla av orsak och verkan när delmängder av datamängder flyttas mellan olika vyer. Andra svårigheter vi stött på är de informationsförluster som är ofrånkomliga när man skapar en visualisering av komplex/multidimensionell data (information döljs ...), samt de problem som uppstår när ett dataelement 
+
+\section{MedView}
+
+MedView-projektet är ett samarbete mellan institutionen för datavetenskap på Chalmers tekniska högskola samt Odontologiska faktulteten vid Göteborgs Universitet. Projektet påbörjades 1995 och syftade till att utveckla modeller, metoder och verktyg för att underlätta arbetet för läkare och annan medicinsk personal \cite{medview_overview}. 
+
+Grundtanken i MedView är att samla in patientdata på en välstrukturerad form. En formell dagalagring möjliggör vidare datorbearbetning \cite{medview_design} som automatisk journalproducering \cite{lindahl_02} eller analys, både i medicinskt och forskningssyfte. Hittils (Januari 2003) finns ca 4000 patientunderökningar inmatade.
+
+Under arbetet har vi deltagit i möten om MedViews framtid och vidare utveckling. Genom detta har vi varit delaktiga i den gemensamma kodbas som utgör MedView-projektet, och den kod vi skrivit har återförts till övriga delar av MedView (framför allt datahantering m m)
+
+\subsection{Applikationer}
+
+MedView-systemet bygger i grunden på två komponenter: Inmatningsverktyget MedRecords och rapportverktyget MedSummary. Dessa två komponenter skrevs ursprungligen i Objective-C och byggde på Apples applikationsramverk WebObjects \cite{webobjects}. (Nya versioner av dessa applikationer påbörjades sommaren 2001, och befinner sig fortfarande under utveckling). Dessa delar utgör stommen i systemet och hanterar inmatning av patientinformation respektive sammanställning av den formella datan till mänskligt läsbar form (s k Summaries).
+
+\subsection{Datahantering}
+
+
+\subsubsection{Struktur}
+
+En undersökning lagras formellt genom att definiera en undersökning som en samling termer som tilldelas värden. En term kan defineras som en mängd av termer eller en mängd av värden. Här är en delmängd av hur en undersökning kan definieras:
+
+\begin{displaymath}
+\begin{array}{ccc}
+
+Unders \ddot okning &=& \{ Patientuppgifter, Anamnes, Diagnos, ... \} \\
+Patientuppgifter &=& \{ Patientkod, Yrke, F \ddot odelseort, ... \} \\
+Anamnes &=& \{ Medicinering, Allergier, R \ddot okning, Alkoholvanor, ...\} \\
+Medicinering &=& \{ ``Alphosyl'', ``Akineton''\} \\ 
+Allergier &=& \{ ``Pollen'' \} \\
+R \ddot okning &=& \{ ``Nej'' \} \\
+\end{array}
+\end{displaymath}
+
+\subsubsection{Aggregering}
+
+\label{aggregering}
+
+Aggregering, eller gruppering av värden, är ett sätt att göra stora mängder av olika värden för en term mer överskådliga. Anledningen att man vill göra detta är att den inmatade datan ofta är mycket detaljerad, och det är ofta lättare att se tendenser och samband om man betraktar datan på en mindre detaljerad nivå. Exempel på grupperingar är till exempel åldersgrupper, allergityper eller ursprungsland: 
+
+\begin{tabular}{c|c|c}
+Term & Värden & Gruppering \\ 
+\hline
+Ålder & 1-12 & Barn \\
+Ålder & 13-19 & Tonåring \\
+Ålder & 20-30 & Ung vuxen \\
+Ålder & 31-65 & Medelålders \\
+Ålder & 65-200 & Pensionär \\
+\hline
+Allergi & Banan, Päron, Äpple & Frukt \\
+Allergi & Valnöt, hasselnöt, mandel & Nötter \\
+Allergi & Hund, katt & Pälsdjur \\
+\hline
+Land & Kenya, Zaire, Zimbabwe, ... & Afrika \\
+Land & Sverige, Norge, Finland, Danmark & Norden \\
+Land & Frankrike, Spanien, Portulgal, ... & Västeuropa \\ 
+Land & Polen, Bulgarien, Jugoslavien, ... & Östeuropa \\
+\hline
+\end{tabular}
+
+Aggregateringar konstrueras i programmet Aggregator, som är en fristående Javaapplikation skriven av Nader Nazari. Den tillhandahåller ett grafiskt gränssnitt för att skapa aggregeringar (se \ref{aggregering}) utifrån en informationsdatabas. Dessa sparas sedan till en s k MVG-struktur (MedView Groups) för användning i applikationer där gruppering av värden önskas.
+
+\subsubsection{Bilder}
+
+En undersökning kan även innehålla en eller flera bilder som tagits av läkaren under undersökningen. Hur dessa bilder lagras respektive hittas är upp till implementationen av datalagringen, men gemensamt är att en bildreferens bör finnas som en definition i undersökningen, just nu tilldelar man termen {\em Photo} unika identifierare för fotona, som sedan används för att leta upp den lagrade bilden.
+
+
+\section{Uppgiften}
+
+Examensarbetets frågeställning gick ut på att skapa en metod för att visualisera medicinsk data som samlats in genom projektet MedView. Våra handledare under projektet har varit Olof Torgersson vid institutionen för datavetenskap vid Chalmers Tekniska Högskola, som forskat på metodik \cite{medview_overview,knowledge_acquisition,medview_declarative,medview_textgeneration,medview_design} för 
+
+Detta problem kunde angripas på två sätt:
+
+\begin{enmerate}
+
+\item
+(Praktisk) Utveckla ett program för analys av odontologisk data som skall tas i bruk.
+\item
+(Teoretisk) Utveckla och/eller utvärdera användbara GUI-metoder för utforskning av [...] medicinsk data.
+\end{enmerate}
+
+Vi har valt att lägga tonvikten vid det första alternativet -  att utveckla ett
+program som i så stor mån som möjligt är färdigt att tas i bruk med all funktionalitet
+för att vara fullt användbart. Anledningen till detta är att kliniken för Oral Medicin samlat in en stor mängd data som de nu vill kunna börja utnyttja till forskning.
+
+Den andra delen av problemställningen går ut på att undersöka befintliga, eller vid
+behov utveckla nya, metoder och komponenter som kan användas för att söka i och
+analysera stora mängder [...] medicinsk data.
+
+\section{Previous Work}
+
+Innan utvecklingsarbetet påbörjades läste vi in oss på en del tidigare artiklar som 
+skrivits inom datavisualiseringsområdet. Emedan många artiklar demonstrerade avancerade 
+kontroller som inte var applicerbara eller lämpliga för vårt arbete, har andra artiklar, 
+såsom Visage \cite{visage_96}, fått stort inflytande på vårt fortsatta arbete och 
+utformningen av vårt program.
+
+\subsection{Datahantering}
+
+\subsubsection{DataHandling}
+
+Hanteringen av trädfiler i Java (TreeFileHandler) skrevs ursprungligen 2000 för användning i projektet Personlig Patientinformation \cite {personlig_patientinformation}. Denna har sedan byggts på med ytterligare klasser för hantering av MVD-strukturer.
+
+\subsection{Visualisering}
+
+\subsubsection{The cube}
+
+The Cube var det första försöket att skriva ett visualiseringsverktyg av patientdata. Den utvecklades av Göran Falkman \cite{falkman_visualization}
+
+\subsubsection{SimVis}
+
+SimVis \cite{falkman_visualization} är ett verktyg skrivet av Göran Falkman som grupperar undersökningar och visar upp grupperingarna grafiskt. Grupperingen baserar sig på s k "Similarity Measures", som jämför undersökningar och slår ihop likartade fall i "Clusters". 11
+
+\subsubsection{Olof Torgerssons visualiseringsprototyp}
+
+En enkel prototyp till ett graf-baserat visualiseringsverktyg har skrivits av Olof Torgersson. Denna prototyp visualiserade 
+
+Protypen var dock kraftigt begränsad - bara en (fix) datamängd kunde visualiseras samtidigt, och det var svårt att utläsa grafers betydelse. 
+
+Spotfire-liknande verktyg har funnits. Dock begränsat. (Bara en datamängd kunde 
+visualiseras samtidigt. Multipel selektion var begränsad. Den kunde använda aggregeringar
+
+
+\subsubsection{Visage}
+
+En av de största influenserna har varit Visage \cite{visage_96}, en prototyp av ett 
+användargränssnitt för att utforska och analysera information. Visage beskriver ett 
+tillvägagångssätt för att koordinera multipla visualiserings-, analys- och 
+presentationsverktyg i tillämpningar med stora datamängder. 
+
+Visage använder sig i hög grad av multipla vyer som visar olika aspekter eller attribut 
+av objekt. Sökningar och urval görs genom ett antal sekventa drag\&drop-operationer av 
+delmängder av objekten mellan de olika vyerna. På så sätt begränsas urvalet av objekt 
+steg för steg med avseende på de attribut som varje vy visar upp.
+
+När ett urval av objekt har gjorts kan dessa grupperas (Visage-teamet refererar till detta
+som "roll-up") och gruppen ges ett namn som beskriver urvalet. Flera grupper kan referera 
+till samma objekt, vilket medför att om vi har ett objekt ``Malmö'' kan det tillhöra både
+gruppen ``Sydliga städer'' och ``Storstäder''. Grupperna kan användas för fortsatta urval
+eller för att visa summan av ett attribut över alla objekt i gruppen.
+
+drill-down, roll-up
+
+färgning av element i flera vyer
+
+\section{Förarbete/Undersökning}
+
+
+\subsection{Begränsningar}
+
+\subsubsection{Datalagring}
+MedViews datalagring baserar sig på undersökningar. Detta innebär att den minsta enheten i systemet är en undersökning för en patient. En undersökning innehåller alltså inte all information som finns tillgänglig om en patient, utan enbart den nya information som tillkommit under besöket. Oförändrad information, som till exempel kön, allergier och liknande har oftast bara matats in vid patientens första besök (den s k Primärundersökningen) och finns därför inte ifylld i senare undersökningar.
+
+Man skulle kunna tänka sig att "slå ihop" samtliga undersökningar för en patient till en enhet. Detta medför dock än värre problem, då patientens tillstånd (t ex medicinering, rökningsvanor) förändras med tiden (från en undersökning till nästa). Då visualiseringsverktygets primära syfte är forskning, är det riskabelt att ...
+
+Detta inför en begränsning för oss då det i ett visualiseringsverkyg kanske skulle kännas mer intuitivt att arbeta per patient istället för per undersökning. 
+
+Om en bättre definition av termer, som angav vilka termer som kan ses som icke-tidsvarianta fanns tillgänglig, skulle mer information per undersökning vara tillgänglig. Någon sådan finns dock inte, och eftersom det inte finns någon standard för vilka termer som finns tillgängliga i MedView, anser vi detta problem ligga utanför
+vår uppgift.
+
+Ett annat problem med den nuvarande datalagringen är att all information man skulle vilja titta på inte finns tillgänglig direkt. Ett exempel på detta är patientens ålder. Denna finns inte lagrad under någon term, men däremot kan den
+utläsas ur patientens identifierare (P-code). Vi har därför infört begreppet "härledda termer", vilket innebär att vi för vårt syfte lägger till nya termer vars värden härletts från andra termer, i detta fall termen {\em Age}, inom vårt system. Problemet är dock att dessa termer inte existerar utanför Visualizer, och kan sålunda inte användas för t ex aggregering. Detta problem behöver lösas centralt för MedView, och vi nöjer oss därför med vår egen lösning tills det tagits ett centralt beslut för hur MedView skall hantera detta.
+
+\subsubsection{Tid}
+
+MedView är under utveckling (grunden ej färdig)- man vet inte vad som kommer förändras, så man får inte låsa sig eller göra för specifika lösningar. Detta har begränsat de antaganden vi kan göra om databasen (namn på termer, ...)
+
+Vi kan inte göra så mycket åt den underliggande datastrukturen etc etc
+
+
+\subsection{Krav}
+
+Vi ställde upp följande krav:
+
+För att applikationen skall vara användbar måste den vara lätt att ta till sig för läkare med begränsad datorvana. Inlärning och träning skall inte behövas, då detta kostar tid och kan avskräcka läkare att ta till sig programmet. Kort sagt skall programmet upplevas som ett enkelt hjälpmedel, utan att för den delen göra avkall på den funktionalitet vi vill att programmet skall omfatta.
+
+Applikationen skall vara plattformsoberoende, då kliniken för Oral Medicin använder sig av både Mac och PC.
+
+ (Dessutom finns mycket medviewverktyg redan i java)
+Integrera MedSummary. (=java)
+
+Visualiserad data skall kunna exporteras till fil för att bearbetas vidare i andra statistikverktyg.
+
+Slutprodukten skall befinna sig i stadiet "användbar"  
+Skall kunna vidareutvecklas - höga krav på bra struktur. Återanvändning.
+
+Syftet är forskning - felaktig information får inte förekomma, felaktiga slutsatser får inte dras.
+
+
+\section{Lösningsförslag / planering / design}
+
+(Här kommer våra funderingar och idéer och hur vi tyckte att systemet skulle se ut)
+
+
+För att maximera insikterna användaren får ville vi att datan skulle kunna visualiseras på flera sätt samtidigt så att man inte missar något. Vi bestämde oss alltså för att kunna använda oss av flera vyer samtidigt. Detta ledde till att vi valde att basera gränssnittet runt fönster då detta gav mest flexibilitet och valmöjlighet, trots att det kostar en del ``screen estate'' (titlebars etc).
+
+Man tittar på sin data på olika sätt (vyer), kan använda ``drill-down'' \cite{visage_96}
+
+Vi ville att användaren skulle kunna vrida och vända på sin data så mycket som möjligt. Detta gjorde att vi bestämde oss för att gränssnittet skulle baseras runt förflyttning av data. Det viktigaste är att användaren kan ``ta'' på sin data och undersöka den utan att känna sig begränsad av presentationen. Detta gjorde att vi valde en interaktionsmetod som baserar sig mycket på drag\&drop. 
+Baserat på visage...
+
+Genom att kopiera data till en ny vy kan man betrakta en delmängd av sin data medan man samtidigt har hela datamängden i ett fönster bredvid (focus + context). För att klargöra för användaren vilka element i de olika vyerna som motsvarar samma undersökningar har vi valt att göra selektionen global. Detta begrepp är centralt för applikationen och innebär att det enbart finns en selektion aktiv i programmet samtidigt, och att denna selektion är densamma för samtliga vyer. Dvs selekterar du eller avselekterar ett element i en vy, händer samma sak med motsvarande element i samtliga övriga vyer som innehåller elementet. Detta är det främsta verktyget för att hitta samband mellan vyer
+
+ 1.20
+10/100...
+
+\subsection{Selektion}
+
+När man tittar på samma datamängd i flera vyer samtidigt är det önskvärt att ha en visuell koppling mellan de olika vyerna för att klargöra relationen mellan dessa för användaren \cite{multiple_views}. Mer exakt vill vi att användaren skall känna igen den data han/hon manipulerar i samtliga vyer samtidigt. Då vårt verktyg baserar sig på selektion Drag\&drop har vi valt att göra selektion global - ett dataelement är antingen selekterat eller ickeselekterat, och detta tillstånd gäller i samtliga vyer. Detta kanske låter anspråkslöst, men är i själva verket ett kraftfullt verktyg då det låter dataelement både grupperas, kännas igen
+
+\subsection{Datagrupper}
+
+Vad är gruppering?
+
+Varför behöver man kunna gruppera?
+
+Det är önskvärt att kunna kombinera datagrupper till en gemensam. Ett exempel vi använt oss av är att Mats Jontell vid kliniken för Oral Medicin vill samköra sina undersökningar via SOMNET med en läkare i stockholm. Detta löses genom att öppna de två datamängderna för sig och sedan kombinera dessa (via drag\&drop) till en gemensam graf.
+
+Problemet är att det är önskvärt att kunna hålla isär vilka element som kommer ifrån vilken mängd. Vi löser detta genom att låta användaren dela in datamängden i datagrupper. Dessa färgkodas sedan i graferna (samma färgkodning i samtliga vyer).
+
+Användaren kan även omfördela grupperna (liksom skapa nya grupper!) under körningen. Exempelvis kan han med hjälp av en query ``Smoke == Mycket'' skapa en grupp vid namn ``Rökare''.
+
+Kan element ingå i flera grupper? Denna fråga skapade mycket tankearbete. Till en början valdes att testa en prototyp där elementen endast kan ingå i endast en grupp. Detta fungerade väl, men skapade vissa hinder i arbetet och kunde ge upphov till förvirring. Detta illustreras bäst med ett exempel. Tänk er att användaren skapat en grupp som heter ``Rökare''. Ur denna grupp gör han/hon sedan ett urval, exempelvis rökare med lichen planus, och skapar en ny grupp som lämpligt nog heter ``Rökare med lichen planus''. Om användaren nu vill göra en ny jämförelse med alla rökare så får han/hon problem. Alla rökare som även hade lichen planus har nu förflyttats till gruppen ``Rökare med lichen planus'' och finns inte kvar i gruppen ``Rökare''.
+
+Efter diskussioner insågs att detta var orimligt och att element måste kunna ingå i flera grupper. Tankegångarna gick då till att låta elementen ha en lista med vilka datagrupper de tillhör. Dock uppt?cktes snart vissa problem som behövde lösas. Det första problemet som upptäcktes var då man har två grupper, låt säga ``Rökare'' och ``Snusare'', där vissa element tillhör båda grupperna. Låt säga nu att vår odontolog vill studera snusare och därför drar gruppen ``Snusare'' från grupp-panelen till ett nytt stapeldiagram. Problemet som här uppstår är att han/hon får staplar för dels alla snusare (i färgen associerad till gruppen ``Snusare''), och dels för alla rökare som även är snusare (i färgen associerad till gruppen ``Rökare''). Detta är inte önskvärt då vår odontolog endast var intresserad av att studera snusare. Problemet härstammar i att diagrammen visar element (undersökningar), och visar elementen en gång för varje grupp elementet tillhör i gruppens färg.
+
+En tänkbar lösning till detta problem är att på varje diagram lägga ett filter som gör att diagrammet endast visar valda grupper. Från början är ett tomt diagram satt till att filtrera bort alla grupper, men när man drar element från en grupp till diagrammet kan man låta skicka med vilken grupp det rör sig om och inaktivera filtret för den gruppen så att den gruppen kan visas men alla andra grupper som elementen råkar tillhöra filtreras bort.
+
+Den slutgiltliga lösningen blev införandet av konceptet dataelement. Ett dataelement har en referens till en undersökning och en datagrupp. Det kan inte finnas två dataelement med en referens till samma undersökning och samma datagrupp, utan i en datagrupp identifierar dataelementet en undersökning unikt.
+
+Grupperna visas och sköts med hjälp en grafisk komponent. Denna komponent innehåller en lista på aktiva datagrupper och deras färg. För att fortsätta med metaforen ``ta på sin data'' kan grupperna behandlas på samma sätt som dataelement - man kan dra en grupp ifrån grupphanteraren till en vy för att lägga till den i vyn. På motsvarande sätt kan användaren dra dataelement från en vy till en grupp i grupphanteraren för att göra dem till en del av gruppen. Vid gruppen finns även en räknare som visar hur många element som ingår i gruppen och hur många av dessa som är selekterade. Gruppen har även ett namn som kan ändras av användaren när som helst.
+
+Selektion blir därför inte färgkodad, utan en markering, så att gruppfärgen fortfarande finns kvar när elementet selekterats.
+
+
+\subsection{Query}
+
+Det finns ett antal olika sätt som ett query-verktyg kan fungera på. Det första sättet är det som används i den tidigare prototypen där verktyget bestämmer direkt vilken datamängd som visas i de olika vyerna. Fördelen med den här metoden är att vid s.k. ``live queries'' blir datamängdens förändring vid ändring av query:n tydlig. En av nackdelarna med den här metoden anser vi vara att det som filtreras bort är osynligt och information göms således. Den andra nackdelen är att om olika vyer skall visa olika datamängder krävs ett query-verktyg per vy eller ett centralt som agerar på den aktiva vyn. Nackdelen med ett query-verktyg per vy är att det tar upp alldeles för mycket skärmutrymme och med ett centralt skulle det ibland kanske bli oklart på vilken vy det agerar.
+
+En annan metod för ett query-verktyg är att använda verktyget för selektering. Den största fördelen med den här metoden är att data inte göms, utan även datan som ej innefattas av query:n syns bakom selekteringen. Detta medför att en global query inte ger lika stora nackdelar. En nackdel med selekterings-query:n är att man inte kan se selektering av enstaka element i alla vyer, och därför kan information om vilka element som uppfyller query:n gömmas. Ta som exempel ett stapeldiagram. I vår implementering markeras stapeln som selekterad om alla element som bidrar till stapeln är selekterade. Tänk nu att om det bara är något element i varje stapel som är selekterad, då kommer vi få fallet att det ser ut som om ingenting aer selekterat. Vi får alltså i detta fall en omvänd informationsgömning emot det tidigare fallet.
+
+För att erhålla en enkel lösning på ovan nämnda problem kan selektions-query-verktyget utökas med urvalsfunktionalitet via drag\&drop. Tanken är att när man skapat en query kan man antingen välja att selektera alla element som uppfyller query:n, eller så kan man dra en ikon, som symboliserar alla element som uppfyller query:n, in i en vy och på så sätt se enbart urvalet.
+
+
+Problem: Queries som inte ger något svar. Hade ett alternativ varit att ta bort valmöjligheterna om de inte ger några träffar? Nej, eftersom det kan vara intressant att veta att ``Iran'' och ``Alvedon'' inte matchar några undersökningar.
+
+Problem: Varför vi skippade history-funktionen
+För komplext - manuell selektion, historian försvinner när man draggar etc
+
+Problem: Hur vet man vilka operationer som gett denna graf som resulatat? Loggar...
+
+
+\subsection{Spårbarhet och historia}
+
+Ett problem som vi ställdes inför var hur vi skulle tala om för användaren vad det är som egentligen visas i en graf. Föreställ er att användaren har gjort ett antal urval och fått fram en graf som visar på ett intressant samband och därefter går på lunch. När han/hon kommer tillbaka från lunchen och sätter sig framför datorn igen är han/hon kanske osäker på vad det är som visas i grafen. Här krävs det således något sätt att kunna spåra vad som visas i en graf. 
+
+I ett query-baserat verktyg är det bara att se på query:n. Exempelvis om query:n är ``(Gender == Male) AND (Diag-def == Lichen Planus)'' så är det ganska enkelt att dra slutsatsen att det som visas i grafen är alla män med diagnosen ``Lichen Planus''.
+
+I ett verktyg som är baserat på grafiska selektioner och drag\&drop-operationer är detta mycket svårare, men dock inte omöjligt. Ett sätt är att logga alla operationer som lett fram till innehållet i en graf, och sedan försöka presentera dessa på ett begripligt sätt för användaren vid behov. Det finns dock ett antal svårigheter med detta tillvägagångssätt. 
+
+Den första svårigheten man troligen stöter på är hur man översätter den grafiska operationen till en lämplig logisk representation. Vid selektering av ett rektangulärt område i ett diagram med numeriska axlar är detta relativt enkelt. Selekteringen representeras då av ett intervall på vardera axeln. Om axlarna har diskreta textvärden blir det genast svårare då ett intervall på axeln inte har en direkt logisk tolkning. Resultatet blir att varje enskilt värde i selektionen måste sparas för att man skall kunna ge en rimlig beskrivning av operationen. Om det är många värden som ingår i selektionen kan beskrivningen dock bli grötig och intetsägande. Tag till exempel fallet då användaren markerar ett antal staplar i ett stapeldiagram baserat på att de staplarna innehåller många undersökningar vilket gör dem användbara för en statistik analys. Det finns då inget sätt för systemet att se någon logik i varför just detta intervall av staplar valdes. Systemet blir då tvunget att representera selektionen med en uppräkning av alla valda staplar, och informationen om att de selekterades för att de var statistiskt användbara går om intet. Även vid fallet då användaren selekterar enskilda objekt i en vy behöver alla selekterade objekt uppräknas. 
+
+Ovan nämnda system kan fungera hyggligt bra, men ytterligare problem uppstår vid operationer mellan vyer. Tänk er situationen när ni har två vyer där båda innehåller data som uppkommit genom ett antal operationer som genererat en operationslogg för varje vy. Om användaren vid något tillfälle drar över ett urval av data från den ena vyn till den andra måste detta reflekteras i loggen för den mottagande vyn. Sammansmältningen av de två loggarna kan vara svårt att lösa på ett tillförlitligt men ändå överskådligt sätt.
+
+Ett kraftfullt sätt att lösa problemet med sammansmältning av loggar från olika vyer
+är att skapa en trädstruktur av de olika loggarna. Den här lösningen är trots (eller
+kanske på grund av) sin flexibilitet alldeles för avancerad för den vanliga användaren
+och bör troligen endast tillämpas då spårbarhet är bland det väsentligaste och då
+det är expertanvändare som skall använda programmet.
+
+En annan approach för att hjälpa användaren komma ihåg vilken data som finns i en vy
+är den helt motsatta till den ovan beskrivna automatgenererade loggen, alltså att man
+förser användaren med ett litet anteckningsfält till varje vy där användaren själv
+hela tiden kan fylla i vad som visas. Den stora fördelen med den här metoden är dess
+flexibilitet och att vyn kan förses med en mer deskriptiv beskrivning en den som skapas
+genom automatgenerering. Nackdelen är att användaren tvingas se till att hålla
+beskrivningen uppdaterad, vilket användaren riskerar att försumma och således blir
+utan beskrivning när den behövs. Detta skulle kunna lösas genom att användaren tvingas
+skriva en anteckning för varje steg, men detta skulle utgöra ett alldeles för stort
+bromsande steg och skulle troligen uppfattas som negativt av användaren. Lösningen
+skulle kunna finnas i en kombination av de två metoderna, att först automatgenerera
+en enkel logg som användaren själv kan editera vid behov.
+
+Ytterligare en metod som är en blandning mellan den automatiserade och den deskriptiva
+kan tillämpas om alla dataelement tillhör en datagrupp med ett deskriptivt namn (se 
+beskrivning av grupper ovan). Varje vy kan då visa vilka datagrupper som visas i den
+vyn och om vyn visar alla dataelement tillhörandes datagruppen. Det här sättet att
+beskriva innehållet i en vy ger en grovkornigare lösning än den automatiserade loggen,
+men om användaren ser till att välja deskriptiva namn på datagrupperna kan den här
+metoden erbjuda en lättimplementerad och fullgod lösning på problemet.
+
+\subsection{Scatterplot}
+
+Det kan vara fördelaktigt att kunna visualisera mer än en term åt gången för att snabbt
+kunna få en överblick över samband mellan termer och att med en enda selektion kunna
+göra ett urval i flera dimensioner samtidigt. En diagramtyp som är skapad för att
+kunna göra just detta och plotta två termer mot varandra är scatterplot.
+
+I standardutförande ritar en scatterplot ut en symbol för varje kombination av
+de två valda termerna som finns i undersökningarna (se Figur ...). Detta fungera
+bra då numeriska icke-diskreta axlar används ty då går det att hitta samband genom
+att se områden där symbolerna plottas tätare.
+
+För att enkelt lägga till ytterligare en dimension till en scatterplot kan man låta
+objekten som plottas ha olika färg. Då termers värden inte mappas särskilt bra mot
+färger kan man istället använda den nya dimensionen för gruppering av objekt.
+
+En vanlig scatterplot som plottar ut punkter, kvadrater, cirklar eller andra små 
+figurer är behäftad med ett antal problem. Nedan går vi igenom ett antal av dessa 
+problem och diskuterar tänkbara lösningar.
+
+I visualiseringsprogrammet har vi implementerat en specialvariant av en scatterplot 
+som egentligen är en kombination av en scatterplot och ett antal pajdiagram.
+
+[lägg in bilder på vanlig scatterplot och vår scatterplot]
+
+Visualiserar två termer.
+
+vanlig scatterplot ger nästintill ingen statistisk information.
+
+egen scatterplot-variant. Kombination av scatterplot och pajdiagram.
+
+En punkt kan motsvara flera undersökningar, och en undersökning kan motsvaras av mer 
+än en punkt.
+
+I en vanlig scatterplot kan en undersökning döljas under en annan.
+
+
+\subsection{Aggregering}
+
+(beskriv aggregering)
+
+Det vore önskvärt att kunna både ha aggregeringen och se de individuella värdena. En ide: att se ``ibuprofen''-aggregeringen på en axel, när man klickar på denna slås aggregeringen av och grafen ritar om med de individuella läkemedlen (ipren, etc...)
+
+I första versionen ligger dock aggregeringen transparent ovanpå data-inläsningen, vilket innebär att vi aldrig ser ipren etc, utan enbart ibuprofen.
+
+
+
+\section{Implementation} 
+
+\subsection{Systemmiljö}
+
+Vi har implementerat visualizern i Java. Detta var en självklarhet för att uppfylla kraven på plattformsoberoende och integrering av tidigare MedView-kod skriven i Java.
+Vi valde att använda version 1.4 av Java SDK då version 1.4 erbjöd två stora förbättringar över 1.3: utökad och förenklade drag\&drop-funktionalitet samt enkel hantering av programinställningar (Preferences).
+
+Under utvecklingsarbetet har vi använt oss av utvecklingsmiljön NetBeans 3.4 vilket underlättat utveckling och versionshantering.
+
+Vårt program bygger dessutom på ett antal programpaket från tredje part:
+
+\subsection{Paket}
+
+\subsubsection{JFreeChart - Grafritning}
+
+För grafritning har vi använt paketet JFreeChart \cite{jfreechart}, som är ett paket för grafritning och hantering av data. Paketet har släppts under licensen LGPL \cite{lgpl} och kan därför användas fritt, även i kommersiella applikationer. (Om man ändrar i paketet måste man dock släppa källkoden till sina ändringar). 
+
+\subsubsection{JXL - Export till Excel}
+
+\section{Systembeskrivning}
+
+\subsection{Funktionalitet}
+
+
+\subsection{Datagrupper}
+
+Vad är en datagrupp?
+
+Alla undersökningar måste tillhöra minst en grupp.
+
+Ett fönster med en lista över datagrupper.
+
+Varje datagrupp i listan har en knapp som selekterar alla undersökningar (element) i datagruppen.
+
+Man kan dra datagrupper från listan och släppa på en vy eller på en knapp för att skapa en ny vy med 
+undersökningarna som finns i datagruppen.
+
+Man kan dra datagrupper från listan till papperskorgen.
+
+Om en undersökning släpps på en datagrupp kopieras den till datagruppen.
+
+Man kan dra undersökningar till knappen som skapar en ny datagrupp. En ny datagrupp skapas då och
+undersökningarna läggs automatiskt till gruppen.
+
+
+
+\subsection{Vyer}
+
+Följande avsnitt beskriver de olika vyer som finns i visualiseringsprogrammet. Varje vytyp erbjuder ett unikt sätt att betrakta en mängd av undersökningar, samt erbjuder olika sätt att dra undersökningar till och från dem. Som vi skall se har varje vy sina egna fördelar och nackdelar.
+
+Samtliga vyer stöder fritt val av värdeaggregering. När en ny aggregering väljs förändras värdemängden för undersökningarnas termen, och vyn genereras om i enlighet med detta.
+
+Papperskorgen. Undersökningar från en vy kan dras till papperskorgen i en annan vy och tas då bort ur
+den vyn i vars papperskorg de släpptes. Effektivt ja, men logiskt (?)
+
+
+\subsubsection{Stapeldiagram (BarChart)}
+
+Visualiserar en term.
+
+Enkelt att tolka.
+
+En stapel för ett värde på en term motsvarar hur många av undersökningarna som har det värdet för den termen. Om vyn innehåller element från flera datagrupper kommer en stapel per datagrupp visas.  
+
+
+\subsubsection{Scatterplot}
+
+Den variant av scatterplot som vi implementerat är egentligen en kombination av en scatterplot och
+pajdiagram. Godtycklig term kan väljas på både x- och y-axeln, men till skillnad från en vanlig
+scatterplot som plottar små kvadrater eller cirklar plottar vår variant små pajdiagram (se Figur SCATTER1). 
+
+[sätt in figur SCATTER1 som visar scatterplot, och skriv figurtext]
+
+Pajdiagrammens radie står i förhållande till antalet undersökningar som har just den kombination av 
+x- och y-termvärden som anges av pajdiagrammets position. De olika sektorerna motsvarar de olika
+datagrupperna och sektorernas storlek motsvarar antingen antalet undersökningar i datagruppen som har
+denna x- och y-termvärde-kombination eller antalet procent av undersökningarna i datagruppen som har
+kombinationen, beroende på vilken inställning användaren gjort för diagrammet. Den senare inställningen
+är troligen den mest användbara då den ger mer korrekt bild av förhållandet mellan datagrupperna
+för den aktuella termvärde-kombinationen.
+
+
+\subsubsection{Bildvy (ImageView)}
+
+Bildvyn visar upp miniatyrer (nedskalade versioner) av de bilder som hör till de undersökningar som vyn innehåller. Varje bild visar även vilken patient den tillhör och när bilden togs. Grupptillhörigheten för undersökningen som bilden hör till illustreras genom en färgad ram runt bilden.
+
+Genom att dubbelklicka på en miniatyrbild öppnas ett nytt fönster med bilden i sin naturliga storlek. 
+
+Syftet med denna vy är att låta läkaren 
+De arbetssätt som kan tänkas är att hålla uppe en bildvy parallelt med annan bearbetning, eller att visualisera en datamängd både i bildvyn och en databaserad vy för att se om visuella likheter motsvarar samband i patientdatan.
+
+När man drar en eller flera bilder så drar man undersökningen som bilderna tillhör. Grupptillhörighet bibehålls.
+
+\subsubsection{Frekvensrapport / StatisticsView}
+
+* frekvensrapport
+
+\subsubsection{TableView}
+
+Tabellvyn skiljer sig ifrån övriga vyer då den saknar grupperingsbegreppet. Anledningen till detta är att...
+
+När man draggar ifrån denna så...
+
+\subsubsection{Journalvy - SummaryView}
+
+Denna vy integrerar journalgenereringen från Fredrik Lindahls MedSummary \cite{lindahl_02}. 
+
+Det går/går inte(?) att dra ifrån denna 
+
+
+
+\subsection{Queryverktyg}
+
+Möjligheter, begränsningar
+
+\subsection{Aggregering}
+
+Fördelar, nackdelar
+
+Tidigare fanns ej kod för att hantera aggregeringar, enbart ett verktyg
+
+
+
+\section{Arbetsgång (försvinner troligen)}
+
+(ta från history filen)
+
+3 Juni 2002 exjobbet påbörjas
+
+17 Juni 2002 arbetet med prototyp inleds
+
+augusti??? första prototypen testas på mats (och ev andra?). Resultat:
+
+
+
+\section{Testning}
+
+I skrivande stund är den utbredda användningen av MedView begränsad till inmatning av data i MedRecords och avläsning av denna genom MedSummary. Eftersom få personer är insatta i tankesättet bakom MedView har vår mängd av testpersoner varit begränsad. 
+
+Under utvecklingen av programmet har vi haft en kontinuerlig dialog med Mats Jontell vid kliniken för Oral Medicin om vad han haft för önskemål och visioner för att kunna få ut så mycket som möjligt av programmet i sin forskning. Därför har Mats blivit vår "target user". När vi väl började implementera programmet har vi låtit Mats testa både prototyper och sedan löpande nya versioner efter hand som de blev klara. Den kontinuerliga feedbacken vi fått på detta sätt har påverkat utformningen av programmet avsevärt.
+
+Det som framför allt kommit fram genom testningen är hur viktigt det är för användaren att förstå vad som händer när data förflyttas... ofta har vi fått tänka om pga missförstånd
+
+Annat vi kunnat fånga tidigt genom kontinuerlig testning är dålig gui-design, knappar man kommer åt (soptunna) mm 
+
+Testat på Mats Jontell och David Öman
+
+- Hanterbarhet (GUI-problem)
+
+- Funktionalitet och förståelse (Gemensam selektion? Olika sätt att selektera? Dragga? Examinations i flera datagrupper?)
+
+- Möjligheter som programmet erbjuder, vad de tycker är bra, vad som de känner begränsar dem
+
+
+
+\section{Resultat och Slutsatser av projektet}
+
+\subsection{Visualizer}
+
+Mats var nöjd. Han kan nu:
+
+* Undersöka blabla (klistra in exemplet 80% kvinnor eller rökare)
+
+* Exportera til SPSS
+
+* Användbart för presentationer etc
+
+\subsection{MedView}
+
+Under projektet har vi skrivit en hel del kod för Visualizer som kommer att kunna återanvändas inom MedView. 
+
+* Aggregation-handling
+
+Inläsning av aggregeringar, och kod för att slå upp värden
+
+Aggregation Library: Visuella komponenter för visualisering och ändring av aggregations
+
+* Querying
+
+\section{Framtid}
+
+Vidare utveckling...
+
+saker som var svåra:
+
+* query-verktyg som ger global selektion som resultat.
+
+* svårt med global selektion då de olika vyerna visar olika saker:
+    * dataelement
+    * undersökningar
+    * statistik
+
+
+
+\newpage
+
+\begin{thebibliography}{99}
+\bibitem{falkman_visualization}
+Falkman, G. (2001). {\em Information Visualisation in Clinical Odontology: Multidimensional
+  Analysis and Interactive Data Exploration.}Artificial Intelligence in Medicine, 22(2),
+  133-158.
+
+\bibitem{visage_96}
+Steven F. Roth, Peter Lucas, Jeffrey A. Senn, Cristina C. Gomberg, Michael B. Burks, Philip J. Stroffolino, John A. Kolojejchik \& Carolyn Dunmire (1996), {\em Visage: A User Interface Environment for Exploring information}, Proceedings of Information Visualization, 3--12. San Francisco: IEEE. \url{http://citeseer.nj.nec.com/roth96visage.html}
+
+\bibitem{lindahl_02}
+Lindahl, F. (2002), {\em User-defined automatic journal production in MedView}
+
+\bibitem{jfreechart}
+Gilbert, D. (2003), {\em About JFreeChart}, The Object Refinery, 
+\url{http://www.object-refinery.com/jfreechart/index.html}. 
+Hämtad 2003-01-20
+
+\bibitem{lgpl}
+Smith, Brett (2002), {\em Licenses}, The GNU project, 
+\url{http://www.gnu.org/licenses/licenses.html#TOCLGPL}.
+Hämtad 2003-01-20
+
+\bibitem{webobjects}
+Apple inc. (2003), {em Webobjects 5.2 - The fastest way to build powerful webservices}
+\url{http://www.apple.com/webobjects/}
+Hämtad 2003-01-20
+
+\bibitem{personlig_patientinformation}
+Aner, A.; Bengtsson, S.; Claesson, M.; Eliasson, J.; Erichson, N; Larsson, B.; Lindahl, F. (2001), {\em Personlig Patientinformation}, 
+\url{http://www.cs.chalmers.se/Cs/Grundutb/Kurser/ d3projekt/OldYears/2000-2001/ProjektgruppernasWWW/1/ rapport/Slutrapport.pdf}
+
+
+\bibitem{medview_overview}
+Youssef Ali, Göran Falkman, Lars Hallnäs, Mats Jontell, Ulf Mattson, Nader Nazari, Olof Torgersson,
+{\em An Overview of MedView}
+
+\bibitem{knowledge_acquisition}
+Falkman, G. and Torgersson, O. (2002). {\em Knowledge Acquisition and Modeling in Clinical
+  Information Systems: A Case Study.} In: Gómez-Pérez, A. \& Benjamins, V.R. (eds.)
+  Knowledge Engineering and Knowledge Management: Ontologies and the Semantic Web.
+  Proceedings of the 13th International Conference on Knowledge Engineering and
+  Knowledge Management (EKAW 2002), Sigüenza, Spain, October 1-4, 2002, LNAI, vol.
+  2473, pp. 96-101. Springer-Verlag.
+
+\bibitem{medview_declarative}
+ Falkman, G. and Torgersson, O. (2002). {\em MedView: A Declarative Approach to
+  Evidence-Based Medicine.} In: Surján, G., Engelbrecht, R. \& McNair, P. (eds.) Health
+  Data in the Information Society. Proceedings of MIE2002, Studies in Health Technology
+  and Informatics, vol. 90, pp. 577-581. IOS Press.
+
+\bibitem{medview_design}
+Ali, Y., Falkman, G., Hallnäs, L., Jontell, M., Nazari, N., and Torgersson, O. (2000).
+{\em MedView: Design and Adoption of an Interactive System for Oral Medicine.} In Hasman,
+  A., Blobel, B., Dudeck, J., Engelbrecht, R., Gell, G., and Prokosch, H-U., eds., Medical
+  Infobahn for Europe. Proceedings of MIE2000 and GMDS2000, IOS Press, Amsterdam,
+  pp. 3-7.
+
+\bibitem{medview_textgeneration}
+Torgersson, O. and Falkman, G. (2002). {\em Using Text Generation to Access Clinical Data in a
+  Variety of Contexts.} In: Surján, G., Engelbrecht, R. \& McNair, P. (eds.) Health Data in the
+  Information Society. Proceedings of MIE2002: Studies in Health Technology and
+  Informatics, vol. 90, pp. 460-465. IOS Press.
+
+\bibitem{multiple_views}
+Multiple views
+
+\end{thebibliography}
+
+\end{document}

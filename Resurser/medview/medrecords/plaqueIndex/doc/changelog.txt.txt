@@ -1,0 +1,55 @@
+$Id: changelog.txt.txt,v 1.4 2005/06/07 18:21:41 erichson Exp $
+---------------------
+PlaqueIndex changelog
+---------------------
+
+COPENHAGEN_DEVELOPMENT (Nils: February-april 2005)
+
+-------
+* The requests from Copenhagen:
+-------
+
+1. Added support for inputing data with number keys.
+2. Added support for deleting input data with delete.
+3. Added separator in the middle to make the separation of left/right mouth 
+   clearer
+4. Added a cursor (highlighting in yellow), so that you now see
+   where the next value will appear if you use buttons or number keys to input
+   data.
+5. "Blödning" should only have the values 0 or 1. Also the cursor did not move in this row.
+--
+6. Added support for backing through tables with backspace.
+7. Extracted teeth are now saved in the same way as Unchecked teeth, but with the value Extracted.
+   Before, extracted teeth would not show up in the tree files at all (the terms would be missing).
+-------
+* Fixed bugs that were discovered during the above work.
+-------
+1. The order of how the input position moved between the five rows was broken -
+   try using the buttons to input values from top to bottom in the old version
+   (the input would jump around erratically, and some rows would be skipped
+   altogether)
+2. When clicking with the mouse on a combobox to input a value, the "cursor" would remain where it
+   was before (always going to the Poche input)
+3. Fixed the "arrow" icon which would remain after using a combobox to input
+   data (which hides what data was actually input)
+4. The layout for "Furkaturer" was misaligned. Fixed.
+--
+5. Tree file saving was broken, as all three columns in a table were saved as <tooth name>f.
+   This was corrected, so that they are now saved as <t>df, <t>f and <t>mf.
+6. Enter key now moves forward through the tables without making changes. (Before, it would always make
+   the cursor move vertically, and loop within the current table)
+7. If the value in a cell was 1, and you clicked the mouse and typed 1, you would cycle to the next value
+   that begun with 1, i.e. 10, and from 10 it would cycle to 11 and so on.
+   Now, the value always becomes 1 if you type 1.
+8. To input values 10-15, press shift+ the last number (shift+0 becomes 10, shift+3 becomes 13)
+   However, this only works for the normal number keys (on the number pad, shift+numbers become the arrow keys, 
+   Home, PgUp etc)
+
+---
+
+Known issues:
+
+* Vertical movement inside Furkaturer behaves differently, due to each tooth being composed by two separate tables
+  - getprvTable 
+
+* Requires at least 1024x768 display size to work in medrecords due to layout issues

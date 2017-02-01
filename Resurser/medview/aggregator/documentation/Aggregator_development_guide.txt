@@ -1,0 +1,33 @@
+$Id: Aggregator_development_guide.txt,v 1.2 2004/05/18 15:54:52 d97nix Exp $
+
+
+Dokumentation av hur Aggregator sitter ihop.
+--------------------------------------------
+Uppdateras kontinuerligt av Nils E efter hand som jag listar ut hur 
+härket fungerar...
+
+AggregatorFrame: Huvudfönstret. Innehåller alla komponenter. Meny och knapp-hantering.
+
+AggregateHashTable: Data-klass.
+
+Attrib-klasser: Alla klasser som har med det vänstra trädet ett göra.
+    AttribTreeUI: Det vänstre JTree:t. Mushantering finns här. SortingMenu innehåller viss popupmeny-funktionalitet.
+    AttribSelectionModel: Begränsar vilka värden som får selekteras i AttribTreeUI.
+
+CategoryFilter: FileFilter som enbart visar .mvg-filer
+CategoryReader: Läser in en MVG-fil.
+
+"Group"-klasserna motsvarar en aggregering (kallas grouping).
+   GroupTreeUI: Det högra JTree:t. Mushantering finns här. 
+
+Node: Används kanske inte? Verkar vara kopierad ifrån en gammal version av TreeFileHandler etc.
+
+SortingMenu: Popupmenu för att sortera om p-coder. Skall kallas när man högerklickar i AttribTreeUI.
+
+TreesReader: Läser in tree-filer/MVD:er till en AggregatehashTable. Håller reda på lite progress.
+ Använder sig av följande klasser:
+    ReadingThread
+    EncodeTreeFile: Gör själva jobbet.
+
+Ut: Snabbklass för att skriva ut felmeddelanden etc (Användning: Ut.println etc)
+

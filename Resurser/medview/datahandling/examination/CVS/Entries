@@ -1,0 +1,28 @@
+/CachingExaminationDataHandler.java/1.2/Mon Apr 24 14:17:37 2006//
+/CouldNotParseDateException.java/1.3/Sat Oct 12 14:10:59 2002//
+/DefaultTreeFileDateParser.java/1.4/Sat Feb 28 17:51:26 2004//
+/DefaultTreeFilePhotoParser.java/1.10/Mon Apr  9 15:19:31 2007//
+/ExaminationDataHandler.java/1.36/Mon Apr 24 14:17:37 2006//
+/ExaminationDataHandlerEvent.java/1.1/Tue Aug 19 16:03:15 2003//
+/ExaminationDataHandlerListener.java/1.3/Mon Apr 24 14:17:38 2006//
+/ExaminationIdentifier.java/1.21/Mon Apr 24 14:17:38 2006//
+/ExaminationValueContainer.java/1.15/Fri Sep  9 15:40:48 2005//
+/GenericExaminationIdentifier.java/1.4/Tue Oct 12 15:34:47 2004//
+/InvalidDataLocationException.java/1.3/Sat Oct 12 14:11:00 2002//
+/MVDCacheHandler.java/1.5/Mon Apr 24 14:17:38 2006//
+/MVDHandler.java/1.68/Mon May 29 18:32:48 2006//
+/MedViewExaminationIdentifier.java/1.21/Tue Nov  9 21:13:50 2004//
+/NoSuchExaminationException.java/1.3/Wed Oct 17 15:15:50 2007//
+/RemoteExaminationDataHandler.java/1.5/Fri Sep  9 15:40:48 2005//
+/RemoteExaminationDataHandlerClient.java/1.21/Mon Apr 24 14:17:38 2006//
+/RemoteExaminationDataHandlerEvent.java/1.2/Thu Nov  4 20:07:42 2004//
+/RemoteExaminationDataHandlerListener.java/1.3/Fri Nov 19 12:32:29 2004//
+/RemoteExaminationDataHandlerListenerImpl.java/1.4/Fri Nov 19 12:32:30 2004//
+/SQLExaminationDataHandler.java/1.23/Wed Jan  3 14:15:38 2007//
+/SafeMVDHandler.java/1.23/Mon Apr 24 14:17:38 2006//
+/TreeFileDateParser.java/1.3/Sat Oct 12 14:11:02 2002//
+/TreeFilePhotoParser.java/1.4/Thu Dec 22 19:10:23 2005//
+/package.html/1.1/Mon Aug 25 22:50:21 2003//
+D/filter////
+D/tablefile////
+D/tree////

@@ -1,0 +1,249 @@
+Funktionalitet
+--------------
+
+Summary:
+
+(Medium) Bilder i summaryn.
+
+Just nu genereras allting direkt vid första klick. Det är inte så bra om man vill selektera flera
+med t ex Control-selektion.
+Gör så här i stället: Lyssna inte på selektion, utan ha en "Generate"-knapp som i Fredriks program.
+
+(LÅG) Ev lägga summary settings i en egen dialog? (Istället för fyra olika menyalternativ)
+
+Kunna dragga från summaryvyn
+
+Ev göra möjligt att få patientbaserad summary-vy? (Drar man in en undersökning vill man kunna få en summary för samtliga patientens undersökningar)
+
+Lägg till statusbar-text när summary genereras.
+
+
+(HÖG) Spara session: Borde få en progress monitor. Programmet verkar stå stilla när man stänger det.
+
+(Medium) Splashruta vid start av programmet så man inte tror det står stilla.
+
+(*** Klart ***) Ta bort tabbarna, de förvirrar (och mats vill helst ha allting i ett flöde)
+(*** Klart ***) Ny grupp dialog: Namnet markerat som default, för att man skall kunna skriva direkt (gruppnamnet för-markerat)
+
+Query-verktyg:
+    För filtrering.
+    Tänk om selektionsknappen (den som nu ligger i datagrupp-rutan)
+    (*** Klart ***) Man skall kunna överföra en hel term
+    (*** Klart ***) Foer selektion.
+    (*** Klart ***) Laegg till "<n/a>" vaerden i query-verktyget.
+    (*** Klart ***) Lägg till pilar <- -> istället för dubbelklick (bra när man väljer flera)
+
+Drag'n'drop:
+    Lägg till inställningar:
+( Skipped )        * "Beh?ll selektionen efter D'n'D (eller inte) - 
+
+( Klar? ) Om ingenting ?r selekterat skall man inte kunna drag-a.
+
+    Kom ih?g vilka termer som var aktiva n?r vi drag:ade.. Ex dra fr?n en barchart ?ver en term till en scatterplot
+    -> Ger scatterplot f?r Term mot Pcode?
+
+History- /loggfunktion. "Hur vet jag vad som finns h?r" (vad ing?r i denna graf). Vad var tanken med att jag skapade den?
+Note-funktion till sig sj?lv.
+Ex: "F?rst tog du 26 svenskar ur grupp 1, sen tog du 24/91 ur scatterploten Drug mot Age"
+
+F?rdigladdade aggregates?
+
+namnge en selektion ex. Sverige + Frankrike + Norge
+
+(*** Klart ***) Integrera MedSummary.
+(*** Klart ***) B?ttre ?versikt av aggregates
+(*** Klart ***) Kunna starta aggregatorn fr?n visualizern
+
+Aggregator
+----------
+
+(*** Klart ***) Inladdning funkar inte (open category uppdateras inte jtree)
+F?rdigladdade aggregates?
+
+Inladdning är väldigt långsam, eller hänger sig (OM.MVD)
+Lägg till en progress bar!
+
+Hjälpfunktion, eftersom gränssnittet inte är konsistent (högerklick vs dubbelklick)
+
+Datahantering
+-------------
+V?rden till siffror (SPSS)
+
+B?ttre hantering av termer... p-code skall inte tas bort, age skall alltid finnas med
+
+Kunna v?lja om man vill kunna l?sa in samtliga unders?kningar eller enbart prim?runders?kningar. (Preferences)
+
+Fixa aggregatorn s? att deriverade termer hanteras
+
+(*** Klart ***) Fixa riktig Age
+(*** Klart ***) Modal inlaesning av  undersoekningar.
+(*** Klart ***) Fels?ka varf?r vi inte kan importera mats' forest.forest
+(*** Klart ***) B?ttre prestanda!!! L?sa in m?nga unders?kningar g?r mycket l?ngsamt. Cache:a handler.
+(* Klart, ej testat *) V?lja teckenkodning f?r inl?sning / skrivning
+(*** Klart ***) Anv?nda naders Aggregates f?r att sl? ihop termer.
+(*** Klart ***) Fixa b?ttre aggregates-hantering... view-specifik ist?llet f?r global. getValue(Aggregation) ?
+(*** Klart ***) V?lja ut termer till graferna. (Se ?ven gui)
+(*** Klart, dock globalt ***) Valda termer skall sparas mellan sessionerna.
+
+Export
+------
+
+Statistikverktyg, t.ex. j?mf?ra datam?ngder. Unders?k vad som ?r intressant att
+j?mf?ra och vilka m?tt som kan anv?ndas.
+
+Generera j?mf?relse i stil med det som mats g?r med Excel idag.
+Typiska fr?gest?llningar:
+    Hur m?nga procent av r?karna medicineras?
+    Hur m?nga procent av de medicinerade r?ker?
+    Vilken ?r ?lders- och/eller k?nsf?rdelningen f?r ovan n?mnda?
+    Hur ser sk?rningen mellan xelocen/svenskar ut?
+
+?nskv?rt: V?lja om man skall exportera numeriska eller VAS-v?rden
+
+(*** Klart ***) Export av data till fil eller Excel. 
+(*** Klart ***) Export av statistik.
+
+Diagram
+-------
+
+Implementera diagramtyper:
+    * PieChart
+    (*** Klart ***) * Image view (Photos)
+    (*** Klart ***)    * Table (unders?k intressanta utformningar och vad som skall visas)
+    (*** Klart ***) * ScatterPlot
+    (*** Klart ***) * BarChart 
+
+Allm?nt: 
+
+    Rektangelselektion borde ske med intersects och contains, inte bara contains.
+
+    Kunna spara ett diagram som en bildfil. Alt. drag'n'drop till andra applikationer.
+    
+    Ge feedback f?r vad som finns under muspekaren hela tiden, speciellt i ScatterPlot. Man 
+    skall inte beh?va selektera ett element f?r att se vad det representerar.
+
+    Sortera numren p? axlarna numeriskt, inte alfabetiskt.
+
+    VIKTIGT: Det skall finnas "select all" per graf. 
+
+    (*** Klart, för datagrupper. ***) Det skall finnas "select all" globalt. 
+
+    (*** Klart, kan dock f?rb?ttras f?r CTRL-selektering. ***) Ett item som finns under
+    musmark?ren n?r man startar en DnD-operation skall selekteras.
+
+    (*** Klart ***) Det skall inte g? att starta en DnD-operation fr?n en plats i diagrammet d?r det inte
+    finns n?got item.
+
+    (*** Klart *** )Det b?r finnas "n/a" i alla diagram d?r unders?kningar hamnar som inte har
+    ett v?rde p? den valda termen.
+
+Barchart:
+    Fixa axlarnas bredd/h?jd. Det ser f?nigt ut n?r en stapel tar upp hela diagrammet. Dynamisk storleks?ndring?
+
+    (*** Klart ***) Staplar f?r samma v?rden men olika datagrupper skall sitta ihop utan mellanrum mellan sig. Annars ser man inte vilka
+    som h?r ihop. Sl? ihop dem utan mellanrum, eller skapa en gemensam (segmenterad) stapel. Det senare kr?ver dock att man
+    kan selektera ett segment.
+
+    (*** Klart ***) L?gg till procentsatser p? staplarna i BarChart.
+    och/eller G?r s? att man kan v?lja mellan Amount och Procent p? m?ngd-axeln.
+
+    (*** Klart ***) Numreringen p? axlarna. Att ha decimaler i "amount" ?r meningsl?st, man kan inte ha en halv unders?kning.
+    (*** Klart ***) Plocka bort dubblerings-buggen i BarChart.
+    (*** Klart ***) Bugg: Panelen under grafen packas d?ligt, n?r man ?ndrar valda termer hamnar ibland comboboxen f?r termval p? en ny rad under (och f?rsvinner s?ledes)
+
+Scatterplot:
+
+    (*** Klart ***) Punktstorlekar f?r att visa hur m?nga unders?kningar som en punkt representerar. Som det ?r nu ser man inte om
+    en punkt ?r 1 eller 15 unders?kningar.
+
+    (*** Klart ***) Rita ut punkterna s? att man ser multi-grupptillh?righet. ("Vart tog finnarna v?gen?")    
+    (*** Klart? ***) B?ttre funktionalitet.
+
+Tableview:
+    (HÖG) Alternativ f?r att visa alla termer bör finnas.
+    (Låg) Kompakt version av vyn för utskick (en patient per rad)
+    (Med) Se till att man kan dragga till datagrupp eller annan tableview, men inget annat
+
+StatisticsView: 
+
+    (*** Klart ***) "Totals" b?r vara "Av antal unders?kningar" (eller liknande)
+
+Red ut validateSelection, validateView i DataManager, ApplicationManager, 
+View och Chart.
+
+Dataset
+-------
+Optimera dataset-uppdatering vid datagruppsbyte. Nu uppdateras dataset:et i Chart:en en
+g?ng f?r varje element som byter datagrupp.
+
+(*** Klart ***) Red ut vilket dataset som anv?nds av vilken klass och vem som lyssnar p? vad. 
+(*** Klart ***) Se till att element kan tas bort ur ett dataset. 
+
+Gui
+---
+
+Gör så att trattknappen i graferna används.
+
+Lägg till text till höger om selektionen i statusraden med info som
+    "Vald översättare OK"
+    "Laddat dataset OK"
+    "Läser bilder..."
+
+G?r menyer, spr?k etc konsistenta. Just nu ?r allting blandat svenskt/engelskt. Dynamiskt spr?k?
+
+Filv?ljare: Aggregering etc... r?tt startkataloger fr?n b?rjan.
+
+Mer logisk positionering av zoomknappar och scrollbars i t ex scatterplot
+
+Ordentlig f?nsterlista p? windows-menyn
+
+Lokalisering. G? ?ver till att anv?nda GUI-komponenter i medview.common.
+
+Rensa upp koden som st?nger ett f?nster.
+
+(*** Klart, den togs bort ***) Kan den globala soptunnan anv?ndas till n?got?
+(*** Klart ***) Ikoner p? internal frames, ev. ?ven st?ng-knappar
+(*** Klart, inte säkert att det alltid fungerar dock ***) Buggfix: vyn m?las inte om ordentligt n?r man byter fr?n free till MDI style
+(*** Klart, den är dold ***) Ta bort tool-v?ljaren, den beh?vs inte.
+(*** Klart ***) "V?lj termer" titelrad tom, fixa
+
+Datagruppf?nstret:
+    
+    Kunna v?lja ALLA unders?kningar. Antingen som en separat "h?rd" grupp, eller som en "v?lj alla"-funktion..
+    Spara grupper (se nedan)
+
+    (*** Klart ***) Inte v?lja f?rg genom att trycka p? den. Man vill kunna drag:a ifr?n b?de texten och f?rgen.   
+    (*** Klart ***) Kunna drag'n'drop:a flera grupper samtidigt.    
+    (*** Klart ***) Kunna v?lja flera grupper samtidigt.
+    (*** Klart ***)    Ange vilka datagrupper som visas i f?nstrets titelrad. Exempel: 
+        BarChart: GBG + Stockholm (delvis) + Malm? (delvis) + Karlstad
+
+Spara sessionen inkluderande:
+    * Se till att ALLA diagrams attribut sparas.
+(*** Klart ***) * F?nsterpositioner
+(*** Klart ***) * Datagrupper
+(*** Klart ***) * Elements tillh?righet i datagrupper
+(*** Klart ***) * Diagram och vilka element som tillh?r diagrammen
+(*** Klart ***) * Inst?llningar (look-and-feel etc)
+
+(* Klart, funktionaliteten bör dock förbättras. *) Lista med alla f?nster i menyn.
+
+(*** Klart ***) Istaellet foer att skriva "ScatterPlot" och "BarChart" bredvid bilderna paa chart-knapparna
+kan man skriva vilka termer som skall visas.
+
+(*** Klart ***) ?ndra s? att term-v?ljaren inte p?verkar graferna direkt, utan har ett OK/Cancel val.
+(*** Klart ***) L?gg till val av look-and-feel.
+(*** Klart ***) Se till att datagrupper kan tas bort.
+(*** Klart ***) Se till att ett oselekterat item i en scatterplot ej kan skymma ett selekterat. 
+(*** Klart ***) En papperskorg i varje View dit man kan dra element man vill skall f?rsvinna ur vyn.
+(*** Klart ***) Val av datagruppstillh?righet vid inladdning av data. 
+
+Praktiskt
+---------
+
+(*** Klart ***) Fixa jar-paketering
+
+Mats
+-----
+
+Vad d? kompletteringsdiagnoser? Hur hantera?

@@ -1,0 +1,2 @@
+English		medview/datahandling/resources/languages/english.lrf
+Svenska		medview/datahandling/resources/languages/swedish.lrf

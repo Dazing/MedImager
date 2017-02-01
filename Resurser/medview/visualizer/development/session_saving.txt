@@ -1,0 +1,110 @@
+Keys and examples of values for saving a session:
+
+==[VIEWS]=======================================================================
+
+view_count
+    the number of views
+
+view_[v]_type ([v] is the view number: 0 <= [v] < view_count)
+    possible values: barchartview, scatterplotview, tableview, statisticsview, summaryview, imageview
+
+view_[v]_elements
+    a commaseparated list of element numbers (look under "ELEMENTS": [e]) like: 0,9,987,1022
+
+view_[v]_location
+    the x-coordinate of the view's frame followed by the y-coordinate like: 68,92
+
+view_[v]_size
+    the width of the view's frame followed by the height like: 100,250
+
+view_[v]_aggregation
+    the active aggregation of the view or "no_active_aggregation" if no aggregation is active
+
+if view_[v]_type is barchartview:
+---------------------------------
+view_[v]_term
+    the displayed term
+
+view_[v]_bar_orientation
+    possible values: horizontal, vertical
+
+view_[v]_stacked_bars
+    possible values: true, false
+
+view_[v]_percent_values
+    possible values: true, false
+
+view_[v]_horizontal_x_labels
+    possible values: true, false
+
+(eventually add zoom and visible range)
+
+if view_[v]_type is scatterplotview:
+------------------------------------
+view_[v]_x_term
+    the term displayed on the x-axis
+
+view_[v]_y_term
+    the term displayed on the y-axis
+
+view_[v]_percent_values
+    possible values: true, false
+
+if view_[v]_type is tableview:
+------------------------------
+
+if view_[v]_type is statisticsview:
+-----------------------------------
+view_[v]_term
+    the term to display the statistics for
+
+if view_[v]_type is summaryview:
+--------------------------------
+
+if view_[v]_type is imageview:
+------------------------------
+
+
+==[DATAGROUPS]==================================================================
+
+datagroup_count
+    the number of datagroups
+
+datagroup_[g]_name  ([g] is the datagroup number: 0 <= [g] < datagroup_count)
+    the name of the data group
+
+datagroup_[g]_color
+    the amount of red followed by the amount of green followed by the amount of blue like: 120,229,122
+
+
+==[AGGREGATIONS]================================================================
+
+aggregation_count
+    the number of aggregations
+
+aggregation_[a]_filename    ([a] is the aggregation number: 0 <= [a] < aggregation_count)
+    the filename of the aggregation
+
+
+==[ELEMENTS]====================================================================
+
+element_count
+    the number of elements
+
+element_[e]_datasource  ([e] is the element number: 0 <= [e] < element_count)
+    the datasource number (look under "DATASOURCES": [d])
+
+element_[e]_datagroup
+    the data group number (look under "DATAGROUPS": [g])
+
+element_[e]_identifier
+    the string representation of the examination identifier
+
+
+==[DATASOURCES]=================================================================
+
+datasource_count
+    the number of datasources
+
+datasource_[d]_url  ([d] is the datasource number: 0 <= [d] < datasource_count)
+    a string with the url representing the datasource

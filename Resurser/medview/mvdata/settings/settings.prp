@@ -1,0 +1,7 @@
+#Medview settings file
+#Mon Jul 22 14:14:28 CEST 2002
+parsedTDHDefinitionFileLocation=/C\:/CVS_Sources/software/java/MedView/medview//mvdata\\terms\\termDefinitions.txt
+currentTemplateAndTranslatorDataHandlerClass=medview.datahandling.XMLTemplateAndTranslatorDataHandler
+currentLanguage=english
+parsedTDHValueFileLocation=/C\:/CVS_Sources/software/java/MedView/medview//mvdata\\terms\\termValues.txt
+currentTermDataHandlerClass=medview.datahandling.ParsedTermDataHandler
