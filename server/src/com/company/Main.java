@@ -31,8 +31,11 @@ public class Main {
                     ExaminationIdentifier[] examinations = handler.getExaminations(pid);
                     for (ExaminationIdentifier examination : examinations){
                         ExaminationImage [] imgs = handler.getImages(examination);
-                        for (ExaminationImage img : imgs){
-                            frame.getContentPane().add(new JLabel(new ImageIcon(img.getThumbnail())));
+                        if(imgs.length > 0) {
+                            frame.getContentPane().add(new JLabel(examination.getExaminationIDString()));
+                            for (ExaminationImage img : imgs) {
+                                frame.getContentPane().add(new JLabel(new ImageIcon(img.getThumbnail())));
+                            }
                         }
                     }
                 }
