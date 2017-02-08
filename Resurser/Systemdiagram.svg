@@ -15,7 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="Systemdiagram.svg">
+   sodipodi:docname="Systemdiagram.svg"
+   inkscape:export-filename="C:\Users\Daniel\Documents\MedImager\MedImager\Resurser\Systemdiagram.png"
+   inkscape:export-xdpi="125.677"
+   inkscape:export-ydpi="125.677">
   <defs
      id="defs4">
     <marker
@@ -186,7 +189,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="366.51562"
+     inkscape:cx="160.01562"
      inkscape:cy="520.37171"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -204,7 +207,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -223,7 +226,7 @@
            x="118"
            y="442.36221"
            style="-inkscape-font-specification:'Liberation Sans Narrow Condensed';font-family:'Liberation Sans Narrow';font-weight:normal;font-style:normal;font-stretch:condensed;font-variant:normal;" /></flowRegion><flowPara
-         id="flowPara4144"></flowPara></flowRoot>    <g
+         id="flowPara4144" /></flowRoot>    <g
        id="g5303">
       <rect
          y="325.70932"
@@ -244,6 +247,13 @@
            id="tspan4148"
            sodipodi:role="line">Frontend</tspan></text>
     </g>
+    <rect
+       style="fill:#f2f2f2;fill-opacity:1;stroke:#000000;stroke-width:2.992;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.992,5.984;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4303"
+       width="703.00842"
+       height="384.00845"
+       x="25.995775"
+       y="496.358" />
     <g
        id="g5313">
       <rect
@@ -335,39 +345,39 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:100%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="406"
-       y="455.36221"
+       y="441.36221"
        id="text5299"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan5301"
          x="406"
-         y="455.36221"
+         y="441.36221"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:25px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'">JSON-</tspan><tspan
          sodipodi:role="line"
          x="406"
-         y="480.36221"
+         y="466.36221"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:25px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'"
          id="tspan6804">objekt</tspan><tspan
          sodipodi:role="line"
          x="406"
-         y="505.36221"
+         y="491.36221"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:25px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'"
          id="tspan6806" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:100%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="327.59302"
-       y="455.13712"
+       y="441.13712"
        id="text5299-9"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          x="327.59302"
-         y="455.13712"
+         y="441.13712"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:25px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:end;text-anchor:end"
          id="tspan6798">HTTP-</tspan><tspan
          sodipodi:role="line"
          x="327.59302"
-         y="480.13712"
+         y="466.13712"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:25px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed';text-align:end;text-anchor:end"
          id="tspan6802">förfrågan</tspan></text>
     <g
@@ -497,5 +507,29 @@
            x="619.6936"
            sodipodi:role="line">databas</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:100%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="232.54346"
+       y="221.99623"
+       id="text5299-95"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         x="232.54346"
+         y="221.99623"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:25px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'"
+         id="tspan6806-6">Användare</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:100%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="34.543457"
+       y="524.99622"
+       id="text5299-6"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         x="34.543457"
+         y="524.99622"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:25px;line-height:100%;font-family:'Liberation Sans Narrow';-inkscape-font-specification:'Liberation Sans Narrow Condensed'"
+         id="tspan6806-0">Backend</tspan></text>
   </g>
 </svg>
