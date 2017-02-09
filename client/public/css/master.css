@@ -1,255 +1,65 @@
-/* @import url(''); */
-/* Bootstrap Imports */
-@import url("bootstrap/bootstrap.min.css");
-@import url("bootstrap/bootstrap-theme.min.css");
-/* Variables (Fonts, Colors etc) */
-/* Colors */
-/* Rounded Corners */
-/* Sizes */
-/* Fonts */
-@font-face {
-  font-family: sspLight;
-  src: url("../fonts/SourceSansPro-Light.ttf"); }
-@font-face {
-  font-family: ssp;
-  src: url("../fonts/SourceSansPro-Regular.ttf"); }
-@font-face {
-  font-family: sspBold;
-  src: url("../fonts/SourceSansPro-Bold.ttf"); }
-/* Default Values */
-/* Reset */
 * {
-  padding: 0;
-  margin: 0; }
-
-input, button {
-  font-family: ssp; }
-
-/* Default font */
-p, h1, h2, h3, h4, h5 {
-  font-family: ssp; }
-
-/* Layout Styling */
-html, body {
-  width: 100%;
-  height: 100%; }
+  box-sizing: border-box; }
 
 body {
-  min-width: 480px;
-  /* suppose you want minimun width of 1000px */
-  width: auto !important;
-  /* Firefox will set width as auto */
-  width: 480px; }
+  margin: 0;
+  font-family: "Roboto Condensed"; }
 
-/* Load when window is smaller then 600px */
-@media (max-width: 600px) {
-  #searchWrapper {
-    width: 400px;
-    margin: 20px auto; }
-
-  #basicSearch {
-    width: 260px;
-    margin: 0px auto; } }
-/* Load when window is between then 600px and 800px */
-@media (min-width: 601px) and (max-width: 900px) {
-  #searchWrapper {
-    width: 400px;
-    margin: 20px auto; }
-
-  #basicSearch {
-    width: auto;
-    margin: 0px auto; } }
-/* Load when window is larger then 800px */
-@media (min-width: 900px) {
-  /* Index */
-  #loginWrapper {
-    width: 500px;
-    height: 100%;
-    float: left; }
-
-  #searchSideWrapper {
-    min-width: 400px;
-    height: 100%;
-    float: left; }
-
-  #quickSearch {
-    width: 400px;
-    margin: 200px auto; }
-
-  /* Search */
-  #searchWrapper {
-    width: 400px;
-    margin: 20px auto; }
-
-  #basicSearch {
-    width: 260px;
-    margin: 10px auto; }
-
-  #advancedSearch {
-    width: 380px;
-    margin: 10px; } }
-/* Element Classes */
-/* Divs etc */
-.elementDiv {
-  overflow: auto;
-  background-color: #FFF;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 5px 0px #c4c4c4;
-  -moz-box-shadow: 0px 0px 5px 0px #c4c4c4;
-  box-shadow: 0px 0px 5px 0px #c4c4c4; }
-
-/* Index */
-#loginWrapper {
-  background-color: #FFF; }
-  #loginWrapper form {
-    margin: 0px 150px 0px 150px; }
-
-#searchSideWrapper {
-  background-image: url("../img/index_bg.jpeg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover; }
-
-/* Search */
-#mainWrapper {
-  background-color: #f6f7fb;
-  height: 100%;
-  margin: 0 !important;
-  padding: 0 !important;
-  font: ssp; }
-
-#mainHeader {
-  background-color: #FFF;
-  height: 50px;
-  box-shadow: 0px 1px 4px #ddd; }
-  #mainHeader a {
-    margin: auto 20px;
-    float: left;
-    color: inherit; }
-  #mainHeader a:hover {
-    text-decoration: none; }
-
-#basicSearch {
-  overflow: auto; }
-
-#advancedSearch {
-  overflow: auto;
-  display: none; }
-
-/* Buttons */
-input {
-  margin-bottom: 2px; }
-
-.button {
-  color: #4680ff; }
-
-.button:hover {
-  cursor: pointer; }
-
-.submitButton {
-  float: right;
-  display: block;
-  background-color: #FFF;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  border: 1px solid #DDD;
-  margin-right: 2px;
-  padding: 5px;
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-  box-sizing: border-box;
-  /* Opera/IE 8+ */ }
-
-.largeButton {
-  width: 60px;
-  height: 40px; }
-
-.extraLargeButton {
-  width: 80px;
-  height: 40px; }
-
-/* Lists */
-/* Table */
-/* Images */
-/* Forms */
-.large-text-input {
-  width: 200px;
-  height: 40px;
-  float: left;
-  display: block;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  border: 1px solid #DDD;
-  padding: 5px;
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-  box-sizing: border-box;
-  /* Opera/IE 8+ */ }
-  .large-text-input :hover {
-    cursor: pointer; }
-
-.large-submit-input {
-  width: 60px;
-  height: 40px;
-  background-color: #FFF;
-  float: right;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  border: 1px solid #DDD;
-  color: #4680ff; }
-
-::-webkit-input-placeholder {
-  /* WebKit, Blink, Edge */
-  color: #ccc;
-  font-family: sspLight; }
-
-:-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
-  color: #ccc;
-  opacity: 1;
-  font-family: sspLight; }
-
-::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
-  color: #ccc;
-  opacity: 1;
-  font-family: sspLight; }
-
-:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #ccc;
-  font-family: sspLight; }
-
-/* Headings, Paragraphs etc */
-.logo {
-  margin: 10px;
-  font-family: "filson-soft",sans-serif;
-  font-weight: 200; }
-  .logo span {
-    color: #4680ff;
-    font-weight: bold; }
-
-#loginWrapper h2 {
-  margin: 150px auto 50px auto;
-  text-align: center;
-  font-family: "filson-soft",sans-serif;
-  font-weight: 200; }
-  #loginWrapper h2 span {
-    color: #4680ff;
-    font-weight: bold; }
-
-#quickSearch h2 {
-  margin: 20px auto 20px auto;
+.center-box-wrapper {
   text-align: center; }
+
+.center-box {
+  position: absolute;
+  width: 100%;
+  max-width: 450px;
+  background-color: #1de9b6;
+  padding: 30px;
+  top: 40%;
+  left: 50%;
+  transform: translateY(-40%) translateX(-50%); }
+  .center-box input {
+    width: 100%;
+    padding: 15px;
+    font-size: 20px;
+    margin: 10px 0;
+    border: 0; }
+
+.medimager-logo {
+  float: left;
+  height: 50px;
+  width: 190px;
+  margin-right: 15px; }
+
+#menu-bar {
+  width: 100%;
+  background-color: #1de9b6;
+  padding: 7px; }
+  #menu-bar input {
+    padding: 15px;
+    width: 35%;
+    min-width: 200px; }
+
+#search-button {
+  height: 50px; }
+
+#search-results {
+  padding: 20px; }
+
+.result-image {
+  width: 300px;
+  height: 200px; }
+
+.user-button {
+  float: right;
+  height: 50px;
+  width: 50px; }
+
+#footer {
+  position: fixed;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  bottom: 0;
+  left: 0; }
 
 /*# sourceMappingURL=master.css.map */
