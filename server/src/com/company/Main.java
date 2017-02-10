@@ -3,50 +3,51 @@ package com.company;
 
 import medview.common.components.MedViewComponentUtilities;
 import medview.common.data.MedViewUtilities;
+import medview.datahandling.InvalidPIDException;
+import medview.datahandling.MedViewDataHandler;
+import medview.datahandling.NoSuchTermException;
 import medview.datahandling.PatientIdentifier;
 import medview.datahandling.examination.ExaminationIdentifier;
+import medview.datahandling.examination.ExaminationValueContainer;
 import medview.datahandling.examination.MVDHandler;
+import medview.datahandling.examination.NoSuchExaminationException;
 import medview.datahandling.images.ExaminationImage;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InvalidPIDException, NoSuchExaminationException {
 
         MedViewUtilities utilObj = new MedViewUtilities();
-        MVDHandler handler = new MVDHandler();
-        if(utilObj.isPathMVD(args[0])){
-            File tree = new File(args[0]);
-            handler.setExaminationDataLocation(args[0]);
-            try{
-                PatientIdentifier [] patients = handler.getPatients();
-                JFrame frame = new JFrame();
-                frame.getContentPane().setLayout(new FlowLayout());
-                for (PatientIdentifier pid : patients){
-                    ExaminationIdentifier[] examinations = handler.getExaminations(pid);
-                    for (ExaminationIdentifier examination : examinations){
-                        ExaminationImage [] imgs = handler.getImages(examination);
-                        if(imgs.length > 0) {
-                            frame.getContentPane().add(new JLabel(examination.getExaminationIDString()));
-                            for (ExaminationImage img : imgs) {
-                                frame.getContentPane().add(new JLabel(new ImageIcon(img.getThumbnail())));
-                            }
-                        }
-                    }
-                }
-                frame.pack();
-                frame.setVisible(true);
+        MedViewDataHandler handler = MedViewDataHandler.instance();
+        handler.setExaminationDataLocation(args[0]);
+        ArrayList<Examination> examinationArrayList = new ArrayList<>();
+        System.out.println(handler.getPatients().length);
+        for(PatientIdentifier pid : handler.getPatients()){
+            for(ExaminationIdentifier eid : handler.getExaminations(pid)){
+                Examination examination = new Examination();
+                examination.setAGE(handler.getAge(pid, eid.getTime()));
+                ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
+                try {
+                    for(String s : container.getValues("Allergy")){
+                        examination.setALLERGY(s);
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                    }
+                } catch (NoSuchTermException e) {
+                    //e.printStackTrace();
+                }
+                examinationArrayList.add(examination);
             }
-        }else{
-            System.out.println("Ej giltig fil");
+        }
+        System.out.println(examinationArrayList.size());
+        for(Examination ex : examinationArrayList){
+            System.out.println("Ålder: " + ex.getAGE() + " Allergi: " + ex.getALLERGY());
         }
     }
 }
