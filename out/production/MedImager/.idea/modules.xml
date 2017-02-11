@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MedImager.iml" filepath="$PROJECT_DIR$/MedImager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/backend/src/main/main.iml" filepath="$PROJECT_DIR$/server/backend/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Resurser/medview/medview.iml" filepath="$PROJECT_DIR$/Resurser/medview/medview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+    </modules>
+  </component>
+</project>

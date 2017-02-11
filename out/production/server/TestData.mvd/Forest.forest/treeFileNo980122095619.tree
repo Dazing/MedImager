@@ -1,0 +1,261 @@
+980122095619
+NKonkret_identifikation
+L/Users/atlas/MedViews/G02209340.medView##
+NDatum
+L98-01-22 08:49:47##
+NPATIENTUPPGIFTER
+NP-code
+LG02209340##
+NName#
+NRef-in
+LLäkare##
+NRef-cause
+LSlemhinneförändring##
+NBorn
+LSverige##
+NOccup
+LFörtidspensionär##
+NCiv-stat
+LGift##
+NNote01
+L###
+NANAMNES
+NAllmän
+NHealth
+LNej##
+NDis-now
+LSpinal stenos##
+NDis-past
+LNej##
+NChld-dis
+LVattenkoppor#
+LMässling#
+LScharlakansfeber##
+NInf-dis
+LSinuiter#
+LHalsfluss##
+NCheckup
+LJa##
+NDrug
+LKliogest##
+NAllergy
+LNej##
+NAdv-drug
+LIgG-injektioner##
+NSmoke
+LInte dagligen##
+NSnuff
+LNej##
+NAlcohol
+L10 cl alkohol/vecka##
+NBleed
+LNej##
+NVas-life##
+NÖvriga symptom
+NSymp-other
+LNej##
+NSymp-saliv
+LMinskad##
+NSymp-head
+LNej##
+NSkin-pbl
+LNej##
+NGenitals
+LJa##
+NNote02
+L			Behandlad för en svampinfektion för någon månad sedan.
+###
+NSpeciell
+NSymtomrelaterade uppgifter
+NSymp-now
+LSvidande##
+NVas-now
+L6.0##
+NSymp-past#
+NVas-past#
+NSymp-site
+LTungrandens högra sida#
+LTungrandens vänstra sida#
+LHöger buccalslemhinna regio#
+LVänster buccalslemhinna regio##
+NSymp-on
+L2 månader##
+NSymp-trigg
+LSomatiskt trauma##
+NSymp-var
+LVarierande##
+NSymp-dur#
+NSymp-freq#
+NSymp-24h
+LNatten##
+NNote03
+L###
+NAndra symtomrelaterade uppgifter
+NFactor-neg
+LStarkt kryddad föda#
+LCitrusfrukter##
+NFactor-pos#
+NTreat-pos
+LXylocain viskös##
+NTreat-neg
+LNej##
+NFamily
+LNej##
+NVas-hndc#
+NNote04
+L			Pat moder avled 971201. Besvärligt under det senaste året med moderns sjukdom
+###
+NVävnadsförändring
+NLesn-on#
+NLesn-trigg#
+NLesn-site#
+NLesn-var#
+NNote05
+L###
+NMuntorrhet
+NWater-nigh
+L1#
+Lx ?/natt##
+NWater-meal
+LJa##
+NSpeech-pbl
+LNej##
+NEye-pbl
+LTorrhet##
+NEye-on
+L10 år##
+NEye-drop
+LJa##
+NEye-exam#
+NNote06
+L###
+NTMJ
+NDent-treat#
+NSymp-joint#
+NSymp-musc#
+NNote07
+L###
+NPsykometri
+NSCL-90#
+NTENSE#
+NPLEAS#
+NACTIVE#
+NORIENT#
+NNote08
+L#####
+NSTATUS
+NDirekt
+NOrala slemhinnan
+NMucos-site
+LTungryggen#
+LHöger buccalslemhinna regio#
+LVänster buccalslemhinna regio##
+NMucos-colr
+LRöd#
+LVit##
+NMucos-attr#
+NMucos-txtur
+LErythem#
+LRetikulum##
+NMucos-size
+L4 cm2##
+NPhoto
+L/Users/atlas/Bilder/G0220/g02203.jpg#
+L/Users/atlas/Bilder/G0220/g02202.jpg#
+L/Users/atlas/Bilder/G0220/g02201.jpg##
+NNote09
+L###
+NBettfunktion
+NOccl-type#
+NJoint-dys#
+NInterfer#
+NFacetts#
+NReconstr#
+NMaterial#
+NNote10
+L###
+NPalpation
+NPalp-site#
+NPalp-cons#
+NPalp-rel#
+NPalp-size#
+NPalp-musc##
+NSensibilitet
+NSens-site#
+NNote11
+L####
+NIndirekt
+NRöntgen
+NXray-type#
+NXray-site#
+NXray-txtur#
+NXray-teeth#
+NNote12
+L###
+NHistopatologi
+NBiopsy-site#
+NEpi-txtur#
+NEpi-cells#
+NEpi-fluor#
+NTiss-type#
+NTiss-txtur#
+NTiss-cells#
+NTiss-fluor#
+NNote13
+L###
+NMikrobiologi
+NMicro-site#
+NMicro-type#
+NNote14
+L###
+NHematologi
+NBlood-HGB#
+NBlood-WBC#
+NBlood-RBC#
+NBlood-PTL#
+NBlood-Kob#
+NBlood-Fol#
+NBlood-Fe#
+NBlood-Glu#
+NBlood-APTT#
+NBlood-PK#
+NBlood-TSH#
+NBlood-T4#
+NNote15
+L###
+NSalivsekretion
+NSaliva-flow#
+NSaliva-pH#
+NSaliva-buff#
+NSaliva-sial#
+NSaliva-scin#
+NNote16
+L#####
+NTENTATIV DIAGNOS
+NDiag-tent
+LAtrofisk lichen planus###
+NHISTOPATOLOGISK DIAGNOS
+NDiag-hist##
+NDIAGNOS
+NDiag-def#
+NDiag-nr#
+NNote17
+L###
+NDAGANTECKNING
+NVis-cause
+LPrimärundersökning##
+NExam-type
+LBiopsi#
+LFoto#
+LKlinisk undersökning#
+LJournal##
+NTreat-eval-obj#
+NTreat-eval-subj#
+NTreat-type
+LInformation##
+NNext-app
+L7 dagar till nästa besök##
+NNote18
+L			Xyl-ex 1ml i buckalslemhinnan regio 46. 5mm stans. Kompression. 1 supolenesut. Åter sut bort. 
+##
+NText##
