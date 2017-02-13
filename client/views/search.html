@@ -5,6 +5,26 @@
 <script type="text/javascript" src="../public/js/jquery-3.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 <link href='../public/css/master.css' rel='stylesheet' type='text/css' />
+
+<script type="text/javascript">
+var tags = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
+
+function displayTagList(string)
+{
+	if(string.length > 1)
+	{
+		$("#auto-search-results").css("display", "block");
+		document.getElementById("auto-search-results").innerHTML="";
+		for(var i=0; i<tags.length; i++)
+		{
+			if(tags[i].includes(string))
+				$("#auto-search-results").append("<span>" + tags[i] + "</span>");
+		}
+	}
+	else
+		$("#auto-search-results").hide();
+}
+</script>
 <title>MedImager</title>
 </head>
 
@@ -18,7 +38,10 @@
 
 <div id="menu-bar">
 	<img src="" class="medimager-logo">
-	<input>
+	<div id="search-wrapper">
+		<input onkeyup="displayTagList(this.value);">
+		<div id="auto-search-results">Sökresultat</div>
+	</div>
 	<button id="search-button">></button>
 	<img src="" class="user-button">
 </div>

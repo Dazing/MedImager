@@ -1,6 +1,14 @@
+//VARIABLES:
+//------------------------------------------------------------------------
 $primary-colour: #1de9b6
 $secondary-colour: #64ffda
 $tertiary-colour: #a7ffeb
+
+=search-input-size
+	width: 35%
+	min-width: 200px
+	
+//------------------------------------------------------------------------
 
 *
 	box-sizing: border-box
@@ -40,14 +48,26 @@ body
 	padding: 7px
 	input
 		padding: 15px
-		width: 35%
-		min-width: 200px
 		border: 0
+		width: 100%
 	button
 		margin-left: -5px
 		height: 47px
 		border: 0
 		font-size: 13px
+		
+#search-wrapper
+	display: inline-table
+	+search-input-size
+		
+#auto-search-results
+	border: 1px solid #aaa
+	position: absolute
+	display: none
+	background-color: #ffffff
+	span
+		display: block
+		width: 100%	
 
 	
 #search-results
@@ -61,7 +81,7 @@ body
 		display: inline-block
 		background-size: cover
 		background-position: center
-		cursor: pointer
+		cursor: pointer	
 
 .user-button
 	float: right
