@@ -56,7 +56,10 @@ body {
   background-color: #ffffff; }
   #auto-search-results span {
     display: block;
-    width: 100%; }
+    width: 100%;
+    cursor: pointer; }
+  #auto-search-results span:hover {
+    background-color: #cccccc; }
 
 #search-results {
   padding: 10px;

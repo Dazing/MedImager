@@ -7,10 +7,11 @@
 <link href='../public/css/master.css' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
-var tags = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
+var tags = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
 
 function displayTagList(string)
 {
+	string = string.toLowerCase();
 	if(string.length > 1)
 	{
 		$("#auto-search-results").css("display", "block");
@@ -20,6 +21,9 @@ function displayTagList(string)
 			if(tags[i].includes(string))
 				$("#auto-search-results").append("<span>" + tags[i] + "</span>");
 		}
+		$("#auto-search-results").find("span").click(function(event) {
+			$(this).hide();
+		});
 	}
 	else
 		$("#auto-search-results").hide();
