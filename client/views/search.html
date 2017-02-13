@@ -12,7 +12,8 @@
 
 <div id="black-back"></div>
 <div id="popup-image-wrapper">
-<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="popup-image">
+	<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="popup-image">
+	<div id="popup-image-data">En fruktansvärd massa data</div>
 </div>
 
 <div id="menu-bar">
@@ -53,12 +54,13 @@
 $("#search-results").find("span").click(function(event) {
 	var url = event.target.style.backgroundImage;
 	$("#popup-image").attr("src", url.substring(5, url.length-2));
+	$("#popup-image-wrapper").css("display", "block");
 	$("#popup-image").css("display", "block");
 	$("#black-back").css("display", "block");
 });
 $("#black-back").click(function(event) {
 	$(this).hide();
-	$("#popup-image").hide();
+	$("#popup-image-wrapper").hide();
 });
 </script>
 </body>
