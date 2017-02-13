@@ -1,0 +1,501 @@
+{\rtf0\ansi{\fonttbl\f0\fnil Times-Roman;\f1\fswiss Helvetica;}
+\margl40
+\margr40
+{\colortbl;\red170\green170\blue170;}
+\cb1\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\f0\b\i0\ulnone\fs24\fc0\cf0 Abstrakt Identifikation = \
+980519115008\
+\
+Konkret Identifikation = \
+/Users/atlas/MedViews/G02749460 (new diagnosis.medView\
+\
+Datum = \
+98-05-19 11:44:26\
+\
+PATIENTUPPGIFTER\
+	P-code = \
+			G02749460\
+	Name = \
+	Ref-in = \
+			TandlÙkare\
+	Ref-cause = \
+			SlemhinnefğrÙndring\
+	\
+	Vilket land Ùr du fğdd i?\
+	Born = \
+			Sverige\
+\
+	Vilken Ùr din huvudsakliga sysselsÙttning?\
+	Occup = \
+			Kontorist\
+\
+	Vilket Ùr ditt civilstÚnd?\
+	Civ-stat = \
+			Gift\
+	Note01 = \
+\
+ANAMNES\
+AllmÙn\
+Anser du dig vara fullt frisk?\
+	Health = \
+			Ja\
+\
+Har du nÚgon sjukdom?\
+	Dis-now = \
+			Nej\
+\
+Har du haft nÚgon allvarlig sjukdom?\
+	Dis-past = \
+			Nej\
+\
+Vilka barnsjukdomar har du haft?\
+	Chld-dis = \
+			Rğda hund\
+			PÚssjuka\
+			MÙsslingen\
+	\
+Har du haft nÚgon allvarlig infektionssjukdom?\
+	Inf-dis = \
+			–LI\
+\
+GÚr du pÚ regelbundna lÙkarkontroller?\
+	Checkup = \
+			Ja\
+\
+Tar du regelbundet mediciner?\
+	Drug = \
+			Nej\
+\
+…r du allergisk mot nÚgot?\
+	Allergy = \
+			Getingstick\
+\
+…r du ğverkÙnslig mot nÚgon medicin?\
+	Adv-drug = \
+			Nej\
+\
+Rğker du?\
+	Smoke = \
+			Nej\
+\
+Snusar du?\
+	Snuff = \
+			Nej\
+\
+Hur mycket alkohol dricker Du i veckan?\
+	1 ğl klass III 33 cl = 6cl\
+	1 fl lÙttvin 75 cl = 21 cl\
+	1 fl starkvin 75 cl = 40 cl\
+	1 fl Renat = 75 cl\
+	\
+	Alcohol = \
+			21 cl alkohol/vecka\
+\
+Har du nÚgra problem med att det blğder lÙngre Ùn normalt om du t.ex. skÙr dig eller fÚr en tand utdragen?\
+	Bleed = \
+			Ja\
+\
+Hur upplever du din allmÙnna livssituation?\
+	Vas-life = \
+\
+–vriga symptom\
+	\
+Har du nÚgra andra besvÙr frÚn munnen eller angrÙnsande vÙvnader?\
+	Symp-other = \
+			Nej\
+\
+Har du nÚgra besvÙr med din saliv?\
+	Symp-saliv = \
+			Nej\
+\
+Har du ofta huvudvÙrk (> x1/vecka)?\
+	Symp-head = \
+			Nej\
+\
+Har du nÚgra hudbesvÙr?\
+	Skin-pbl = \
+			Torr hud\
+\
+Har du nÚgra besvÙr i underlivets slemhinna?\
+	Genitals = \
+			Ja\
+	\
+	Note02 = \
+			Tidigare svampinfektioner genitalt. Under observation fğr myom.\
+\
+Speciell\
+Symtomrelaterade uppgifter\
+\
+Har du nÚgra besvÙr nu frÚn den Úkomma som du remitterats fğr?\
+	Symp-now = \
+			Svidande\
+			Irritation\
+\
+Hur svÚra Ùr dina besvÙr just nu?\
+	Vas-now = \
+			3.0\
+\
+Har du tidigare haft besvÙr frÚn den Úkomma som du remitterats fğr?\
+	Symp-past = \
+\
+Hur svÚra var dina besvÙr nÙr de var som mest pÚtagliga?\
+	Vas-past = \
+\
+Var har eller har du haft besvÙr?\
+	Symp-site = \
+			727\
+			517\
+			1435\
+\
+Hur lÙnge har du haft besvÙr?\
+	Symp-on = \
+			6 mÚnader\
+\
+Associerar du debuten av besvÙren med nÚgon speciell hÙndelse?\
+	Symp-trigg = \
+			Nej\
+\
+Varierar dina besvÙr ğver tiden?\
+	Symp-var = \
+			Varierande\
+\
+Hur lÙnge varar dina besvÙr om de inte Ùr konstanta?\
+	Symp-dur = \
+\
+Hur ofta har du besvÙr, om dina besvÙr inte Ùr konstanta?\
+	Symp-freq = \
+\
+Om besvÙren varierar under dygnet, nÙr pÚ dygnet har du mest besvÙr?\
+	Symp-24h = \
+\
+\
+\
+	Note03 = \
+\
+Andra symtomrelaterade uppgifter\
+\
+…r det nÚgra faktorer som pÚverkar dina besvÙr/ din fğrÙndring negativt?\
+	Factor-neg = \
+			Starkt kryddad fğda\
+\
+…r det nÚgra faktorer som pÚverkar dina besvÙr/ din fğrÙndring positiv?\
+	Factor-pos = \
+\
+Har du erhÚllit nÚgon behandling fğr dina besvÙr/ din fğrÙndring som givit ett positivt resultat?\
+	Treat-pos = \
+			Nej\
+\
+Har du erhÚllit nÚgon behandling fğr dina besvÙr/ din fğrÙndring som givit ett negativt resultat?\
+	Treat-neg = \
+\
+Har nÚgon nÙra anhğrig haft liknande besvÙr/ fğrÙndring?\
+	Family = \
+			Nej\
+\
+Hur pÚverkar din Úkomma din livssituation?\
+	Vas-hndc = \
+\
+	Note04 = \
+\
+VÙvnadsfğrÙndring\
+\
+Hur lÙnge sedan Ùr det som fğrÙndringen noterades?\
+	Lesn-on = \
+\
+Associerar du debuten av besvÙren med nÚgon speciell hÙndelse?\
+	Lesn-trigg = \
+\
+Var brukar fğrÙndringen pÚtrÙffas?\
+	Lesn-site = \
+\
+…ndrar fğrÙndringen utseende ğver tiden?\
+	Lesn-var = \
+\
+	Note05 = \
+\
+Muntorrhet\
+\
+Hur mÚnga gÚnger behğver du dricka vatten under natten?\
+	Water-nigh = \
+\
+Har du svÚrt att Ùta utan att dricka mycket ?\
+	Water-meal = \
+\
+Upplever du att du har svÚrt att tala?\
+	Speech-pbl = \
+\
+Upplever du besvÙr frÚn ğgonen?\
+	Eye-pbl = \
+\
+NÙr startade dessa ğgonbesvÙr?\
+	Eye-on = \
+\
+AnvÙnder du ğgondroppar dagligen?\
+	Eye-drop = \
+\
+Om du genomgÚtt ğgonundersğkning, vad blev resultatet?\
+	Eye-exam = \
+\
+	Note06 = \
+\
+TMJ\
+\
+Har du genomgÚtt nÚgon stğrre protetisk behandling hos tandlÙkare?\
+	Dent-treat = \
+\
+Har du besvÙr frÚn dina kÙkleder?\
+	Symp-joint = \
+\
+Har du besvÙr frÚn din tuggmuskulatur?\
+	Symp-musc = \
+\
+	Note07 = \
+\
+\
+Psykometri\
+\
+SCL-90\
+	SCL-90 = \
+\
+MACL\
+	TENSE = \
+	PLEAS = \
+	ACTIVE = \
+	ORIENT = \
+\
+	Note08 = \
+\
+STATUS\
+Direkt\
+Orala slemhinnan\
+Lokalisation\
+	Mucos-site = \
+			547\
+			727\
+\
+FÙrg\
+	Mucos-colr = \
+			Gul\
+			Rğd\
+\
+Attribut till reaktionsmğnster\
+	Mucos-attr = \
+			Homogen\
+\
+Reaktionsmğnster\
+	Mucos-txtur = \
+			Erythem\
+\
+ Storlek\
+	Mucos-size = \
+			1 cm2\
+\
+Foto			\
+	Photo = \
+/Users/atlas/Bilder/G0274/g02744.jpg\
+/Users/atlas/Bilder/G0274/g02743.jpg\
+/Users/atlas/Bilder/G0274/g02742.jpg\
+	\
+Note09 = \
+\
+Bettfunktion\
+\
+Bettyp\
+	Occl-type = \
+\
+KÙkledsdysfunktion\
+	Joint-dys = \
+\
+Interferenser\
+	Interfer = \
+\
+Bruxofacetter\
+	Facetts = \
+\
+Protetiska konstruktioner\
+	Reconstr = \
+\
+Material\
+	Material = \
+	\
+	Note10 = \
+\
+\
+Palpation\
+\
+Lokalisation\
+	Palp-site = \
+\
+Konsistens\
+	Palp-cons = \
+\
+Relation till omgivande vÙvnad\
+	Palp-rel = \
+\
+Storlek\
+	Palp-size = \
+\
+MuskelsmÙrta vid palpation\
+	Palp-musc = \
+\
+Sensibilitet\
+	Sens-site = \
+\
+	Note11 = \
+\
+Indirekt\
+Rğntgen\
+\
+Typ av undersğkning\
+	Xray-type = \
+\
+Lokalisation\
+	Xray-site = \
+\
+Benets patologiska reaktionsmğnster\
+	Xray-txtur = \
+\
+TÙndernas patologiska mğnster\
+	Xray-teeth = \
+\
+	Note12 = \
+\
+Histopatologi\
+\
+Lokalisation\
+	Biopsy-site = \
+\
+Epitelets reaktionsmğnster\
+	Epi-txtur = \
+\
+Epitelets patologiska celler\
+	Epi-cells = \
+\
+Epitelets fluorescence\
+	Epi-fluor = \
+\
+Typ av ğvriga vÙvnader\
+	Tiss-type = \
+\
+Typ av reaktionsmğnster i ğvriga vÙvnader\
+	Tiss-txtur = \
+\
+Typ av patologiska celler i ğvriga vÙvnader\
+	Tiss-cells = \
+\
+–vriga vÙvnaders fluorescence\
+	Tiss-fluor = \
+\
+	Note13 = \
+\
+Mikrobiologi\
+\
+Lokalisation\
+	Micro-site = \
+\
+Typ av mikroorganism\
+	Micro-type = \
+\
+	Note14 = \
+\
+Hematologi\
+\
+Hemoglobin (116-166 g/L)\
+	Blood-HGB = \
+\
+Leukocyter (3,5-9,0 109/L)\
+	Blood-WBC = \
+\
+Erytrocyter (3,7-5,4 1012/L)\
+	Blood-RBC = \
+	\
+Trombocyter (150-350 109/L)\
+	Blood-PTL = \
+\
+S-Kobolamin\
+	Blood-Kob = \
+\
+S-Folat\
+	Blood-Fol = \
+\
+fS-JÙrn\
+	Blood-Fe = \
+\
+fB-Glukos (3,5-5,6 mmol/l)\
+	Blood-Glu = \
+\
+S-APTT \
+	Blood-APTT = \
+\
+Protrombinkomplex\
+	Blood-PK = \
+\
+S-TSH  (0,4-4,0 mIU/l)\
+	Blood-TSH = \
+\
+S-Tyroxin(fritt)  (12-25 pmol/l)\
+	Blood-T4 = \
+\
+	Note15 = \
+\
+Salivsekretion\
+\
+Sekretionshastighet\
+	Saliva-flow = \
+\
+Saliv-pH\
+	Saliva-pH = \
+\
+Buffringskapacitet\
+	Saliva-buff = \
+\
+Sialografi\
+	Saliva-sial = \
+\
+Scintigrafi\
+	Saliva-scin = \
+	\
+	Note16 = \
+\
+TENTATIV DIAGNOS\
+	Diag-tent = \
+\
+HISTOPATOLOGISK DIAGNOS\
+	Diag-hist = 	\
+\
+DIAGNOS\
+	Diag-def = \
+			Allergi mot amalgam\
+\
+	Diag-nr = \
+	\
+	Note17 = \
+\
+DAGANTECKNING\
+Besğksanledning\
+	Vis-cause = \
+			PrimÙrundersğkning\
+\
+Typ av undersğkning\
+	Exam-type = \
+			Klinisk undersğkning\
+			Journal\
+			Foto\
+\
+UtvÙrdering av fğregÚende behandling-objektivt\
+	Treat-eval-obj = \
+\
+UtvÙrdering av fğregÚende behandling-subjektivt\
+	Treat-eval-subj = \
+\
+†tgÙrd\
+	Treat-type = Amalgamutbyte\
+\
+†terbesğk\
+	Next-app = \
+			7 dagar till nÙsta besğk\
+\
+	Note18 = \
+			Intyg avseende paragraf 9.\
+\
+	Text = 
+}

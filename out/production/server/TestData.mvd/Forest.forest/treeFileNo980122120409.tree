@@ -1,0 +1,253 @@
+980122120409
+NKonkret_identifikation
+L/Users/atlas/MedViews/G02229281.medView##
+NDatum
+L98-01-22 11:26:26##
+NPATIENTUPPGIFTER
+NP-code
+LG02229281##
+NName#
+NRef-in
+LTandläkare##
+NRef-cause
+LSlemhinneförändring##
+NBorn
+LSverige##
+NOccup
+LPensionär##
+NCiv-stat
+LOgift##
+NNote01
+L###
+NANAMNES
+NAllmän
+NHealth#
+NDis-now
+LAtopiskt eksem##
+NDis-past
+LNej##
+NChld-dis
+LVet ej##
+NInf-dis
+LHalsfluss##
+NCheckup
+LNej##
+NDrug
+LNej##
+NAllergy
+LNej##
+NAdv-drug
+LNej##
+NSmoke
+LNej##
+NSnuff
+LNej##
+NAlcohol
+LNej##
+NBleed
+LNej##
+NVas-life##
+NÖvriga symptom
+NSymp-other
+LNej##
+NSymp-saliv
+LMinskad##
+NSymp-head
+LNej##
+NSkin-pbl
+LTorr hud#
+LEksem##
+NGenitals#
+NNote02
+L###
+NSpeciell
+NSymtomrelaterade uppgifter
+NSymp-now
+LSvidande##
+NVas-now
+L3.2##
+NSymp-past#
+NVas-past#
+NSymp-site
+LTungryggen#
+LVänster buccalslemhinna regio#
+LHöger buccalslemhinna regio##
+NSymp-on
+L30 år##
+NSymp-trigg
+LNej##
+NSymp-var
+LVarierande##
+NSymp-dur
+L2 dagar##
+NSymp-freq
+L3 gånger/månad##
+NSymp-24h
+LNej##
+NNote03
+L###
+NAndra symtomrelaterade uppgifter
+NFactor-neg
+LHård föda##
+NFactor-pos
+LFörbättrad munhygien##
+NTreat-pos
+LNej##
+NTreat-neg#
+NFamily
+LBroder##
+NVas-hndc#
+NNote04
+L###
+NVävnadsförändring
+NLesn-on#
+NLesn-trigg#
+NLesn-site#
+NLesn-var#
+NNote05
+L###
+NMuntorrhet
+NWater-nigh
+L1x/natt##
+NWater-meal
+LJa##
+NSpeech-pbl
+LNej##
+NEye-pbl
+LGruskänsla##
+NEye-on
+L12 månader##
+NEye-drop
+LNej##
+NEye-exam#
+NNote06
+L###
+NTMJ
+NDent-treat#
+NSymp-joint#
+NSymp-musc#
+NNote07
+L###
+NPsykometri
+NSCL-90#
+NTENSE#
+NPLEAS#
+NACTIVE#
+NORIENT#
+NNote08
+L#####
+NSTATUS
+NDirekt
+NOrala slemhinnan
+NMucos-site
+LHöger buccalslemhinna regio#
+LVänster buccalslemhinna regio##
+NMucos-colr
+LGul#
+LRöd#
+LVit##
+NMucos-attr#
+NMucos-txtur
+LRetikulum#
+LErythem##
+NMucos-size
+L2 cm2##
+NPhoto
+L/Users/atlas/Bilder/G0222/g02223.jpg#
+L/Users/atlas/Bilder/G0222/g02222.jpg#
+L/Users/atlas/Bilder/G0222/g02221.jpg##
+NNote09
+L###
+NBettfunktion
+NOccl-type#
+NJoint-dys#
+NInterfer#
+NFacetts#
+NReconstr#
+NMaterial#
+NNote10
+L###
+NPalpation
+NPalp-site#
+NPalp-cons#
+NPalp-rel#
+NPalp-size#
+NPalp-musc##
+NSensibilitet
+NSens-site#
+NNote11
+L####
+NIndirekt
+NRöntgen
+NXray-type#
+NXray-site#
+NXray-txtur#
+NXray-teeth#
+NNote12
+L###
+NHistopatologi
+NBiopsy-site#
+NEpi-txtur#
+NEpi-cells#
+NEpi-fluor#
+NTiss-type#
+NTiss-txtur#
+NTiss-cells#
+NTiss-fluor#
+NNote13
+L###
+NMikrobiologi
+NMicro-site#
+NMicro-type#
+NNote14
+L###
+NHematologi
+NBlood-HGB#
+NBlood-WBC#
+NBlood-RBC#
+NBlood-PTL#
+NBlood-Kob#
+NBlood-Fol#
+NBlood-Fe#
+NBlood-Glu#
+NBlood-APTT#
+NBlood-PK#
+NBlood-TSH#
+NBlood-T4#
+NNote15
+L###
+NSalivsekretion
+NSaliva-flow#
+NSaliva-pH#
+NSaliva-buff#
+NSaliva-sial#
+NSaliva-scin#
+NNote16
+L#####
+NTENTATIV DIAGNOS
+NDiag-tent##
+NHISTOPATOLOGISK DIAGNOS
+NDiag-hist##
+NDIAGNOS
+NDiag-def
+LAtrofisk lichen planus##
+NDiag-nr#
+NNote17
+L###
+NDAGANTECKNING
+NVis-cause
+LPrimärundersökning##
+NExam-type
+LKlinisk undersökning#
+LJournal#
+LFoto##
+NTreat-eval-obj#
+NTreat-eval-subj#
+NTreat-type
+LInformation##
+NNext-app
+LKlar##
+NNote18
+L			Pat går hos Michael Thunfors som kommer att byta am 27 och därefter överväga lokal steroidbehandling.
+##
+NText##
