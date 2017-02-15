@@ -53,13 +53,26 @@ body {
   border: 1px solid #aaa;
   position: absolute;
   display: none;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  width: 35%;
+  min-width: 200px; }
   #auto-search-results span {
     display: block;
+    padding: 5px;
     width: 100%;
     cursor: pointer; }
   #auto-search-results span:hover {
     background-color: #cccccc; }
+
+#selected-tags span {
+  padding: 4px;
+  border: 1px solid #64ffda;
+  display: inline-block;
+  background-color: #a7ffeb;
+  margin: 4px;
+  border-radius: 5px; }
+  #selected-tags span span {
+    cursor: pointer; }
 
 #search-results {
   padding: 10px;

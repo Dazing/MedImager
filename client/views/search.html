@@ -8,14 +8,14 @@
 
 <script type="text/javascript">
 var tags = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
-
+var tagId = 0;
 function displayTagList(string)
 {
 	string = string.toLowerCase();
 	if(string.length > 1)
 	{
 		$("#auto-search-results").css("display", "block");
-		document.getElementById("auto-search-results").innerHTML="";
+		$("#auto-search-results").html("");
 		for(var i=0; i<tags.length; i++)
 		{
 			if(tags[i].includes(string))
@@ -23,11 +23,23 @@ function displayTagList(string)
 		}
 		$("#auto-search-results").find("span").click(function(event) {
 			$(this).hide();
+			$("#selected-tags").append("<span>" + $(this).html() + " <span class='selectedTag'>x</span></span>");
 		});
 	}
 	else
 		$("#auto-search-results").hide();
 }
+
+$('html').click(function() {
+	$("#auto-search-results").hide();
+});
+$('#search-input').click(function() {
+	$("#auto-search-results").css("display", "block");
+});
+
+$(document).on('click', '.selectedTag', function(){
+  $(this).parent().remove();
+});
 </script>
 <title>MedImager</title>
 </head>
@@ -43,8 +55,9 @@ function displayTagList(string)
 <div id="menu-bar">
 	<img src="" class="medimager-logo">
 	<div id="search-wrapper">
-		<input onkeyup="displayTagList(this.value);">
+		<input id="search-input" onkeyup="displayTagList(this.value);">
 		<div id="auto-search-results">Sökresultat</div>
+		<div id="selected-tags"></div>
 	</div>
 	<button id="search-button">></button>
 	<img src="" class="user-button">

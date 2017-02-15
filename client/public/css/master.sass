@@ -65,12 +65,25 @@ body
 	position: absolute
 	display: none
 	background-color: #ffffff
+	+search-input-size
 	span
 		display: block
+		padding: 5px
 		width: 100%
 		cursor: pointer
 	span:hover
 		background-color: #cccccc
+		
+#selected-tags
+	span
+		padding: 4px
+		border: 1px solid $secondary-colour
+		display: inline-block
+		background-color: $tertiary-colour
+		margin: 4px
+		border-radius: 5px
+		span
+			cursor: pointer
 
 	
 #search-results
