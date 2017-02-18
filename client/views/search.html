@@ -7,22 +7,34 @@
 <link href='../public/css/master.css' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
+function tag(title)
+{
+	this.title = title;
+	this.selected = false;
+}
+
 var tags = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
-var tagId = 0;
+var tagObjects = [];
+for (var i = 0; i < tags.length; i++)
+{
+	tagObjects.push(new tag(tags[i]));
+}
 function displayTagList(string)
 {
 	string = string.toLowerCase();
 	if(string.length > 1)
 	{
 		$("#auto-search-results").html("");
-		for(var i=0; i<tags.length; i++)
+		for(var i=0; i<tagObjects.length; i++)
 		{
-			if(tags[i].includes(string))
-				$("#auto-search-results").append("<span>" + tags[i] + "</span>");
+			if(tagObjects[i].title.includes(string) && !tagObjects[i].selected)
+				$("#auto-search-results").append("<span id='sugg" + i + "'>" + tagObjects[i].title + "</span>");
 		}
 		$("#auto-search-results").find("span").click(function(event) {
 			$(this).remove();
-			$("#selected-tags").append("<span>" + $(this).html() + " <span class='selectedTag'>x</span></span>");
+			var thisTagId = event.target.id.substring(4, event.target.id.length);
+			tagObjects[thisTagId].selected = true;
+			$("#selected-tags").append("<span>" + $(this).html() + " <span id='tag" + thisTagId + "' class='selectedTag'>x</span></span>");
 			$("#search-input").val("");
 			$("#auto-search-results").hide();
 		});
@@ -38,7 +50,8 @@ $("html").click(function(event) {
 });
 
 $(document).on("click", ".selectedTag", function(){
-  $(this).parent().remove();
+	$(this).parent().remove();
+	tagObjects[$(this).attr("id").substring(3, $(this).attr("id").length)].selected = false;
 });
 </script>
 <title>MedImager</title>
