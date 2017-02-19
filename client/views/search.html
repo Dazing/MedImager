@@ -34,15 +34,13 @@ function displayTagList(string)
 				$("#auto-search-results").append("<span id='sugg" + i + "'>" + tagObjects[i].title + "</span>");
 		}
 		$("#auto-search-results").find("span").click(function(event) {
-			var results = $("#auto-search-results").find("span");
-			for(var i=0; i<results.length; i++)
-			{
-				if($(results[i]).html() == $(this).html())
-					break;
-			}
-			selectTag(i);
+			selectTag(listIdToTagId(event));
 		});
 		$("#auto-search-results").css("display", "block");
+		$("#auto-search-results").find("span").mouseover(function(event) {
+			currentAutoSearchPos = listIdToTagId(event);
+			markAutoSearch();
+		});
 	}
 	else
 		$("#auto-search-results").hide();
@@ -53,6 +51,17 @@ function markAutoSearch()
 	for(var i=0; i<results.length; i++)
 		$(results[i]).css("background-color", "transparent");
 	$(results[currentAutoSearchPos]).css("background-color", "#eeeeee");
+}
+
+function listIdToTagId(event)
+{
+	var results = $("#auto-search-results").find("span");
+	for(var i=0; i<results.length; i++)
+	{
+		if($(results[i]).html() == $(event.target).html())
+			break;
+	}
+	return i;
 }
 
 function selectTag(selectedTagId)
