@@ -38,11 +38,6 @@ body {
     padding: 15px;
     border: 0;
     width: 100%; }
-  #menu-bar button {
-    margin-left: -5px;
-    height: 47px;
-    border: 0;
-    font-size: 13px; }
 
 #search-wrapper {
   display: inline-table;
@@ -55,9 +50,7 @@ body {
   display: none;
   background-color: #ffffff;
   width: 35%;
-  min-width: 200px;
-  /*span:hover
-   * background-color: #eeeeee !important */ }
+  min-width: 200px; }
   #auto-search-results span {
     display: block;
     padding: 5px;
