@@ -2,8 +2,11 @@
 <html>
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="../public/js/jquery-3.1.1.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
+<script type="text/javascript" src="../public/js/materialize.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="../public/css/materialize.min.css"  media="screen,projection"/>
 <link href='../public/css/master.css' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
@@ -69,7 +72,7 @@ function selectTag(selectedTagId)
 	var results = $("#auto-search-results").find("span");
 	thisTagId = $(results[selectedTagId]).attr("id").substring(4, $(results[selectedTagId]).attr("id").length);
 	tagObjects[thisTagId].selected = true;
-	$("#selected-tags").append("<span>" + tagObjects[thisTagId].title + " <span id='tag" + thisTagId + "' class='selectedTag'>x</span></span>");
+	$("#selected-tags").append("<div class='chip'>" + tagObjects[thisTagId].title + "<i id='tag" + thisTagId + "' class='removeTag close material-icons'>close</i></div>");
 	$("#search-input").val("");
 	$("#auto-search-results").hide();
 	$("#search-input").focus();
@@ -80,7 +83,7 @@ $("html").click(function(event) {
 		$("#auto-search-results").hide();
 });
 
-$(document).on("click", ".selectedTag", function(){
+$(document).on("click", ".removeTag", function(){
 	$(this).parent().remove();
 	tagObjects[$(this).attr("id").substring(3, $(this).attr("id").length)].selected = false;
 });
