@@ -12,17 +12,37 @@ body {
   position: absolute;
   width: 100%;
   max-width: 450px;
-  background-color: #1de9b6;
+  background-color: #ffffff;
   padding: 30px;
   top: 40%;
   left: 50%;
-  transform: translateY(-40%) translateX(-50%); }
+  transform: translateY(-40%) translateX(-50%);
+  border: 2px solid #000000;
+  border-radius: 20px; }
   .center-box input {
     width: 100%;
     padding: 15px;
     font-size: 20px;
     margin: 10px 0;
-    border: 0; }
+    border: 1px solid #000000; }
+  .center-box ul {
+    list-style-type: none;
+    margin: 15px 0 0 0;
+    padding: 0; }
+  .center-box li a {
+    display: block;
+    text-align: center;
+    padding: 20px; }
+  .center-box #register {
+    background-color: #ffffff;
+    float: left;
+    width: 46%;
+    border: 1px solid #000000; }
+  .center-box #login {
+    background-color: #64ffda;
+    float: right;
+    width: 46%;
+    border: 1px solid #000000; }
 
 .medimager-logo {
   float: left;
@@ -30,10 +50,16 @@ body {
   width: 190px;
   margin-right: 15px; }
 
+#page-wrapper {
+  margin-top: 64px; }
+
 #menu-bar {
   width: 100%;
   background-color: #1de9b6;
-  padding: 7px; }
+  padding: 7px;
+  position: fixed;
+  top: 0;
+  left: 0; }
   #menu-bar input {
     padding: 15px;
     border: 0;
@@ -69,7 +95,8 @@ body {
 
 #search-results {
   padding: 10px;
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 39px; }
   #search-results span {
     max-width: 300px;
     width: 100vw;
@@ -79,6 +106,10 @@ body {
     background-size: cover;
     background-position: center;
     cursor: pointer; }
+
+#results-count {
+  margin-right: 15px;
+  text-align: right; }
 
 .user-button {
   float: right;
@@ -115,6 +146,32 @@ body {
   height: 80%;
   z-index: 101; }
 
+#collections-togglebutton {
+  height: 50px;
+  width: 30px;
+  background-color: #64ffda;
+  position: fixed;
+  top: 64px; }
+
+#collections-menu {
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  display: none;
+  background-color: #ffffff;
+  border-right: 2px solid #cccccc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1; }
+  #collections-menu a {
+    display: block;
+    padding: 12px 12px 12px 32px;
+    width: 300px;
+    border-bottom: 1px solid #999999;
+    font-size: 18px; }
+
 #footer {
   position: fixed;
   width: 100%;
@@ -122,6 +179,7 @@ body {
   text-align: center;
   bottom: 0;
   left: 0;
-  background-color: #ffffff; }
+  background-color: #ffffff;
+  z-index: 0; }
 
 /*# sourceMappingURL=master.css.map */
