@@ -24,17 +24,37 @@ body
 	position: absolute
 	width: 100%
 	max-width: 450px
-	background-color: $primary-colour
+	background-color: #ffffff
 	padding: 30px
 	top: 40%
 	left: 50%
 	transform: translateY(-40%) translateX(-50%)
+	border: 2px solid #000000
+	border-radius: 20px
 	input
 		width: 100%
 		padding: 15px
 		font-size: 20px
 		margin: 10px 0
-		border: 0
+		border: 1px solid #000000
+	ul
+		list-style-type: none
+		margin: 15px 0 0 0
+		padding: 0
+	li a
+		display: block
+		text-align: center
+		padding: 20px
+	#register
+		background-color: #ffffff
+		float: left
+		width: 46%
+		border: 1px solid #000000
+	#login
+		background-color: $secondary-colour
+		float: right
+		width: 46%
+		border: 1px solid #000000
 		
 .medimager-logo
 	float: left 
@@ -42,10 +62,16 @@ body
 	width: 190px
 	margin-right: 15px
 	
+#page-wrapper
+	margin-top: 64px
+	
 #menu-bar
 	width: 100%
 	background-color: $primary-colour
 	padding: 7px
+	position: fixed
+	top: 0
+	left: 0
 	input
 		padding: 15px
 		border: 0
@@ -82,6 +108,7 @@ body
 #search-results
 	padding: 10px
 	text-align: center
+	margin-bottom: 39px
 	span
 		max-width: 300px
 		width: 100vw
@@ -92,6 +119,10 @@ body
 		background-position: center
 		cursor: pointer	
 
+#results-count
+	margin-right: 15px
+	text-align: right
+		
 .user-button
 	float: right
 	height: 50px
@@ -127,6 +158,34 @@ body
 	height: 80%
 	z-index: 101
 	
+#collections-togglebutton
+	height: 50px
+	width: 30px
+	background-color: $secondary-colour
+	position: fixed
+	top: 64px
+	
+#collections-menu
+	position: fixed
+	top: 64px
+	bottom: 0
+	left: 0
+	width: 300px
+	display: none
+	background-color: #ffffff
+	border-right: 2px solid #cccccc
+	overflow-y: auto
+	overflow-x: hidden
+	z-index: 1
+	a
+		display: block
+		padding: 12px 12px 12px 32px
+		width: 300px
+		border-bottom: 1px solid #999999
+		font-size: 18px
+	
+	
+	
 #footer
 	position: fixed
 	width: 100%
@@ -135,4 +194,5 @@ body
 	bottom: 0
 	left: 0
 	background-color: #ffffff
+	z-index: 0
 		
