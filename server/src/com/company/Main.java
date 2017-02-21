@@ -6,7 +6,7 @@ public class Main {
         path = args[0];
         SearchTermParser search = new SearchTermParser("Pollen");
         for(Examination ex : search.getResultList()){
-           // System.out.println("Ålder: " + ex.getAGE() + " Allergi: " + ex.getALLERGY());
+            System.out.println("Ålder: " + ex.getAGE() + " Allergi: " + ex.getALLERGY());
         }
     }
 }
