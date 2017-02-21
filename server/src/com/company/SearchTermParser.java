@@ -41,10 +41,10 @@ public class SearchTermParser {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
                     ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
                     try {
+                        Examination examination = new Examination();
                         for (String s : container.getValues("Allergy")) {
                             allTerms.add(s);
                             if(term == s){
-                                Examination examination = new Examination();
                                 examination.setAGE(handler.getAge(pid, eid.getTime()));
                                 examination.setALLERGY(s);
                                 resultList.add(examination);
@@ -98,4 +98,4 @@ public class SearchTermParser {
         }
         return closestMatches;
     }
-}
+    }
