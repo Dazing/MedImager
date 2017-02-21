@@ -87,6 +87,16 @@ $(document).on("click", ".removeTag", function(){
 	$(this).parent().remove();
 	tagObjects[$(this).attr("id").substring(3, $(this).attr("id").length)].selected = false;
 });
+
+var advancedBar = false;
+function showAdvancedBar()
+{
+	if(advancedBar)
+		$("#advanced-bar").css("margin-top", "-40px");
+	else
+		$("#advanced-bar").css("margin-top", "0px");
+	advancedBar = !advancedBar;
+}
 </script>
 <title>MedImager</title>
 </head>
@@ -100,32 +110,29 @@ $(document).on("click", ".removeTag", function(){
 </div>
 
 <div id="menu-bar">
-	<img src="" class="medimager-logo">
+	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo">
 	<div id="search-wrapper">
 		<input id="search-input">
 		<div id="auto-search-results">Sökresultat</div>
 		<div id="selected-tags"></div>
 	</div>
-	<img src="" class="user-button">
+	<span onclick="showAdvancedBar();">Avancerad sökning</span>
+	<i class='user-button medium material-icons'>account_circle</i>
 </div>
-
-<div id="collections-menu">
-	<a>item 1</a>
-	<a>item 2</a>
-	<a>item 3</a>
-	<a>item 4</a>
-	<a>item 5</a>
+<div id="advanced-bar">
+	<input type="checkbox" id="rokare-check"><label for="rokare-check">Rökare</label>
+	<input type="checkbox" id="snusare-check"><label for="snusare-check">Snusare</label>
 </div>
 
 <div id="page-wrapper">
 
-	<div id="collections-togglebutton"> 
-	>
-	</div>
+<ul id="slide-out" class="side-nav">
 
+</ul>
+<a href="#" data-activates="slide-out" class="button-collapse" id="collections-togglebutton"><span>></span></a>
 
 	<p id="results-count">99 999 resultat</p>
-
+	
 	<div id="search-results">
 		<span style="background-image: url('http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg');"></span>
 		<span style="background-image: url('http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg');"></span>
@@ -183,18 +190,7 @@ $('#search-input').keydown(function(event) {
 		currentAutoSearchPos = 0;
 	markAutoSearch();
 });
-$("#page-wrapper #collections-togglebutton").click(function(event) {
-	if ($("#collections-menu").is(':visible')) {
-		$("#collections-menu").hide("fast");
-		$("#page-wrapper").css("margin-left", "0");
-	} else {
-		$("#collections-menu").show("fast");
-		$("#page-wrapper").css("margin-left", "300px");
-		$("#page-wrapper").css("border-right", "2px");
-		
-	}
-	
-});
+$(".button-collapse").sideNav();
 </script>
 </body>
 </html>

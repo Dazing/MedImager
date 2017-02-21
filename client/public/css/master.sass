@@ -3,6 +3,7 @@
 $primary-colour: #1de9b6
 $secondary-colour: #64ffda
 $tertiary-colour: #a7ffeb
+$grey: #e7e7e7
 
 =search-input-size
 	width: 35%
@@ -11,7 +12,7 @@ $tertiary-colour: #a7ffeb
 //------------------------------------------------------------------------
 
 *
-	box-sizing: border-box
+	box-sizing: border-box !important
 	font-family: "Roboto Condensed"
 	
 body
@@ -59,13 +60,14 @@ body
 .medimager-logo
 	float: left 
 	height: 50px
-	width: 190px
+	padding: 5px
 	margin-right: 15px
 	
 #page-wrapper
 	margin-top: 64px
 	
 #menu-bar
+	z-index: 100
 	width: 100%
 	background-color: $primary-colour
 	padding: 7px
@@ -73,9 +75,25 @@ body
 	top: 0
 	left: 0
 	input
-		padding: 15px
+		padding: 0 15px
+		background-color: #ffffff
 		border: 0
 		width: 100%
+		margin-bottom: 0
+		
+#advanced-bar
+	z-index: 99
+	background-color: $secondary-colour
+	width: 100%
+	padding: 10px 20px
+	position: fixed
+	margin-top: -40px
+	transition: margin 0.4s
+	label
+		font-size: 20px
+		margin-right: 20px
+	input
+		display: inline-block
 		
 #search-wrapper
 	display: inline-table
@@ -94,6 +112,7 @@ body
 		cursor: pointer
 		
 #selected-tags
+	margin-top: 10px
 	span
 		padding: 4px
 		border: 1px solid $secondary-colour
@@ -159,11 +178,15 @@ body
 	z-index: 101
 	
 #collections-togglebutton
-	height: 50px
-	width: 30px
-	background-color: $secondary-colour
+	height: 100vw
+	width: 20px
+	background-color: $grey
 	position: fixed
-	top: 64px
+	top: 0
+	z-index: 50
+	span
+		display: block
+		vertical-align: middle
 	
 #collections-menu
 	position: fixed
