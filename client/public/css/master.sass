@@ -1,10 +1,9 @@
+//IMPORTS OF OTHER FILES:
+//------------------------------------------------------------------------
+@import "colours"
+
 //VARIABLES:
 //------------------------------------------------------------------------
-$primary-colour: #1de9b6
-$secondary-colour: #64ffda
-$tertiary-colour: #a7ffeb
-$grey: #e7e7e7
-
 =search-input-size
 	width: 35%
 	min-width: 200px
@@ -18,44 +17,13 @@ $grey: #e7e7e7
 body
 	margin: 0
 
-.center-box-wrapper
-	text-align: center
-	
-.center-box
+.vertical-center
 	position: absolute
+	top: 50%
+	transform: translateY(-50%)
+	
+.login-box
 	width: 100%
-	max-width: 450px
-	background-color: #ffffff
-	padding: 30px
-	top: 40%
-	left: 50%
-	transform: translateY(-40%) translateX(-50%)
-	border: 2px solid #000000
-	border-radius: 20px
-	input
-		width: 100%
-		padding: 15px
-		font-size: 20px
-		margin: 10px 0
-		border: 1px solid #000000
-	ul
-		list-style-type: none
-		margin: 15px 0 0 0
-		padding: 0
-	li a
-		display: block
-		text-align: center
-		padding: 20px
-	#register
-		background-color: #ffffff
-		float: left
-		width: 46%
-		border: 1px solid #000000
-	#login
-		background-color: $secondary-colour
-		float: right
-		width: 46%
-		border: 1px solid #000000
 		
 .medimager-logo
 	float: left 

@@ -1,3 +1,21 @@
+.primary-colour {
+  background-color: #1de9b6; }
+
+.primary-colour-text {
+  color: #1de9b6; }
+
+.secondary-colour {
+  background-color: #64ffda; }
+
+.secondary-colour-text {
+  color: #64ffda; }
+
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
+
 * {
   box-sizing: border-box !important;
   font-family: "Roboto Condensed"; }
@@ -5,44 +23,13 @@
 body {
   margin: 0; }
 
-.center-box-wrapper {
-  text-align: center; }
-
-.center-box {
+.vertical-center {
   position: absolute;
-  width: 100%;
-  max-width: 450px;
-  background-color: #ffffff;
-  padding: 30px;
-  top: 40%;
-  left: 50%;
-  transform: translateY(-40%) translateX(-50%);
-  border: 2px solid #000000;
-  border-radius: 20px; }
-  .center-box input {
-    width: 100%;
-    padding: 15px;
-    font-size: 20px;
-    margin: 10px 0;
-    border: 1px solid #000000; }
-  .center-box ul {
-    list-style-type: none;
-    margin: 15px 0 0 0;
-    padding: 0; }
-  .center-box li a {
-    display: block;
-    text-align: center;
-    padding: 20px; }
-  .center-box #register {
-    background-color: #ffffff;
-    float: left;
-    width: 46%;
-    border: 1px solid #000000; }
-  .center-box #login {
-    background-color: #64ffda;
-    float: right;
-    width: 46%;
-    border: 1px solid #000000; }
+  top: 50%;
+  transform: translateY(-50%); }
+
+.login-box {
+  width: 100%; }
 
 .medimager-logo {
   float: left;
