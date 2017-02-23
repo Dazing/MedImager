@@ -105,8 +105,26 @@ function showAdvancedBar()
 
 <div id="black-back"></div>
 <div id="popup-image-wrapper">
+	<div id="popup-image-container">
 	<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="popup-image">
-	<div id="popup-image-data">En fruktansvärd massa data</div>
+	</div>
+	<div id="popup-image-data">
+	<label>Bild-ID</label>
+	<p>Bild12345678</p>
+	<label>Instutition</label>
+	<p>Chalmerska oralinstutitionen</p>
+	<label>Fotodatum</label>
+	<p>25 januari 1996</p>
+	<label>Favoritfilm</label>
+	<p>Lejonkungen</p>
+	<label>Andra kommentarer</label>
+	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+	<p>Han är ful i munnen.</p>
+	</div>
 </div>
 
 <div id="menu-wrapper">
@@ -166,8 +184,7 @@ function showAdvancedBar()
 $("#search-results span").click(function(event) {
 	var url = event.target.style.backgroundImage;
 	$("#popup-image").attr("src", url.substring(5, url.length-2));
-	$("#popup-image-wrapper").css("display", "block");
-	$("#popup-image").css("display", "block");
+	$("#popup-image-wrapper").css("display", "flex");
 	$("#black-back").css("display", "block");
 });
 $("#black-back").click(function(event) {
