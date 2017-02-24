@@ -97,6 +97,12 @@ function showAdvancedBar()
 		$("#advanced-bar").css("margin-top", "0px");
 	advancedBar = !advancedBar;
 }
+
+function closePopUp()
+{
+	$("#black-back").hide();
+	$("#popup-image-wrapper").hide();
+}
 </script>
 <title>MedImager</title>
 </head>
@@ -106,28 +112,34 @@ function showAdvancedBar()
 <div id="black-back"></div>
 <div id="popup-image-wrapper">
 	<div id="popup-image-container">
-	<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="popup-image">
+		<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="popup-image">
 	</div>
 	<div id="popup-image-data">
-	<label>Bild-ID</label>
-	<p>Bild12345678</p>
-	<label>Instutition</label>
-	<p>Chalmerska oralinstutitionen</p>
-	<label>Fotodatum</label>
-	<p>25 januari 1996</p>
-	<label>Favoritfilm</label>
-	<p>Lejonkungen</p>
-	<label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p>
-	
-	<div id="popup-image-data-buttons">
-		<div>Bramarkera</div><div>Permalänk</div>
-	</div>
+		<i id="popup-close-button" class='small material-icons'>close</i>
+		<label>Bild-ID</label>
+		<p>Bild12345678</p>
+		<label>Instutition</label>	
+		<p>Chalmerska oralinstutitionen</p>
+		<label>Fotodatum</label>
+		<p>25 januari 1996</p>
+		<label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p>
+		<label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p>
+		
+		<div id="popup-image-data-buttons">
+			<div>Bramarkera</div><div>Permalänk</div>
+		</div>
 	</div>
 </div>
 
@@ -192,8 +204,10 @@ $("#search-results span").click(function(event) {
 	$("#black-back").css("display", "block");
 });
 $("#black-back").click(function(event) {
-	$(this).hide();
-	$("#popup-image-wrapper").hide();
+	closePopUp();
+});
+$("#popup-close-button").click(function(event) {
+	closePopUp();
 });
 $('#search-input').click(function() {
 	displayTagList($(this).val());

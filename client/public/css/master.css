@@ -138,7 +138,9 @@ body {
 
 #popup-image-wrapper {
   display: none;
-  width: 100%;
+  width: -moz-max-content;
+  width: -webkit-max-content;
+  width: max-content;
   max-width: 80%;
   max-height: 85%;
   position: fixed;
@@ -178,6 +180,12 @@ body {
     margin-bottom: 10px; }
   #popup-image-data h2 {
     font-size: 30px; }
+
+#popup-close-button {
+  position: fixed;
+  top: 7px;
+  right: 7px;
+  cursor: pointer; }
 
 #popup-image-data-buttons {
   position: absolute;
