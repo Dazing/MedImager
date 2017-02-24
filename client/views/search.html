@@ -10,6 +10,11 @@
 <link href='../public/css/master.css' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
+$(document).keyup(function(e) {
+	if (e.keyCode == 27)
+		closePopUp();
+});
+
 function tag(title)
 {
 	this.title = title;
@@ -151,7 +156,7 @@ function closePopUp()
 			<div id="auto-search-results">Sökresultat</div>
 			<div id="selected-tags"></div>
 		</div>
-		<span onclick="showAdvancedBar();">Avancerad sökning</span>
+		<span id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
 		<i class='user-button medium material-icons'>account_circle</i>
 	</div>
 	<div id="advanced-bar">

@@ -59,6 +59,12 @@ body {
     width: 100%;
     margin-bottom: 0; }
 
+#advanced-button {
+  margin-left: 10px;
+  cursor: pointer; }
+  #advanced-button:hover {
+    text-decoration: underline; }
+
 #advanced-bar {
   z-index: -1;
   background-color: #64ffda;
@@ -165,6 +171,7 @@ body {
   display: inline-block;
   background-color: #ffffff;
   max-width: 300px;
+  width: 100%;
   min-width: 250px;
   align-items: stretch;
   vertical-align: top;
@@ -183,8 +190,8 @@ body {
 
 #popup-close-button {
   position: fixed;
-  top: 7px;
-  right: 7px;
+  top: 15px;
+  right: 15px;
   cursor: pointer; }
 
 #popup-image-data-buttons {
