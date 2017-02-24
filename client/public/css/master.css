@@ -138,6 +138,7 @@ body {
 
 #popup-image-wrapper {
   display: none;
+  width: 100%;
   max-width: 80%;
   max-height: 85%;
   position: fixed;
@@ -166,7 +167,9 @@ body {
   align-items: stretch;
   vertical-align: top;
   padding: 20px;
-  overflow-y: auto; }
+  padding-bottom: 55px;
+  overflow-y: auto;
+  position: relative; }
   #popup-image-data label {
     font-size: 18px; }
   #popup-image-data p {
@@ -175,6 +178,28 @@ body {
     margin-bottom: 10px; }
   #popup-image-data h2 {
     font-size: 30px; }
+
+#popup-image-data-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  width: 100%; }
+  #popup-image-data-buttons div {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer; }
+    #popup-image-data-buttons div:first-of-type {
+      background-color: #a7ffeb; }
+      #popup-image-data-buttons div:first-of-type:hover {
+        background-color: #1de9b6; }
+    #popup-image-data-buttons div:nth-of-type(2) {
+      background-color: #64ffda; }
+      #popup-image-data-buttons div:nth-of-type(2):hover {
+        background-color: #1de9b6; }
 
 #collections-togglebutton {
   height: 100vw;
