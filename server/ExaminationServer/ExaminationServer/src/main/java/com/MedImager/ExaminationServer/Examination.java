@@ -1,5 +1,7 @@
 package com.MedImager.ExaminationServer;
 
+import java.util.List;
+
 import medview.datahandling.images.ExaminationImage;
 
 /**
@@ -8,17 +10,10 @@ import medview.datahandling.images.ExaminationImage;
 public class Examination {
     private int AGE;
     private String ALLERGY;
-    private ExaminationImage[] images;
+    private List<String> imagePaths;
 
     public Examination(){}
     
-    public ExaminationImage[] getImages(){
-    	return images;
-    }
-    
-    public void setImages(ExaminationImage[] images){
-    	this.images = images;
-    }
 
     public int getAGE() {
         return AGE;
@@ -35,4 +30,14 @@ public class Examination {
     public void setALLERGY(String ALLERGY) {
         this.ALLERGY = ALLERGY;
     }
+
+
+	public List<String> getImagePaths() {
+		return imagePaths;
+	}
+
+
+	public void setImagePaths(List<String> imagePaths) {
+		this.imagePaths = imagePaths;
+	}
 }

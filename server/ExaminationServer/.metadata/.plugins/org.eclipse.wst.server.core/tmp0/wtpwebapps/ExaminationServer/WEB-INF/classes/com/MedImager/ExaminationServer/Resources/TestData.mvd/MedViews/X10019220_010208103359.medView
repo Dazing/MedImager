@@ -1,0 +1,453 @@
+{\rtf0\ansi{\fonttbl\f0\fswiss Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue255;\red0\green255\blue0;}
+\pard\tx960\tx1920\tx2880\tx3840\tx4800\tx5760\tx6720\tx7680\tx8640\tx9600\ql\qnatural
+
+\f0\fs28 \cf0 Abstrakt Identifikation =\
+010208103359 \
+\
+Konkret Identifikation =\
+Z:/MVDatabases/WebSummary/English.mvd/MedViews/X10019220_010208103359.medView \
+\
+Datum =\
+2001-02-08 10:33:28 \
+\
+\cf2 PATIENTUPPGIFTER\cf0 \
+	P-code = \
+		X10019220\
+	Name = \
+	\cf2 Ref-in =\cf0  \
+		Tandhygienist\
+	\cf2 Ref-cause =\cf0  \
+		SlemhinnefğrÙndring\
+	\
+	Vilket land Ùr du fğdd i?\
+	\cf2 Born =\cf0  \
+		Sverige\
+\
+	Vilken Ùr din huvudsakliga sysselsÙttning?\
+	\cf2 Occup =\cf0  \
+		Kontorist\
+\
+	Vilket Ùr ditt civilstÚnd?\
+	\cf2 Civ-stat =\cf0  \
+		Gift\
+	Note01 = PAtienten hej\
+\
+\
+\cf2 ANAMNES\cf0 \
+\cf2 AllmÙn\cf0 \
+Anser du dig vara fullt frisk?\
+	\cf3 Health =\cf0  \
+		Ja\
+\
+Har du nÚgon sjukdom?\
+	\cf2 Dis-now =\cf0  \
+\
+Har du haft nÚgon allvarlig sjukdom?\
+	\cf2 Dis-past =\cf0  \
+\
+Vilka barnsjukdomar har du haft?\
+	\cf2 Chld-dis =\cf0  \
+	\
+Har du haft nÚgon allvarlig infektionssjukdom?\
+	\cf2 Inf-dis =\cf0  \
+\
+GÚr du pÚ regelbundna lÙkarkontroller fğr nÚgon speciell sjukdom?\
+	\cf2 Checkup =\cf0  \
+\
+Tar du regelbundet mediciner?\
+	\cf2 Drug =\cf0  \
+\
+…r du allergisk mot nÚgot?\
+	\cf2 Allergy =\cf0  \
+\
+…r du ğverkÙnslig mot nÚgon medicin?\
+	\cf2 Adv-drug =\cf0  \
+\
+Rğker du?\
+	\cf2 Smoke =\cf0  \
+\
+Snusar du?\
+	\cf2 Snuff =\cf0  \
+\
+Hur mycket alkohol dricker Du i veckan?\
+	1 ğl klass III 33 cl = 6cl\
+	1 fl lÙttvin 75 cl = 21 cl\
+	1 fl starkvin 75 cl = 40 cl\
+	1 fl Renat = 75 cl\
+	\
+	\cf2 Alcohol =\cf0  \
+\
+Har du nÚgra problem med att det blğder lÙngre Ùn normalt om du t.ex. skÙr dig eller fÚr en tand utdragen?\
+	\cf2 Bleed =\cf0  \
+\
+Hur upplever du din allmÙnna livssituation?\
+	\cf2 Vas-life =\cf0  \
+\
+\cf2 –vriga symptom\cf0 \
+	\
+Har du nÚgra andra besvÙr frÚn munnen eller angrÙnsande vÙvnader?\
+	\cf2 Symp-other =\cf0  \
+\
+Har du nÚgra besvÙr med din saliv?\
+	\cf2 Symp-saliv =\cf0  \
+\
+Har du ofta huvudvÙrk (> x1/vecka)?\
+	\cf2 Symp-head =\cf0  \
+\
+Har du nÚgra hudbesvÙr?\
+	\cf2 Skin-pbl =\cf0  \
+\
+Har du nÚgra besvÙr i underlivets slemhinna?\
+	\cf2 Genitals =\cf0  \
+	\
+	Note02 = \
+\
+\cf2 Speciell\cf0 \
+\cf2 Symtomrelaterade uppgifter\cf0 \
+\
+Har du nÚgra besvÙr nu frÚn den Úkomma som du remitterats fğr?\
+	\cf2 Symp-now =\cf0  \
+\
+Hur svÚra Ùr dina besvÙr just nu?\
+	\cf2 Vas-now =\cf0  \
+\
+Har du tidigare haft besvÙr frÚn den Úkomma som du remitterats fğr?\
+	\cf2 Symp-past =\cf0  \
+\
+Hur svÚra var dina besvÙr nÙr de var som mest pÚtagliga?\
+	\cf2 Vas-past =\cf0  \
+\
+Var har eller har du haft besvÙr?\
+	\cf2 Symp-site =\cf0  \
+\
+Hur lÙnge har du haft besvÙr?\
+	\cf2 Symp-on =\cf0  \
+\
+Associerar du debuten av besvÙren med nÚgon speciell hÙndelse?\
+	\cf2 Symp-trigg =\cf0  \
+\
+Varierar dina besvÙr ğver tiden?\
+	\cf2 Symp-var =\cf0  \
+\
+Hur lÙnge varar dina besvÙr om de inte Ùr konstanta?\
+	\cf2 Symp-dur =\cf0  \
+\
+Hur ofta har du besvÙr, om dina besvÙr inte Ùr konstanta?\
+	\cf2 Symp-freq =\cf0  \
+\
+Om besvÙren varierar under dygnet, nÙr pÚ dygnet har du mest besvÙr?\
+	\cf2 Symp-24h =\cf0  \
+\
+\
+\
+	Note03 = \
+\
+\cf2 Andra symtomrelaterade uppgifter\cf0 \
+\
+…r det nÚgra faktorer som pÚverkar dina besvÙr/ din fğrÙndring negativt?\
+	\cf2 Factor-neg =\cf0  \
+\
+…r det nÚgra faktorer som pÚverkar dina besvÙr/ din fğrÙndring positiv?\
+	\cf2 Factor-pos =\cf0  \
+\
+Har du erhÚllit nÚgon behandling fğr dina besvÙr/ din fğrÙndring som givit ett positivt resultat?\
+	\cf2 Treat-pos =\cf0  \
+\
+Har du erhÚllit nÚgon behandling fğr dina besvÙr/ din fğrÙndring som givit ett negativt resultat?\
+	\cf2 Treat-neg =\cf0  \
+\
+Har nÚgon nÙra anhğrig haft liknande besvÙr/ fğrÙndring?\
+	\cf2 Family =\cf0  \
+\
+Hur pÚverkar din Úkomma din livssituation?\
+	\cf2 Vas-hndc =\cf0  \
+\
+	Note04 = \
+\
+\cf2 VÙvnadsfğrÙndring\cf0 \
+\
+Hur lÙnge sedan Ùr det som fğrÙndringen noterades?\
+	\cf2 Lesn-on =\cf0  \
+\
+Associerar du debuten av besvÙren med nÚgon speciell hÙndelse?\
+	\cf2 Lesn-trigg =\cf0  \
+\
+Var brukar fğrÙndringen pÚtrÙffas?\
+	\cf2 Lesn-site =\cf0  \
+\
+…ndrar fğrÙndringen utseende ğver tiden?\
+	\cf2 Lesn-var =\cf0  \
+\
+	Note05 = \
+\
+\cf2 Muntorrhet\cf0 \
+\
+Hur mÚnga gÚnger behğver du dricka vatten under natten?\
+	\cf2 Water-nigh =\cf0  \
+\
+Har du svÚrt att Ùta utan att dricka mycket ?\
+	\cf2 Water-meal =\cf0  \
+\
+Upplever du att du har svÚrt att tala?\
+	\cf2 Speech-pbl =\cf0  \
+\
+Upplever du besvÙr frÚn ğgonen?\
+	\cf2 Eye-pbl =\cf0  \
+\
+NÙr startade dessa ğgonbesvÙr?\
+	\cf2 Eye-on =\cf0  \
+\
+AnvÙnder du ğgondroppar dagligen?\
+	\cf2 Eye-drop =\cf0  \
+\
+Om du genomgÚtt ğgonundersğkning, vad blev resultatet?\
+	\cf2 Eye-exam =\cf0  \
+\
+	Note06 = \
+\
+\cf2 TMJ\cf0 \
+\
+Har du genomgÚtt nÚgon stğrre protetisk behandling hos tandlÙkare?\
+	\cf2 Dent-treat =\cf0  \
+\
+Har du besvÙr frÚn dina kÙkleder?\
+	\cf2 Symp-joint =\cf0  \
+\
+Har du besvÙr frÚn din tuggmuskulatur?\
+	\cf2 Symp-musc =\cf0  \
+\
+	Note07 = \
+\
+\
+\cf2 Psykometri\cf0 \
+\
+SCL-90\
+	\cf2 SCL-90 =\cf0  \
+\
+MACL\
+	\cf2 TENSE =\cf0  \
+	\cf2 PLEAS =\cf0  \
+	\cf2 ACTIVE =\cf0  \
+	\cf2 ORIENT =\cf0  \
+\
+	Note08 = \
+\
+\cf2 STATUS\cf0 \
+\cf2 Direkt\cf0 \
+\cf2 Orala slemhinnan\cf0 \
+Lokalisation\
+	\cf2 Mucos-site =\cf0  \
+\
+FÙrg\
+	\cf2 Mucos-colr =\cf0  \
+\
+Attribut till reaktionsmğnster\
+	\cf2 Mucos-attr =\cf0  \
+\
+Reaktionsmğnster\
+	\cf2 Mucos-txtur =\cf0  \
+\
+ Storlek\
+	\cf2 Mucos-size =\cf0  \
+\
+Foto			\
+	\cf2 Photo =\cf0  \
+	\
+Note09 = \
+\
+\cf2 Bettfunktion\cf0 \
+\
+Bettyp\
+	\cf2 Occl-type =\cf0  \
+\
+KÙkledsdysfunktion\
+	\cf2 Joint-dys =\cf0  \
+\
+Interferenser\
+	\cf2 Interfer =\cf0  \
+\
+Bruxofacetter\
+	\cf2 Facetts =\cf0  \
+\
+Protetiska konstruktioner\
+	\cf2 Reconstr =\cf0  \
+\
+Material\
+	\cf2 Material =\cf0  \
+	\
+	Note10 = \
+\
+\
+\cf2 Palpation\cf0 \
+\
+Lokalisation\
+	\cf2 Palp-site =\cf0  \
+\
+Konsistens\
+	\cf2 Palp-cons =\cf0  \
+\
+Relation till omgivande vÙvnad\
+	\cf2 Palp-rel =\cf0  \
+\
+Storlek\
+	\cf2 Palp-size =\cf0  \
+\
+MuskelsmÙrta vid palpation\
+	\cf2 Palp-musc =\cf0  \
+\
+\cf2 Sensibilitet\cf0 \
+	\cf2 Sens-site =\cf0  \
+\
+	Note11 = \
+\
+\cf2 Indirekt\cf0 \
+\cf2 Rğntgen\cf0 \
+\
+Typ av undersğkning\
+	\cf2 Xray-type =\cf0  \
+\
+Lokalisation\
+	\cf2 Xray-site =\cf0  \
+\
+Benets patologiska reaktionsmğnster\
+	\cf2 Xray-txtur =\cf0  \
+\
+TÙndernas patologiska mğnster\
+	\cf2 Xray-teeth =\cf0  \
+\
+	Note12 = \
+\
+\cf2 Histopatologi\cf0 \
+\
+Lokalisation\
+	\cf2 Biopsy-site =\cf0  \
+\
+Epitelets reaktionsmğnster\
+	\cf2 Epi-txtur =\cf0  \
+\
+Epitelets patologiska celler\
+	\cf2 Epi-cells =\cf0  \
+\
+Epitelets fluorescence\
+	\cf2 Epi-fluor =\cf0  \
+\
+Typ av ğvriga vÙvnader\
+	\cf2 Tiss-type =\cf0  \
+\
+Typ av reaktionsmğnster i ğvriga vÙvnader\
+	\cf2 Tiss-txtur =\cf0  \
+\
+Typ av patologiska celler i ğvriga vÙvnader\
+	\cf2 Tiss-cells =\cf0  \
+\
+–vriga vÙvnaders fluorescence\
+	\cf2 Tiss-fluor =\cf0  \
+\
+	Note13 = \
+\
+\cf2 Mikrobiologi\cf0 \
+\
+Lokalisation\
+	\cf2 Micro-site =\cf0  \
+\
+Typ av mikroorganism\
+	\cf2 Micro-type =\cf0  \
+\
+	Note14 = \
+\
+\cf2 Hematologi\cf0 \
+\
+Hemoglobin (116-166 g/L)\
+	\cf2 Blood-HGB =\cf0  \
+\
+Leukocyter (3,5-9,0 109/L)\
+	\cf2 Blood-WBC =\cf0  \
+\
+Erytrocyter (3,7-5,4 1012/L)\
+	\cf2 Blood-RBC =\cf0  \
+	\
+Trombocyter (150-350 109/L)\
+	\cf2 Blood-PTL =\cf0  \
+\
+S-Kobolamin\
+	\cf2 Blood-Kob =\cf0  \
+\
+S-Folat\
+	\cf2 Blood-Fol =\cf0  \
+\
+fS-JÙrn\
+	\cf2 Blood-Fe =\cf0  \
+\
+fB-Glukos (3,5-5,6 mmol/l)\
+	\cf2 Blood-Glu =\cf0  \
+\
+S-APTT \
+	\cf2 Blood-APTT =\cf0  \
+\
+Protrombinkomplex\
+	\cf2 Blood-PK =\cf0  \
+\
+S-TSH  (0,4-4,0 mIU/l)\
+	\cf2 Blood-TSH =\cf0  \
+\
+S-Tyroxin(fritt)  (12-25 pmol/l)\
+	\cf2 Blood-T4 =\cf0  \
+\
+	Note15 = \
+\
+\cf2 Salivsekretion\cf0 \
+\
+Sekretionshastighet\
+	\cf2 Saliva-flow =\cf0  \
+\
+Saliv-pH\
+	\cf2 Saliva-pH =\cf0  \
+\
+Buffringskapacitet\
+	\cf2 Saliva-buff =\cf0  \
+\
+Sialografi\
+	\cf2 Saliva-sial =\cf0  \
+\
+Scintigrafi\
+	\cf2 Saliva-scin =\cf0  \
+	\
+	Note16 = \
+\
+\cf2 TENTATIV DIAGNOS\cf0 \
+	\cf2 Diag-tent =\cf0  \
+\
+\cf2 HISTOPATOLOGISK DIAGNOS\cf0 \
+	\cf2 Diag-hist =\cf0  	\
+\
+\cf2 DIAGNOS\cf0 \
+	\cf2 Diag-def =\cf0  \
+\
+	\cf2 Diag-nr =\cf0  \
+	\
+	Note17 = \
+\
+\cf2 DAGANTECKNING\cf0 \
+Besğksanledning\
+	\cf2 Vis-cause =\cf0  \
+\
+Typ av undersğkning\
+	\cf2 Exam-type =\cf0  \
+\
+UtvÙrdering av fğregÚende behandling-objektivt\
+	\cf2 Treat-eval-obj =\cf0  \
+\
+UtvÙrdering av fğregÚende behandling-subjektivt\
+	\cf2 Treat-eval-subj =\cf0  \
+\
+†tgÙrd\
+	\cf2 Treat-type =\cf0  \
+\
+†terbesğk\
+	\cf2 Next-app =\cf0  \
+\
+	Note18 = \
+\
+	Text = \
+}

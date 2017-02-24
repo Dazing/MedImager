@@ -1,0 +1,9 @@
+1487890235280	Encapsulate field 'imagePaths'
+1487891668237	Rename resource 'index.jsp'
+1487891700007	Rename resource 'Test.html'
+1487893504896	Move 'index.html' to 'TestData.mvd'
+1487893513634	Move 'index.html' to 'ROOT'
+1487893538656	Move 'index.html' to 'webapp'
+1487893584550	Move 'TestData.mvd' to 'webapp'
+1487893589429	Delete element
+1487894912678	Delete element

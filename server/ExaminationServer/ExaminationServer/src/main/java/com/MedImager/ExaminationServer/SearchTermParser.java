@@ -12,8 +12,12 @@ import medview.datahandling.PatientIdentifier;
 import medview.datahandling.examination.ExaminationIdentifier;
 import medview.datahandling.examination.ExaminationValueContainer;
 import medview.datahandling.examination.NoSuchExaminationException;
+import medview.datahandling.images.ExaminationImage;
+import misc.foundation.MethodNotSupportedException;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SearchTermParser {
@@ -23,17 +27,16 @@ public class SearchTermParser {
         this.searchTerm = searchTerm;
     }
 
-    public ArrayList<Examination> getResultList(){
+    public ArrayList<Examination> getResultList() throws MethodNotSupportedException{
         return findTerm(searchTerm);
     }
 
     /*
     NOT COMPLETE
      */
-    private ArrayList<Examination> findTerm(String term) {
+    private ArrayList<Examination> findTerm(String term) throws MethodNotSupportedException {
         MedViewUtilities utilObj = new MedViewUtilities();
         MedViewDataHandler handler = MedViewDataHandler.instance();
-        
         handler.setExaminationDataLocation("TestData.mvd");
         ArrayList<Examination> resultList = new ArrayList<Examination>();
         try {
@@ -41,13 +44,17 @@ public class SearchTermParser {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
                     ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
                     try {
-                        Examination examination = new Examination();
                         for (String s : container.getValues("Allergy")) {
                             allTerms.add(s);
-                            if(term == s){
+                            if(term.equals(s)){
+                            	Examination examination = new Examination();
                                 examination.setAGE(handler.getAge(pid, eid.getTime()));
                                 examination.setALLERGY(s);
-                                examination.setImages(handler.getImages(eid));
+                                List<String> imagePaths = new ArrayList<String>();
+                                for(ExaminationImage img :handler.getImages(eid)){
+                                	imagePaths.add(img.getFile().toString());
+                                };
+                                examination.setImagePaths(imagePaths);
                                 resultList.add(examination);
                             }
                         }

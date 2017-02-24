@@ -2,9 +2,11 @@ package com.MedImager.ExaminationServer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -16,33 +18,16 @@ import misc.foundation.MethodNotSupportedException;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("myresource")
+@Path("search")
 public class MyResource {
 
-    /**
-     * Method handling HTTP GET requests. The returned object will be sent
-     * to the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
-     */
-	SearchTermParser search = new SearchTermParser("Pollen");
+	//SearchTermParser search = new SearchTermParser("Pollen");
 	//MedViewUtilities util = new MedViewUtilities();
 	@GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getIt(){
-		SearchTermParser search = new SearchTermParser("Pollen");
-		StringBuilder sb = new StringBuilder();
-		for(Examination s : search.getResultList()){
-			for (ExaminationImage img:s.getImages()){
-				try {
-					sb.append(img.getFile() + ", ");
-				} catch (MethodNotSupportedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return sb.toString();
+	@Path("{searchTerm}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Examination> getJSONResult(@PathParam("searchTerm") String searchTerm) throws MethodNotSupportedException{
+		SearchTermParser search = new SearchTermParser(searchTerm);
+		return search.getResultList();
     }
 }

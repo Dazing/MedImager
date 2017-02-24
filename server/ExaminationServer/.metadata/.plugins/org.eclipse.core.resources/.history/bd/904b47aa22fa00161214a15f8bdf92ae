@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+function resultJSON(searchTerm){
+	$.getJSON("examData/search/" + searchTerm, function(data){
+		data.forEach(function(exam){
+			exam.imagePaths.forEach(function(path){
+				$("#imgContainer").prepend($('<img>',{id:'theImg',src:path}))
+				console.log(path);
+			});
+		});
+	});
+}
+
+</script>
+</head>
+<body>
+
+<div id="imgContainer">
+</div>
+</body>
+</html>
