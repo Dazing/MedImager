@@ -189,15 +189,15 @@ body {
   transform: translateY(-50%); }
 
 #popup-image-data {
-  display: inline-block;
-  background-color: #ffffff;
   max-width: 300px;
   width: 100%;
   min-width: 250px;
+  display: inline-block;
+  background-color: #ffffff;
   align-items: stretch;
   vertical-align: top;
   padding: 20px;
-  padding-bottom: 55px;
+  margin-bottom: 50px;
   overflow-y: auto;
   position: relative; }
   #popup-image-data label {
@@ -216,11 +216,13 @@ body {
   cursor: pointer; }
 
 #popup-image-data-buttons {
-  position: absolute;
+  max-width: 300px;
+  width: 100%;
+  min-width: 250px;
+  position: fixed;
   bottom: 0;
-  left: 0;
-  background-color: #ffffff;
-  width: 100%; }
+  right: 0;
+  background-color: #ffffff; }
   #popup-image-data-buttons div {
     width: 50%;
     display: inline-block;
