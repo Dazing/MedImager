@@ -38,6 +38,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/marcus/Downloads/jersey-json-1.8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
