@@ -16,6 +16,81 @@
 .tertiary-colour-text {
   color: #a7ffeb; }
 
+.medimager-logo {
+  float: left;
+  height: 50px;
+  padding: 5px;
+  margin-right: 15px; }
+
+#menu-wrapper {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100; }
+
+#menu-bar {
+  z-index: 100;
+  width: 100%;
+  background-color: #1de9b6;
+  padding: 7px; }
+  #menu-bar input {
+    padding: 0 15px;
+    background-color: #ffffff;
+    border: 0;
+    width: 100%;
+    margin-bottom: 0; }
+
+#advanced-button {
+  margin-left: 10px;
+  cursor: pointer; }
+  #advanced-button:hover {
+    text-decoration: underline; }
+
+#advanced-bar {
+  z-index: -1;
+  background-color: #64ffda;
+  width: 100%;
+  padding: 10px 20px;
+  position: fixed;
+  margin-top: -45px;
+  transition: margin 0.4s; }
+  #advanced-bar label {
+    font-size: 20px;
+    margin-right: 20px; }
+  #advanced-bar input {
+    display: inline-block; }
+
+#search-wrapper {
+  display: inline-table;
+  width: 35%;
+  min-width: 200px; }
+
+#auto-search-results {
+  border: 1px solid #aaa;
+  position: absolute;
+  display: none;
+  background-color: #ffffff;
+  width: 35%;
+  min-width: 200px; }
+  #auto-search-results span {
+    display: block;
+    padding: 5px;
+    width: 100%;
+    cursor: pointer; }
+
+#selected-tags {
+  margin-top: 10px; }
+  #selected-tags span {
+    padding: 4px;
+    border: 1px solid #64ffda;
+    display: inline-block;
+    background-color: #a7ffeb;
+    margin: 4px;
+    border-radius: 5px; }
+    #selected-tags span span {
+      cursor: pointer; }
+
 #black-back {
   position: fixed;
   display: none;
@@ -140,83 +215,8 @@ body {
 .login-box {
   width: 100%; }
 
-.medimager-logo {
-  float: left;
-  height: 50px;
-  padding: 5px;
-  margin-right: 15px; }
-
 #page-wrapper {
   margin-top: 64px; }
-
-#menu-wrapper {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100; }
-
-#menu-bar {
-  z-index: 100;
-  width: 100%;
-  background-color: #1de9b6;
-  padding: 7px; }
-  #menu-bar input {
-    padding: 0 15px;
-    background-color: #ffffff;
-    border: 0;
-    width: 100%;
-    margin-bottom: 0; }
-
-#advanced-button {
-  margin-left: 10px;
-  cursor: pointer; }
-  #advanced-button:hover {
-    text-decoration: underline; }
-
-#advanced-bar {
-  z-index: -1;
-  background-color: #64ffda;
-  width: 100%;
-  padding: 10px 20px;
-  position: fixed;
-  margin-top: -45px;
-  transition: margin 0.4s; }
-  #advanced-bar label {
-    font-size: 20px;
-    margin-right: 20px; }
-  #advanced-bar input {
-    display: inline-block; }
-
-#search-wrapper {
-  display: inline-table;
-  width: 35%;
-  min-width: 200px; }
-
-#auto-search-results {
-  border: 1px solid #aaa;
-  position: absolute;
-  display: none;
-  background-color: #ffffff;
-  width: 35%;
-  min-width: 200px; }
-  #auto-search-results span {
-    display: block;
-    padding: 5px;
-    width: 100%;
-    cursor: pointer; }
-
-#selected-tags {
-  margin-top: 10px; }
-  #selected-tags span {
-    padding: 4px;
-    border: 1px solid #64ffda;
-    display: inline-block;
-    background-color: #a7ffeb;
-    margin: 4px;
-    border-radius: 5px; }
-    #selected-tags span span {
-      cursor: pointer; }
 
 #search-results {
   padding: 10px;
