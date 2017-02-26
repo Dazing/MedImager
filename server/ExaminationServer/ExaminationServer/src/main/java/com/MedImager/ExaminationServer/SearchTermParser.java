@@ -37,12 +37,13 @@ public class SearchTermParser {
     private ArrayList<Examination> findTerm(String term) throws MethodNotSupportedException {
         MedViewUtilities utilObj = new MedViewUtilities();
         MedViewDataHandler handler = MedViewDataHandler.instance();
+        
         handler.setExaminationDataLocation("TestData.mvd");
         ArrayList<Examination> resultList = new ArrayList<Examination>();
         try {
             for (PatientIdentifier pid : handler.getPatients()) {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
-                    ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
+                	ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
                     try {
                         for (String s : container.getValues("Allergy")) {
                             allTerms.add(s);
