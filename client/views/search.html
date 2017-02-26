@@ -140,6 +140,14 @@ $("#search-results span").click(function(event) {
 $("#black-back").click(function(event) {
 	closePopUp();
 });
+$("#popup-image-container").mouseover(function(event) {
+	$("#popup-image-next").css("display", "block");
+	$("#popup-image-previous").css("display", "block");
+});
+$("#popup-image-container").mouseout(function(event) {
+	$("#popup-image-next").hide();
+	$("#popup-image-previous").hide();
+});
 $("#popup-close-button").click(function(event) {
 	closePopUp();
 });
