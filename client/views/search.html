@@ -36,6 +36,10 @@ function showAdvancedBar()
 
 function setPopUpImage()
 {
+	if(currentImage < 0)
+		currentImage = searchresults.length-1;
+	else if(currentImage > searchresults.length-1)
+		currentImage = 0;
 	$("#popup-image").attr("src", searchresults[currentImage]);
 }
 
@@ -53,7 +57,7 @@ function closePopUp()
 <div id="black-back"></div>
 <div id="popup-image-wrapper">
 	<div id="popup-image-container">
-		<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="popup-image">
+		<img id="popup-image">
 	</div>
 	<div id="popup-image-data">
 		<i id="popup-close-button" class='small material-icons'>close</i>
