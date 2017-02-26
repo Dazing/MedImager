@@ -57,6 +57,8 @@ function closePopUp()
 <div id="black-back"></div>
 <div id="popup-image-wrapper">
 	<div id="popup-image-container">
+		<i id="popup-image-previous" class='large material-icons'>keyboard_arrow_left</i>
+		<i id="popup-image-next" class='large material-icons'>keyboard_arrow_right</i>
 		<img id="popup-image">
 	</div>
 	<div id="popup-image-data">
@@ -140,6 +142,12 @@ $("#black-back").click(function(event) {
 });
 $("#popup-close-button").click(function(event) {
 	closePopUp();
+});
+$("#popup-image-previous").click(function(event) {
+	setPopUpImage(currentImage--);
+});
+$("#popup-image-next").click(function(event) {
+	setPopUpImage(currentImage++);
 });
 $('#search-input').click(function() {
 	displayTagList($(this).val());

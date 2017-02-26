@@ -157,7 +157,28 @@ body {
 
 #popup-image-container {
   background-color: #000000;
-  max-width: 100vw; }
+  max-width: 100vw;
+  position: relative; }
+
+#popup-image-previous {
+  position: absolute;
+  top: 50%;
+  margin-top: -70px;
+  text-shadow: -1px -1px 0 #000000, 1px 1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+  color: #ffffff;
+  z-index: 1000;
+  cursor: pointer;
+  left: 0px; }
+
+#popup-image-next {
+  position: absolute;
+  top: 50%;
+  margin-top: -70px;
+  text-shadow: -1px -1px 0 #000000, 1px 1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+  color: #ffffff;
+  z-index: 1000;
+  cursor: pointer;
+  right: 0px; }
 
 #popup-image {
   width: 100%;
