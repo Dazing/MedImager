@@ -17,14 +17,34 @@ import misc.foundation.MethodNotSupportedException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class SearchTermParser {
     private String searchTerm;
     ArrayList<String> allTerms = new ArrayList<String>();
+    MedViewDataHandler handler;
+    
+    //Hashmap with translations from variable names in Examination class -> term names in MedView
+    public static Map<String, String> translations;
+    
     public SearchTermParser(String searchTerm){
         this.searchTerm = searchTerm;
+        
+        handler = MedViewDataHandler.instance();
+        handler.setExaminationDataLocation("TestData.mvd");
+        
+        //Incomplete at the moment
+        translations = new HashMap<>();
+        translations.put("allergy", "Allergy");
+        translations.put("biopsySite", "Biopsy-site");
+        translations.put("diagDef", "Diag-def");
+        translations.put("diagHist", "diagHist");
+        translations.put("diagTent", "diagTent");
+        translations.put("disNow", "Dis-now");
+        translations.put("disPast", "Dis-past");
     }
 
     public ArrayList<Examination> getResultList() throws MethodNotSupportedException{
@@ -35,10 +55,6 @@ public class SearchTermParser {
     NOT COMPLETE
      */
     private ArrayList<Examination> findTerm(String term) throws MethodNotSupportedException {
-        MedViewUtilities utilObj = new MedViewUtilities();
-        MedViewDataHandler handler = MedViewDataHandler.instance();
-        
-        handler.setExaminationDataLocation("TestData.mvd");
         ArrayList<Examination> resultList = new ArrayList<Examination>();
         try {
             for (PatientIdentifier pid : handler.getPatients()) {
@@ -106,5 +122,36 @@ public class SearchTermParser {
 
         }
         return closestMatches;
+    }
+    
+    public HashMap<String, Integer> getSearchableValues(){
+        HashMap<String, Integer> map = new HashMap<>();
+        try {
+            for (PatientIdentifier pid : handler.getPatients()) {
+                for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
+                    ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
+                    for(String term : container.getTermsWithValues()){
+                        if(translations.containsValue(term)){
+                            try{
+                                for(String value : container.getValues(term)){
+                                    if(map.containsKey(value)){
+                                        map.put(value, map.get(value) + 1);
+                                    } else{
+                                        map.put(value, 1);
+                                    }
+                                }
+                            } catch(NoSuchTermException e){
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchExaminationException e) {
+            e.printStackTrace();
+        }
+        
+        return map;
     }
 }
