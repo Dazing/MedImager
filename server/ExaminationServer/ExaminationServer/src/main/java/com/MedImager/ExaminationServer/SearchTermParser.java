@@ -65,8 +65,8 @@ public class SearchTermParser {
                             allTerms.add(s);
                             if(term.equals(s)){
                             	Examination examination = new Examination();
-                                examination.setAGE(handler.getAge(pid, eid.getTime()));
-                                examination.setALLERGY(s);
+                                examination.setAge(handler.getAge(pid, eid.getTime()));
+                                examination.setAllergy(s);
                                 List<String> imagePaths = new ArrayList<String>();
                                 for(ExaminationImage img :handler.getImages(eid)){
                                 	imagePaths.add(img.getFile().toString());
