@@ -8,27 +8,47 @@ import medview.datahandling.images.ExaminationImage;
  * Created by marcus on 2017-02-10.
  */
 public class Examination {
-    private int AGE;
-    private String ALLERGY;
-    private List<String> imagePaths;
+	private int age;
+	private String allergy;
+	private String biopsySite;
+	private String diagDef;
+	private String diagHist;
+	private String diagTent;
+	private String disNow;
+	private String disPast;
+	private String drug;
+	private String factorNeg;
+	private String factorPos;
+	private String family;
+	private String gender;
+	private String lesnOn;
+	private String lesnSite;
+	private String skinPbl;
+	private String smoke;
+	private String snuff;
+	private String symptNow;
+	private String symptSite;
+	private String treatType;
+	private String vasNow;
+	private List<String> imagePaths;
 
     public Examination(){}
     
 
-    public int getAGE() {
-        return AGE;
+    public int getAge() {
+        return age;
     }
 
-    public void setAGE(int AGE) {
-        this.AGE = AGE;
+    public void setAge(int AGE) {
+        this.age = AGE;
     }
 
-    public String getALLERGY() {
-        return ALLERGY;
+    public String getAllergy() {
+        return allergy;
     }
 
-    public void setALLERGY(String ALLERGY) {
-        this.ALLERGY = ALLERGY;
+    public void setAllergy(String ALLERGY) {
+        this.allergy = ALLERGY;
     }
 
 
@@ -36,8 +56,9 @@ public class Examination {
 		return imagePaths;
 	}
 
-
 	public void setImagePaths(List<String> imagePaths) {
 		this.imagePaths = imagePaths;
 	}
+	
+	
 }
