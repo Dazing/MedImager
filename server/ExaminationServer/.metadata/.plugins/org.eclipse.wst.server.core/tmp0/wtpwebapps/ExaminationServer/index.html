@@ -7,6 +7,7 @@
 <script>
 function resultJSON(){
 	$("#imgContainer").empty();
+	console.log($("#searchTerm").val());
 	$.getJSON("examData/search/" + $("#searchTerm").val(), function(data){
 		data.forEach(function(exam){
 			exam.imagePaths.forEach(function(path){

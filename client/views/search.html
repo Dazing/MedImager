@@ -5,87 +5,23 @@
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="../public/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="../public/js/materialize.min.js"></script>
+<script type="text/javascript" src="../public/js/tags.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="../public/css/materialize.min.css"  media="screen,projection"/>
 <link href='../public/css/master.css' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
-function tag(title)
-{
-	this.title = title;
-	this.selected = false;
-}
+var currentImage = 0;
 
-var tags = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
-var tagObjects = [];
-var currentAutoSearchPos = 0;
+var searchresults = ["http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg", "https://petterssonorg.files.wordpress.com/2013/08/surikat.jpg", "http://4.bp.blogspot.com/-b_CoEyL7Y4E/VeCTOqEqdwI/AAAAAAAAJ1A/0kigqVeRPnM/s1600/TrumpPhenomenon2.jpg", "http://vignette3.wikia.nocookie.net/disney/images/f/f8/Timon_and_Pumbaa_Lion_Guard.jpg/revision/latest?cb=20151009185849", "https://s-media-cache-ak0.pinimg.com/originals/91/d9/7e/91d97e06cdc41757cfb421dab4eabd30.jpg", "http://www.konbini.com/en/files/2016/09/cow-triangle.jpg", "http://i2.irishmirror.ie/incoming/article5979450.ece/ALTERNATES/s1200/Blosom-Tallest-Cow.jpg", "http://www.healthyfoodelements.com/wp-content/uploads/2015/09/white-teeth.jpg", "http://www.sbf.se/globalassets/svenska-bilsportforbundet/bilder/racing4.jpg", "https://static01.nyt.com/images/2016/10/01/sports/01prix-web/01prix-web-master768.jpg", "https://scontent-fra3-1.xx.fbcdn.net/v/t31.0-0/p526x296/16722497_1917407805156563_3159559885330646095_o.jpg?oh=9da568a689c0b645eb7598fc2473896b&oe=5931AF31", "https://scontent-fra3-1.xx.fbcdn.net/v/t31.0-8/s960x960/16178428_618225748388740_4582847272464874647_o.jpg?oh=80cfde983b8e240157a52ce73f5efec2&oe=5928255D", "https://scontent-fra3-1.xx.fbcdn.net/v/t31.0-8/15385408_887975597901331_648368677598689041_o.jpg?oh=c322e32fbcd5cbe63bde5281efc1b43e&oe=593E090D", "https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/15027579_579697472241568_5653370222063429241_n.jpg?oh=bdd22e5c61f2307056af6282ab3f0000&oe=593AB2AE"];
 
-for (var i = 0; i < tags.length; i++)
-{
-	tagObjects.push(new tag(tags[i]));
-}
-function displayTagList(string)
-{
-	currentAutoSearchPos = 0;
-	string = string.toLowerCase();
-	if(string.length > 1)
-	{
-		$("#auto-search-results").html("");
-		for(var i=0; i<tagObjects.length; i++)
-		{
-			if(tagObjects[i].title.includes(string) && !tagObjects[i].selected)
-				$("#auto-search-results").append("<span id='sugg" + i + "'>" + tagObjects[i].title + "</span>");
-		}
-		$("#auto-search-results").find("span").click(function(event) {
-			selectTag(listIdToTagId(event));
-		});
-		$("#auto-search-results").css("display", "block");
-		$("#auto-search-results").find("span").mouseover(function(event) {
-			currentAutoSearchPos = listIdToTagId(event);
-			markAutoSearch();
-		});
-	}
-	else
-		$("#auto-search-results").hide();
-}
-function markAutoSearch()
-{
-	var results = $("#auto-search-results").find("span");
-	for(var i=0; i<results.length; i++)
-		$(results[i]).css("background-color", "transparent");
-	$(results[currentAutoSearchPos]).css("background-color", "#eeeeee");
-}
-
-function listIdToTagId(event)
-{
-	var results = $("#auto-search-results").find("span");
-	for(var i=0; i<results.length; i++)
-	{
-		if($(results[i]).html() == $(event.target).html())
-			break;
-	}
-	return i;
-}
-
-function selectTag(selectedTagId)
-{
-	var results = $("#auto-search-results").find("span");
-	thisTagId = $(results[selectedTagId]).attr("id").substring(4, $(results[selectedTagId]).attr("id").length);
-	tagObjects[thisTagId].selected = true;
-	$("#selected-tags").append("<div class='chip'>" + tagObjects[thisTagId].title + "<i id='tag" + thisTagId + "' class='removeTag close material-icons'>close</i></div>");
-	$("#search-input").val("");
-	$("#auto-search-results").hide();
-	$("#search-input").focus();
-}
-
-$("html").click(function(event) {
-	if(event.target.id != "search-input")
-		$("#auto-search-results").hide();
-});
-
-$(document).on("click", ".removeTag", function(){
-	$(this).parent().remove();
-	tagObjects[$(this).attr("id").substring(3, $(this).attr("id").length)].selected = false;
+$(document).keyup(function(e) {
+	if (e.keyCode == 27)
+		closePopUp();
+	else if (e.keyCode == 37)
+		setPopUpImage(currentImage--);
+	else if (e.keyCode == 39)
+		setPopUpImage(currentImage++);
 });
 
 var advancedBar = false;
@@ -97,6 +33,21 @@ function showAdvancedBar()
 		$("#advanced-bar").css("margin-top", "0px");
 	advancedBar = !advancedBar;
 }
+
+function setPopUpImage()
+{
+	if(currentImage < 0)
+		currentImage = searchresults.length-1;
+	else if(currentImage > searchresults.length-1)
+		currentImage = 0;
+	$("#popup-image").attr("src", searchresults[currentImage]);
+}
+
+function closePopUp()
+{
+	$("#black-back").hide();
+	$("#popup-image-wrapper").hide();
+}
 </script>
 <title>MedImager</title>
 </head>
@@ -106,24 +57,36 @@ function showAdvancedBar()
 <div id="black-back"></div>
 <div id="popup-image-wrapper">
 	<div id="popup-image-container">
-	<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="popup-image">
+		<i id="popup-image-previous" class='large material-icons'>keyboard_arrow_left</i>
+		<i id="popup-image-next" class='large material-icons'>keyboard_arrow_right</i>
+		<img id="popup-image">
 	</div>
 	<div id="popup-image-data">
-	<label>Bild-ID</label>
-	<p>Bild12345678</p>
-	<label>Instutition</label>
-	<p>Chalmerska oralinstutitionen</p>
-	<label>Fotodatum</label>
-	<p>25 januari 1996</p>
-	<label>Favoritfilm</label>
-	<p>Lejonkungen</p>
-	<label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-	<p>Han är ful i munnen.</p>
+		<i id="popup-close-button" class='small material-icons'>close</i>
+		<label>Bild-ID</label>
+		<p>Bild12345678</p>
+		<label>Instutition</label>	
+		<p>Chalmerska oralinstutitionen</p>
+		<label>Fotodatum</label>
+		<p>25 januari 1996</p>
+		<label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p>
+		<label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p>
+		
+		<div id="popup-image-data-buttons">
+			<div>Bramarkera</div><a href="image.html"><div>Permalänk</div></a>
+		</div>
 	</div>
 </div>
 
@@ -135,7 +98,7 @@ function showAdvancedBar()
 			<div id="auto-search-results">Sökresultat</div>
 			<div id="selected-tags"></div>
 		</div>
-		<span onclick="showAdvancedBar();">Avancerad sökning</span>
+		<span id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
 		<i class='user-button medium material-icons'>account_circle</i>
 	</div>
 	<div id="advanced-bar">
@@ -158,24 +121,7 @@ function showAdvancedBar()
 	<p id="results-count">99 999 resultat</p>
 	
 	<div id="search-results">
-		<span style="background-image: url('http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg');"></span>
-		<span style="background-image: url('http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg');"></span>
-		<span style="background-image: url('http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg');"></span>
-		<span style="background-image: url('https://petterssonorg.files.wordpress.com/2013/08/surikat.jpg');"></span>
-		<span style="background-image: url('http://4.bp.blogspot.com/-b_CoEyL7Y4E/VeCTOqEqdwI/AAAAAAAAJ1A/0kigqVeRPnM/s1600/TrumpPhenomenon2.jpg');"></span>
-		<span style="background-image: url('http://www.pets4homes.co.uk/images/articles/1646/large/kitten-emergencies-signs-to-look-out-for-537479947ec1c.jpg');"></span>
-		<span style="background-image: url('http://www.pets4homes.co.uk/images/articles/1646/large/kitten-emergencies-signs-to-look-out-for-537479947ec1c.jpg');"></span>
-		<span style="background-image: url('https://s-media-cache-ak0.pinimg.com/originals/91/d9/7e/91d97e06cdc41757cfb421dab4eabd30.jpg');"></span>
-		<span style="background-image: url('http://wallpapersboom.net/wp-content/uploads/2015/04/2303_timon_and_pumbaa.jpg');"></span>
-		<span style="background-image: url('https://s-media-cache-ak0.pinimg.com/originals/91/d9/7e/91d97e06cdc41757cfb421dab4eabd30.jpg');"></span>
-		<span style="background-image: url('https://s-media-cache-ak0.pinimg.com/originals/91/d9/7e/91d97e06cdc41757cfb421dab4eabd30.jpg');"></span>
-		<span style="background-image: url('http://www.konbini.com/en/files/2016/09/cow-triangle.jpg');"></span>
-		<span style="background-image: url('http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg');"></span>
-		<span style="background-image: url('http://i2.irishmirror.ie/incoming/article5979450.ece/ALTERNATES/s1200/Blosom-Tallest-Cow.jpg');"></span>
-		<span style="background-image: url('http://i2.irishmirror.ie/incoming/article5979450.ece/ALTERNATES/s1200/Blosom-Tallest-Cow.jpg');"></span>
-		<span style="background-image: url('http://i2.irishmirror.ie/incoming/article5979450.ece/ALTERNATES/s1200/Blosom-Tallest-Cow.jpg');"></span>
-		<span style="background-image: url('http://i2.irishmirror.ie/incoming/article5979450.ece/ALTERNATES/s1200/Blosom-Tallest-Cow.jpg');"></span>
-		<span style="background-image: url('http://i2.irishmirror.ie/incoming/article5979450.ece/ALTERNATES/s1200/Blosom-Tallest-Cow.jpg');"></span>
+		
 	</div>
 </div>
 <div id="footer">
@@ -183,16 +129,36 @@ function showAdvancedBar()
 </div>
 
 <script>
-
+for(var i=0; i<searchresults.length; i++)
+{
+	$("#search-results").append('<span id="result-image-' + i + '" style="background-image: url(' + searchresults[i] + ');"></span>');
+}
 $("#search-results span").click(function(event) {
-	var url = event.target.style.backgroundImage;
-	$("#popup-image").attr("src", url.substring(5, url.length-2));
+	var thisId = event.target.id;
+	currentImage = thisId.substring(13, thisId.length);
+	setPopUpImage();
 	$("#popup-image-wrapper").css("display", "flex");
 	$("#black-back").css("display", "block");
 });
 $("#black-back").click(function(event) {
-	$(this).hide();
-	$("#popup-image-wrapper").hide();
+	closePopUp();
+});
+$("#popup-image-container").mouseover(function(event) {
+	$("#popup-image-next").css("display", "block");
+	$("#popup-image-previous").css("display", "block");
+});
+$("#popup-image-container").mouseout(function(event) {
+	$("#popup-image-next").hide();
+	$("#popup-image-previous").hide();
+});
+$("#popup-close-button").click(function(event) {
+	closePopUp();
+});
+$("#popup-image-previous").click(function(event) {
+	setPopUpImage(currentImage--);
+});
+$("#popup-image-next").click(function(event) {
+	setPopUpImage(currentImage++);
 });
 $('#search-input').click(function() {
 	displayTagList($(this).val());
@@ -222,6 +188,7 @@ $(".medimager-logo").click(function(event) {
 		$("#page-wrapper").css("margin-left", "0");
 	}
 });
+$(".button-collapse").sideNav();
 </script>
 </body>
 </html>

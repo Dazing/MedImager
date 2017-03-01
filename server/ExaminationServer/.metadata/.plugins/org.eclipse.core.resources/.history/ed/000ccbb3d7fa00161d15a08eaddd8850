@@ -1,0 +1,119 @@
+package com.MedImager.ExaminationServer;
+
+/**
+ * Created by marcus on 2017-02-11.
+ */
+
+import medview.common.data.MedViewUtilities;
+import medview.datahandling.InvalidPIDException;
+import medview.datahandling.MedViewDataHandler;
+import medview.datahandling.NoSuchTermException;
+import medview.datahandling.PatientIdentifier;
+import medview.datahandling.examination.ExaminationIdentifier;
+import medview.datahandling.examination.ExaminationValueContainer;
+import medview.datahandling.examination.NoSuchExaminationException;
+import medview.datahandling.images.ExaminationImage;
+import misc.foundation.MethodNotSupportedException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class SearchTermParser {
+    private String searchTerm;
+    ArrayList<String> allTerms = new ArrayList<String>();
+    public SearchTermParser(String searchTerm){
+        this.searchTerm = searchTerm;
+    }
+
+    public ArrayList<Examination> getResultList() throws MethodNotSupportedException{
+        return findTerm(searchTerm);
+    }
+
+    /*
+    NOT COMPLETE
+     */
+    private ArrayList<Examination> findTerm(String term) throws MethodNotSupportedException {
+        MedViewUtilities utilObj = new MedViewUtilities();
+        MedViewDataHandler handler = MedViewDataHandler.instance();
+        handler.setExaminationDataLocation("TestData.mvd");
+        ArrayList<Examination> resultList = new ArrayList<Examination>();
+        try {
+			if(handler.getPatients().length == 0){
+				Examination noMatch = new Examination();
+				noMatch.setALLERGY("TestData.mvd".getRealPath());
+				resultList.add(noMatch);
+			}
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        try {
+            for (PatientIdentifier pid : handler.getPatients()) {
+                for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
+                    ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
+                    try {
+                        for (String s : container.getValues("Allergy")) {
+                            allTerms.add(s);
+                            if(term.equals(s)){
+                            	Examination examination = new Examination();
+                                examination.setAGE(handler.getAge(pid, eid.getTime()));
+                                examination.setALLERGY(s);
+                                List<String> imagePaths = new ArrayList<String>();
+                                for(ExaminationImage img :handler.getImages(eid)){
+                                	imagePaths.add(img.getFile().toString());
+                                };
+                                examination.setImagePaths(imagePaths);
+                                resultList.add(examination);
+                            }
+                        }
+                    } catch (NoSuchTermException e) {
+                    }
+                }
+            }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InvalidPIDException e) {
+                e.printStackTrace();
+            } catch (NoSuchExaminationException e) {
+                e.printStackTrace();
+            }
+        if(resultList.isEmpty()) {
+            for (String match : closeMatch(term)) {
+                System.out.println("Inga resultat, menade du: " + match + ", ");
+            }
+        }
+        return resultList;
+
+    }
+    /*
+    * Calculates Edit Distance.
+    * Is called when no results were found in findTerm(String)
+    *
+    * An array with matches of equal distances are returned.
+    *
+    * CAN BE IMPROVED UPON!
+    * */
+    private ArrayList<String> closeMatch(String s){
+        int lowestDistance = s.length();
+        ArrayList<String> closestMatches = new ArrayList<String>();
+        for(String word:allTerms){
+            int distance = Math.abs(s.length()-word.length());
+            for(int i = 0; i<s.length()&&i<word.length();i++){
+                if(word.charAt(i)!=s.charAt(i)){
+                    distance++;
+                }
+            }
+            if (distance<lowestDistance){
+                lowestDistance = distance;
+                closestMatches = new ArrayList<String>();
+                closestMatches.add(word);
+            }else if(distance==lowestDistance && !closestMatches.contains(word)){
+                closestMatches.add(word);
+            }
+
+        }
+        return closestMatches;
+    }
+}
