@@ -145,6 +145,9 @@ function showAdvancedBar()
 	</div>
 </div>
 
+<div id="collections-menu">
+</div>
+
 <div id="page-wrapper">
 
 <ul id="slide-out" class="side-nav">
@@ -210,7 +213,15 @@ $('#search-input').keydown(function(event) {
 		currentAutoSearchPos = 0;
 	markAutoSearch();
 });
-$(".button-collapse").sideNav();
+$(".medimager-logo").click(function(event) {
+	if($("#collections-menu").is(":hidden")) {
+		$("#collections-menu").show("fast");
+		$("#page-wrapper").css("margin-left", "300px");
+	} else {
+		$("#collections-menu").hide("fast");
+		$("#page-wrapper").css("margin-left", "0");
+	}
+});
 </script>
 </body>
 </html>
