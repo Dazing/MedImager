@@ -63,6 +63,7 @@ function selectTag(selectedTagId)
 	$("#selected-tags").append("<div class='chip'>" + tagObjects[thisTagId].title + "<i id='tag" + thisTagId + "' class='removeTag close material-icons'>close</i></div>");
 	$("#search-input").val("");
 	$("#auto-search-results").hide();
+	currentAutoSearchPos = null;
 	$("#search-input").focus();
 }
 

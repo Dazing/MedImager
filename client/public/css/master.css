@@ -219,7 +219,8 @@ a, a:visited {
   width: 100%; }
 
 #page-wrapper {
-  margin-top: 64px; }
+  margin-top: 64px;
+  transition: margin 0.4s; }
 
 #search-results {
   padding: 10px;
@@ -292,7 +293,12 @@ a, a:visited {
   margin: 0 auto;
   display: inline-block;
   vertical-align: top;
-  text-align: left; }
+  text-align: left;
+  font-size: 20px; }
+  #image-data label {
+    font-size: 18px; }
+  #image-data p {
+    margin: 1px 0 16px 0px; }
 
 #footer {
   position: fixed;
