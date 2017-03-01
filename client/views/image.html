@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript" src="../public/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../public/js/materialize.min.js"></script>
+<script type="text/javascript" src="../public/js/tags.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="../public/css/materialize.min.css"  media="screen,projection"/>
+<link href='../public/css/master.css' rel='stylesheet' type='text/css' />
+
+<script type="text/javascript">
+
+</script>
+<title>MedImager</title>
+</head>
+
+<body>
+
+<div id="menu-wrapper">
+	<div id="menu-bar">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo">
+		<div id="search-wrapper">
+			<input id="search-input">
+			<div id="auto-search-results">Sökresultat</div>
+			<div id="selected-tags"></div>
+		</div>
+		<span id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
+		<i class='user-button medium material-icons'>account_circle</i>
+	</div>
+	<div id="advanced-bar">
+		<input type="checkbox" id="rokare-check"><label for="rokare-check">Rökare</label>
+		<input type="checkbox" id="snusare-check"><label for="snusare-check">Snusare</label>
+		<input type="checkbox" id="alder-check"><label for="alder-check">Hög ålder</label>
+	</div>
+</div>
+
+<div id="page-wrapper">
+
+	<ul id="slide-out" class="side-nav">
+
+	</ul>
+	<a href="#" data-activates="slide-out" class="button-collapse" id="collections-togglebutton"><span>></span></a>
+
+	<div id="image-wrapper">
+		<img src="http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg" id="full-image">
+		<div id="image-data">
+		<label>Bild-ID</label>
+		<p>Bild12345678</p>
+		<label>Instutition</label>	
+		<p>Chalmerska oralinstutitionen</p>
+		<label>Fotodatum</label>
+		<p>25 januari 1996</p>
+		<label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p>
+		<label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p>
+		
+		<div>Bramarkera</div>
+		</div>
+	</div>
+</div>
+<div id="footer">
+© MedImager, 2017. Alla rättigheter reserverade.
+</div>
+
+<script>
+$(".button-collapse").sideNav();
+</script>
+</body>
+</html>
