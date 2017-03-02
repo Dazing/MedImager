@@ -99,11 +99,15 @@ function closePopUp()
 	</div>
 </div>
 
-<div id="page-wrapper">
+<div class="collections-menu side-nav fixed">
 
-<ul id="slide-out" class="side-nav">
 
-</ul>
+</div>
+
+<div class="page-wrapper">
+
+
+
 <a href="#" data-activates="slide-out" class="button-collapse" id="collections-togglebutton"><span>></span></a>
 
 	<p id="results-count">99 999 resultat</p>
@@ -112,6 +116,8 @@ function closePopUp()
 		
 	</div>
 </div>
+
+
 <div id="footer">
 © MedImager, 2017. Alla rättigheter reserverade.
 </div>
@@ -168,7 +174,10 @@ $('#search-input').keydown(function(event) {
 	markAutoSearch();
 });
 
-$(".button-collapse").sideNav();
+$(".button-collapse").click(function() {
+	$(".side-nav").toggle("fast");
+	$(".page-wrapper").toggleClass("collections-menu-margin");
+});
 </script>
 </body>
 </html>
