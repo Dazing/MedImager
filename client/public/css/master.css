@@ -16,6 +16,24 @@
 .tertiary-colour-text {
   color: #a7ffeb; }
 
+.primary-colour {
+  background-color: #1de9b6; }
+
+.primary-colour-text {
+  color: #1de9b6; }
+
+.secondary-colour {
+  background-color: #64ffda; }
+
+.secondary-colour-text {
+  color: #64ffda; }
+
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
+
 .medimager-logo {
   float: left;
   height: 50px;
@@ -53,7 +71,7 @@
   width: 100%;
   padding: 10px 20px;
   position: fixed;
-  margin-top: -45px;
+  margin-top: -50px;
   transition: margin 0.4s; }
   #advanced-bar label {
     font-size: 20px;
@@ -276,7 +294,7 @@ a, a:visited {
     font-size: 18px; }
 
 #image-wrapper {
-  margin-top: 100px;
+  padding-top: 40px;
   margin-bottom: 100px;
   text-align: center; }
 

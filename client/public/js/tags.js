@@ -64,6 +64,7 @@ function selectTag(selectedTagId)
 	$("#search-input").val("");
 	$("#auto-search-results").hide();
 	currentAutoSearchPos = null;
+	setPageWrapperHeight();
 	$("#search-input").focus();
 }
 
@@ -75,4 +76,5 @@ $("html").click(function(event) {
 $(document).on("click", ".removeTag", function(){
 	$(this).parent().remove();
 	tagObjects[$(this).attr("id").substring(3, $(this).attr("id").length)].selected = false;
+	setPageWrapperHeight();
 });
