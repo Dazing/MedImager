@@ -59,6 +59,10 @@
     width: 100%;
     margin-bottom: 0; }
 
+.user-button {
+  float: right;
+  margin-top: -2px; }
+
 #advanced-button {
   margin-left: 10px;
   cursor: pointer; }
@@ -276,12 +280,10 @@ a, a:visited {
 
 #results-count {
   margin-right: 15px;
-  text-align: right; }
-
-.user-button {
-  float: right;
-  height: 50px;
-  width: 50px; }
+  padding-top: 10px;
+  text-align: right;
+  font-size: 22px;
+  color: #424242; }
 
 #collections-togglebutton {
   height: 100vw;

@@ -9,7 +9,7 @@ function showAdvancedBar()
 	else
 	{
 		$("#advanced-bar").css("margin-top", "0px");
-		$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + 64 + "px");
+		$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + 54 + "px");
 	}
 	advancedBar = !advancedBar;
 }
