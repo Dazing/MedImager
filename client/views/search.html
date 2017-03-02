@@ -4,6 +4,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="../public/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../public/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="../public/js/materialize.min.js"></script>
 <script type="text/javascript" src="../public/js/tags.js"></script>
 <script type="text/javascript" src="../public/js/menu.js"></script>
@@ -89,7 +90,7 @@ function closePopUp()
 			<div id="auto-search-results">Sökresultat</div>
 			<div id="selected-tags"></div>
 		</div>
-		<span id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
+		<span id="advanced-button" onclick="showAdvancedBar()">Avancerad sökning</span>
 		<i class='user-button medium material-icons'>account_circle</i>
 	</div>
 	<div id="advanced-bar">
@@ -99,12 +100,11 @@ function closePopUp()
 	</div>
 </div>
 
-<div class="collections-menu side-nav fixed">
+<ul class="collections-menu side-nav fixed menu-bar-margin">
+	
+</ul>
 
-
-</div>
-
-<div class="page-wrapper">
+<div class="page-wrapper menu-bar-margin">
 
 
 
@@ -178,6 +178,11 @@ $(".button-collapse").click(function() {
 	$(".side-nav").toggle("fast");
 	$(".page-wrapper").toggleClass("collections-menu-margin");
 });
+
+$("#advanced-button").click(function() {
+	$(".menu-bar-margin").toggleClass("advanced-search-dropdown-margin", "fast");
+});
+
 </script>
 </body>
 </html>

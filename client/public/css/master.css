@@ -113,6 +113,12 @@
     #selected-tags span span {
       cursor: pointer; }
 
+.menu-bar-margin {
+  margin-top: 69px; }
+
+.advanced-search-dropdown-margin {
+  margin-top: 114px; }
+
 .primary-colour {
   background-color: #1de9b6; }
 
@@ -272,7 +278,6 @@
     vertical-align: middle; }
 
 .collections-menu {
-  top: 69px;
   display: none; }
 
 .collections-menu-margin {
@@ -332,6 +337,10 @@ a, a:visited {
   display: inline-block;
   vertical-align: top;
   margin-right: 20px; }
+
+.ui-draggable-handle {
+  -ms-touch-action: none;
+  touch-action: none; }
 
 #image-data {
   max-width: 30%;
