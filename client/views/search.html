@@ -99,9 +99,6 @@ function closePopUp()
 	</div>
 </div>
 
-<div id="collections-menu">
-</div>
-
 <div id="page-wrapper">
 
 <ul id="slide-out" class="side-nav">
@@ -135,12 +132,12 @@ $("#black-back").click(function(event) {
 	closePopUp();
 });
 $("#popup-image-container").mouseover(function(event) {
-	$("#popup-image-next").css("display", "block");
-	$("#popup-image-previous").css("display", "block");
+	$("#popup-image-next").css("opacity", "0.8");
+	$("#popup-image-previous").css("opacity", "0.8");
 });
 $("#popup-image-container").mouseout(function(event) {
-	$("#popup-image-next").hide();
-	$("#popup-image-previous").hide();
+	$("#popup-image-next").css("opacity", "0");
+	$("#popup-image-previous").css("opacity", "0");
 });
 $("#popup-close-button").click(function(event) {
 	closePopUp();
@@ -170,15 +167,7 @@ $('#search-input').keydown(function(event) {
 		currentAutoSearchPos = 0;
 	markAutoSearch();
 });
-$(".medimager-logo").click(function(event) {
-	if($("#collections-menu").is(":hidden")) {
-		$("#collections-menu").show("fast");
-		$("#page-wrapper").css("margin-left", "300px");
-	} else {
-		$("#collections-menu").hide("fast");
-		$("#page-wrapper").css("margin-left", "0");
-	}
-});
+
 $(".button-collapse").sideNav();
 </script>
 </body>

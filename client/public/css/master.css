@@ -109,6 +109,24 @@
     #selected-tags span span {
       cursor: pointer; }
 
+.primary-colour {
+  background-color: #1de9b6; }
+
+.primary-colour-text {
+  color: #1de9b6; }
+
+.secondary-colour {
+  background-color: #64ffda; }
+
+.secondary-colour-text {
+  color: #64ffda; }
+
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
+
 #black-back {
   position: fixed;
   display: none;
@@ -145,7 +163,8 @@
   color: #ffffff;
   z-index: 1000;
   cursor: pointer;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.2s;
   left: 0px; }
 
 #popup-image-next {
@@ -156,7 +175,8 @@
   color: #ffffff;
   z-index: 1000;
   cursor: pointer;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.2s;
   right: 0px; }
 
 #popup-image {
@@ -326,6 +346,7 @@ a, a:visited {
   bottom: 0;
   left: 0;
   background-color: #ffffff;
+  box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8);
   z-index: 0; }
 
 /*# sourceMappingURL=master.css.map */
