@@ -278,7 +278,8 @@
     vertical-align: middle; }
 
 .collections-menu {
-  display: none; }
+  display: none;
+  z-index: 50; }
 
 .collections-menu-margin {
   padding-left: 300px; }
