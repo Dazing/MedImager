@@ -3,13 +3,13 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script type="text/javascript" src="../public/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="../public/js/materialize.min.js"></script>
-<script type="text/javascript" src="../public/js/tags.js"></script>
-<script type="text/javascript" src="../public/js/menu.js"></script>
+<script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="./js/materialize.min.js"></script>
+<script type="text/javascript" src="./js/tags.js"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="../public/css/materialize.min.css"  media="screen,projection"/>
-<link href='../public/css/master.css' rel='stylesheet' type='text/css' />
+<link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
+<link href='./css/master.css' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
 var currentImage = 0;
@@ -56,7 +56,7 @@ function closePopUp()
 		<i id="popup-close-button" class='small material-icons'>close</i>
 		<label>Bild-ID</label>
 		<p>Bild12345678</p>
-		<label>Instutition</label>	
+		<label>Instutition</label>
 		<p>Chalmerska oralinstutitionen</p>
 		<label>Fotodatum</label>
 		<p>25 januari 1996</p>
@@ -74,7 +74,7 @@ function closePopUp()
 		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
 		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
 		<p>Han är ful i munnen.</p>
-		
+
 		<div id="popup-image-data-buttons">
 			<div>Bramarkera</div><a href="image.html"><div>Permalänk</div></a>
 		</div>
@@ -107,9 +107,9 @@ function closePopUp()
 <a href="#" data-activates="slide-out" class="button-collapse" id="collections-togglebutton"><span>></span></a>
 
 	<p id="results-count">99 999 resultat</p>
-	
+
 	<div id="search-results">
-		
+
 	</div>
 </div>
 <div id="footer">
@@ -160,7 +160,7 @@ $('#search-input').keydown(function(event) {
 		selectTag(currentAutoSearchPos);
 	else
 		displayTagList($(this).val());
-	
+
 	if(currentAutoSearchPos < 0)
 		currentAutoSearchPos = $("#auto-search-results").find("span").length-1;
 	else if(currentAutoSearchPos > $("#auto-search-results").find("span").length-1)
