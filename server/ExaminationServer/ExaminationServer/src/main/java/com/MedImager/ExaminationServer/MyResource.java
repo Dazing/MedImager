@@ -18,8 +18,9 @@ public class MyResource {
 	@GET
 	@Path("{searchTerm}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List <Examination> getJSONResult(@PathParam("searchTerm") String searchTerm) throws MethodNotSupportedException{
-		SearchTermParser search = new SearchTermParser(searchTerm);
+    public List <Examination> getJSONResult(@PathParam("searchTerm") String searchURL) throws MethodNotSupportedException{
+		SearchFilter filter = SearchParser.createSearchFilter(searchURL);
+		SearchTermParser search = new SearchTermParser(filter);
 		return search.getResultList();
     }
 }

@@ -4,6 +4,7 @@ function tag(title)
 	this.selected = false;
 }
 
+
 var tags = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
 var tagObjects = [];
 var currentAutoSearchPos = 0;
@@ -12,6 +13,20 @@ for (var i = 0; i < tags.length; i++)
 {
 	tagObjects.push(new tag(tags[i]));
 }
+
+
+$('document').ready(function(){
+	// Fetch search terms (tags) from server.
+	var url = "www.medimager.com/api/tags";
+	/*$.get(url).then(function(res){
+		console.log(res);
+		for (var i = 0; i < res.tags.length; i++) {
+			tagObjects.push(new tag(res.tags[i]));
+		}
+	});*/
+});
+
+
 function displayTagList(string)
 {
 	currentAutoSearchPos = 0;

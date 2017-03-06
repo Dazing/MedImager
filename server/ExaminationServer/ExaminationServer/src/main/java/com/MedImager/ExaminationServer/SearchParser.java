@@ -5,8 +5,9 @@ package com.MedImager.ExaminationServer;
  * out the values contained within to create a SearchFilter
  */
 public class SearchParser {
-	public static SearchFilter createSearchFilter(String resourceUrl) {
+	public static SearchFilter createSearchFilter(String searchURL) {
 		SearchFilter filter = new SearchFilter();
+		filter.setSearchURL(searchURL);
 		
 		/* 
 		 * Next parse the resourceUrl. If it contains e.g. 
@@ -16,7 +17,7 @@ public class SearchParser {
 		 * filter.setAgeLower(20);
 		 */
 		
-		
+		return filter;
 	}
 	
 }

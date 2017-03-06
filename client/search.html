@@ -3,43 +3,22 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<script type="text/javascript" src="../public/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="../public/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../public/js/materialize.min.js"></script>
-<script type="text/javascript" src="../public/js/tags.js"></script>
-<script type="text/javascript" src="../public/js/menu.js"></script>
+<script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./js/materialize.min.js"></script>
+<script type="text/javascript" src="./js/tags.js"></script>
+<script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/eventlistners.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="../public/css/materialize.min.css"  media="screen,projection"/>
-<link href='../public/css/master.css' rel='stylesheet' type='text/css' />
+<link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
+<link href='./css/master.css' rel='stylesheet' type='text/css' />
 
 <script type="text/javascript">
 var currentImage = 0;
 
 var searchresults = ["http://cdn.modernfarmer.com/wp-content/uploads/2014/09/innercowhero.jpg", "https://petterssonorg.files.wordpress.com/2013/08/surikat.jpg", "http://4.bp.blogspot.com/-b_CoEyL7Y4E/VeCTOqEqdwI/AAAAAAAAJ1A/0kigqVeRPnM/s1600/TrumpPhenomenon2.jpg", "http://vignette3.wikia.nocookie.net/disney/images/f/f8/Timon_and_Pumbaa_Lion_Guard.jpg/revision/latest?cb=20151009185849", "https://s-media-cache-ak0.pinimg.com/originals/91/d9/7e/91d97e06cdc41757cfb421dab4eabd30.jpg", "http://www.konbini.com/en/files/2016/09/cow-triangle.jpg", "http://i2.irishmirror.ie/incoming/article5979450.ece/ALTERNATES/s1200/Blosom-Tallest-Cow.jpg", "http://www.healthyfoodelements.com/wp-content/uploads/2015/09/white-teeth.jpg", "http://www.sbf.se/globalassets/svenska-bilsportforbundet/bilder/racing4.jpg", "https://static01.nyt.com/images/2016/10/01/sports/01prix-web/01prix-web-master768.jpg", "https://scontent-fra3-1.xx.fbcdn.net/v/t31.0-0/p526x296/16722497_1917407805156563_3159559885330646095_o.jpg?oh=9da568a689c0b645eb7598fc2473896b&oe=5931AF31", "https://scontent-fra3-1.xx.fbcdn.net/v/t31.0-8/s960x960/16178428_618225748388740_4582847272464874647_o.jpg?oh=80cfde983b8e240157a52ce73f5efec2&oe=5928255D", "https://scontent-fra3-1.xx.fbcdn.net/v/t31.0-8/15385408_887975597901331_648368677598689041_o.jpg?oh=c322e32fbcd5cbe63bde5281efc1b43e&oe=593E090D", "https://scontent-fra3-1.xx.fbcdn.net/v/t1.0-9/15027579_579697472241568_5653370222063429241_n.jpg?oh=bdd22e5c61f2307056af6282ab3f0000&oe=593AB2AE"];
 
-$(document).keyup(function(e) {
-	if (e.keyCode == 27)
-		closePopUp();
-	else if (e.keyCode == 37)
-		setPopUpImage(currentImage--);
-	else if (e.keyCode == 39)
-		setPopUpImage(currentImage++);
-});
 
-function setPopUpImage()
-{
-	if(currentImage < 0)
-		currentImage = searchresults.length-1;
-	else if(currentImage > searchresults.length-1)
-		currentImage = 0;
-	$("#popup-image").attr("src", searchresults[currentImage]);
-}
-
-function closePopUp()
-{
-	$("#black-back").hide();
-	$("#popup-image-wrapper").hide();
-}
 </script>
 <title>MedImager</title>
 </head>
@@ -57,7 +36,7 @@ function closePopUp()
 		<i id="popup-close-button" class='small material-icons'>close</i>
 		<label>Bild-ID</label>
 		<p>Bild12345678</p>
-		<label>Instutition</label>	
+		<label>Instutition</label>
 		<p>Chalmerska oralinstutitionen</p>
 		<label>Fotodatum</label>
 		<p>25 januari 1996</p>
@@ -75,7 +54,7 @@ function closePopUp()
 		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
 		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
 		<p>Han är ful i munnen.</p>
-		
+
 		<div id="popup-image-data-buttons">
 			<div>Bramarkera</div><a href="image.html"><div>Permalänk</div></a>
 		</div>
@@ -100,20 +79,20 @@ function closePopUp()
 	</div>
 </div>
 
-<ul class="collections-menu side-nav fixed menu-bar-margin">
-	
+<ul class="side-nav fixed collections-menu menu-bar-margin">
+	<li><a href="#">collection 1</a></li>
 </ul>
 
 <div class="page-wrapper menu-bar-margin">
 
 
 
-<a href="#" data-activates="slide-out" class="button-collapse" id="collections-togglebutton"><span>></span></a>
+<a href="#" id="collections-togglebutton"><span>></span></a>
 
 	<p id="results-count">99 999 resultat</p>
-	
+
 	<div id="search-results">
-		
+
 	</div>
 </div>
 
@@ -123,6 +102,8 @@ function closePopUp()
 </div>
 
 <script>
+
+
 for(var i=0; i<searchresults.length; i++)
 {
 	$("#search-results").append('<span id="result-image-' + i + '" style="background-image: url(' + searchresults[i] + ');"></span>');
@@ -174,7 +155,7 @@ $('#search-input').keydown(function(event) {
 	markAutoSearch();
 });
 
-$(".button-collapse").click(function() {
+$("#collections-togglebutton").click(function() {
 	$(".side-nav").toggle("fast");
 	$(".page-wrapper").toggleClass("collections-menu-margin");
 });
