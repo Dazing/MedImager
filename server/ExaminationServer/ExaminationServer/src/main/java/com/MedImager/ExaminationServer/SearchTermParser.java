@@ -30,8 +30,8 @@ public class SearchTermParser {
     //Hashmap with translations from variable names in Examination class -> term names in MedView
     public static Map<String, String> translations;
     
-    public SearchTermParser(String searchTerm){
-        this.searchTerm = searchTerm;
+    public SearchTermParser(SearchFilter filter){
+        this.searchTerm = filter.getSearchURL();
         
         handler = MedViewDataHandler.instance();
         handler.setExaminationDataLocation("TestData.mvd");

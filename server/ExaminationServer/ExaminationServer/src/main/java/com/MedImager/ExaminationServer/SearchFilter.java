@@ -23,6 +23,8 @@ public class SearchFilter {
 	private int ageUpper;
 	private Boolean smokes;
 	private List<String> terms;
+	private String searchURL;
+	
 	
 	public SearchFilter(){
 		terms = new ArrayList<>();
@@ -52,6 +54,12 @@ public class SearchFilter {
 	}
 	public void setSmokes(boolean smokes) {
 		this.smokes = smokes;
+	}
+	public String getSearchURL() {
+		return searchURL;
+	}
+	public void setSearchURL(String searchURL) {
+		this.searchURL = searchURL;
 	}
 	
 	public Boolean filterSatisfied(ExaminationIdentifier eid){
