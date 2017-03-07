@@ -8,6 +8,7 @@
 <script type="text/javascript" src="./js/materialize.min.js"></script>
 <script type="text/javascript" src="./js/tags.js"></script>
 <script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/collections.js"></script>
 <script type="text/javascript" src="./js/eventlistners.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
@@ -80,7 +81,7 @@ var searchresults = ["http://cdn.modernfarmer.com/wp-content/uploads/2014/09/inn
 </div>
 
 <ul class="side-nav fixed collections-menu menu-bar-margin">
-	<li><a href="#">collection 1</a></li>
+	<li class="collections-menu-content"></li>
 </ul>
 
 <div class="page-wrapper menu-bar-margin">
@@ -102,11 +103,13 @@ var searchresults = ["http://cdn.modernfarmer.com/wp-content/uploads/2014/09/inn
 </div>
 
 <script>
-
+$( document ).ready(function() {
+    displayCollectionsMenu();
+});
 
 for(var i=0; i<searchresults.length; i++)
 {
-	$("#search-results").append('<span id="result-image-' + i + '" style="background-image: url(' + searchresults[i] + ');"></span>');
+	$("#search-results").append('<span id="result-image-' + i + '" style="background-image: url(' + searchresults[i] + ');" draggable="true"></span>');
 }
 $("#search-results span").click(function(event) {
 	var thisId = event.target.id;
