@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Handler;
 
+import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
+
+import medview.datahandling.InvalidPIDException;
 import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
 import medview.datahandling.examination.ExaminationIdentifier;
@@ -16,26 +19,41 @@ import medview.datahandling.examination.NoSuchExaminationException;
  * Class that helps in filtering when searching in the database
  */
 public class SearchFilter {
-	
-	MedViewDataHandler handler;
-	
+	private String value;
+	private List<String> terms;
 	private int ageLower;
 	private int ageUpper;
 	private Boolean smokes;
-	private List<String> terms;
 	private String searchURL;
 	
-	
 	public SearchFilter(){
-		terms = new ArrayList<>();
-		handler = MedViewDataHandler.instance();
-		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
+	}
+	
+	public SearchFilter(String value, List<String> terms, String ageLower, String ageUpper){
+		setValue(value);
+		setTerms(terms);
+		if(ageLower != null){
+			this.ageLower = Integer.parseInt(ageLower);
+		}
+		if(ageUpper != null){
+			this.ageUpper = Integer.parseInt(ageUpper);
+		}
+		
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
 	}
 	public void addTerm(String term){
 		terms.add(term);
 	}
 	public List<String> getTerms(){
 		return terms;
+	}
+	public void setTerms(List<String> terms) {
+		this.terms = terms;
 	}
 	public int getAgeLower() {
 		return ageLower;
@@ -49,10 +67,10 @@ public class SearchFilter {
 	public void setAgeUpper(int ageUpper) {
 		this.ageUpper = ageUpper;
 	}
-	public boolean isSmokes() {
+	public Boolean isSmokes() {
 		return smokes;
 	}
-	public void setSmokes(boolean smokes) {
+	public void setSmokes(Boolean smokes) {
 		this.smokes = smokes;
 	}
 	public String getSearchURL() {
@@ -63,17 +81,39 @@ public class SearchFilter {
 	}
 	
 	public Boolean filterSatisfied(ExaminationIdentifier eid){
+		MedViewDataHandler handler = MedViewDataHandler.instance();
+		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
 		try {
 			ExaminationValueContainer evc = handler.getExaminationValueContainer(eid);
-			
-			/*
-			 * Make sure that the examination has values for all the terms that the
-			 * user filtered for
-			 */
-			for(String term : terms){
-				if(!Arrays.asList(evc.getTermsWithValues()).contains(term)){
+			if(terms.isEmpty()){
+				boolean examinationContainsValue = false;
+				for(String term : evc.getTermsWithValues()){
+					if(Arrays.asList(evc.getValues(term)).contains(value)){
+						examinationContainsValue = true;
+					}
+				}
+				if(examinationContainsValue == false){
 					return false;
 				}
+			}else{
+				for(String term : terms){
+					if(!Arrays.asList(evc.getTermsWithValues()).contains(term)){
+						return false;
+					}else{
+						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
+						int size = termValues.size();
+						String a = termValues.get(0);
+						if(!termValues.contains(value)){
+							return false;
+						}
+					}
+				}
+			}
+			if(ageLower > 0 && handler.getAge(eid.getPID(), eid.getTime()) < ageLower){
+				return false;
+			}
+			if(ageUpper > 0 && handler.getAge(eid.getPID(), eid.getTime()) > ageUpper){
+				return false;
 			}
 			
 			/*
@@ -90,8 +130,7 @@ public class SearchFilter {
 					(!Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == true);
 				}
 			}
-			
-		} catch (IOException | NoSuchExaminationException | NoSuchTermException e) {
+		} catch (IOException | NoSuchExaminationException | NoSuchTermException | InvalidPIDException e) {
 			e.printStackTrace();
 		}
 		
