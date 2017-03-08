@@ -26,12 +26,14 @@ public class SearchTermParser {
     private String searchTerm;
     ArrayList<String> allTerms = new ArrayList<String>();
     MedViewDataHandler handler;
+    SearchFilter filter;
     
     //Hashmap with translations from variable names in Examination class -> term names in MedView
     public static Map<String, String> translations;
     
     public SearchTermParser(SearchFilter filter){
         this.searchTerm = filter.getSearchURL();
+        this.filter = filter;
         
         handler = MedViewDataHandler.instance();
         handler.setExaminationDataLocation("TestData.mvd");
@@ -49,6 +51,10 @@ public class SearchTermParser {
 
     public ArrayList<Examination> getResultList() throws MethodNotSupportedException{
         return findTerm(searchTerm);
+    }
+    
+    public ArrayList<Examination> getResultListWithFilter() throws MethodNotSupportedException{
+        return findTerm(filter);
     }
 
     /*
@@ -94,6 +100,30 @@ public class SearchTermParser {
         return resultList;
 
     }
+    
+    private ArrayList<Examination> findTerm(SearchFilter filter) throws MethodNotSupportedException {
+        ArrayList<Examination> resultList = new ArrayList<Examination>();
+        try {
+            for (PatientIdentifier pid : handler.getPatients()) {
+                for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
+                	if(filter.filterSatisfied(eid)){
+                		Examination examination = new Examination();
+                		examination.setAge(handler.getAge(pid, eid.getTime()));
+                        List<String> imagePaths = new ArrayList<String>();
+                        for(ExaminationImage img :handler.getImages(eid)){
+                        	imagePaths.add(img.getFile().toString());
+                        };
+                        examination.setImagePaths(imagePaths);
+                        resultList.add(examination);
+                	}
+                }
+            }
+        } catch (IOException | InvalidPIDException e) {
+            e.printStackTrace();
+        }
+        return resultList;
+    }
+    
     /*
     * Calculates Edit Distance.
     * Is called when no results were found in findTerm(String)
