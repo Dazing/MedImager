@@ -16,20 +16,20 @@ $('document').ready(function(){
 
 
 function displayCollectionsMenu() {	
-	$(".collections-menu-content").html("");
+	$(".collections-menu").html("");
 	
 	if (myCollections.length > 0) {
-		$(".collections-menu-content").append('<li><a class="subheader">Mina Samlingar</a></li>');
+		$(".collections-menu").append('<li><a class="subheader">Mina Samlingar</a></li>');
 		for(var i=0; i<myCollections.length; i++){
-			$(".collections-menu-content").append('<li><a class="image-collection my-collection waves-effect" href="#" data-id="' + myCollections[i].id + '">' + myCollections[i].name + "</a></li>");
+			$(".collections-menu").append('<li><a class="image-collection my-collection waves-effect dnd-target" data-id="' + myCollections[i].id + '">' + myCollections[i].name + "</a></li>");
 		}
-		$(".collections-menu-content").append('<li><div class="divider"></div></li>');
+		$(".collections-menu").append('<li><div class="divider"></div></li>');
 	}
 	
 	if (sharedWithMe.length > 0) {
 		$(".collections-menu-content").append('<li><a class="subheader">Delade med mig</a></li>');
 		for(var i=0; i<sharedWithMe.length; i++){
-			$(".collections-menu-content").append('<li><a class="image-collection shared-collection waves-effect" href="#" data-id="' + sharedWithMe[i].id + '">' + sharedWithMe[i].name + "</a></li>");
+			$(".collections-menu-content").append('<li><a class="image-collection shared-collection waves-effect dnd-target" href="#" data-id="' + sharedWithMe[i].id + '">' + sharedWithMe[i].name + "</a></li>");
 		}
 		$(".collections-menu-content").append('<li><div class="divider"></div></li>');
 	}

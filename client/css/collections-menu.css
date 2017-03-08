@@ -28,8 +28,7 @@
     vertical-align: middle; }
 
 .collections-menu {
-  display: none;
-  z-index: 50; }
+  display: none; }
 
 .collections-menu-margin {
   padding-left: 300px; }
