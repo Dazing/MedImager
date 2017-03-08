@@ -113,12 +113,6 @@
     #selected-tags span span {
       cursor: pointer; }
 
-.menu-bar-margin {
-  margin-top: 69px; }
-
-.advanced-search-dropdown-margin {
-  margin-top: 114px; }
-
 .primary-colour {
   background-color: #1de9b6; }
 
@@ -248,44 +242,6 @@
       #popup-image-data-buttons div:nth-of-type(2):hover {
         background-color: #1de9b6; }
 
-.primary-colour {
-  background-color: #1de9b6; }
-
-.primary-colour-text {
-  color: #1de9b6; }
-
-.secondary-colour {
-  background-color: #64ffda; }
-
-.secondary-colour-text {
-  color: #64ffda; }
-
-.tertiary-colour {
-  background-color: #a7ffeb; }
-
-.tertiary-colour-text {
-  color: #a7ffeb; }
-
-#collections-togglebutton {
-  height: 100vw;
-  width: 20px;
-  background-color: #e7e7e7;
-  position: fixed;
-  top: 0;
-  z-index: 50; }
-  #collections-togglebutton span {
-    display: block;
-    vertical-align: middle; }
-
-.collections-menu {
-  display: none; }
-
-.collections-menu-margin {
-  padding-left: 300px; }
-  @media only screen and (max-width: 992px) {
-    .collections-menu-margin {
-      padding-left: 0; } }
-
 * {
   box-sizing: border-box !important;
   font-family: "Roboto Condensed"; }
@@ -303,6 +259,10 @@ a, a:visited {
 
 .login-box {
   width: 100%; }
+
+#page-wrapper {
+  margin-top: 64px;
+  transition: margin 0.4s; }
 
 #search-results {
   padding: 10px;
@@ -325,6 +285,36 @@ a, a:visited {
   font-size: 22px;
   color: #424242; }
 
+#collections-togglebutton {
+  height: 100vw;
+  width: 20px;
+  background-color: #e7e7e7;
+  position: fixed;
+  top: 0;
+  z-index: 50; }
+  #collections-togglebutton span {
+    display: block;
+    vertical-align: middle; }
+
+#collections-menu {
+  position: fixed;
+  top: 64px;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  display: none;
+  background-color: #ffffff;
+  border-right: 2px solid #cccccc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1; }
+  #collections-menu a {
+    display: block;
+    padding: 12px 12px 12px 32px;
+    width: 300px;
+    border-bottom: 1px solid #999999;
+    font-size: 18px; }
+
 #image-wrapper {
   padding-top: 40px;
   margin-bottom: 100px;
@@ -337,10 +327,6 @@ a, a:visited {
   display: inline-block;
   vertical-align: top;
   margin-right: 20px; }
-
-.ui-draggable-handle {
-  -ms-touch-action: none;
-  touch-action: none; }
 
 #image-data {
   max-width: 30%;
