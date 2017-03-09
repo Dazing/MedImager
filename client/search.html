@@ -4,9 +4,12 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="./js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="./js/materialize.min.js"></script>
 <script type="text/javascript" src="./js/tags.js"></script>
 <script type="text/javascript" src="./js/menu.js"></script>
+<script type="text/javascript" src="./js/collections.js"></script>
+<script type="text/javascript" src="./js/dragdrop.js"></script>
 <script type="text/javascript" src="./js/eventlistners.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="./css/materialize.min.css"  media="screen,projection"/>
@@ -78,12 +81,12 @@ var searchresults = ["http://cdn.modernfarmer.com/wp-content/uploads/2014/09/inn
 	</div>
 </div>
 
+<ul class="side-nav fixed collections-menu menu-bar-margin">
+</ul>
+
 <div id="page-wrapper">
 
-<ul id="slide-out" class="side-nav">
-
-</ul>
-<a href="#" data-activates="slide-out" class="button-collapse" id="collections-togglebutton"><span>></span></a>
+	<a href="#" id="collections-togglebutton"><span>></span></a>
 
 	<p id="results-count">99 999 resultat</p>
 
@@ -97,10 +100,11 @@ var searchresults = ["http://cdn.modernfarmer.com/wp-content/uploads/2014/09/inn
 
 <script>
 
+displayCollectionsMenu();
 
 for(var i=0; i<searchresults.length; i++)
 {
-	$("#search-results").append('<span id="result-image-' + i + '" style="background-image: url(' + searchresults[i] + ');"></span>');
+	$("#search-results").append('<span id="result-image-' + i + '" class="dnd-source" style="background-image: url(' + searchresults[i] + '" draggable="true" data-id="' + i + '");"></span>');
 }
 
 </script>

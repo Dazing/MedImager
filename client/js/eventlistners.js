@@ -72,7 +72,15 @@ $(document).ready(function () {
 		markAutoSearch();
 	});
 
-	$(".button-collapse").sideNav();
+	$("#collections-togglebutton").click(function() {
+		$(".side-nav").animate({width: 'toggle'}, "fast");
+		$("#page-wrapper").toggleClass("collections-menu-margin", "fast");
+	});
+	
+	$(".dnd-source").on("dragstart",handleDragStart);
+	$(".dnd-target-collection").on("dragenter",handleDragEnter);
+	$(".dnd-target").on("dragover",handleDragOver);
+	$(".dnd-target").on("drop",handleDrop);
 
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27)
