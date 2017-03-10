@@ -1,0 +1,75 @@
+package com.MedImager.ExaminationServer;
+
+import java.util.List;
+
+import medview.datahandling.examination.ExaminationIdentifier;
+import medview.datahandling.images.ExaminationImage;
+
+/**
+ * Created by marcus on 2017-02-10.
+ */
+public class Examination {
+	private int age;
+	private String allergy;
+	private String biopsySite;
+	private String diagDef;
+	private String diagHist;
+	private String diagTent;
+	private String disNow;
+	private String disPast;
+	private String drug;
+	private String factorNeg;
+	private String factorPos;
+	private String family;
+	private String gender;
+	private String lesnOn;
+	private String lesnSite;
+	private String skinPbl;
+	private String smoke;
+	private String snuff;
+	private String symptNow;
+	private String symptSite;
+	private String treatType;
+	private String vasNow;
+	private List<String> imagePaths;
+	public ExaminationIdentifier getEid() {
+		return eid;
+	}
+
+
+	public void setEid(ExaminationIdentifier eid) {
+		this.eid = eid;
+	}
+
+
+    public Examination(){}
+    
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int AGE) {
+        this.age = AGE;
+    }
+
+    public String getAllergy() {
+        return allergy;
+    }
+
+    public void setAllergy(String ALLERGY) {
+        this.allergy = ALLERGY;
+    }
+
+
+	public List<String> getImagePaths() {
+		return imagePaths;
+	}
+
+	public void setImagePaths(List<String> imagePaths) {
+		this.imagePaths = imagePaths;
+	}
+	
+	
+	
+}

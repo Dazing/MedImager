@@ -1,0 +1,82 @@
+@import "colours"
+
+=search-input-size
+	width: 35%
+	min-width: 200px
+
+.medimager-logo
+	float: left 
+	height: 50px
+	padding: 5px
+	margin-right: 15px
+	
+#menu-wrapper
+	width: 100%
+	position: fixed
+	top: 0
+	left: 0
+	z-index: 100
+	
+#menu-bar
+	z-index: 100
+	width: 100%
+	background-color: $primary-colour
+	padding: 7px
+	input
+		padding: 0 15px
+		background-color: #ffffff
+		border: 0
+		width: 100%
+		margin-bottom: 0
+		
+.user-button
+	float: right
+	margin-top: -2px
+		
+#advanced-button
+	margin-left: 10px
+	cursor: pointer
+	&:hover
+		text-decoration: underline
+		
+#advanced-bar
+	z-index: -1
+	background-color: $secondary-colour
+	width: 100%
+	padding: 10px 20px
+	position: fixed
+	margin-top: -50px
+	transition: margin 0.4s
+	label
+		font-size: 20px
+		margin-right: 20px
+	input
+		display: inline-block
+		
+#search-wrapper
+	display: inline-table
+	+search-input-size
+	
+#auto-search-results
+	border: 1px solid #aaa
+	position: absolute
+	display: none
+	background-color: #ffffff
+	+search-input-size
+	span
+		display: block
+		padding: 5px
+		width: 100%
+		cursor: pointer
+		
+#selected-tags
+	margin-top: 10px
+	span
+		padding: 4px
+		border: 1px solid $secondary-colour
+		display: inline-block
+		background-color: $tertiary-colour
+		margin: 4px
+		border-radius: 5px
+		span
+			cursor: pointer
