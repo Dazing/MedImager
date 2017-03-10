@@ -32,7 +32,8 @@
 
 .collections-menu {
   display: none;
-  margin-top: 69px; }
+  margin-top: 69px;
+  z-index: 50; }
 
 .collections-menu-margin {
   padding-left: 300px; }
