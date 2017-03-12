@@ -104,7 +104,11 @@ displayCollectionsMenu();
 
 for(var i=0; i<searchresults.length; i++)
 {
-	$("#search-results").append('<span id="result-image-' + i + '" class="dnd-source" style="background-image: url(' + searchresults[i] + '" draggable="true" data-id="' + i + '");"></span>');
+	$("#search-results").append('<span id="result-image-' + i + '" class="dnd-source" style="background-image: url(' + searchresults[i] + '" draggable="true" data-id="' + i + '"></span>');
+	$("#result-image-" + i).append( '<div class="opacity-wrapper"></div>');
+	$("#result-image-" + i).find(".opacity-wrapper").append('<div class="inner-text">' + '<b>Diagnoser:</b> diagnos1, diagnos2, diagnos3' + '</div>'
+	+ '<div class="inner-text">' + '<b>Ålder:</b> 55 år' + '</div>'
+	+ '<div class="inner-text">' + '<b>Annan handy info:</b> info info info info info' + '</div>');
 }
 
 </script>
