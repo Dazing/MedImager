@@ -40,7 +40,7 @@ function displayTagList(string)
 				$("#auto-search-results").append("<span id='sugg" + i + "'>" + tagObjects[i].title + "</span>");
 		}
 		$("#auto-search-results").find("span").click(function(event) {
-			selectTag(listIdToTagId(event));
+			selectTag(currentAutoSearchPos);
 		});
 		$("#auto-search-results").css("display", "block");
 		$("#auto-search-results").find("span").mouseover(function(event) {
@@ -72,10 +72,15 @@ function listIdToTagId(event)
 
 function selectTag(selectedTagId)
 {
-	var results = $("#auto-search-results").find("span");
-	thisTagId = $(results[selectedTagId]).attr("id").substring(4, $(results[selectedTagId]).attr("id").length);
-	tagObjects[thisTagId].selected = true;
-	$("#selected-tags").append("<div class='chip'>" + tagObjects[thisTagId].title + "<i id='tag" + thisTagId + "' class='removeTag close material-icons'>close</i></div>");
+	var filename = window.location.pathname;
+	filename = filename.split("/").pop();
+	if(filename != "search" && filename != "search.html")
+	{
+		document.cookie = "selectedTagId=" + selectedTagId;
+		window.location.href = "search.html";
+	}
+	tagObjects[selectedTagId].selected = true;
+	$("#selected-tags").append("<div class='chip'>" + tagObjects[selectedTagId].title + "<i id='tag" + selectedTagId + "' class='removeTag close material-icons'>close</i></div>");
 	$("#search-input").val("");
 	$("#auto-search-results").hide();
 	currentAutoSearchPos = null;

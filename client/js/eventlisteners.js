@@ -1,4 +1,11 @@
 $(document).ready(function () {
+	var selectedTagId = document.cookie.split("selectedTagId=").pop();
+	if(selectedTagId != "")
+	{
+		document.cookie = "selectedTagId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+		selectTag(selectedTagId);
+	}
+	
 	$('#searchSideWrapper').width(
 		$('body').width()-500
 	);
@@ -71,7 +78,11 @@ $(document).ready(function () {
 		else if(event.keyCode == 38)
 			currentAutoSearchPos--;
 		else if(event.keyCode == 13)
-			selectTag(currentAutoSearchPos);
+		{
+			var results = $("#auto-search-results").find("span");
+			var thisTagId = $(results[currentAutoSearchPos]).attr("id").substring(4, $(results[currentAutoSearchPos]).attr("id").length);
+			selectTag(thisTagId);
+		}
 		else
 			displayTagList($(this).val());
 
