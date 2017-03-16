@@ -78,11 +78,7 @@ $(document).ready(function () {
 		else if(event.keyCode == 38)
 			currentAutoSearchPos--;
 		else if(event.keyCode == 13)
-		{
-			var results = $("#auto-search-results").find("span");
-			var thisTagId = $(results[currentAutoSearchPos]).attr("id").substring(4, $(results[currentAutoSearchPos]).attr("id").length);
-			selectTag(thisTagId);
-		}
+			selectTagByMarkedPos();
 		else
 			displayTagList($(this).val());
 
