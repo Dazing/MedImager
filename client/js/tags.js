@@ -40,7 +40,7 @@ function displayTagList(string)
 				$("#auto-search-results").append("<span id='sugg" + i + "'>" + tagObjects[i].title + "</span>");
 		}
 		$("#auto-search-results").find("span").click(function(event) {
-			selectTag(currentAutoSearchPos);
+			selectTagByMarkedPos();
 		});
 		$("#auto-search-results").css("display", "block");
 		$("#auto-search-results").find("span").mouseover(function(event) {
@@ -70,6 +70,13 @@ function listIdToTagId(event)
 	return i;
 }
 
+function selectTagByMarkedPos()
+{
+	var results = $("#auto-search-results").find("span");
+	var thisTagId = $(results[currentAutoSearchPos]).attr("id").substring(4, $(results[currentAutoSearchPos]).attr("id").length);
+	selectTag(thisTagId);
+}
+
 function selectTag(selectedTagId)
 {
 	var filename = window.location.pathname;
@@ -79,6 +86,7 @@ function selectTag(selectedTagId)
 		document.cookie = "selectedTagId=" + selectedTagId;
 		window.location.href = "search.html";
 	}
+	
 	tagObjects[selectedTagId].selected = true;
 	$("#selected-tags").append("<div class='chip'>" + tagObjects[selectedTagId].title + "<i id='tag" + selectedTagId + "' class='removeTag close material-icons'>close</i></div>");
 	$("#search-input").val("");
