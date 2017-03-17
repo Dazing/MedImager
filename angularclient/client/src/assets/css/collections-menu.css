@@ -1,0 +1,45 @@
+.primary-colour {
+  background-color: #1de9b6; }
+
+.primary-colour-text {
+  color: #1de9b6; }
+
+.secondary-colour {
+  background-color: #64ffda; }
+
+.secondary-colour-text {
+  color: #64ffda; }
+
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
+
+#collections-togglebutton {
+  height: 100vw;
+  width: 20px;
+  background-color: #e7e7e7;
+  position: fixed;
+  top: 0;
+  z-index: 50; }
+  #collections-togglebutton span {
+    display: block;
+    vertical-align: middle; }
+  @media only screen and (max-width: 992px) {
+    #collections-togglebutton {
+      display: none; } }
+
+.collections-menu {
+  display: none;
+  margin-top: 69px;
+  z-index: 50;
+  transition: margin 0.4s; }
+
+.collections-menu-margin {
+  padding-left: 300px; }
+  @media only screen and (max-width: 992px) {
+    .collections-menu-margin {
+      padding-left: 0; } }
+
+/*# sourceMappingURL=collections-menu.css.map */
