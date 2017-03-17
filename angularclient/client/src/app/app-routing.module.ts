@@ -1,13 +1,13 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ApplyComponent }   from './apply.component';
-import { ForumComponent }   from './forum.component';
+import { LoginComponent }   from './login.component';
+import { SearchComponent }   from './search.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'apply',  component: ApplyComponent },
-  { path: 'forum',  component: ForumComponent }
+  { path: 'login',  component: LoginComponent },
+  { path: 'search',  component: SearchComponent }
 ];
 
 @NgModule({

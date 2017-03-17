@@ -5,15 +5,15 @@ import { HttpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { ApplyComponent } from './apply.component';
-import { ForumComponent } from './forum.component';
+import { LoginComponent } from './login.component';
+import { SearchComponent } from './search.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ApplyComponent,
-		ForumComponent
+		LoginComponent,
+		SearchComponent
 	],
 	imports: [
 		BrowserModule,
