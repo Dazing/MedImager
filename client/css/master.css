@@ -83,6 +83,12 @@
   #advanced-bar input {
     display: inline-block; }
 
+.slider {
+  display: inline-block;
+  width: 300px;
+  height: 10px;
+  margin: 0 10px; }
+
 #search-wrapper {
   display: inline-table;
   width: 35%;
@@ -277,7 +283,8 @@
 .collections-menu {
   display: none;
   margin-top: 69px;
-  z-index: 50; }
+  z-index: 50;
+  transition: margin 0.4s; }
 
 .collections-menu-margin {
   padding-left: 300px; }
@@ -285,23 +292,23 @@
     .collections-menu-margin {
       padding-left: 0; } }
 
-* {
-  box-sizing: border-box !important;
-  font-family: "Roboto Condensed"; }
+.primary-colour {
+  background-color: #1de9b6; }
 
-body {
-  margin: 0; }
+.primary-colour-text {
+  color: #1de9b6; }
 
-a, a:visited {
-  color: #000000; }
+.secondary-colour {
+  background-color: #64ffda; }
 
-.vertical-center {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%); }
+.secondary-colour-text {
+  color: #64ffda; }
 
-.login-box {
-  width: 100%; }
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
 
 #page-wrapper {
   margin-top: 64px;
@@ -320,6 +327,21 @@ a, a:visited {
     background-size: cover;
     background-position: center;
     cursor: pointer; }
+    #search-results span .opacity-wrapper {
+      height: 100%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      opacity: 0;
+      transition: opacity 0.15s ease-in-out;
+      -moz-transition: opacity 0.15s ease-in-out;
+      -webkit-transition: opacity 0.15s ease-in-out; }
+      #search-results span .opacity-wrapper:hover {
+        opacity: 1; }
+    #search-results span .inner-text {
+      opacity: 1;
+      margin: 5px;
+      text-align: left; }
 
 #results-count {
   margin-right: 15px;
@@ -327,6 +349,24 @@ a, a:visited {
   text-align: right;
   font-size: 22px;
   color: #424242; }
+
+* {
+  box-sizing: border-box !important;
+  font-family: "Roboto Condensed"; }
+
+body {
+  margin: 0; }
+
+a, a:visited {
+  color: #000000; }
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.login-box {
+  width: 100%; }
 
 #image-wrapper {
   padding-top: 40px;

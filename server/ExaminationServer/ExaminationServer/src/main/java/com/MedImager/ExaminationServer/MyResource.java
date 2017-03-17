@@ -20,7 +20,7 @@ import misc.foundation.MethodNotSupportedException;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("search")
+@Path("api")
 public class MyResource {
 	@GET
 	@Path("{searchTerm}")

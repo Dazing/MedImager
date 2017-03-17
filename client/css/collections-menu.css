@@ -33,7 +33,8 @@
 .collections-menu {
   display: none;
   margin-top: 69px;
-  z-index: 50; }
+  z-index: 50;
+  transition: margin 0.4s; }
 
 .collections-menu-margin {
   padding-left: 300px; }

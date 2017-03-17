@@ -1,0 +1,5 @@
+package com.MedImager.ExaminationServer;
+
+public class ExaminationBuilder {
+
+}
