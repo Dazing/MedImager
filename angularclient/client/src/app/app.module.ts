@@ -5,9 +5,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login.component';
-import { SearchComponent } from './search.component';
-import { ThumbnailComponent } from './thumbnail.component';
+import { LoginComponent } from './login/login.component';
+import { SearchComponent } from './search/search.component';
+import { ThumbnailComponent } from './search/thumbnail.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
