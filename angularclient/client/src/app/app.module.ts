@@ -11,13 +11,16 @@ import { ThumbnailComponent } from './search/thumbnail.component';
 import { CollectionsMenuComponent } from './search/collections-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { DraggableImageDirective } from './search/draggableImage.directive';
+
 @NgModule({
 	declarations: [
 		AppComponent,
 		LoginComponent,
 		SearchComponent,
 		ThumbnailComponent,
-		CollectionsMenuComponent
+		CollectionsMenuComponent,
+		DraggableImageDirective
 	],
 	imports: [
 		BrowserModule,

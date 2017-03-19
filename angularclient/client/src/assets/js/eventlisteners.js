@@ -102,10 +102,10 @@ $(document).ready(function () {
 		markAutoSearch();
 	});
 
-	$(".dnd-source").on("dragstart",handleDragStart);
-	$(".dnd-target-collection").on("dragenter",handleDragEnter);
-	$(".dnd-target").on("dragover",handleDragOver);
-	$(".dnd-target").on("drop",handleDrop);
+	//$(".dnd-source").on("dragstart",handleDragStart);
+	//$(".dnd-target").on("dragenter",handleDragEnter);
+	//$(".dnd-target").on("dragover",handleDragOver);
+	//$(".dnd-target").on("drop",handleDrop);
 
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27)
