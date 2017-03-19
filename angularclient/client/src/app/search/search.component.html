@@ -35,22 +35,25 @@
 </div>
 
 <div id="menu-wrapper">
-	<div id="menu-bar">
-		<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
-		<div id="search-wrapper">
-			<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)">
-			<div id="auto-search-results">Sökresultat</div>
-			<div id="selected-tags"></div>
+	<form [formGroup]="form" action="">
+		<div id="menu-bar">
+			<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
+			<div id="search-wrapper">
+				<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)">
+				<input type="hidden" formControlName="searchTerms">
+				<div id="auto-search-results">Sökresultat</div>
+				<div id="selected-tags"></div>
+			</div>
+			<span id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
+			<i class='user-button medium material-icons'>account_circle</i>
 		</div>
-		<span id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
-		<i class='user-button medium material-icons'>account_circle</i>
-	</div>
-	<div id="advanced-bar">
-		<input type="checkbox" id="rokare-check"><label for="rokare-check">Rökare</label>
-		<input type="checkbox" id="snusare-check"><label for="snusare-check">Snusare</label>
-		<input type="checkbox" id="alder-check"><label for="alder-check">Hög ålder</label>
-		<div id="age" class="slider"></div><label>Ålder</label>
-	</div>
+		<div id="advanced-bar">
+			<input formControlName="rokare" type="checkbox" id="rokare-check"><label for="rokare-check">Rökare</label>
+			<input formControlName="snusare" type="checkbox" id="snusare-check"><label for="snusare-check">Snusare</label>
+			<input formControlName="alder" type="checkbox" id="alder-check"><label for="alder-check">Hög ålder</label>
+			<div id="age" class="slider"></div><label>Ålder</label>
+		</div>
+	</form>
 </div>
 
 <ul class="side-nav fixed collections-menu menu-bar-margin">
@@ -65,10 +68,12 @@
 	<div id="search-results">
 		<thumbnail></thumbnail>
 	</div>
+
+	<div *ngFor="let image of images">
+		<p>Image: {{image.name}}</p>
+	</div>
 </div>
-<div *ngFor="let image of images | async">
-    {{image.name}}
-</div>
+
 
 <div id="footer">
 © MedImager, 2017. Alla rättigheter reserverade.

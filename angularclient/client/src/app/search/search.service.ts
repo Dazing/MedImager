@@ -16,13 +16,13 @@ export class SearchService {
 
 	constructor(private http: Http) {}
 
-	getSearch():void {
+	getSearch(query:string):Promise<any[]> {
 		console.log("running getsear");
 		
-    	 this.http.get('http://localhost:3000/api/search')
-               .toPromise()
-               .then(response => console.log(response.json()))
-			   .catch(this.handleError);
+		return this.http.get('http://localhost:3000/api/search')
+			.toPromise()
+			.then(response => response.json())
+			.catch(this.handleError);
 	}
 	getImage(): Image {
 		return new Image();

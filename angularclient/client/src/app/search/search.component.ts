@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 import { Image } from './image';
 
 import { SearchService } from './search.service';
@@ -16,14 +17,24 @@ import 'rxjs/add/operator/distinctUntilChanged';
 @Component({
 	selector: 'search',
 	templateUrl: './search.component.html',
-  	providers: [SearchService]
+  	providers: [SearchService, FormBuilder]
 })
 export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
+	form;
 
-	constructor(private searchService: SearchService){
-
+	constructor(private searchService: SearchService, private formBuilder: FormBuilder){
+		this.form = formBuilder.group({
+			searchTerms: '',
+			rokare: '',
+			snusare: '',
+			alder: ''
+		})
+		
+		this.form.valueChanges.subscribe(data => {
+			console.log('Form changes', data)
+		})
 	}
 
 	/*ngOnInit(): void {
@@ -42,8 +53,12 @@ export class SearchComponent {
 			});
 		}
 	*/
-	onEnter(term){
-		 this.searchService.getSearch();
+	onEnter(term: string){
+	console.log("term: "+term);
+	
+		 this.searchService
+			.getSearch(term)
+			.then(images => this.images = images);
 		 console.log(JSON.stringify(this.images));
 		 
 	}
