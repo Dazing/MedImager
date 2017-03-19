@@ -45,7 +45,7 @@ $(document).ready(function () {
 		);
 	})
 
-	$("#search-results span").on('mousedown', function(event) {
+	$("#search-results span").on('mouseup', function(event) {
 		var thisId = event.target.id;
 		currentImage = thisId.substring(13, thisId.length);
 		if(event.which == 2)
