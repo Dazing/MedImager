@@ -84,7 +84,7 @@ function selectTag(selectedTagId)
 	if(filename != "search" && filename != "search.html")
 	{
 		document.cookie = "selectedTagId=" + selectedTagId;
-		window.location.href = "search.html";
+		window.location.href = "search";
 	}
 	
 	tagObjects[selectedTagId].selected = true;

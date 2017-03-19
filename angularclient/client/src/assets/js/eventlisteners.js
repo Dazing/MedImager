@@ -45,12 +45,20 @@ $(document).ready(function () {
 		);
 	})
 
-	$("#search-results span").click(function(event) {
+	$("#search-results span").on('mousedown', function(event) {
 		var thisId = event.target.id;
 		currentImage = thisId.substring(13, thisId.length);
-		setPopUpImage();
-		$("#popup-image-wrapper").css("display", "flex");
-		$("#black-back").css("display", "block");
+		if(event.which == 2)
+		{
+			event.preventDefault();
+			var newTab = window.open("image?id=" + thisId, '_newtab');
+		}
+		else
+		{
+			setPopUpImage();
+			$("#popup-image-wrapper").css("display", "flex");
+			$("#black-back").css("display", "block");
+		}
 	});
 
 	$(".opacity-wrapper").click(function(event) {//edit event target to give proper image data to #search-results span : click
@@ -130,5 +138,6 @@ $(document).ready(function () {
 		$("#black-back").hide();
 		$("#popup-image-wrapper").hide();
 	}
-
+	
+	
 });
