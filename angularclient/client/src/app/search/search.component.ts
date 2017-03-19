@@ -21,6 +21,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
+	private collectionsMenuVisible = false;
 
 	constructor(private searchService: SearchService){
 
@@ -50,6 +51,10 @@ export class SearchComponent {
 
 	search(term: string): void {
     this.searchTerms.next(term);
+  }
+
+  toggleCollectionsMenu() {
+	this.collectionsMenuVisible = !this.collectionsMenuVisible;
   }
 
 }

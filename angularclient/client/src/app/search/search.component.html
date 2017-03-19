@@ -53,13 +53,13 @@
 	</div>
 </div>
 
-<collections-menu>
+<collections-menu *ngIf="collectionsMenuVisible">
 
 </collections-menu>
 
-<div id="page-wrapper">
+<div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	<a id="collections-togglebutton"><span></span></a>
+	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
 
 	<p id="results-count"><span></span> resultat</p>
 

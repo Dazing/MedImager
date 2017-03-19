@@ -1,13 +1,13 @@
 <ul class="side-nav fixed collections-menu menu-bar-margin">
     <li *ngIf="myCollections.length > 0"><a class="subheader">Mina Samlingar</a></li>
-    <li *ngFor="let myCollection of myCollections"><a class="image-collection my-collection waves-effect dnd-target" data-id="111111">{{myCollection.name}}</a></li>
+    <li *ngFor="let myCollection of myCollections"><a class="image-collection my-collection waves-effect dnd-target" [attr.data-id]="myCollection.id">{{myCollection.name}}</a></li>
     <li *ngIf="myCollections.length > 0"><div class="divider"></div></li>
 
     <li *ngIf="sharedCollections.length > 0"><a class="subheader">Delade med mig</a></li>
-    <li *ngFor="let sharedCollection of sharedCollections"><a class="image-collection shared-collection waves-effect dnd-target" data-id="1232123">{{sharedCollection.name}}</a></li>
+    <li *ngFor="let sharedCollection of sharedCollections"><a class="image-collection shared-collection waves-effect dnd-target" [attr.data-id]="sharedCollection.id">{{sharedCollection.name}}</a></li>
     <li *ngIf="sharedCollections.length > 0"><div class="divider"></div></li>
 
     <li *ngIf="inboxImages.length > 0"><a class="subheader">Inbox</a></li>
-    <li *ngFor="let sharedCollection of sharedCollections"><a class="inbox-image waves-effect" data-id="41233"><i class="material-icons">perm_media</i>bild 1</a></li>
+    <li *ngFor="let inboxImage of inboxImages"><a class="inbox-image waves-effect" [attr.data-id]="inboxImage.id"><i class="material-icons">perm_media</i>{{inboxImage.name}}</a></li>
     <li *ngIf="inboxImages.length > 0"><div class="divider"></div></li>
 </ul>
