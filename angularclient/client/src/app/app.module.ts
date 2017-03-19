@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SearchComponent } from './search/search.component';
 import { ThumbnailComponent } from './search/thumbnail.component';
+import { CollectionsMenuComponent } from './search/collections-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 		AppComponent,
 		LoginComponent,
 		SearchComponent,
-		ThumbnailComponent
+		ThumbnailComponent,
+		CollectionsMenuComponent
 	],
 	imports: [
 		BrowserModule,
