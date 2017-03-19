@@ -5,7 +5,7 @@ $(document).ready(function () {
 		document.cookie = "selectedTagId=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 		selectTag(selectedTagId);
 	}
-	
+
 	$('#searchSideWrapper').width(
 		$('body').width()-500
 	);
@@ -24,6 +24,19 @@ $(document).ready(function () {
 		});
 	});
 
+	var count = $('#resultLength').val();
+	if (count > 0) {
+		$('#results-count span').html(count);
+		$('#results-count').toggle();
+	}
+	$('#resultLength').change(function(){
+		var count = $('#resultLength').val();
+		if (count > 0) {
+			$('#results-count span').html(count);
+			$('#results-count').toggle();
+		}
+	});
+
 	/* DOM Manipulation */
 
 	$(window).resize(function(){
@@ -39,16 +52,16 @@ $(document).ready(function () {
 		$("#popup-image-wrapper").css("display", "flex");
 		$("#black-back").css("display", "block");
 	});
-	
+
 	$(".opacity-wrapper").click(function(event) {//edit event target to give proper image data to #search-results span : click
 		event.target.id = $(this).parent().attr('id');
 	});
-	
+
 	$(".inner-text").click(function(event) { //same as last one but for when grandchildren are fired
 		event.target.id = $(this).parent().parent().attr('id');
 	});
-	
-	
+
+
 	$("#black-back").click(function(event) {
 		closePopUp();
 	});
@@ -89,15 +102,10 @@ $(document).ready(function () {
 		markAutoSearch();
 	});
 
-	$("#collections-togglebutton").click(function() {
-		$(".side-nav").animate({width: 'toggle'}, "fast");
-		$("#page-wrapper").toggleClass("collections-menu-margin", "fast");
-	});
-	
-	$(".dnd-source").on("dragstart",handleDragStart);
-	$(".dnd-target-collection").on("dragenter",handleDragEnter);
-	$(".dnd-target").on("dragover",handleDragOver);
-	$(".dnd-target").on("drop",handleDrop);
+	//$(".dnd-source").on("dragstart",handleDragStart);
+	//$(".dnd-target").on("dragenter",handleDragEnter);
+	//$(".dnd-target").on("dragover",handleDragOver);
+	//$(".dnd-target").on("drop",handleDrop);
 
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27)
@@ -122,5 +130,5 @@ $(document).ready(function () {
 		$("#black-back").hide();
 		$("#popup-image-wrapper").hide();
 	}
-	
+
 });

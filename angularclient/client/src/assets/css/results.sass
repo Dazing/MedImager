@@ -2,8 +2,11 @@
 
 #page-wrapper
 	margin-top: 64px
+	z-index: 51
+	position: relative
+	background-color: #ffffff
 	transition: margin 0.4s
-	
+
 #search-results
 	padding: 10px
 	text-align: center
@@ -16,7 +19,7 @@
 		display: inline-block
 		background-size: cover
 		background-position: center
-		cursor: pointer	
+		cursor: pointer
 		.opacity-wrapper
 			height: 100%
 			padding: 10px
@@ -32,11 +35,12 @@
 			opacity: 1
 			margin: 5px
 			text-align: left
-			
-			
+
+
 #results-count
 	margin-right: 15px
 	padding-top: 10px
 	text-align: right
 	font-size: 22px
 	color: $grey-text
+	display: none

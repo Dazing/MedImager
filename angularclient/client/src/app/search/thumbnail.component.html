@@ -1,4 +1,5 @@
-<span *ngFor="let searchresult of searchresults; let i = index" id="result-image-{{i}}" class="dnd-source" [ngStyle]="{'background-image': 'url(' + searchresult + ')'}" draggable="true" data-id="{{i}}">
+<input id="resultLength" type="hidden" name="resultLength" value="{{searchresults.length}}">
+<span draggableImage *ngFor="let searchresult of searchresults; let i = index" id="result-image-{{i}}" [ngStyle]="{'background-image': 'url(' + searchresult + ')'}" data-id="{{i}}">
 	<div class="opacity-wrapper">
 		<div class="inner-text"><b>Diagnoser:</b> diagnos1, diagnos2, diagnos3</div>
 		<div class="inner-text"><b>Ålder:</b> 55 år</div>

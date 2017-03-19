@@ -35,10 +35,10 @@
 </div>
 
 <div id="menu-wrapper">
-	<div id="menu-bar">
+	<div id="menu-bar" class="z-depth-1">
 		<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
 		<div id="search-wrapper">
-			<input id="search-input">
+			<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)" class="z-depth-2">
 			<div id="auto-search-results">Sökresultat</div>
 			<div id="selected-tags"></div>
 		</div>
@@ -53,19 +53,24 @@
 	</div>
 </div>
 
-<ul class="side-nav fixed collections-menu menu-bar-margin">
-</ul>
+<collections-menu *ngIf="collectionsMenuVisible">
 
-<div id="page-wrapper">
+</collections-menu>
 
-	<a id="collections-togglebutton"><span></span></a>
+<div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	<p id="results-count">99 999 resultat</p>
+	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
+
+	<p id="results-count"><span></span> resultat</p>
 
 	<div id="search-results">
 		<thumbnail></thumbnail>
 	</div>
 </div>
+<div *ngFor="let image of images | async">
+    {{image.name}}
+</div>
+
 <div id="footer">
 © MedImager, 2017. Alla rättigheter reserverade.
 </div>
