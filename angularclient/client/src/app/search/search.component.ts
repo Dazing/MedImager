@@ -22,7 +22,10 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
+
 	form;
+
+	private collectionsMenuVisible = false;
 
 	constructor(private searchService: SearchService, private formBuilder: FormBuilder){
 		this.form = formBuilder.group({
@@ -31,7 +34,7 @@ export class SearchComponent {
 			snusare: '',
 			alder: ''
 		})
-		
+
 		this.form.valueChanges.subscribe(data => {
 			console.log('Form changes', data)
 		})
@@ -55,16 +58,20 @@ export class SearchComponent {
 	*/
 	onEnter(term: string){
 	console.log("term: "+term);
-	
+
 		 this.searchService
 			.getSearch(term)
 			.then(images => this.images = images);
 		 console.log(JSON.stringify(this.images));
-		 
+
 	}
 
 	search(term: string): void {
     this.searchTerms.next(term);
+  }
+
+  toggleCollectionsMenu() {
+	this.collectionsMenuVisible = !this.collectionsMenuVisible;
   }
 
 }

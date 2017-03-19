@@ -45,12 +45,20 @@ $(document).ready(function () {
 		);
 	})
 
-	$("#search-results span").click(function(event) {
+	$("#search-results span").on('mouseup', function(event) {
 		var thisId = event.target.id;
 		currentImage = thisId.substring(13, thisId.length);
-		setPopUpImage();
-		$("#popup-image-wrapper").css("display", "flex");
-		$("#black-back").css("display", "block");
+		if(event.which == 2)
+		{
+			event.preventDefault();
+			var newTab = window.open("image?id=" + thisId, '_blank');
+		}
+		else
+		{
+			setPopUpImage();
+			$("#popup-image-wrapper").css("display", "flex");
+			$("#black-back").css("display", "block");
+		}
 	});
 
 	$(".opacity-wrapper").click(function(event) {//edit event target to give proper image data to #search-results span : click
@@ -102,15 +110,10 @@ $(document).ready(function () {
 		markAutoSearch();
 	});
 
-	$("#collections-togglebutton").click(function() {
-		$(".side-nav").animate({width: 'toggle'}, "fast");
-		$("#page-wrapper").toggleClass("collections-menu-margin", "fast");
-	});
-
-	$(".dnd-source").on("dragstart",handleDragStart);
-	$(".dnd-target-collection").on("dragenter",handleDragEnter);
-	$(".dnd-target").on("dragover",handleDragOver);
-	$(".dnd-target").on("drop",handleDrop);
+	//$(".dnd-source").on("dragstart",handleDragStart);
+	//$(".dnd-target").on("dragenter",handleDragEnter);
+	//$(".dnd-target").on("dragover",handleDragOver);
+	//$(".dnd-target").on("drop",handleDrop);
 
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27)
@@ -135,5 +138,6 @@ $(document).ready(function () {
 		$("#black-back").hide();
 		$("#popup-image-wrapper").hide();
 	}
-
+	
+	
 });

@@ -29,10 +29,11 @@
 		<p>Han är ful i munnen.</p>
 
 		<div id="popup-image-data-buttons">
-			<div>Bramarkera</div><a href="image.html"><div>Permalänk</div></a>
+			<div>Bramarkera</div><a href="image"><div>Permalänk</div></a>
 		</div>
 	</div>
 </div>
+
 
 <div id="menu-wrapper">
 	<form [formGroup]="form" action="">
@@ -56,12 +57,16 @@
 	</form>
 </div>
 
-<ul class="side-nav fixed collections-menu menu-bar-margin">
-</ul>
+<top-menu></top-menu>
 
-<div id="page-wrapper">
+<collections-menu *ngIf="collectionsMenuVisible">
 
-	<a id="collections-togglebutton"><span></span></a>
+
+</collections-menu>
+
+<div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
+
+	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
 
 	<p id="results-count"><span></span> resultat</p>
 
