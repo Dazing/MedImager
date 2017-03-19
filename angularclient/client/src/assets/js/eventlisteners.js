@@ -51,7 +51,7 @@ $(document).ready(function () {
 		if(event.which == 2)
 		{
 			event.preventDefault();
-			var newTab = window.open("image?id=" + thisId, '_newtab');
+			var newTab = window.open("image?id=" + thisId, '_blank');
 		}
 		else
 		{
