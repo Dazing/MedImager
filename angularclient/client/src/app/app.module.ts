@@ -7,6 +7,7 @@ import { RouterModule }   from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { TopMenuComponent } from './menu/topmenu.component';
+import { FooterComponent } from './other/footer.component';
 import { SearchComponent } from './search/search.component';
 import { ThumbnailComponent } from './search/thumbnail.component';
 import { ImagePageComponent } from './image/imagepage.component';
@@ -20,6 +21,7 @@ import { DraggableImageDirective } from './search/draggableImage.directive';
 		AppComponent,
 		LoginComponent,
 		TopMenuComponent,
+		FooterComponent,
 		SearchComponent,
 		ThumbnailComponent,
 		ImagePageComponent,
