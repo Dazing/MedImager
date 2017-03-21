@@ -138,35 +138,4 @@ public class SearchTermParser {
         }
         return closestMatches;
     }
-    
-    public HashMap<String, Integer> getSearchableValues(){
-        HashMap<String, Integer> map = new HashMap<>();
-        try {
-            for (PatientIdentifier pid : handler.getPatients()) {
-                for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
-                    ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
-                    for(String term : container.getTermsWithValues()){
-                        if(translations.containsValue(term)){
-                            try{
-                                for(String value : container.getValues(term)){
-                                    if(map.containsKey(value)){
-                                        map.put(value, map.get(value) + 1);
-                                    } else{
-                                        map.put(value, 1);
-                                    }
-                                }
-                            } catch(NoSuchTermException e){
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchExaminationException e) {
-            e.printStackTrace();
-        }
-        
-        return map;
-    }
 }
