@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.ws.rs.PathParam"/>
 <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+<fullyQualifiedTypeName name="medview.datahandling.examination.MVDHandler"/>
+<fullyQualifiedTypeName name="medview.datahandling.examination.ExaminationIdentifier"/>
 </qualifiedTypeNameHistroy>

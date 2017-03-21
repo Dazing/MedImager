@@ -41,4 +41,12 @@ public class MyResource {
 		SearchTermParser search = new SearchTermParser(new SearchFilter(value, terms, ageLower, ageUpper));
 		return search.getResultListWithFilter();
     }
+	
+	@GET
+	@Path("/patient/{examinationID")
+    @Produces(MediaType.APPLICATION_JSON)
+	public List <Examination> getPatientJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException{
+		
+		return null;
+	}
 }
