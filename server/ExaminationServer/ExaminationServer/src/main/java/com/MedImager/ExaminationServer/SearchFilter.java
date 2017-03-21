@@ -94,6 +94,75 @@ public class SearchFilter {
 		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
 		
 		try {
+			if(ageLower > 0 && handler.getAge(eid.getPID(), eid.getTime()) < ageLower){
+				return false;
+			}
+			if(ageUpper > 0 && handler.getAge(eid.getPID(), eid.getTime()) > ageUpper){
+				return false;
+			}
+			ExaminationValueContainer evc = handler.getExaminationValueContainer(eid);
+			
+			boolean valueInExamination = false;
+			
+			/*
+			 * Search through primary terms for a match
+			 */
+			for(String term : Arrays.asList(Constants.primaryRelevantTerms)){
+				if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
+					List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
+					if(termValues.contains(value)){
+						valueInExamination = true;
+					}
+				}
+			}
+			
+			/*
+			 * Search through extra terms (if any) specified by the user
+			 */
+			if(valueInExamination == false && !terms.isEmpty()){
+				for(String term : terms){
+					if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
+						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
+						if(termValues.contains(value)){
+							valueInExamination = true;
+						}
+					}
+				}
+			}
+			
+			if(valueInExamination == false){
+				return false;
+			}
+			
+//			/*
+//			 * Check for what the user specified about smoking and compare it to
+//			 * what information the examination has about smoking
+//			 */
+//			if(smokes == null){
+//				return true;
+//			}else{
+//				if(!Arrays.asList(evc.getTermsWithValues()).contains("Smoke")){
+//					return false;
+//				}else{
+//					return (Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == false) ||
+//					(!Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == true);
+//				}
+//			}
+		} catch (IOException | NoSuchExaminationException | NoSuchTermException | InvalidPIDException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * Old version, kept for now for possible future reference
+	 */
+	public Boolean valueSatisfiedOld(String value, ExaminationIdentifier eid){
+		MedViewDataHandler handler = MedViewDataHandler.instance();
+		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
+		
+		try {
 			ExaminationValueContainer evc = handler.getExaminationValueContainer(eid);
 			if(terms.isEmpty()){
 				boolean examinationContainsValue = false;

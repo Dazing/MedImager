@@ -9,4 +9,7 @@ public class Constants {
 			"Skin-pbl", "Smoke", "Snuff", "Sympt-now", "Sympt-site", 
 			"Treat-type", "Vas-now"
 			};
+	public static final String[] primaryRelevantTerms = {
+			"Diag-def", "Diag-hist", "Dis-now", "Dis-past", "Sympt-now", "Treat-type"
+			};
 }
