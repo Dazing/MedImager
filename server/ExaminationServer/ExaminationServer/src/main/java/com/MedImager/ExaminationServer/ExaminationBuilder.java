@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import medview.datahandling.InvalidPIDException;
 import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
 import medview.datahandling.examination.ExaminationIdentifier;
@@ -28,8 +29,9 @@ public class ExaminationBuilder {
 		try {
 			ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
 			try {
-				ex.setAge(container.getValues("Age"));
-			} catch (NoSuchTermException e) {
+				String[] ageStringArr = {Integer.toString(handler.getAge(eid.getPID(), eid.getTime()))};
+				ex.setAge(ageStringArr);
+			} catch (InvalidPIDException e) {
 				ex.setDisPast(noVal);
 			}
 			try {
