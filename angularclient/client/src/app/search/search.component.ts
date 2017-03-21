@@ -17,7 +17,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 @Component({
 	selector: 'search',
 	templateUrl: './search.component.html',
-  	providers: [SearchService, FormBuilder]
+	providers: []
 })
 export class SearchComponent {
 	images: Image[];
@@ -27,17 +27,8 @@ export class SearchComponent {
 
 	private collectionsMenuVisible = false;
 
-	constructor(private searchService: SearchService, private formBuilder: FormBuilder){
-		this.form = formBuilder.group({
-			searchTerms: '',
-			rokare: '',
-			snusare: '',
-			alder: ''
-		})
-
-		this.form.valueChanges.subscribe(data => {
-			console.log('Form changes', data)
-		})
+	constructor(private searchService: SearchService){
+		
 	}
 
 	/*ngOnInit(): void {
@@ -57,11 +48,6 @@ export class SearchComponent {
 		}
 	*/
 	onEnter(term: string){
-	console.log("term: "+term);
-
-		 this.searchService
-			.getSearch(term)
-			.then(images => this.images = images);
 		 console.log(JSON.stringify(this.images));
 
 	}

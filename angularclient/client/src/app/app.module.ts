@@ -14,6 +14,8 @@ import { ImagePageComponent } from './image/imagepage.component';
 import { CollectionsMenuComponent } from './search/collections-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { SearchService } from './search/search.service';
+
 import { DraggableImageDirective } from './search/draggableImage.directive';
 
 @NgModule({
@@ -26,7 +28,8 @@ import { DraggableImageDirective } from './search/draggableImage.directive';
 		ThumbnailComponent,
 		ImagePageComponent,
 		CollectionsMenuComponent,
-		DraggableImageDirective
+		DraggableImageDirective,
+		
 	],
 	imports: [
 		BrowserModule,
@@ -35,7 +38,11 @@ import { DraggableImageDirective } from './search/draggableImage.directive';
 		AppRoutingModule,
 		ReactiveFormsModule
 	],
-	providers: [],
+	providers: [SearchService],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+	constructor(private searchService: SearchService){}
+
+}

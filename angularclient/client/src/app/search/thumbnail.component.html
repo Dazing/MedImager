@@ -1,4 +1,6 @@
-<input id="resultLength" type="hidden" name="resultLength" value="{{searchresults.length}}">
+<input id="resultLength" type="hidden" name="resultLength" value="{{searchresults?.length}}">
+<input type="button" (click)="myClick()" value="List">
+
 <span draggableImage *ngFor="let searchresult of searchresults; let i = index" id="result-image-{{i}}" [ngStyle]="{'background-image': 'url(' + searchresult + ')'}" data-id="{{i}}">
 	<div class="opacity-wrapper">
 		<div class="inner-text"><b>Diagnoser:</b> diagnos1, diagnos2, diagnos3</div>
