@@ -34,11 +34,11 @@ public class MyResource {
 	@GET
 	@Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
-    public List <Examination> testGet(@QueryParam("Value") String value,
+    public List <Examination> testGet(@QueryParam("Values") List<String> values,
     										 @QueryParam("Term") List<String> terms,
     										 @QueryParam("AgeLower") String ageLower,
     										 @QueryParam("AgeUpper") String ageUpper) throws MethodNotSupportedException{
-		SearchTermParser search = new SearchTermParser(new SearchFilter(value, terms, ageLower, ageUpper));
+		SearchTermParser search = new SearchTermParser(new SearchFilter(values, terms, ageLower, ageUpper));
 		return search.getResultListWithFilter();
     }
 	

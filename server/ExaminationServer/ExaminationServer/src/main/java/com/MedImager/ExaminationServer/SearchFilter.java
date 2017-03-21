@@ -19,7 +19,7 @@ import medview.datahandling.examination.NoSuchExaminationException;
  * Class that helps in filtering when searching in the database
  */
 public class SearchFilter {
-	private String value;
+	private List<String> values;
 	private List<String> terms;
 	private int ageLower;
 	private int ageUpper;
@@ -29,8 +29,8 @@ public class SearchFilter {
 	public SearchFilter(){
 	}
 	
-	public SearchFilter(String value, List<String> terms, String ageLower, String ageUpper){
-		setValue(value);
+	public SearchFilter(List<String> values, List<String> terms, String ageLower, String ageUpper){
+		setValues(values);
 		setTerms(terms);
 		if(ageLower != null){
 			this.ageLower = Integer.parseInt(ageLower);
@@ -40,11 +40,11 @@ public class SearchFilter {
 		}
 		
 	}
-	public String getValue() {
-		return value;
+	public List<String> getValues() {
+		return values;
 	}
-	public void setValue(String value) {
-		this.value = value;
+	public void setValues(List<String> values) {
+		this.values = values;
 	}
 	public void addTerm(String term){
 		terms.add(term);
@@ -80,9 +80,12 @@ public class SearchFilter {
 		this.searchURL = searchURL;
 	}
 	
-	public Boolean filterSatisfied(ExaminationIdentifier eid){
+//	public Boolean filterSatisfied
+	
+	public Boolean valueSatisfied(ExaminationIdentifier eid){
 		MedViewDataHandler handler = MedViewDataHandler.instance();
 		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
+		
 		try {
 			ExaminationValueContainer evc = handler.getExaminationValueContainer(eid);
 			if(terms.isEmpty()){

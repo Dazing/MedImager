@@ -106,7 +106,7 @@ public class SearchTermParser {
         try {
             for (PatientIdentifier pid : handler.getPatients()) {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
-                	if(filter.filterSatisfied(eid)){
+                	if(filter.valueSatisfied(eid)){
                 		Examination examination = new Examination();
                 		examination.setAge(handler.getAge(pid, eid.getTime()));
                         List<String> imagePaths = new ArrayList<String>();
