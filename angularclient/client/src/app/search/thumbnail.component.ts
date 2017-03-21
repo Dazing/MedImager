@@ -19,7 +19,10 @@ export class ThumbnailComponent implements OnInit {
 		console.log(a);
 		
 
-		this.searchService.images.subscribe();
+		this.searchService.images.subscribe(images => {
+			this.searchresults = images;
+
+		})
 	}
 
 	myClick():void{
