@@ -1,0 +1,57 @@
+package com.MedImager.ExaminationServer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import medview.datahandling.NoSuchTermException;
+import medview.datahandling.examination.ExaminationIdentifier;
+import medview.datahandling.examination.ExaminationValueContainer;
+import medview.datahandling.examination.MVDHandler;
+import medview.datahandling.examination.NoSuchExaminationException;
+import medview.datahandling.images.ExaminationImage;
+
+public class ExaminationBuilder {
+	Examination ex;
+	
+	public ExaminationBuilder(){
+		Examination ex = new Examination();
+	}
+	
+	public Examination getExamination(ExaminationIdentifier eid){
+		MVDHandler handler = new MVDHandler();
+		try {
+			ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
+			try {
+				ex.setAllergy(container.getValues("Allergy"));
+				ex.setBiopsySite(container.getValues("Biopsy-site"));
+				ex.setDiagDef(container.getValues("Diag-def"));
+				ex.setDiagHist(container.getValues("Diag-hist"));
+				ex.setDiagTent(container.getValues("Diag-tent"));
+				ex.setDisNow(container.getValues("Dis-now"));
+				ex.setDisPast(container.getValues("Dis-past"));
+				ex.setDrug(container.getValues("Drug"));
+				ex.setFactorNeg(container.getValues("Factor-neg"));
+				ex.setFactorPos(container.getValues("Factor-pos"));
+				ex.setFamily(container.getValues("Family"));
+				ex.setGender(container.getValues("Gender"));
+                List<String> imagePaths = new ArrayList<String>();
+				for(ExaminationImage img :handler.getImages(eid)){
+                	imagePaths.add(img.getFile().toString());
+                };
+			} catch (NoSuchTermException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchExaminationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ex;
+	}
+}

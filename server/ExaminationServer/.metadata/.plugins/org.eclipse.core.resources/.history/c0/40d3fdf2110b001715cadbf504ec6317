@@ -1,0 +1,225 @@
+package com.MedImager.ExaminationServer;
+
+import java.util.List;
+
+import medview.datahandling.images.ExaminationImage;
+
+/**
+ * Created by marcus on 2017-02-10.
+ */
+public class Examination {
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getAllergy() {
+		return allergy;
+	}
+
+	public void setAllergy(String[] strings) {
+		this.allergy = strings;
+	}
+
+	public String getBiopsySite() {
+		return biopsySite;
+	}
+
+	public void setBiopsySite(String biopsySite) {
+		this.biopsySite = biopsySite;
+	}
+
+	public String getDiagDef() {
+		return diagDef;
+	}
+
+	public void setDiagDef(String diagDef) {
+		this.diagDef = diagDef;
+	}
+
+	public String getDiagHist() {
+		return diagHist;
+	}
+
+	public void setDiagHist(String diagHist) {
+		this.diagHist = diagHist;
+	}
+
+	public String getDiagTent() {
+		return diagTent;
+	}
+
+	public void setDiagTent(String diagTent) {
+		this.diagTent = diagTent;
+	}
+
+	public String getDisNow() {
+		return disNow;
+	}
+
+	public void setDisNow(String disNow) {
+		this.disNow = disNow;
+	}
+
+	public String getDisPast() {
+		return disPast;
+	}
+
+	public void setDisPast(String disPast) {
+		this.disPast = disPast;
+	}
+
+	public String getDrug() {
+		return drug;
+	}
+
+	public void setDrug(String drug) {
+		this.drug = drug;
+	}
+
+	public String getFactorNeg() {
+		return factorNeg;
+	}
+
+	public void setFactorNeg(String factorNeg) {
+		this.factorNeg = factorNeg;
+	}
+
+	public String getFactorPos() {
+		return factorPos;
+	}
+
+	public void setFactorPos(String factorPos) {
+		this.factorPos = factorPos;
+	}
+
+	public String getFamily() {
+		return family;
+	}
+
+	public void setFamily(String family) {
+		this.family = family;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getLesnOn() {
+		return lesnOn;
+	}
+
+	public void setLesnOn(String lesnOn) {
+		this.lesnOn = lesnOn;
+	}
+
+	public String getLesnSite() {
+		return lesnSite;
+	}
+
+	public void setLesnSite(String lesnSite) {
+		this.lesnSite = lesnSite;
+	}
+
+	public String getSkinPbl() {
+		return skinPbl;
+	}
+
+	public void setSkinPbl(String skinPbl) {
+		this.skinPbl = skinPbl;
+	}
+
+	public String getSmoke() {
+		return smoke;
+	}
+
+	public void setSmoke(String smoke) {
+		this.smoke = smoke;
+	}
+
+	public String getSnuff() {
+		return snuff;
+	}
+
+	public void setSnuff(String snuff) {
+		this.snuff = snuff;
+	}
+
+	public String getSymptNow() {
+		return symptNow;
+	}
+
+	public void setSymptNow(String symptNow) {
+		this.symptNow = symptNow;
+	}
+
+	public String getSymptSite() {
+		return symptSite;
+	}
+
+	public void setSymptSite(String symptSite) {
+		this.symptSite = symptSite;
+	}
+
+	public String getTreatType() {
+		return treatType;
+	}
+
+	public void setTreatType(String treatType) {
+		this.treatType = treatType;
+	}
+
+	public String getVasNow() {
+		return vasNow;
+	}
+
+	public void setVasNow(String vasNow) {
+		this.vasNow = vasNow;
+	}
+
+	public List<String> getImagePaths() {
+		return imagePaths;
+	}
+
+	public void setImagePaths(List<String> imagePaths) {
+		this.imagePaths = imagePaths;
+	}
+
+	private int age;		// range
+	private String[] allergy;	// inte söka
+	private String[] biopsySite;	// inte söka
+	private String[] diagDef;	// SÖKORD
+	private String[] diagHist; // eventuell SÖK
+	private String[] diagTent; // eventuell SÖK
+	private String[] disNow;	// SÖKORD
+	private String[] disPast;	// eventuell SÖK
+	private String[] drug;	// eventuell SÖK
+	private String[] factorNeg;	// inte sök
+	private String[] factorPos;	// inte sök
+	private String[] family;		// inte sök
+	private String[] gender;		// checkbox
+	private String[] lesnOn;		// fråga
+	private String[] lesnSite;	// fråga
+	private String[] skinPbl;		// inte sök
+	private String[] smoke;		// checkbox
+	private String[] snuff;		// checkbox
+	private String[] symptNow;	// SÖKORD
+	private String[] symptSite;	// SÖKORD
+	private String[] treatType;	// checklista - hämta alternativ vid init
+	private String[] vasNow;		// range
+	private List<String[]> imagePaths;
+
+    public Examination(){}
+    
+
+
+	
+	
+}

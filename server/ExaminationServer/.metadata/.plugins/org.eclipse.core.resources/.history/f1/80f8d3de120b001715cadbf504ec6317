@@ -1,0 +1,33 @@
+package com.MedImager.ExaminationServer;
+
+import java.io.IOException;
+
+import medview.datahandling.examination.ExaminationIdentifier;
+import medview.datahandling.examination.ExaminationValueContainer;
+import medview.datahandling.examination.MVDHandler;
+import medview.datahandling.examination.NoSuchExaminationException;
+
+public class ExaminationBuilder {
+	Examination ex;
+	
+	public ExaminationBuilder(){
+		Examination ex = new Examination();
+	}
+	
+	public Examination getExamination(ExaminationIdentifier eid){
+		MVDHandler handler = new MVDHandler();
+		try {
+			ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
+			ex.setAllergy(container.getValues("Allergy"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchExaminationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return ex;
+	}
+}

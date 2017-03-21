@@ -1,0 +1,76 @@
+package com.MedImager.ExaminationServer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import medview.datahandling.MedViewDataHandler;
+import medview.datahandling.NoSuchTermException;
+import medview.datahandling.examination.ExaminationIdentifier;
+import medview.datahandling.examination.ExaminationValueContainer;
+import medview.datahandling.examination.MVDHandler;
+import medview.datahandling.examination.NoSuchExaminationException;
+import medview.datahandling.images.ExaminationImage;
+import misc.foundation.MethodNotSupportedException;
+
+public class ExaminationBuilder {
+	Examination ex;
+    MedViewDataHandler handler;
+    
+	public ExaminationBuilder(){
+	}
+	
+	public Examination getExamination(ExaminationIdentifier eid){
+        handler = MedViewDataHandler.instance();
+        handler.setExaminationDataLocation("TestData.mvd");
+		Examination ex = new Examination();
+		try {
+			ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
+			try {
+				
+				//ex.setAge(container.getValues("Age"));
+				ex.setAllergy(container.getValues("Allergy"));
+				//ex.setBiopsySite(container.getValues("Biopsy-site"));
+				ex.setDiagDef(container.getValues("Diag-def"));
+				//ex.setDiagHist(container.getValues("Diag-hist"));
+				//ex.setDiagTent(container.getValues("Diag-tent"));
+				ex.setDisNow(container.getValues("Dis-now"));
+				ex.setDisPast(container.getValues("Dis-past"));
+				ex.setDrug(container.getValues("Drug"));
+				//ex.setFactorNeg(container.getValues("Factor-neg"));
+				//ex.setFactorPos(container.getValues("Factor-pos"));
+				ex.setFamily(container.getValues("Family"));
+				//ex.setGender(container.getValues("Gender"));
+				ex.setLesnOn(container.getValues("Lesn-on"));
+				//ex.setLesnSite(container.getValues("Lesn-site"));
+				ex.setSkinPbl(container.getValues("Skin-pbl"));
+				ex.setSmoke(container.getValues("Smoke"));
+				ex.setSnuff(container.getValues("Snuff"));
+				//ex.setSymptNow(container.getValues("Sympt-now"));
+				//ex.setSymptSite(container.getValues("Sympt-site"));
+				ex.setTreatType(container.getValues("Treat-type"));
+				//ex.setVasNow(container.getValues("Vas-now"));
+                List<String> imagePaths = new ArrayList<String>();
+
+				for(ExaminationImage img :handler.getImages(eid)){
+                	try {
+						imagePaths.add(img.getFile().toString());
+					} catch (MethodNotSupportedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                };
+                ex.setLength(handler.getImages(eid).length);
+                ex.setImagePaths(imagePaths);
+                ex.setExaminationID(eid.getExaminationIDString());
+			} catch (NoSuchTermException e) {
+				// TODO Auto-generated catch block
+			}
+			
+		} catch (IOException e) {
+		} catch (NoSuchExaminationException e) {
+		}
+		
+		return ex;
+	}
+}
