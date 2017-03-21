@@ -80,9 +80,16 @@ public class SearchFilter {
 		this.searchURL = searchURL;
 	}
 	
-//	public Boolean filterSatisfied
+	public Boolean filterSatisfied(ExaminationIdentifier eid){
+		for(String value : values){
+			if(!valueSatisfied(value, eid)){
+				return false;
+			}
+		}
+		return true;
+	}
 	
-	public Boolean valueSatisfied(ExaminationIdentifier eid){
+	public Boolean valueSatisfied(String value, ExaminationIdentifier eid){
 		MedViewDataHandler handler = MedViewDataHandler.instance();
 		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
 		

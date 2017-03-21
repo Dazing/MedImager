@@ -42,11 +42,11 @@ public class MyResource {
 		return search.getResultListWithFilter();
     }
 	
-	@GET
-	@Path("/patient/{examinationID")
-    @Produces(MediaType.APPLICATION_JSON)
-	public List <Examination> getPatientJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException{
-		
-		return null;
-	}
+//	@GET
+//	@Path("/patient/{examinationID")
+//    @Produces(MediaType.APPLICATION_JSON)
+//	public List <Examination> getPatientJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException{
+//		
+//		return null;
+//	}
 }

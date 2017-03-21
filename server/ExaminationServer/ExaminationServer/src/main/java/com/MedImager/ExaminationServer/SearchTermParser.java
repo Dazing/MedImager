@@ -70,15 +70,8 @@ public class SearchTermParser {
                         for (String s : container.getValues("Allergy")) {
                             allTerms.add(s);
                             if(term.equals(s)){
-                            	Examination examination = new Examination();
-                                examination.setAge(handler.getAge(pid, eid.getTime()));
-                                examination.setAllergy(s);
-                                List<String> imagePaths = new ArrayList<String>();
-                                for(ExaminationImage img :handler.getImages(eid)){
-                                	imagePaths.add(img.getFile().toString());
-                                };
-                                examination.setImagePaths(imagePaths);
-                                resultList.add(examination);
+                        		ExaminationBuilder ex = new ExaminationBuilder();
+                        		resultList.add(ex.getExamination(eid));
                             }
                         }
                     } catch (NoSuchTermException e) {
@@ -86,8 +79,6 @@ public class SearchTermParser {
                 }
             }
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InvalidPIDException e) {
                 e.printStackTrace();
             } catch (NoSuchExaminationException e) {
                 e.printStackTrace();
@@ -106,19 +97,13 @@ public class SearchTermParser {
         try {
             for (PatientIdentifier pid : handler.getPatients()) {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
-                	if(filter.valueSatisfied(eid)){
-                		Examination examination = new Examination();
-                		examination.setAge(handler.getAge(pid, eid.getTime()));
-                        List<String> imagePaths = new ArrayList<String>();
-                        for(ExaminationImage img :handler.getImages(eid)){
-                        	imagePaths.add(img.getFile().toString());
-                        };
-                        examination.setImagePaths(imagePaths);
-                        resultList.add(examination);
+                	if(filter.filterSatisfied(eid)){
+                		ExaminationBuilder ex = new ExaminationBuilder();
+                		resultList.add(ex.getExamination(eid));
                 	}
                 }
             }
-        } catch (IOException | InvalidPIDException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return resultList;
