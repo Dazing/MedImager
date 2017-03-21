@@ -1,5 +1,6 @@
 package com.MedImager.ExaminationServer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +14,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.eclipse.jdt.internal.compiler.lookup.ReductionResult;
-
+import medview.datahandling.examination.NoSuchExaminationException;
 import misc.foundation.MethodNotSupportedException;
 
 /**
@@ -22,14 +22,6 @@ import misc.foundation.MethodNotSupportedException;
  */
 @Path("api")
 public class MyResource {
-	@GET
-	@Path("{searchTerm}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List <Examination> getJSONResult(@PathParam("searchTerm") String searchURL) throws MethodNotSupportedException{
-		SearchFilter filter = SearchParser.createSearchFilter(searchURL);
-		SearchTermParser search = new SearchTermParser(filter);
-		return search.getResultList();
-    }
 	
 	@GET
 	@Path("/test")
@@ -41,12 +33,28 @@ public class MyResource {
 		SearchTermParser search = new SearchTermParser(new SearchFilter(values, terms, ageLower, ageUpper));
 		return search.getResultListWithFilter();
     }
+
+	@GET
+	@Path("/patient/{examinationID}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public List<Examination> getPatientJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException, IOException{
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		return eidParser.getMoreFromPatient(examinationID);
+	}
+
+	@GET
+	@Path("/examination/{examinationID}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public Examination getExaminationJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException, IOException{
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		return eidParser.getMoreFromExamination(examinationID);
+	}
 	
-//	@GET
-//	@Path("/patient/{examinationID")
-//    @Produces(MediaType.APPLICATION_JSON)
-//	public List <Examination> getPatientJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException{
-//		
-//		return null;
-//	}
+	@GET
+	@Path("/initValues")
+    @Produces(MediaType.APPLICATION_JSON)
+	public InitValues getTreatTypesJSON() throws IOException, NoSuchExaminationException{
+		ServerInitializer init = new ServerInitializer();
+		return init.initialize();
+	}
 }

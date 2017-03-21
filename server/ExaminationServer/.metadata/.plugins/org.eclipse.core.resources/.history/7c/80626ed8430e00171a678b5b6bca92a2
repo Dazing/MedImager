@@ -1,0 +1,17 @@
+package com.MedImager.ExaminationServer;
+
+import java.util.List;
+
+public class TreatTypes {
+	
+	public List<String> getTreatTypes() {
+		return treatTypes;
+	}
+	public void setTreatTypes(List<String> treatTypes) {
+		this.treatTypes = treatTypes;
+	}
+	List<String> treatTypes;
+	public TreatTypes(List<String> treatTypes){
+		this.treatTypes = treatTypes;
+	}
+}
