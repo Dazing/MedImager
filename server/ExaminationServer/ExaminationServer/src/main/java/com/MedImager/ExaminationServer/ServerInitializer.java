@@ -2,6 +2,7 @@ package com.MedImager.ExaminationServer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,16 +54,18 @@ public class ServerInitializer {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
                     ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
                     for(String term : container.getTermsWithValues()){
-                        try{
-                            for(String value : container.getValues(term)){
-                                if(result.containsKey(value)){
-                                    result.put(value, result.get(value) + 1);
-                                } else{
-                                    result.put(value, 1);
-                                }
-                            }
-                        } catch(NoSuchTermException e){
-                        }
+                    	if(Arrays.asList(Constants.relevantTerms).contains(term)){
+	                        try{
+	                            for(String value : container.getValues(term)){
+	                                if(result.containsKey(value)){
+	                                    result.put(value, result.get(value) + 1);
+	                                } else{
+	                                    result.put(value, 1);
+	                                }
+	                            }
+	                        } catch(NoSuchTermException e){
+	                        }
+                    	}
                     }
                 }
             }
