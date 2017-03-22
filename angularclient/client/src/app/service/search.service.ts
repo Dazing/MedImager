@@ -1,13 +1,15 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http }       from '@angular/http';
+import { Headers, Http } from '@angular/http';
 import { Observable } from 'rxjs';
-import {Subject} from 'rxjs/Subject';
+import { Subject} from 'rxjs/Subject';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-import { Image } from './image';
+import { Image } from '../model/image';
+
+import { Server } from '../model/server';
 
 
 
@@ -23,9 +25,21 @@ export class SearchService{
 	}
 
 
-	getSearch(query:string): void {
+	getSearch(query:JSON): void {
+		var str = "";
+
+		for (var key in query) {
+			if (query.hasOwnProperty(key) && query[key].toString() != "") {
+				str += "&"+key.toString()+"="+query[key].toString();
+			}
+		}
+		if (str.charAt(0) === "&"){
+			str = str.substr(1);
+		}	
+
+		var url = ('http://localhost:8080/api/search?'+str);
+		console.log("Q: "+str);
 		
-		var url = ('http://localhost:3000/api/search?query='+query.toString());
 		this.http.get(url)
 			.toPromise()
 			.then(response => {
@@ -34,6 +48,7 @@ export class SearchService{
 				console.log(this.images);
 			})
 			.catch(this.handleError);
+
 	}
 	getImage(): Image {
 		return new Image();

@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 
-import { SearchService } from '../search/search.service';
+import { SearchService } from '../service/search.service';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
 	selector: 'top-menu',
-	templateUrl: './topmenu.component.html',
+	templateUrl: '../template/topmenu.component.html',
   	providers: [FormBuilder]
 })
 export class TopMenuComponent {
@@ -35,7 +35,7 @@ export class TopMenuComponent {
 				this.router.navigate(['/search', { query: data }]);
 			}
 
-			this.searchService.getSearch(JSON.stringify(data));
+			this.searchService.getSearch(data);
 		})
 	}
 

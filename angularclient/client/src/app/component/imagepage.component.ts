@@ -13,7 +13,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
 	selector: 'imagepage',
-	templateUrl: './imagepage.component.html'
+	templateUrl: '../template/imagepage.component.html'
 })
 export class ImagePageComponent {
 	private collectionsMenuVisible = false;
