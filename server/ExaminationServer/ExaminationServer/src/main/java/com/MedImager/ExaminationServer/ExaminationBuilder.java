@@ -90,9 +90,10 @@ public class ExaminationBuilder {
 				ex.setFamily(noVal);	
 			}
 			try {
-				ex.setGender(container.getValues("Gender"));
-			} catch (NoSuchTermException e) {
-				ex.setGender(noVal);	
+				String [] gender = {Integer.toString(handler.getGender(eid.getPID()))};
+				ex.setGender(gender);
+			} catch (InvalidPIDException e) {
+				ex.setGender(noVal);
 			}
 			try {
 				ex.setLesnOn(container.getValues("Lesn-on"));
