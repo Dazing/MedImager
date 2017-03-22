@@ -282,9 +282,11 @@
 
 .collections-menu {
   margin-top: 69px;
-  z-index: 50;
   transition: margin 0.4s;
   transition: width 0.4s; }
+
+.collections-menu-hidden {
+  width: 0; }
 
 .collections-menu-margin {
   margin-left: 300px; }
@@ -312,8 +314,7 @@
 
 #page-wrapper {
   margin-top: 64px;
-  z-index: 51;
-  position: relative;
+  height: 100%;
   background-color: #ffffff;
   transition: margin 0.4s; }
 

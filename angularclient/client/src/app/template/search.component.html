@@ -39,7 +39,7 @@
 
 <top-menu></top-menu>
 
-<collections-menu *ngIf="collectionsMenuVisible">
+<collections-menu *ngIf="collectionsMenuVisible" [ngClass]="{'collections-menu-hidden': collectionsMenuVisible}">
 
 
 </collections-menu>
