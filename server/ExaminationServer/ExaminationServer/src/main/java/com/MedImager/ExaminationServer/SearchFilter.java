@@ -23,13 +23,39 @@ public class SearchFilter {
 	private List<String> terms;
 	private int ageLower;
 	private int ageUpper;
-	private Boolean smokes;
+	private String gender;
+	private Boolean smoke;
+	private Boolean snuff;
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Boolean getSmoke() {
+		return smoke;
+	}
+
+	public void setSmoke(Boolean smoke) {
+		this.smoke = smoke;
+	}
+
+	public Boolean getSnuff() {
+		return snuff;
+	}
+
+	public void setSnuff(Boolean snuff) {
+		this.snuff = snuff;
+	}
+
 	private String searchURL;
 	
 	public SearchFilter(){
 	}
 	
-	public SearchFilter(List<String> values, List<String> terms, String ageLower, String ageUpper){
+	public SearchFilter(List<String> values, List<String> terms, String ageLower, String ageUpper, String gender, Boolean smoke, Boolean snuff){
 		setValues(values);
 		setTerms(terms);
 		if(ageLower != null){
@@ -38,7 +64,12 @@ public class SearchFilter {
 		if(ageUpper != null){
 			this.ageUpper = Integer.parseInt(ageUpper);
 		}
-		
+		if(smoke != null){
+			this.smoke = smoke;
+		}
+		if(snuff != null){
+			this.snuff = snuff;
+		}
 	}
 	public List<String> getValues() {
 		return values;
@@ -67,12 +98,6 @@ public class SearchFilter {
 	public void setAgeUpper(int ageUpper) {
 		this.ageUpper = ageUpper;
 	}
-	public Boolean isSmokes() {
-		return smokes;
-	}
-	public void setSmokes(Boolean smokes) {
-		this.smokes = smokes;
-	}
 	public String getSearchURL() {
 		return searchURL;
 	}
@@ -100,7 +125,31 @@ public class SearchFilter {
 			if(ageUpper > 0 && handler.getAge(eid.getPID(), eid.getTime()) > ageUpper){
 				return false;
 			}
+			
 			ExaminationValueContainer evc = handler.getExaminationValueContainer(eid);
+			
+			/*
+			 * Gender implementation is preliminary, wait for real database before deploying
+			 */
+//			if(gender.equals("Female") && !Arrays.asList(evc.getValues("Sex")).contains("Female") ||
+//					gender.equals("Male") && !Arrays.asList(evc.getValues("Sex")).contains("Male")){
+//				return false;
+//			}
+			
+			if(smoke != null && Arrays.asList(evc.getTermsWithValues()).contains("Smoke")){
+				if(smoke == true && Arrays.asList(evc.getValues("Smoke")).contains("Nej") ||
+						smoke == false && !Arrays.asList(evc.getValues("Smoke")).contains("Nej")){
+					return false;
+				}
+			}
+			
+			if(snuff != null && Arrays.asList(evc.getTermsWithValues()).contains("Snuff")){
+				if(snuff == true && Arrays.asList(evc.getValues("Snuff")).contains("Nej") ||
+						snuff == false && !Arrays.asList(evc.getValues("Snuff")).contains("Nej")){
+					return false;
+				}
+			}
+			
 			
 			boolean valueInExamination = false;
 			
@@ -199,16 +248,16 @@ public class SearchFilter {
 			 * Check for what the user specified about smoking and compare it to
 			 * what information the examination has about smoking
 			 */
-			if(smokes == null){
-				return true;
-			}else{
-				if(!Arrays.asList(evc.getTermsWithValues()).contains("Smoke")){
-					return false;
-				}else{
-					return (Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == false) ||
-					(!Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == true);
-				}
-			}
+//			if(smokes == null){
+//				return true;
+//			}else{
+//				if(!Arrays.asList(evc.getTermsWithValues()).contains("Smoke")){
+//					return false;
+//				}else{
+//					return (Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == false) ||
+//					(!Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == true);
+//				}
+//			}
 		} catch (IOException | NoSuchExaminationException | NoSuchTermException | InvalidPIDException e) {
 			e.printStackTrace();
 		}
