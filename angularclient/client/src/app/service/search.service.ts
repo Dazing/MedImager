@@ -7,7 +7,9 @@ import { Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-import { Image } from '../image';
+import { Image } from '../model/image';
+
+import { Server } from '../model/server';
 
 
 
