@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
-import { SearchService } from './search.service';
+import { SearchService } from '../service/search.service';
 
 @Component({
 	selector: 'thumbnail',
-	templateUrl: './thumbnail.component.html'
+	templateUrl: '../template/thumbnail.component.html'
 })
 export class ThumbnailComponent implements OnInit {
 

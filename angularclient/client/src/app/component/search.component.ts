@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 import { Image } from './image';
 
-import { SearchService } from './search.service';
+import { SearchService } from '../service/search.service';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -16,7 +16,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
 	selector: 'search',
-	templateUrl: './search.component.html',
+	templateUrl: '../template/search.component.html',
 	providers: []
 })
 export class SearchComponent {

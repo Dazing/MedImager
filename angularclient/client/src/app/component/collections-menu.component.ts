@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'collections-menu',
-  templateUrl: './collections-menu.component.html'
+  templateUrl: '../template/collections-menu.component.html'
 })
 
 export class CollectionsMenuComponent {
