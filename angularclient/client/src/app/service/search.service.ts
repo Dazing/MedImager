@@ -37,7 +37,7 @@ export class SearchService{
 			str = str.substr(1);
 		}	
 
-		var url = ('http://localhost:3000/ExaminationServer/examData/api/search?'+str);
+		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
 		console.log("Q: "+str);
 		
 		this.http.get(url)
