@@ -24,7 +24,7 @@ import misc.foundation.MethodNotSupportedException;
 public class MyResource {
 	
 	@GET
-	@Path("/search")
+	@Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
     public List <Examination> testGet(@QueryParam("Value") List<String> values,
     										 @QueryParam("Term") List<String> terms,

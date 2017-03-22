@@ -29,9 +29,10 @@ public class ExaminationBuilder {
 		try {
 			ExaminationValueContainer container = handler.getExaminationValueContainer(eid);
 			try {
-				String[] ageStringArr = {Integer.toString(handler.getAge(eid.getPID(), eid.getTime()))};
-				ex.setAge(ageStringArr);
-			} catch (InvalidPIDException e) {
+				//String[] ageStringArr = {Integer.toString(handler.getAge(eid.getPID(), eid.getTime()))};
+				//ex.setAge(ageStringArr);
+				ex.setAge(container.getValues("Age"));
+			} catch (NoSuchTermException e) {
 				ex.setAge(noVal);
 			}
 			try {

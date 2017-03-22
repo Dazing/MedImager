@@ -24,11 +24,11 @@ import misc.foundation.MethodNotSupportedException;
 public class MyResource {
 	
 	@GET
-	@Path("/search")
+	@Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
     public List <Examination> testGet(@QueryParam("Value") List<String> values,
     										 @QueryParam("Term") List<String> terms,
-    										 @QueryParam(" ") String ageLower,
+    										 @QueryParam("AgeLower") String ageLower,
     										 @QueryParam("AgeUpper") String ageUpper) throws MethodNotSupportedException{
 		SearchTermParser search = new SearchTermParser(new SearchFilter(values, terms, ageLower, ageUpper));
 		return search.getResultListWithFilter();

@@ -32,7 +32,7 @@ public class ExaminationBuilder {
 				String[] ageStringArr = {Integer.toString(handler.getAge(eid.getPID(), eid.getTime()))};
 				ex.setAge(ageStringArr);
 			} catch (InvalidPIDException e) {
-				ex.setAge(noVal);
+				ex.setDisPast(noVal);
 			}
 			try {
 				ex.setAllergy(container.getValues("Allergy"));
