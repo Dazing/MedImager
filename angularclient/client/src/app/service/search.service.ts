@@ -27,12 +27,15 @@ export class SearchService{
 		var str = "";
 
 		for (var key in query) {
-			if (query.hasOwnProperty(key)) {
-				str += key.toString()+"="+query[key].toString();
+			if (query.hasOwnProperty(key) && query[key].toString() != "") {
+				str += "&"+key.toString()+"="+query[key].toString();
 			}
 		}
+		if (str.charAt(0) === "&"){
+			str = str.substr(1);
+		}	
 
-		var url = ('http://localhost:3000/api/search?query='+query.toString());
+		var url = ('http://localhost:3000/api/search?'+str);
 		console.log("Q: "+str);
 		
 		this.http.get(url)
