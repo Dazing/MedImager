@@ -26,6 +26,7 @@ public class SearchFilter {
 	private String gender;
 	private Boolean smoke;
 	private Boolean snuff;
+	
 	public String getGender() {
 		return gender;
 	}
