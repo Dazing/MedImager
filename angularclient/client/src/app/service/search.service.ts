@@ -1,13 +1,13 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http }       from '@angular/http';
+import { Headers, Http } from '@angular/http';
 import { Observable } from 'rxjs';
-import {Subject} from 'rxjs/Subject';
+import { Subject} from 'rxjs/Subject';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
-import { Image } from './image';
+import { Image } from '../image';
 
 
 
@@ -24,15 +24,16 @@ export class SearchService{
 
 
 	getSearch(query:JSON): void {
-		
+		var str = "";
+
 		for (var key in query) {
 			if (query.hasOwnProperty(key)) {
-				console.log(key + " -> " + query[key]);
+				str += key.toString()+"="+query[key].toString();
 			}
 		}
 
 		var url = ('http://localhost:3000/api/search?query='+query.toString());
-		console.log("Q: "+query.toString());
+		console.log("Q: "+str);
 		
 		this.http.get(url)
 			.toPromise()

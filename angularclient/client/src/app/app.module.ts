@@ -5,18 +5,18 @@ import { HttpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { TopMenuComponent } from './menu/topmenu.component';
-import { FooterComponent } from './other/footer.component';
-import { SearchComponent } from './search/search.component';
-import { ThumbnailComponent } from './search/thumbnail.component';
-import { ImagePageComponent } from './image/imagepage.component';
-import { CollectionsMenuComponent } from './search/collections-menu.component';
+import { LoginComponent } from './component/login.component';
+import { TopMenuComponent } from './component/topmenu.component';
+import { FooterComponent } from './component/footer.component';
+import { SearchComponent } from './component/search.component';
+import { ThumbnailComponent } from './component/thumbnail.component';
+import { ImagePageComponent } from './component/imagepage.component';
+import { CollectionsMenuComponent } from './component/collections-menu.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { SearchService } from './search/search.service';
+import { SearchService } from './service/search.service';
 
-import { DraggableImageDirective } from './search/draggableImage.directive';
+import { DraggableImageDirective } from './directive/draggableImage.directive';
 
 @NgModule({
 	declarations: [
