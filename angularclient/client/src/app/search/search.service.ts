@@ -23,9 +23,17 @@ export class SearchService{
 	}
 
 
-	getSearch(query:string): void {
+	getSearch(query:JSON): void {
 		
+		for (var key in query) {
+			if (query.hasOwnProperty(key)) {
+				console.log(key + " -> " + query[key]);
+			}
+		}
+
 		var url = ('http://localhost:3000/api/search?query='+query.toString());
+		console.log("Q: "+query.toString());
+		
 		this.http.get(url)
 			.toPromise()
 			.then(response => {
@@ -34,6 +42,7 @@ export class SearchService{
 				console.log(this.images);
 			})
 			.catch(this.handleError);
+
 	}
 	getImage(): Image {
 		return new Image();
