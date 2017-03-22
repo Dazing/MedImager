@@ -35,7 +35,7 @@ export class TopMenuComponent {
 				this.router.navigate(['/search', { query: data }]);
 			}
 
-			this.searchService.getSearch(JSON.stringify(data));
+			this.searchService.getSearch(data);
 		})
 	}
 
