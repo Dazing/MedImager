@@ -12,9 +12,14 @@ import { SearchComponent } from './component/search.component';
 import { ThumbnailComponent } from './component/thumbnail.component';
 import { ImagePageComponent } from './component/imagepage.component';
 import { CollectionsMenuComponent } from './component/collections-menu.component';
+import { NotFound } from './component/not-found.component';
+import { ServerUnreachable } from './component/server-unreachable.component';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { SearchService } from './service/search.service';
+import { UserService } from './service/user.service';
+import { Server } from './model/server'
 
 import { DraggableImageDirective } from './directive/draggableImage.directive';
 
@@ -28,8 +33,9 @@ import { DraggableImageDirective } from './directive/draggableImage.directive';
 		ThumbnailComponent,
 		ImagePageComponent,
 		CollectionsMenuComponent,
-		DraggableImageDirective,
-		
+		NotFound,
+		ServerUnreachable,
+		DraggableImageDirective
 	],
 	imports: [
 		BrowserModule,
@@ -38,11 +44,17 @@ import { DraggableImageDirective } from './directive/draggableImage.directive';
 		AppRoutingModule,
 		ReactiveFormsModule
 	],
-	providers: [SearchService],
+	providers: [SearchService, UserService, Server],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
 
-	constructor(private searchService: SearchService){}
+	constructor(
+		private searchService: SearchService, 
+		private userService: UserService,
+		private server: Server
+	) {
+
+	}
 
 }

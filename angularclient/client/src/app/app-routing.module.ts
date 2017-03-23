@@ -5,16 +5,27 @@ import { LoginComponent }   from './component/login.component';
 import { SearchComponent }   from './component/search.component';
 import { ImagePageComponent }   from './component/imagepage.component';
 
+import { ServerUnreachable } from './component/server-unreachable.component';
+import { NotFound }   from './component/not-found.component';
+
+
+import { UserGuard }   from './guard/user.guard';
+
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login',  component: LoginComponent },
-  { path: 'search',  component: SearchComponent },
-  { path: 'image',  component: ImagePageComponent }
+	{ path: '', redirectTo: '/login', pathMatch: 'full' },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'search', component: SearchComponent },
+	{ path: 'image', component: ImagePageComponent, canActivate: [UserGuard] },
+
+	{ path: 'serverunreachable', component: ServerUnreachable },
+	{ path: '**',  component: NotFound }
+
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+	providers: [UserGuard],
+	imports: [ RouterModule.forRoot(routes) ],
+	exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
 

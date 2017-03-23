@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject} from 'rxjs/Subject';
 
@@ -19,7 +20,7 @@ export class SearchService{
 	images:Observable<string[]>;
 	private privImages: Subject<string[]>;
 
-	constructor(private http: Http) {
+	constructor(private http: Http, private router: Router, ) {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
 	}
@@ -29,7 +30,7 @@ export class SearchService{
 		var str = "";
 
 		for (var key in query) {
-			if (query.hasOwnProperty(key) && query[key].toString() != "") {
+			if (query.hasOwnProperty(key) && query[key] != "") {
 				str += "&"+key.toString()+"="+query[key].toString();
 			}
 		}
@@ -47,7 +48,7 @@ export class SearchService{
 				
 				console.log(this.images);
 			})
-			.catch(this.handleError);
+			.catch(e => this.router.navigate(['/serverunreachable']));
 
 	}
 	getImage(): Image {

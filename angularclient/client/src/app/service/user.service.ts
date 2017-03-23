@@ -16,6 +16,8 @@ import { Server } from '../model/server';
 @Injectable()
 export class UserService {
 
+	private sessionId:string;
+
 	constructor(private http: Http, private server: Server) {
 	}
 
@@ -50,9 +52,23 @@ export class UserService {
 			.catch(this.handleError);
 	}
 
+	isLoggedIn(): boolean {
+		console.log("isLoggedIn");
+
+		if (this.sessionId) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	getSessionId(): string {
+		return this.sessionId;
+	}
+
 	private handleError(error: any): Promise<any> {
 		console.error('An error occurred', error); // for demo purposes only
 		return Promise.reject(error.message || error);
-	}
+	}	
 
 }
