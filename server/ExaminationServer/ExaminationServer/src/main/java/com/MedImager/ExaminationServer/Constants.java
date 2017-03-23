@@ -10,6 +10,6 @@ public class Constants {
 			"Treat-type", "Vas-now"
 			};
 	public static final String[] primaryRelevantTerms = {
-			"Diag-def", "Diag-hist", "Dis-now", "Dis-past", "Sympt-now", "Treat-type"
+			"Diag-def", "Dis-now", "Sympt-now", "Sympt-site"
 			};
 }
