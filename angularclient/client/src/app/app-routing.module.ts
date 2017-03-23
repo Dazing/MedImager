@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent }   from './component/login.component';
 import { SearchComponent }   from './component/search.component';
 import { ImagePageComponent }   from './component/imagepage.component';
+import { CollectionComponent }   from './component/collection.component';
 
 import { ServerUnreachable } from './component/server-unreachable.component';
 import { NotFound }   from './component/not-found.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'search', component: SearchComponent },
 	{ path: 'image', component: ImagePageComponent, canActivate: [UserGuard] },
+	{ path: 'collection', component: CollectionComponent },
 
 	{ path: 'serverunreachable', component: ServerUnreachable },
 	{ path: '**',  component: NotFound }
