@@ -53,12 +53,21 @@
 
 #advanced-bar {
   z-index: -1;
-  background-color: #64ffda;
+  background-color: #ffffff;
   width: 100%;
-  padding: 10px 20px;
+  height: 100px;
   position: fixed;
-  margin-top: -50px;
+  margin-top: -100px;
   transition: margin 0.4s; }
+  #advanced-bar .row {
+    margin: 0; }
+  #advanced-bar .row .col {
+    height: 50px;
+    padding-left: 25px; }
+    #advanced-bar .row .col .smaller-text {
+      font-size: 15px; }
+    #advanced-bar .row .col label {
+      color: #000000; }
   #advanced-bar label {
     font-size: 20px;
     margin-right: 20px; }
