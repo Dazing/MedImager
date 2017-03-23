@@ -3,15 +3,15 @@ function showAdvancedBar()
 {
 	if(advancedBar)
 	{
-		$("#advanced-bar").css("margin-top", "-50px");
+		$("#advanced-bar").css("margin-top", "-100px");
 		$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + "px");
 		$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + "px");
 	}
 	else
 	{
 		$("#advanced-bar").css("margin-top", "0px");
-		$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + 54 + "px");
-		$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + 54 + "px");
+		$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + 104 + "px");
+		$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + 104 + "px");
 	}
 	advancedBar = !advancedBar;
 }

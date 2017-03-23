@@ -23,9 +23,12 @@ export class TopMenuComponent {
 	){
 		this.form = formBuilder.group({
 			searchTerms: '',
-			rokare: '',
-			snusare: '',
-			alder: ''
+			gender: '',
+			smoker: '',
+			snus: '',
+			includeTentative: '',
+			includeHist: '',
+			includeDiseasePast: ''
 		})
 
 		this.form.valueChanges.subscribe(data => {
@@ -37,6 +40,7 @@ export class TopMenuComponent {
 
 			this.searchService.getSearch(data);
 		})
+
 	}
 
 	onEnter(term: string){
