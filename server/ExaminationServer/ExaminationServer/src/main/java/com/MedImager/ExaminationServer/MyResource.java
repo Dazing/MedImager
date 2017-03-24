@@ -62,10 +62,23 @@ public class MyResource {
 		ExaminationIDParser eidParser = new ExaminationIDParser();
 		String path = eidParser.getMoreFromExamination(examinationID).getImagePaths().get(index);
 		File file = new File(path);
-		
 		ResponseBuilder response = Response.ok((Object) file);
 		response.header("Content-Disposition",
-			"attachment; filename=" + examinationID + "-" + index + ".png");
+			"attachment; filename=" + examinationID + "-" + index + ".jpg");
+		return response.build();
+
+	}
+	@GET
+	@Path("/thumbnail/{examinationID}/{index}")
+	@Produces("image/jpg")
+	public Response getThumbnailFile(@PathParam("examinationID") String examinationID, @PathParam("index") int index) throws IOException {
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		String path = eidParser.getMoreFromExamination(examinationID).getImagePaths().get(index);
+		ThumbnailBuilder thumbBuilder = new ThumbnailBuilder();
+		File file = thumbBuilder.getThumbnail(path);
+		ResponseBuilder response = Response.ok((Object) file);
+		response.header("Content-Disposition",
+			"attachment; filename=" + examinationID + "-" + index + "-thumb.jpg");
 		return response.build();
 
 	}
