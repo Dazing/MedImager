@@ -107,9 +107,15 @@ public class SearchFilter {
 	}
 	
 	public Boolean filterSatisfied(ExaminationIdentifier eid){
-		for(String value : values){
-			if(!valueSatisfied(value, eid)){
+		if(values.size() == 0){
+			if(!valueSatisfied(null, eid)){
 				return false;
+			}
+		}else{
+			for(String value : values){
+				if(!valueSatisfied(value, eid)){
+					return false;
+				}
 			}
 		}
 		return true;
@@ -142,6 +148,8 @@ public class SearchFilter {
 						smoke == false && !Arrays.asList(evc.getValues("Smoke")).contains("Nej")){
 					return false;
 				}
+			}else if(smoke != null && !Arrays.asList(evc.getTermsWithValues()).contains("Smoke")){
+				return false;
 			}
 			
 			if(snuff != null && Arrays.asList(evc.getTermsWithValues()).contains("Snuff")){
@@ -149,28 +157,23 @@ public class SearchFilter {
 						snuff == false && !Arrays.asList(evc.getValues("Snuff")).contains("Nej")){
 					return false;
 				}
-			}
-			
-			
-			boolean valueInExamination = false;
-			
-			/*
-			 * Search through primary terms for a match
-			 */
-			for(String term : Arrays.asList(Constants.primaryRelevantTerms)){
-				if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
-					List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
-					if(termValues.contains(value)){
-						valueInExamination = true;
-					}
-				}
+			}else if(snuff != null && !Arrays.asList(evc.getTermsWithValues()).contains("Snuff")){
+				return false;
 			}
 			
 			/*
-			 * Search through extra terms (if any) specified by the user
+			 * If no values are passed from the user, only the above checks are relevant for the search.
+			 * That is, if the examination satisifies the user's requirements of age and whether the patient
+			 * smokes and/or snuffs, the examination is deemed eligible to be sent to the user and thus no 
+			 * further action needs to be taken.
 			 */
-			if(valueInExamination == false && !terms.isEmpty()){
-				for(String term : terms){
+			if(values.size() != 0){
+				boolean valueInExamination = false;
+				
+				/*
+				 * Search through primary terms for a match
+				 */
+				for(String term : Arrays.asList(Constants.primaryRelevantTerms)){
 					if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
 						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
 						if(termValues.contains(value)){
@@ -178,11 +181,26 @@ public class SearchFilter {
 						}
 					}
 				}
+				
+				/*
+				 * Search through extra terms (if any) specified by the user
+				 */
+				if(valueInExamination == false && !terms.isEmpty()){
+					for(String term : terms){
+						if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
+							List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
+							if(termValues.contains(value)){
+								valueInExamination = true;
+							}
+						}
+					}
+				}
+				
+				if(valueInExamination == false){
+					return false;
+				}
 			}
 			
-			if(valueInExamination == false){
-				return false;
-			}
 			
 //			/*
 //			 * Check for what the user specified about smoking and compare it to
