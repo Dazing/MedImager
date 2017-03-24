@@ -16,7 +16,7 @@ const routes: Routes = [
 	{ path: '', redirectTo: '/login', pathMatch: 'full' },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'search', component: SearchComponent },
-	{ path: 'image', component: ImagePageComponent, canActivate: [UserGuard] },
+	{ path: 'image', component: ImagePageComponent },
 	{ path: 'collection', component: CollectionComponent },
 
 	{ path: 'serverunreachable', component: ServerUnreachable },
