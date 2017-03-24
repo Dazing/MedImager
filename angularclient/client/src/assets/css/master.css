@@ -418,4 +418,12 @@ a, a:visited {
   box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8);
   z-index: 90; }
 
+.unselectable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+
 /*# sourceMappingURL=master.css.map */
