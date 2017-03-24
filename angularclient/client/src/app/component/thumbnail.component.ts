@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core'
+import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Server } from '../model/server';
 import { SearchService } from '../service/search.service';
 
 @Component({
@@ -9,11 +10,17 @@ import { SearchService } from '../service/search.service';
 export class ThumbnailComponent implements OnInit {
 
 	private searchresults;
+	private url;
 
-	constructor(private searchService: SearchService, public ref: ChangeDetectorRef){}
+	constructor(
+		private searchService: SearchService,
+		public ref: ChangeDetectorRef, 
+		private server: Server
+	){}
 
 	ngOnInit(): void {
 		console.log("Thumbnai init");
+		this.url = this.server.getUrl();
 		
 		var a = this.searchService.images;
 		console.log(a);
@@ -28,5 +35,9 @@ export class ThumbnailComponent implements OnInit {
 	myClick():void{
 		console.log("Hej"+this.searchresults);
 		
+	}
+
+	formatURL(url: any): string {
+		return url.replace(/\\/g,"/");
 	}
 }

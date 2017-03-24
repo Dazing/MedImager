@@ -39,16 +39,29 @@ export class SearchService{
 		}	
 
 		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
-		console.log("Q: "+str);
+		console.log("URL: "+url+"Q: "+str);
 		
 		this.http.get(url)
 			.toPromise()
 			.then(response => {
 				this.privImages.next(response.json());
+				var responsejson = response.json();
 				
-				console.log(this.images);
+				for (var i=0; i<responsejson.length; i++) {
+					for (var j=0; j<responsejson[i].imagePaths.length; j++) {
+						var path = responsejson[i].imagePaths[j];
+						path = path.replace(/\\/g,"/");
+						console.log(path);
+					}
+				}
+
+				console.log("ImagePath[0]: " + JSON.stringify(responsejson[0].imagePaths[0]));
 			})
-			.catch(e => this.router.navigate(['/serverunreachable']));
+			.catch(e => {
+				console.log(e);
+				
+				this.router.navigate(['/serverunreachable']);
+			});
 
 	}
 	getImage(): Image {
