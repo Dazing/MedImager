@@ -107,7 +107,6 @@ function tagsToHiddenInput()
 		var term = termHTML.substr(0, termHTML.indexOf('<')).trim();
 		$(hiddenField).val(term + "," + $(hiddenField).val());
 	}
-	alert($(hiddenField).val());
 }
 
 $("html").click(function(event) {
