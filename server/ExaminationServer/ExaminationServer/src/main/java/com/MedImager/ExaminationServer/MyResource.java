@@ -1,5 +1,6 @@
 package com.MedImager.ExaminationServer;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import medview.datahandling.examination.NoSuchExaminationException;
 import misc.foundation.MethodNotSupportedException;
@@ -52,7 +54,21 @@ public class MyResource {
 		ExaminationIDParser eidParser = new ExaminationIDParser();
 		return eidParser.getMoreFromExamination(examinationID);
 	}
-	
+
+	@GET
+	@Path("/image/{examinationID}/{index}")
+	@Produces("image/jpg")
+	public Response getFile(@PathParam("examinationID") String examinationID, @PathParam("index") int index) throws IOException {
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		String path = eidParser.getMoreFromExamination(examinationID).getImagePaths().get(index);
+		File file = new File(path);
+		
+		ResponseBuilder response = Response.ok((Object) file);
+		response.header("Content-Disposition",
+			"attachment; filename=" + examinationID + "-" + index + ".png");
+		return response.build();
+
+	}
 	@GET
 	@Path("/initValues")
     @Produces(MediaType.APPLICATION_JSON)

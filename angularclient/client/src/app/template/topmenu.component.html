@@ -4,7 +4,7 @@
 			<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
 			<div id="search-wrapper">
 				<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)">
-				<input type="hidden" formControlName="searchTerms">
+				<input type="hidden" name="searchTerms" formControlName="searchTerms">
 				<div id="auto-search-results">Sökresultat</div>
 				<div id="selected-tags"></div>
 			</div>

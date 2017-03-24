@@ -175,9 +175,10 @@ public class SearchFilter {
 				 */
 				for(String term : Arrays.asList(Constants.primaryRelevantTerms)){
 					if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
-						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
-						if(termValues.contains(value)){
-							valueInExamination = true;
+						for(String termValue : evc.getValues(term)){
+							if(termValue.equalsIgnoreCase(value)){
+								valueInExamination = true;
+							}
 						}
 					}
 				}
@@ -188,9 +189,10 @@ public class SearchFilter {
 				if(valueInExamination == false && !terms.isEmpty()){
 					for(String term : terms){
 						if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
-							List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
-							if(termValues.contains(value)){
-								valueInExamination = true;
+							for(String termValue : evc.getValues(term)){
+								if(termValue.equalsIgnoreCase(value)){
+									valueInExamination = true;
+								}
 							}
 						}
 					}

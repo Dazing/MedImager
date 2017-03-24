@@ -89,11 +89,24 @@ function selectTag(selectedTagId)
 	
 	tagObjects[selectedTagId].selected = true;
 	$("#selected-tags").append("<div class='chip'>" + tagObjects[selectedTagId].title + "<i id='tag" + selectedTagId + "' class='removeTag close material-icons'>close</i></div>");
+	tagsToHiddenInput();
 	$("#search-input").val("");
 	$("#auto-search-results").hide();
 	currentAutoSearchPos = null;
 	setPageWrapperHeight();
 	$("#search-input").focus();
+}
+
+function tagsToHiddenInput()
+{
+	var hiddenField = $("[name='searchTerms']");
+	$(hiddenField).val("");
+	for(var i = 0; i < $(".chip").length; i++)
+	{
+		var termHTML = $(".chip").eq(i).html();
+		var term = termHTML.substr(0, termHTML.indexOf('<')).trim();
+		$(hiddenField).val(term + "," + $(hiddenField).val());
+	}
 }
 
 $("html").click(function(event) {
