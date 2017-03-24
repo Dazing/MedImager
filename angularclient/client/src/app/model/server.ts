@@ -1,5 +1,5 @@
 export class Server {
-    private url: string = "http://localhost:3000/api";
+    private url: string = "http://localhost:8080/ExaminationServer/examData/api";
     
 	getUrl(): string  {
 		return this.url;

@@ -47,15 +47,8 @@ export class SearchService{
 				this.privImages.next(response.json());
 				var responsejson = response.json();
 				
-				for (var i=0; i<responsejson.length; i++) {
-					for (var j=0; j<responsejson[i].imagePaths.length; j++) {
-						var path = responsejson[i].imagePaths[j];
-						path = path.replace(/\\/g,"/");
-						console.log(path);
-					}
-				}
 
-				console.log("ImagePath[0]: " + JSON.stringify(responsejson[0].imagePaths[0]));
+				console.log("ImagePath[0]: " + JSON.stringify(responsejson[0].age));
 			})
 			.catch(e => {
 				console.log(e);

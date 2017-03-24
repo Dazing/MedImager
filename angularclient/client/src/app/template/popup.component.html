@@ -1,0 +1,68 @@
+<div id="black-back"></div>
+<div id="popup-image-wrapper">
+	<div id="popup-image-container">
+		<i id="popup-image-previous" class='large material-icons'>keyboard_arrow_left</i>
+		<i id="popup-image-next" class='large material-icons'>keyboard_arrow_right</i>
+		<img id="popup-image">
+	</div>
+	<div id="popup-image-data">
+		<i id="popup-close-button" class='small material-icons'>close</i>
+		<label *ngIf="notNull(popup.age)" >Ålder</label>
+		<p *ngIf="notNull(popup.age)" >{{popup.age}}</p>
+		<label>Instutition</label>
+		<p>Chalmerska oralinstutitionen</p>
+		<label>Fotodatum</label>
+		<p>25 januari 1996</p>
+		<label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p><label>Favoritfilm</label>
+		<p>Lejonkungen</p>
+		<label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
+		<p>Han är ful i munnen.</p>
+
+		<div id="popup-image-data-buttons">
+			<div>Bramarkera</div><a href="image"><div>Permalänk</div></a>
+		</div>
+	</div>
+</div>
+
+<!-- 
+	{
+		"age":["70"],
+		"allergy":["Nej"],
+		"biopsySite":[],
+		"diagDef":["Atrofisk lichen planus"],
+		"diagHist":[],
+		"diagTent":[],
+		"disNow":["Atopiskt eksem"],
+		"disPast":["Nej"],
+		"drug":["Nej"],
+		"examinationID":"980122112626",
+		"factorNeg":["Hård föda"],
+		"factorPos":["Förbättrad munhygien"],
+		"family":["Broder"],
+		"gender":["1"],
+		"imagePaths":[
+			"TestData.mvd\\Pictures\\G0222\\g02223.jpg",
+			"TestData.mvd\\Pictures\\G0222\\g02222.jpg",
+			"TestData.mvd\\Pictures\\G0222\\g02221.jpg"
+		],
+		"lesnOn":[],
+		"lesnSite":[],
+		"skinPbl":["Torr hud","Eksem"],
+		"smoke":["Nej"],
+		"snuff":["Nej"],
+		"symptNow":[],
+		"symptSite":[],
+		"treatType":["Information"],
+		"vasNow":["3.2"]
+	}
+-->

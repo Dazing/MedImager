@@ -1,12 +1,15 @@
-<input id="resultLength" type="hidden" name="resultLength" value="{{searchresults?.length}}">
-<input type="button" (click)="myClick()" value="List">
-
 <template ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
-	<span *ngFor="let imagePath of searchresult.imagePaths" draggableImage id="result-image-{{i}}" [ngStyle]="{'background-image': 'url(' + url+'/'+formatURL(imagePath) + ')'}" data-id="{{i}}">
+	<span *ngFor="let imagePath of searchresult.imagePaths; let j=index" 
+		draggableImage id="result-image-{{i}}" 
+		[ngStyle]="{'background-image': 'url(' + url+'/image/'+searchresult.examinationID +'/' +j + ')'}" 
+		data-id="{{i}}"
+		(click)="onImageClick(i,j)"
+	>
 		<div class="opacity-wrapper">
-			<div class="inner-text"><b>Diagnoser:</b> {{searchResult?.diagDef}}</div>
-			<div class="inner-text"><b>Ålder:</b> 55 år</div>
-			<div class="inner-text"><b>Annan handy info:</b> info info info info info</div>
+			<div *ngIf="searchresults[i].diagDef.length > 0" class="inner-text"><b>Diagnos:</b> {{getDiagDef(i)}}</div>
+			<div *ngIf="searchresults[i].diagTent.length > 0" class="inner-text"><b>Tentativ diagnos:</b> {{getDiagTent(i)}}</div>
+			<div *ngIf="searchresults[i].diagHist.length > 0" class="inner-text"><b>Tidigare diagnos:</b> {{getDiagHist(i)}}</div>
+			<div class="inner-text"><b>Ålder:</b> {{getAge(i)}} år</div>
 		</div>
 	</span>
 </template>
