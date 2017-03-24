@@ -13,7 +13,7 @@ export class ThumbnailComponent implements OnInit {
 	constructor(private searchService: SearchService, public ref: ChangeDetectorRef){}
 
 	ngOnInit(): void {
-		console.log("Thumbnai init");
+		console.log("Thumbnail init");
 		
 		var a = this.searchService.images;
 		console.log(a);
