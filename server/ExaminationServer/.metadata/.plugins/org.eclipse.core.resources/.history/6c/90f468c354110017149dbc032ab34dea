@@ -4,17 +4,21 @@ package com.MedImager.ExaminationServer;
  * Created by marcus on 2017-02-11.
  */
 
+import medview.common.data.MedViewUtilities;
+import medview.datahandling.InvalidPIDException;
 import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
 import medview.datahandling.PatientIdentifier;
 import medview.datahandling.examination.ExaminationIdentifier;
 import medview.datahandling.examination.ExaminationValueContainer;
 import medview.datahandling.examination.NoSuchExaminationException;
+import medview.datahandling.images.ExaminationImage;
 import misc.foundation.MethodNotSupportedException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 

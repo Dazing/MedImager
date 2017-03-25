@@ -1,9 +1,9 @@
-<div id="black-back"></div>
-<div id="popup-image-wrapper">
+<div *ngIf="visible" id="black-back" (click)="hidePopup()"></div>
+<div *ngIf="visible" id="popup-image-wrapper">
 	<div id="popup-image-container">
 		<i id="popup-image-previous" class='large material-icons'>keyboard_arrow_left</i>
 		<i id="popup-image-next" class='large material-icons'>keyboard_arrow_right</i>
-		<img id="popup-image">
+		<img id="popup-image" [src]="getUrl()">
 	</div>
 	<div id="popup-image-data">
 		<i id="popup-close-button" class='small material-icons'>close</i>

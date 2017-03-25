@@ -252,6 +252,7 @@ public class SearchFilter {
 						return false;
 					}else{
 						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
+						String a = termValues.get(0);
 						if(!termValues.contains(value)){
 							return false;
 						}

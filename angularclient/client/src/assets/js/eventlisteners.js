@@ -49,21 +49,21 @@ $(document).ready(function () {
 		);
 	})
 
-	$("#search-results span").on('mouseup', function(event) {
-		var thisId = event.target.id;
-		currentImage = thisId;
-		if(event.which == 2)
-		{
-			event.preventDefault();
-			var newTab = window.open("image?id=" + thisId, '_blank');
-		}
-		else
-		{
-			setPopUpImage();
-			$("#popup-image-wrapper").css("display", "flex");
-			$("#black-back").css("display", "block");
-		}
-	});
+	//$("#search-results span").on('mouseup', function(event) {
+	//	var thisId = event.target.id;
+	//	currentImage = thisId;
+	//	if(event.which == 2)
+	//	{
+	//		event.preventDefault();
+	//		var newTab = window.open("image?id=" + thisId, '_blank');
+	//	}
+	//	else
+	//	{
+	//		setPopUpImage();
+	//		$("#popup-image-wrapper").css("display", "flex");
+	//		$("#black-back").css("display", "block");
+	//	}
+	//});
 
 	$(".opacity-wrapper").click(function(event) {//edit event target to give proper image data to #search-results span : click
 		event.target.id = $(this).parent().attr('id');
@@ -74,9 +74,9 @@ $(document).ready(function () {
 	});
 
 
-	$("#black-back").click(function(event) {
-		closePopUp();
-	});
+	//$("#black-back").click(function(event) { 
+	//	closePopUp();						 ////// moved to angular
+	//});
 	$("#popup-image-container").mouseover(function(event) {
 		$("#popup-image-next").css("opacity", "0.8");
 		$("#popup-image-previous").css("opacity", "0.8");
@@ -119,14 +119,14 @@ $(document).ready(function () {
 	//$(".dnd-target").on("dragover",handleDragOver);
 	//$(".dnd-target").on("drop",handleDrop);
 
-	$(document).keyup(function(e) {
-		if (e.keyCode == 27)
-			closePopUp();
-		else if (e.keyCode == 37)
-			setPopUpImage(currentImage--);
-		else if (e.keyCode == 39)
-			setPopUpImage(currentImage++);
-	});
+	//$(document).keyup(function(e) {
+	//	if (e.keyCode == 27)
+	//		closePopUp();
+	//	else if (e.keyCode == 37)
+	//		setPopUpImage(currentImage--);
+	//	else if (e.keyCode == 39)
+	//		setPopUpImage(currentImage++);
+	//});
 
 	function setPopUpImage()
 	{

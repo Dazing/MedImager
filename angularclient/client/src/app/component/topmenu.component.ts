@@ -25,8 +25,8 @@ export class TopMenuComponent {
 		this.form = formBuilder.group({
 			value: '',
 			gender: '',
-			smoker: '',
-			snus: '',
+			smoke: '',
+			snuff: '',
 			includeTentative: '',
 			includeHist: '',
 			includeDiseasePast: ''

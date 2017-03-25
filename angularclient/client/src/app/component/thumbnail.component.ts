@@ -31,12 +31,23 @@ export class ThumbnailComponent implements OnInit {
 
 		this.searchService.images.subscribe(images => {
 			this.searchresults = images;
+		})
 
+		this.popupService.searchResult.subscribe(searchResult => {
+			if (searchResult.direction > 0) {
+				this.showNextImage(searchResult.examinationIndex, searchResult.imageIndex);
+			}
 		})
 	}
 
+	showNextImage(examinationIndex: number, imageIndex: number): void {
+		if (imageIndex == this.searchresults[examinationIndex].imagePaths.length){
+			
+		}
+	}
+
 	onImageClick(examinationIndex: number, imageIndex: number):void{
-		this.popupService.setPopup(this.searchresults[examinationIndex], imageIndex);
+		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], imageIndex, examinationIndex);
 	}
 
 
