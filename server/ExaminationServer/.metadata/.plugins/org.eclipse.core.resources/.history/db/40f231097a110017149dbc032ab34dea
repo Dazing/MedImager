@@ -94,11 +94,8 @@ public class SearchTermParser {
             for (PatientIdentifier pid : handler.getPatients()) {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
                 	if(filter.filterSatisfied(eid)){
-                		ExaminationBuilder exBuilder = new ExaminationBuilder();
-                		Examination ex = exBuilder.getExamination(eid);
-                		if(ex.getImagePaths().size()!=0){
-                			resultList.add(ex);
-                		}
+                		ExaminationBuilder ex = new ExaminationBuilder();
+                		resultList.add(ex.getExamination(eid));
                 	}
                 }
             }
