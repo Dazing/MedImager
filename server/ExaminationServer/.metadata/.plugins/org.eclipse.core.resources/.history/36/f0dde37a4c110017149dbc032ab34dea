@@ -75,7 +75,7 @@ public class MyResource {
 		ExaminationIDParser eidParser = new ExaminationIDParser();
 		String path = eidParser.getMoreFromExamination(examinationID).getImagePaths().get(index);
 		ThumbnailBuilder thumbBuilder = new ThumbnailBuilder();
-		File file = thumbBuilder.getThumbnail(path, examinationID, index);
+		File file = thumbBuilder.getThumbnail(path);
 		ResponseBuilder response = Response.ok((Object) file);
 		response.header("Content-Disposition",
 			"attachment; filename=" + examinationID + "-" + index + "-thumb.jpg");

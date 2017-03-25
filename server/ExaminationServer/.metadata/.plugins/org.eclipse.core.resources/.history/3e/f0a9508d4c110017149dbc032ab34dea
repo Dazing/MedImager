@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 public class ThumbnailBuilder {
 	public ThumbnailBuilder(){}
-	public File getThumbnail(String path, String examinationID, int index){
+	public File getThumbnail(String path){
 		File thumbnail;
 		BufferedImage originalBufferedImage = null;
 		try {
@@ -50,7 +50,7 @@ public class ThumbnailBuilder {
 		    throw new IllegalArgumentException("Width of new thumbnail is bigger than original image");
 		}
 		BufferedImage thumbnailBufferedImage = resizedImage.getSubimage(x, y, thumbnailWidth, thumbnailHeight);
-		thumbnail = new File(examinationID + "-" + index +"-" + "thumbnail.jpg");
+		thumbnail = new File("thumbnail.jpg");
 		try {
 		    ImageIO.write(thumbnailBufferedImage, "JPG", thumbnail);
 		}
