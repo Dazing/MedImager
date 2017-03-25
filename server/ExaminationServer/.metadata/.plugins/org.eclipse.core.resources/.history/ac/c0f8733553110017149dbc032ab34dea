@@ -173,12 +173,6 @@ public class SearchFilter {
 				/*
 				 * Search through primary terms for a match
 				 */
-				/*
-				 * Changed from equals to contains - so even substrings match
-				 * meaning "astm" and "stma" will match for astma
-				 * Extra-term loop also changed
-				 * - Marcus
-				 */
 				for(String term : Arrays.asList(Constants.primaryRelevantTerms)){
 					if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
 						for(String termValue : evc.getValues(term)){
@@ -196,7 +190,7 @@ public class SearchFilter {
 					for(String term : terms){
 						if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
 							for(String termValue : evc.getValues(term)){
-								if(termValue.toLowerCase().contains(value.toLowerCase())){
+								if(termValue.equalsIgnoreCase(value)){
 									valueInExamination = true;
 								}
 							}
