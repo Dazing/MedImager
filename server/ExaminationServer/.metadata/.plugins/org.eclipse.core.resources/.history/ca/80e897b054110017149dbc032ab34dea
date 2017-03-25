@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Handler;
+
+import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
+
 import medview.datahandling.InvalidPIDException;
 import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
@@ -252,6 +256,8 @@ public class SearchFilter {
 						return false;
 					}else{
 						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
+						int size = termValues.size();
+						String a = termValues.get(0);
 						if(!termValues.contains(value)){
 							return false;
 						}

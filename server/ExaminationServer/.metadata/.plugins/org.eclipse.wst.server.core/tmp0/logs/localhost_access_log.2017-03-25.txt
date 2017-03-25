@@ -45,3 +45,5 @@
 127.0.0.1 - - [25/Mar/2017:13:09:51 +0100] "GET /ExaminationServer/examData/api/search?value=stma&value=t&ageLower=60 HTTP/1.1" 200 548
 127.0.0.1 - - [25/Mar/2017:13:10:03 +0100] "GET /ExaminationServer/examData/api/search?value=stma&value=t&ageUpper=60 HTTP/1.1" 200 543
 127.0.0.1 - - [25/Mar/2017:13:10:46 +0100] "GET /ExaminationServer/examData/api/search?value=planus&ageUpper=60 HTTP/1.1" 200 2305
+127.0.0.1 - - [25/Mar/2017:13:13:03 +0100] "GET /ExaminationServer/examData/api/search?value=planus HTTP/1.1" 200 7021
+127.0.0.1 - - [25/Mar/2017:13:13:51 +0100] "GET /ExaminationServer/examData/api/search?value=astma HTTP/1.1" 200 1090
