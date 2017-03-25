@@ -35,13 +35,15 @@ export class ThumbnailComponent implements OnInit {
 
 		this.popupService.searchResult.subscribe(searchResult => {
 			if (searchResult.direction > 0) {
-				this.showNextImage(searchResult.examinationID, searchResult.imageIndex);
+				this.showNextImage(searchResult.examinationIndex, searchResult.imageIndex);
 			}
 		})
 	}
 
-	showNextImage(examinationID: string, imageIndex: number): void {
-
+	showNextImage(examinationIndex: number, imageIndex: number): void {
+		if (imageIndex == this.searchresults[examinationIndex].imagePaths.length){
+			
+		}
 	}
 
 	onImageClick(examinationIndex: number, imageIndex: number):void{

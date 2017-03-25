@@ -34,12 +34,12 @@ export class PopupService{
 		
 	}
 
-	setNextImage(examinationID: string, imageIndex: number): void {
+	setNextImage(examinationIndex: number, imageIndex: number): void {
 		let arg = new PopupNavArgs();
 		arg.direction = 1;
-		arg.examinationID = examinationID;
+		arg.examinationIndex = examinationIndex;
 		arg.imageIndex = imageIndex;
-		console.log("navigating with arg: " + arg.examinationID + ", " + arg.imageIndex);
+		console.log("navigating with arg: " + arg.examinationIndex + ", " + arg.imageIndex);
 		
 		this.privSearchResult.next(arg);
 	}
