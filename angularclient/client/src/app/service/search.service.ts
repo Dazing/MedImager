@@ -43,7 +43,18 @@ export class SearchService{
 
 		for (var key in query) {
 			if (query.hasOwnProperty(key) && query[key] != "") {
-				str += "&"+key.toString()+"="+query[key].toString();
+				if (key.toString() == "includeTentative") {
+
+				}
+				else if (key.toString() == "includeHist") {
+					
+				}
+				else if (key.toString() == "includeDiseasePast") {
+					str += "&term=Dis-past";
+				}
+				else {
+					str += "&"+key.toString()+"="+query[key].toString();
+				}
 			}
 		}
 		if (str.charAt(0) === "&"){
@@ -51,19 +62,16 @@ export class SearchService{
 		}	
 
 		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
-		console.log("URL: "+url+"Q: "+str);
+		console.log("URL: "+url+", Q: "+str);
 		
 		this.http.get(url)
 			.toPromise()
 			.then(response => {
 				this.privImages.next(response.json());
 				var responsejson = response.json();
-				
-
-				console.log("ImagePath[0]: " + JSON.stringify(responsejson[0].age));
 			})
 			.catch(e => {
-				console.log("Get serach"+e);
+				console.log("Get search "+e);
 				
 				//this.router.navigate(['/serverunreachable']);
 			});
