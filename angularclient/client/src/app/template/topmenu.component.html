@@ -3,10 +3,25 @@
 		<div id="menu-bar">
 			<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
 			<div id="search-wrapper">
-				<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)">
-				<input type="hidden" name="searchTerms" formControlName="searchTerms">
-				<div id="auto-search-results">Sökresultat</div>
-				<div id="selected-tags"></div>
+				<input id="search-input searchTerms" formControlName="value" #value (keyup.enter)="onEnter(value.value)">
+				
+				
+				<!--<input class="filled-in" type="hidden" name="searchTerms" id="searchTerms" formControlName="searchTerms">-->
+
+				<div id="auto-search-results">
+
+					<!-- Autocomplete -->
+
+				</div>
+				<div id="selected-tags">
+
+					<!-- Display selected tags -->
+					<div *ngFor="let tag of tags; let i=index" class="chip">
+						tandtroll
+						<i id="generateId(i)" class="removeTag close material-icons">close</i>
+					</div>
+
+				</div>
 			</div>
 			<span class="unselectable" id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
 			<i class='user-button medium material-icons'>account_circle</i>
@@ -44,6 +59,5 @@
 			</div>
 
 		</div>
-
 	</form>
 </div>

@@ -17,12 +17,24 @@ import { Server } from '../model/server';
 @Injectable()
 export class SearchService{
 	private headers = new Headers({'Content-Type': 'application/json'});
+
+	searchTerms: string[];
+	
 	images:Observable<string[]>;
 	private privImages: Subject<string[]>;
+
+	tags:Observable<string[]>;
+	private privTags: Subject<string[]>;
 
 	constructor(private http: Http, private router: Router, ) {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
+
+		this.privTags = new Subject<string[]>();
+        this.tags = this.privTags.asObservable();
+
+		this.searchTerms = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
+
 	}
 
 
@@ -51,12 +63,17 @@ export class SearchService{
 				console.log("ImagePath[0]: " + JSON.stringify(responsejson[0].age));
 			})
 			.catch(e => {
-				console.log(e);
+				console.log("Get serach"+e);
 				
-				this.router.navigate(['/serverunreachable']);
+				//this.router.navigate(['/serverunreachable']);
 			});
 
 	}
+
+	autoComplete(term: string): string[]{
+		return;
+	}
+
 	getImage(): Image {
 		return new Image();
 	}
