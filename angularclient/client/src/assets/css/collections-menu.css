@@ -22,7 +22,8 @@
   background-color: #e7e7e7;
   position: fixed;
   top: 0;
-  z-index: 50; }
+  z-index: 50;
+  cursor: pointer; }
   #collections-togglebutton span {
     display: block;
     vertical-align: middle; }

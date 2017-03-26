@@ -3,25 +3,25 @@
 		<div id="menu-bar">
 			<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
 			<div id="search-wrapper">
-				<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)">
+				<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)" placeholder="Sök...">
 				<input type="hidden" name="searchTerms" formControlName="searchTerms">
 				<div id="auto-search-results">Sökresultat</div>
 				<div id="selected-tags"></div>
 			</div>
-			<span class="unselectable" id="advanced-button" onclick="showAdvancedBar();">Avancerad sökning</span>
-			<i class='user-button medium material-icons'>account_circle</i>
+			<i class='spin-menu-button material-icons unselectable' id="advanced-button" onclick="showExtraBar('advanced');">filter_list</i>
+			<i class='spin-menu-button material-icons unselectable' id="settings-button" onclick="showExtraBar('settings');">settings</i>
 		</div>
 
 		<div id="advanced-bar">
-			<div class="row ">
-				<div class="tertiary-colour valign-wrapper col s4 ">
+			<div class="row">
+				<div class="valign-wrapper col s4 ">
 					<input class="filled-in" formControlName="smoker" type="checkbox" id="smokerCheck"><label for="smokerCheck">Rökare</label>
 					<input class="filled-in" formControlName="snus" type="checkbox" id="snusCheck"><label for="snusCheck">Snusare</label>
 				</div>
-				<div class="secondary-colour valign-wrapper col s4">
+				<div class="valign-wrapper col s4">
 					(ålder)
 				</div>
-				<div class="tertiary-colour valign-wrapper col s4"> 
+				<div class="valign-wrapper col s4"> 
 					<input class="with-gap valign-center" name="gender" value="all" formControlName="gender" type="radio" id="anyGender" checked="checked" />
 					<label for="anyGender">Alla kön</label>
 					<input class="with-gap valign-center" name="gender" value="women" formControlName="gender" type="radio" id="womenOnly"/>
@@ -31,19 +31,21 @@
 				</div>
 			</div>
 
-			<div class="row ">
-				<div class="secondary-colour valign-wrapper col s4 ">
+			<div class="row">
+				<div class="valign-wrapper col s4 ">
 					<input class="filled-in" formControlName="includeTentative" type="checkbox" id="diagTentCheck"><label for="diagTentCheck">Inkludera tentativa diagnoser</label>
 				</div>
-				<div class="tertiary-colour valign-wrapper col s4">
-					<input class="filled-in" formControlName="includeHist" type="checkbox" id="diagHistCheck"><label for="diagHistCheck">Inkludera föregående diagnoser</label>
+				<div class="valign-wrapper col s4">
+					<input class="filled-in" formControlName="includeHist" type="checkbox" id="diagHistCheck"><label for="diagHistCheck">Inkludera tidigare diagnoser</label>
 				</div>
-				<div class="secondary-colour valign-wrapper col s4"> 
-					<input class="filled-in" formControlName="includeDiseasePast" type="checkbox" id="diseasePastCheck"><label for="diseasePastCheck">Inkludera föregående sjukdomar</label>
+				<div class="valign-wrapper col s4"> 
+					<input class="filled-in" formControlName="includeDiseasePast" type="checkbox" id="diseasePastCheck"><label for="diseasePastCheck">Inkludera tidigare sjukdomar</label>
 				</div>
 			</div>
 
 		</div>
-
+		<div id="settings-bar">
+			Dina inställningar
+		</div>
 	</form>
 </div>

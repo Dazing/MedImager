@@ -1,27 +1,52 @@
 var advancedBar = false;
-function showAdvancedBar()
+var settingsBar = false;
+
+function showExtraBar(bar)
 {
-	if(advancedBar)
+	if(bar == "advanced")
+	{
+		toggleAdvancedBar();
+		toggleSettingsBar(true);
+	}
+	else if(bar == "settings")
+	{
+		toggleAdvancedBar(true);
+		toggleSettingsBar();
+	}
+}
+function toggleAdvancedBar(hide)
+{
+	if(advancedBar || hide)
 	{
 		$("#advanced-bar").css("margin-top", "-100px");
-		$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + "px");
-		$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + "px");
+		setPageWrapperHeight(0);
+		advancedBar = false;
 	}
 	else
 	{
 		$("#advanced-bar").css("margin-top", "0px");
-		$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + 104 + "px");
-		$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + 104 + "px");
+		setPageWrapperHeight(104);
+		advancedBar = true;
 	}
-	advancedBar = !advancedBar;
+}
+function toggleSettingsBar(hide)
+{
+	if(settingsBar || hide)
+	{
+		$("#settings-bar").css("margin-top", "-50px");
+		setPageWrapperHeight(0);
+		settingsBar = false;
+	}
+	else
+	{
+		$("#settings-bar").css("margin-top", "0px");
+		setPageWrapperHeight(52);
+		settingsBar = true;
+	}
 }
 
-function setPageWrapperHeight()
+function setPageWrapperHeight(extra)
 {
-	var advancedBarHeight = 0;
-	if(advancedBar)
-		advancedBarHeight = $("#advanced-bar").outerHeight();
-	var menuHeight = $("#menu-bar").outerHeight() + advancedBarHeight + "px";
-	$("#page-wrapper").css("margin-top", menuHeight);
-	$(".collections-menu").css("margin-top", menuHeight);
+	$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
+	$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
 }
