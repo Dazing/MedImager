@@ -1,0 +1,15 @@
+package com.MedImager.ExaminationServer;
+
+import java.awt.image.BufferedImage;
+
+public class ThumbnailBuilder {
+	
+	private BufferedImage img;
+	public ThumbNailBuilder(String path){
+		
+	}
+	BufferedImage srcImg = ImageIO.read(new File(sourceFile)); 
+	BufferedImage dstImg = Scalr.resize(srcImg, Scalr.Method.QUALITY, 
+	    THUMB_WIDTH, THUMB_HEIGHT); 
+	ImageIO.write(dstImg, format, new File(destFile));
+}

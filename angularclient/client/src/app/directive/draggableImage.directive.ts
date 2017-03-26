@@ -10,7 +10,8 @@ export class DraggableImageDirective {
     }
 
     @HostListener('dragstart', ['$event']) onDragStart(event) {
-        event.dataTransfer.setData("sourceId", event.target.getAttribute("data-id"));
+        event.dataTransfer.setData("examinationID", event.target.getAttribute("data-examinationid"));
+        event.dataTransfer.setData("imageIndex", event.target.getAttribute("data-imageIndex"));
         event.dataTransfer.setData("sourceType", "draggableImage");
         
         //DnD ghost images must be drawn on the document, draw a styled (resized) clone thumbnail to assign as DnD ghost:

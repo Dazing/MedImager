@@ -1,0 +1,10 @@
+package com.MedImager.ExaminationServer;
+
+import java.awt.image.BufferedImage;
+
+public class ThumbnailBuilder {
+	private BufferedImage img;
+	public ThumbNailBuilder(String path){
+		
+	}
+}

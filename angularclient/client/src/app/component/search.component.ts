@@ -3,7 +3,9 @@ import { Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 import { Image } from '../model/image';
 
+import { PopupService } from '../service/popup.service';
 import { SearchService } from '../service/search.service';
+import { PopupComponent } from './popup.component';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -17,7 +19,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 @Component({
 	selector: 'search',
 	templateUrl: '../template/search.component.html',
-	providers: []
+	providers: [PopupService]
 })
 export class SearchComponent {
 	images: Image[];
@@ -27,7 +29,10 @@ export class SearchComponent {
 
 	private collectionsMenuVisible = false;
 
-	constructor(private searchService: SearchService){
+	constructor(
+		private searchService: SearchService,
+		private popupService: PopupService
+	){
 		
 	}
 

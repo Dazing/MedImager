@@ -14,6 +14,7 @@ import { Subject } from 'rxjs/Subject';
 export class TopMenuComponent {
 	form;
 	active : boolean;
+	autocompleteList;
 
 	constructor(
 		private router: Router, 
@@ -22,28 +23,30 @@ export class TopMenuComponent {
 		private searchService: SearchService
 	){
 		this.form = formBuilder.group({
-			searchTerms: '',
+			value: '',
 			gender: '',
-			smoker: '',
-			snus: '',
+			smoke: '',
+			snuff: '',
 			includeTentative: '',
 			includeHist: '',
 			includeDiseasePast: ''
-		})
+		});
 
-		this.form.valueChanges.subscribe(data => {
+		this.form.valueChanges.debounceTime(400).subscribe(data => {
 			this.active = this.router.isActive(this.router.url,false);
 		
 			if (!(this.active)){
 				this.router.navigate(['/search', { query: data }]);
 			}
-
+			console.log(data);
+			
 			this.searchService.getSearch(data);
-		})
+		});
 
 	}
 
 	onEnter(term: string){
+		console.log(this.form.getRawValue());
 		
 	}
 

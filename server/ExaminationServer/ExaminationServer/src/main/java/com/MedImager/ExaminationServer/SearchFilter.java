@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Handler;
-
-import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
-
 import medview.datahandling.InvalidPIDException;
 import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
@@ -173,10 +169,16 @@ public class SearchFilter {
 				/*
 				 * Search through primary terms for a match
 				 */
+				/*
+				 * Changed from equals to contains - so even substrings match
+				 * meaning "astm" and "stma" will match for astma
+				 * Extra-term loop also changed
+				 * - Marcus
+				 */
 				for(String term : Arrays.asList(Constants.primaryRelevantTerms)){
 					if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
 						for(String termValue : evc.getValues(term)){
-							if(termValue.equalsIgnoreCase(value)){
+							if(termValue.toLowerCase().contains(value.toLowerCase())){
 								valueInExamination = true;
 							}
 						}
@@ -190,7 +192,7 @@ public class SearchFilter {
 					for(String term : terms){
 						if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
 							for(String termValue : evc.getValues(term)){
-								if(termValue.equalsIgnoreCase(value)){
+								if(termValue.toLowerCase().contains(value.toLowerCase())){
 									valueInExamination = true;
 								}
 							}
@@ -250,8 +252,6 @@ public class SearchFilter {
 						return false;
 					}else{
 						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
-						int size = termValues.size();
-						String a = termValues.get(0);
 						if(!termValues.contains(value)){
 							return false;
 						}

@@ -51,51 +51,51 @@ $(document).ready(function () {
 		);
 	})
 
-	$("#search-results span").on('mouseup', function(event) {
-		var thisId = event.target.id;
-		currentImage = thisId;
-		if(event.which == 2)
-		{
-			event.preventDefault();
-			var newTab = window.open("image?id=" + thisId, '_blank');
-		}
-		else
-		{
-			setPopUpImage();
-			$("#popup-image-wrapper").css("display", "flex");
-			$("#black-back").css("display", "block");
-		}
-	});
+	//$("#search-results span").on('mouseup', function(event) {
+	//	var thisId = event.target.id;
+	//	currentImage = thisId;
+	//	if(event.which == 2)
+	//	{
+	//		event.preventDefault();
+	//		var newTab = window.open("image?id=" + thisId, '_blank');
+	//	}
+	//	else
+	//	{
+	//		setPopUpImage();
+	//		$("#popup-image-wrapper").css("display", "flex");
+	//		$("#black-back").css("display", "block");
+	//	}
+	//});
 
-	$(".opacity-wrapper").click(function(event) {//edit event target to give proper image data to #search-results span : click
-		event.target.id = $(this).parent().attr('id');
-	});
+	//$(".opacity-wrapper").click(function(event) {//edit event target to give proper image data to #search-results span : click
+	//	event.target.id = $(this).parent().attr('id');
+	//});
 
-	$(".inner-text").click(function(event) { //same as last one but for when grandchildren are fired
-		event.target.id = $(this).parent().parent().attr('id');
-	});
+	//$(".inner-text").click(function(event) { //same as last one but for when grandchildren are fired
+	//	event.target.id = $(this).parent().parent().attr('id');
+	//});
 
 
-	$("#black-back").click(function(event) {
-		closePopUp();
-	});
-	$("#popup-image-container").mouseover(function(event) {
-		$("#popup-image-next").css("opacity", "0.8");
-		$("#popup-image-previous").css("opacity", "0.8");
-	});
-	$("#popup-image-container").mouseout(function(event) {
-		$("#popup-image-next").css("opacity", "0");
-		$("#popup-image-previous").css("opacity", "0");
-	});
-	$("#popup-close-button").click(function(event) {
-		closePopUp();
-	});
-	$("#popup-image-previous").click(function(event) {
-		setPopUpImage(currentImage--);
-	});
-	$("#popup-image-next").click(function(event) {
-		setPopUpImage(currentImage++);
-	});
+	//$("#black-back").click(function(event) { 
+	//	closePopUp();						 ////// moved to angular
+	//});
+	//$("#popup-image-container").mouseover(function(event) {
+	//	$("#popup-image-next").css("opacity", "0.8");
+	//	$("#popup-image-previous").css("opacity", "0.8");
+	//});
+	//$("#popup-image-container").mouseout(function(event) {
+	//	$("#popup-image-next").css("opacity", "0");
+	//	$("#popup-image-previous").css("opacity", "0");
+	//});
+	//$("#popup-close-button").click(function(event) {
+	//	closePopUp();
+	//});
+	//$("#popup-image-previous").click(function(event) {
+	//	setPopUpImage(currentImage--);
+	//});
+	//$("#popup-image-next").click(function(event) {
+	//	setPopUpImage(currentImage++);
+	//});
 	$('#search-input').click(function() {
 		displayTagList($(this).val());
 	});
@@ -139,27 +139,27 @@ $(document).ready(function () {
 	//$(".dnd-target").on("dragover",handleDragOver);
 	//$(".dnd-target").on("drop",handleDrop);
 
-	$(document).keyup(function(e) {
-		if (e.keyCode == 27)
-			closePopUp();
-		else if (e.keyCode == 37)
-			setPopUpImage(currentImage--);
-		else if (e.keyCode == 39)
-			setPopUpImage(currentImage++);
-	});
+	//$(document).keyup(function(e) {
+	//	if (e.keyCode == 27)
+	//		closePopUp();
+	//	else if (e.keyCode == 37)
+	//		setPopUpImage(currentImage--);
+	//	else if (e.keyCode == 39)
+	//		setPopUpImage(currentImage++);
+	//});
 
-	function setPopUpImage()
-	{
-		if(currentImage < 0)
-			currentImage = searchresults.length-1;
-		else if(currentImage > searchresults.length-1)
-			currentImage = 0;
-		$("#popup-image").attr("src", searchresults[currentImage]);
-	}
+	//function setPopUpImage()
+	//{
+	//	if(currentImage < 0)
+	//		currentImage = searchresults.length-1;
+	//	else if(currentImage > searchresults.length-1)
+	//		currentImage = 0;
+	//	$("#popup-image").attr("src", searchresults[currentImage]);
+	//}
 
-	function closePopUp()
-	{
-		$("#black-back").hide();
-		$("#popup-image-wrapper").hide();
-	}
+	//function closePopUp()
+	//{
+	//	$("#black-back").hide();
+	//	$("#popup-image-wrapper").hide();
+	//}
 });

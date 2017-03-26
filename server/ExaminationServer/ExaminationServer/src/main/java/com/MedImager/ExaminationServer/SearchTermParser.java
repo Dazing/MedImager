@@ -4,21 +4,17 @@ package com.MedImager.ExaminationServer;
  * Created by marcus on 2017-02-11.
  */
 
-import medview.common.data.MedViewUtilities;
-import medview.datahandling.InvalidPIDException;
 import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
 import medview.datahandling.PatientIdentifier;
 import medview.datahandling.examination.ExaminationIdentifier;
 import medview.datahandling.examination.ExaminationValueContainer;
 import medview.datahandling.examination.NoSuchExaminationException;
-import medview.datahandling.images.ExaminationImage;
 import misc.foundation.MethodNotSupportedException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -98,8 +94,11 @@ public class SearchTermParser {
             for (PatientIdentifier pid : handler.getPatients()) {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
                 	if(filter.filterSatisfied(eid)){
-                		ExaminationBuilder ex = new ExaminationBuilder();
-                		resultList.add(ex.getExamination(eid));
+                		ExaminationBuilder exBuilder = new ExaminationBuilder();
+                		Examination ex = exBuilder.getExamination(eid);
+                		if(ex.getImagePaths().size()!=0){
+                			resultList.add(ex);
+                		}
                 	}
                 }
             }

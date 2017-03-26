@@ -17,12 +17,24 @@ import { Server } from '../model/server';
 @Injectable()
 export class SearchService{
 	private headers = new Headers({'Content-Type': 'application/json'});
+
+	searchTerms: string[];
+	
 	images:Observable<string[]>;
 	private privImages: Subject<string[]>;
+
+	tags:Observable<string[]>;
+	private privTags: Subject<string[]>;
 
 	constructor(private http: Http, private router: Router, ) {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
+
+		this.privTags = new Subject<string[]>();
+        this.tags = this.privTags.asObservable();
+
+		this.searchTerms = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
+
 	}
 
 
@@ -31,7 +43,18 @@ export class SearchService{
 
 		for (var key in query) {
 			if (query.hasOwnProperty(key) && query[key] != "") {
-				str += "&"+key.toString()+"="+query[key].toString();
+				if (key.toString() == "includeTentative") {
+
+				}
+				else if (key.toString() == "includeHist") {
+					
+				}
+				else if (key.toString() == "includeDiseasePast") {
+					str += "&term=Dis-past";
+				}
+				else {
+					str += "&"+key.toString()+"="+query[key].toString();
+				}
 			}
 		}
 		if (str.charAt(0) === "&"){
@@ -39,18 +62,26 @@ export class SearchService{
 		}	
 
 		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
-		console.log("Q: "+str);
+		console.log("URL: "+url+", Q: "+str);
 		
 		this.http.get(url)
 			.toPromise()
 			.then(response => {
 				this.privImages.next(response.json());
-				
-				console.log(this.images);
+				var responsejson = response.json();
 			})
-			.catch(e => this.router.navigate(['/serverunreachable']));
+			.catch(e => {
+				console.log("Get search "+e);
+				
+				//this.router.navigate(['/serverunreachable']);
+			});
 
 	}
+
+	autoComplete(term: string): string[]{
+		return;
+	}
+
 	getImage(): Image {
 		return new Image();
 	}

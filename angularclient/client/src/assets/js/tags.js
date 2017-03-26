@@ -1,3 +1,4 @@
+/*
 function tag(title)
 {
 	this.title = title;
@@ -18,12 +19,12 @@ for (var i = 0; i < tags.length; i++)
 $('document').ready(function(){
 	// Fetch search terms (tags) from server.
 	var url = "www.medimager.com/api/tags";
-	/*$.get(url).then(function(res){
+	$.get(url).then(function(res){
 		console.log(res);
 		for (var i = 0; i < res.tags.length; i++) {
 			tagObjects.push(new tag(res.tags[i]));
 		}
-	});*/
+	});
 });
 
 
@@ -105,7 +106,8 @@ function tagsToHiddenInput()
 	{
 		var termHTML = $(".chip").eq(i).html();
 		var term = termHTML.substr(0, termHTML.indexOf('<')).trim();
-		$(hiddenField).val(term + "," + $(hiddenField).val());
+		$(hiddenField).val(term + "," + $(hiddenField).val()).change();
+		$('#searchTerms').trigger('change');
 	}
 }
 
@@ -119,3 +121,4 @@ $(document).on("click", ".removeTag", function(){
 	tagObjects[$(this).attr("id").substring(3, $(this).attr("id").length)].selected = false;
 	setPageWrapperHeight();
 });
+*/

@@ -1,0 +1,33 @@
+package com.MedImager.ExaminationServer;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class ThumbnailBuilder {
+	public ThumbnailBuilder(){}
+	public File getThumbnail(String path){
+		BufferedImage originalBufferedImage = null;
+		try {
+		    originalBufferedImage = ImageIO.read(new File("/images/sample.jpg"));
+		}   
+		catch(IOException ioe) {
+		}
+		int thumbnailWidth = 150;
+		 
+		int widthToScale, heightToScale;
+		if (originalBufferedImage.getWidth() > originalBufferedImage.getHeight()) {
+		 
+		    heightToScale = (int)(1.1 * thumbnailWidth);
+		    widthToScale = (int)((heightToScale * 1.0) / originalBufferedImage.getHeight() 
+		                    * originalBufferedImage.getWidth());
+		 
+		} else {
+		    widthToScale = (int)(1.1 * thumbnailWidth);
+		    heightToScale = (int)((widthToScale * 1.0) / originalBufferedImage.getWidth() 
+		                    * originalBufferedImage.getHeight());
+		}
+	}
+}

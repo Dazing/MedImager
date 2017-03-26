@@ -15,6 +15,7 @@ import { CollectionsMenuComponent } from './component/collections-menu.component
 import { CollectionComponent } from './component/collection.component';
 import { NotFound } from './component/not-found.component';
 import { ServerUnreachable } from './component/server-unreachable.component';
+import { PopupComponent } from './component/popup.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -23,6 +24,7 @@ import { UserService } from './service/user.service';
 import { Server } from './model/server'
 
 import { DraggableImageDirective } from './directive/draggableImage.directive';
+import { DroppableCollectionDirective } from './directive/droppableCollection.directive';
 
 @NgModule({
 	declarations: [
@@ -35,9 +37,11 @@ import { DraggableImageDirective } from './directive/draggableImage.directive';
 		ImagePageComponent,
 		CollectionsMenuComponent,
 		CollectionComponent,
+		PopupComponent,
 		NotFound,
 		ServerUnreachable,
-		DraggableImageDirective
+		DraggableImageDirective,
+		DroppableCollectionDirective
 	],
 	imports: [
 		BrowserModule,

@@ -3,20 +3,36 @@
 		<div id="menu-bar">
 			<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
 			<div id="search-wrapper">
-				<input id="search-input" #searchInput (keyup.enter)="onEnter(searchInput.value)" placeholder="Sök...">
-				<input type="hidden" name="searchTerms" formControlName="searchTerms">
-				<div id="auto-search-results">Sökresultat</div>
-				<div id="selected-tags"></div>
+
+				<input id="search-input searchTerms" formControlName="value" #value (keyup.enter)="onEnter(value.value)">
+				
+				
+				<!--<input class="filled-in" type="hidden" name="searchTerms" id="searchTerms" formControlName="searchTerms">-->
+
+				<div id="auto-search-results">
+
+					<!-- Autocomplete -->
+
+				</div>
+				<div id="selected-tags">
+
+					<!-- Display selected tags -->
+					<div *ngFor="let tag of tags; let i=index" class="chip">
+						tandtroll
+						<i id="generateId(i)" class="removeTag close material-icons">close</i>
+					</div>
+
+				</div>
 			</div>
 			<i class='spin-menu-button material-icons unselectable' id="advanced-button" onclick="showExtraBar('advanced');">filter_list</i>
 			<i class='spin-menu-button material-icons unselectable' id="settings-button" onclick="showExtraBar('settings');">settings</i>
 		</div>
 
 		<div id="advanced-bar">
-			<div class="row">
+			<div class="row ">
 				<div class="valign-wrapper col s4 ">
-					<input class="filled-in" formControlName="smoker" type="checkbox" id="smokerCheck"><label for="smokerCheck">Rökare</label>
-					<input class="filled-in" formControlName="snus" type="checkbox" id="snusCheck"><label for="snusCheck">Snusare</label>
+					<input class="filled-in" formControlName="smoke" type="checkbox" id="smokerCheck"><label for="smokerCheck">Rökare</label>
+					<input class="filled-in" formControlName="snuff" type="checkbox" id="snusCheck"><label for="snusCheck">Snusare</label>
 				</div>
 				<div class="valign-wrapper col s4">
 					(ålder)

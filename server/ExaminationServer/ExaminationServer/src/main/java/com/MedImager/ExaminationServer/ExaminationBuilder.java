@@ -9,7 +9,6 @@ import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
 import medview.datahandling.examination.ExaminationIdentifier;
 import medview.datahandling.examination.ExaminationValueContainer;
-import medview.datahandling.examination.MVDHandler;
 import medview.datahandling.examination.NoSuchExaminationException;
 import medview.datahandling.images.ExaminationImage;
 import misc.foundation.MethodNotSupportedException;
