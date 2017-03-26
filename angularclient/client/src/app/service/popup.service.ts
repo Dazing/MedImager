@@ -39,7 +39,15 @@ export class PopupService{
 		arg.direction = 1;
 		arg.examinationIndex = examinationIndex;
 		arg.imageIndex = imageIndex;
-		console.log("navigating with arg: " + arg.examinationIndex + ", " + arg.imageIndex);
+		
+		this.privSearchResult.next(arg);
+	}
+
+	setPreviousImage(examinationIndex: number, imageIndex: number): void {
+		let arg = new PopupNavArgs();
+		arg.direction = -1;
+		arg.examinationIndex = examinationIndex;
+		arg.imageIndex = imageIndex;
 		
 		this.privSearchResult.next(arg);
 	}

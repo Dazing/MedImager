@@ -24,6 +24,7 @@ import { UserService } from './service/user.service';
 import { Server } from './model/server'
 
 import { DraggableImageDirective } from './directive/draggableImage.directive';
+import { DroppableCollectionDirective } from './directive/droppableCollection.directive';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import { DraggableImageDirective } from './directive/draggableImage.directive';
 		PopupComponent,
 		NotFound,
 		ServerUnreachable,
-		DraggableImageDirective
+		DraggableImageDirective,
+		DroppableCollectionDirective
 	],
 	imports: [
 		BrowserModule,

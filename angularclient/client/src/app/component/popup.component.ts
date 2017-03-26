@@ -12,6 +12,7 @@ import { PopupService } from '../service/popup.service';
 export class PopupComponent {
     private popup;
     private visible = false;
+    private arrowsVisible = false;
 
     constructor(
 		private searchService: SearchService,
@@ -39,6 +40,10 @@ export class PopupComponent {
         }
     }
 
+    showArrows(visible: boolean): void {
+        this.arrowsVisible = visible;
+    }
+
     hidePopup(): void {
         this.visible = false;
     }
@@ -47,16 +52,39 @@ export class PopupComponent {
         return this.server.getUrl() + '/image/' + this.popup.examinationID +'/' + this.popup.imageIndex;
     }
 
+    nextImage(): void {
+        this.popupService.setNextImage(this.popup.searchIndex, this.popup.imageIndex);
+    }
+
+    prevImage(): void {
+        this.popupService.setPreviousImage(this.popup.searchIndex, this.popup.imageIndex);
+    }
+
+    listToText(items: string[]): string {
+        let tot = "";
+        for (let item of items) {
+            if (tot != "") {
+                tot += ", "
+            }
+            tot += item;
+        }
+        return tot;
+    }
+
     
     @HostListener('window:keydown', ['$event'])
         keyboardInput(event: KeyboardEvent) {
             if (event.keyCode == 27)
                 this.hidePopup();
             else if (event.keyCode == 37) {
-                {}//prev image
+                if (this.visible) {
+                    this.prevImage();
+                }
             }
             else if (event.keyCode == 39) {
-                this.popupService.setNextImage(this.popup.examinationID, this.popup.imageIndex);
+                if (this.visible) {
+                    this.nextImage();
+                }
             }
         }
 

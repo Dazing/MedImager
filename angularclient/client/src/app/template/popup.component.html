@@ -1,32 +1,81 @@
 <div *ngIf="visible" id="black-back" (click)="hidePopup()"></div>
 <div *ngIf="visible" id="popup-image-wrapper">
-	<div id="popup-image-container">
-		<i id="popup-image-previous" class='large material-icons'>keyboard_arrow_left</i>
-		<i id="popup-image-next" class='large material-icons'>keyboard_arrow_right</i>
-		<img id="popup-image" [src]="getUrl()">
+	<div id="popup-image-container" (mouseover)="showArrows(true)" (mouseout)="showArrows(false)">
+		<i id="popup-image-previous" class='large material-icons unselectable' (click)="prevImage()" [ngStyle]="{'opacity': arrowsVisible ? 0.8 : 0}" >keyboard_arrow_left</i>
+		<i id="popup-image-next" class='large material-icons unselectable' (click)="nextImage()"  [ngStyle]="{'opacity': arrowsVisible ? 0.8 : 0}" >keyboard_arrow_right</i>
+		<img id="popup-image" class="unselectable" [src]="getUrl()">
 	</div>
 	<div id="popup-image-data">
-		<i id="popup-close-button" class='small material-icons'>close</i>
+		<i id="popup-close-button" class='small material-icons' (click)="hidePopup()">close</i>
+
+		<label *ngIf="notNull(popup.examinationID)" >Undersökningsnummer</label>
+		<p *ngIf="notNull(popup.examinationID)">{{popup.examinationID}}</p>
+
+		<label *ngIf="popup.diagDef.length > 0" >Diagnos</label>
+		<p *ngIf="popup.diagDef.length > 0">{{listToText(popup.diagDef)}}</p>
+
+		<label *ngIf="popup.diagTent.length > 0" >Tentativ diagnos</label>
+		<p *ngIf="popup.diagTent.length > 0">{{listToText(popup.diagTent)}}</p>
+
+		<label *ngIf="popup.diagHist.length > 0" >Tidigare diagnos</label>
+		<p *ngIf="popup.diagHist.length > 0">{{listToText(popup.diagHist)}}</p>
+
+		<label *ngIf="popup.disNow.length > 0 && popup.disNow != 'Nej'" >Sjukdom</label>
+		<p *ngIf="popup.disNow.length > 0 && popup.disNow != 'Nej'">{{listToText(popup.disNow)}}</p>
+
+		<label *ngIf="popup.disPast.length > 0 && popup.disPast != 'Nej'" >Tidigare sjukdom</label>
+		<p *ngIf="popup.disPast.length > 0  && popup.disPast != 'Nej'">{{listToText(popup.disPast)}}</p>
+
+		<label *ngIf="popup.gender == '1'|| popup.gender == '2'" >Kön:</label>
+		<p *ngIf="popup.gender == '1'">Man</p>
+		<p *ngIf="popup.gender == '2'">Kvinna</p>
+
 		<label *ngIf="notNull(popup.age)" >Ålder</label>
-		<p *ngIf="notNull(popup.age)" >{{popup.age}}</p>
-		<label>Instutition</label>
-		<p>Chalmerska oralinstutitionen</p>
-		<label>Fotodatum</label>
-		<p>25 januari 1996</p>
-		<label>Favoritfilm</label>
-		<p>Lejonkungen</p><label>Favoritfilm</label>
-		<p>Lejonkungen</p><label>Favoritfilm</label>
-		<p>Lejonkungen</p><label>Favoritfilm</label>
-		<p>Lejonkungen</p><label>Favoritfilm</label>
-		<p>Lejonkungen</p><label>Favoritfilm</label>
-		<p>Lejonkungen</p>
-		<label>Andra kommentarer</label>
-		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-		<p>Han är ful i munnen.</p><label>Andra kommentarer</label>
-		<p>Han är ful i munnen.</p>
+		<p  *ngIf="notNull(popup.age)" >{{popup.age}} år</p>
+
+		<label *ngIf="notNull(popup.allergy) && popup.allergy != 'Nej'">Allergi</label>
+		<p *ngIf="notNull(popup.allergy) && popup.allergy != 'Nej'" >{{popup.allergy}}</p>
+
+		<label *ngIf="popup.drug.length > 0 && popup.drug != 'Nej'" >Läkemedel</label>
+		<p *ngIf="popup.drug.length > 0 && popup.drug != 'Nej'">{{listToText(popup.drug)}}</p>
+
+		<label *ngIf="popup.biopsySite.length > 0 && popup.biopsySite != 'Nej'" >Biopsiplats</label>
+		<p *ngIf="popup.biopsySite.length > 0 && popup.biopsySite != 'Nej'">{{listToText(popup.biopsySite)}}</p>
+
+		<label *ngIf="popup.factorNeg.length > 0 && popup.factorNeg != 'Nej'" >Negativ faktor</label>
+		<p *ngIf="popup.factorNeg.length > 0 && popup.factorNeg != 'Nej'">{{listToText(popup.factorNeg)}}</p>
+
+		<label *ngIf="popup.factorPos.length > 0 && popup.factorPos != 'Nej'" >Positiv faktor</label>
+		<p *ngIf="popup.factorPos.length > 0 && popup.factorPos != 'Nej'">{{listToText(popup.factorPos)}}</p>
+
+		<label *ngIf="popup.lesnOn.length > 0" >lesnOn</label>
+		<p *ngIf="popup.lesnOn.length > 0">{{listToText(popup.lesnOn)}}</p>
+
+		<label *ngIf="popup.lesnSite.length > 0" >lesnSite</label>
+		<p *ngIf="popup.lesnSite.length > 0">{{listToText(popup.lesnSite)}}</p>
+
+		<label *ngIf="popup.skinPbl.length > 0" >Hudproblem</label>
+		<p *ngIf="popup.skinPbl.length > 0">{{listToText(popup.skinPbl)}}</p>
+
+		<label *ngIf="popup.smoke.length > 0" >Rökare</label>
+		<p *ngIf="popup.smoke.length > 0">{{listToText(popup.smoke)}}</p>
+
+		<label *ngIf="popup.snuff.length > 0" >Snusare</label>
+		<p *ngIf="popup.snuff.length > 0">{{listToText(popup.snuff)}}</p>
+
+		<label *ngIf="popup.symptNow.length > 0" >Symptom</label>
+		<p *ngIf="popup.symptNow.length > 0">{{listToText(popup.symptNow)}}</p>
+
+		<label *ngIf="popup.symptSite.length > 0" >Symptomplats</label>
+		<p *ngIf="popup.symptSite.length > 0">{{listToText(popup.symptSite)}}</p>
+
+		<label *ngIf="popup.treatType.length > 0" >treatType</label>
+		<p *ngIf="popup.treatType.length > 0">{{listToText(popup.treatType)}}</p>
+
+		<label *ngIf="popup.vasNow.length > 0" >vasNow</label>
+		<p *ngIf="popup.vasNow.length > 0">{{listToText(popup.vasNow)}}</p>
+
+
 
 		<div id="popup-image-data-buttons">
 			<div>Bramarkera</div><a href="image"><div>Permalänk</div></a>
@@ -36,25 +85,19 @@
 
 <!-- 
 	{
+		"examinationID":"980122112626",
+		"gender":["1"],
 		"age":["70"],
 		"allergy":["Nej"],
-		"biopsySite":[],
 		"diagDef":["Atrofisk lichen planus"],
 		"diagHist":[],
 		"diagTent":[],
 		"disNow":["Atopiskt eksem"],
 		"disPast":["Nej"],
 		"drug":["Nej"],
-		"examinationID":"980122112626",
+		"biopsySite":[],
 		"factorNeg":["Hård föda"],
 		"factorPos":["Förbättrad munhygien"],
-		"family":["Broder"],
-		"gender":["1"],
-		"imagePaths":[
-			"TestData.mvd\\Pictures\\G0222\\g02223.jpg",
-			"TestData.mvd\\Pictures\\G0222\\g02222.jpg",
-			"TestData.mvd\\Pictures\\G0222\\g02221.jpg"
-		],
 		"lesnOn":[],
 		"lesnSite":[],
 		"skinPbl":["Torr hud","Eksem"],
@@ -64,5 +107,18 @@
 		"symptSite":[],
 		"treatType":["Information"],
 		"vasNow":["3.2"]
+
+		
+		"family":["Broder"],
+		"imagePaths":[
+			"TestData.mvd\\Pictures\\G0222\\g02223.jpg",
+			"TestData.mvd\\Pictures\\G0222\\g02222.jpg",
+			"TestData.mvd\\Pictures\\G0222\\g02221.jpg"
+		],
+		
+		
+		
+		
+		
 	}
 -->

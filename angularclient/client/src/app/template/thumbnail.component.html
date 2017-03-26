@@ -1,8 +1,11 @@
 <template ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
 	<span *ngFor="let imagePath of searchresult.imagePaths; let j=index" 
-		draggableImage id="{{'result-image-'+i+j}}" 
+		draggableImage 
+		id="{{'result-image-'+i+j}}" 
 		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
 		data-id="{{i}}"
+		[attr.data-examinationid]="searchresult.examinationID"
+		[attr.data-imageIndex]="j"
 		(click)="onImageClick(i,j)"
 	>
 		<div class="opacity-wrapper">
