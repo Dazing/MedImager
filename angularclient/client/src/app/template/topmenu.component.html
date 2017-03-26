@@ -1,10 +1,10 @@
 <div id="menu-wrapper">
 	<form [formGroup]="form" action="">
 		<div id="menu-bar">
-			<a href="index.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/EBay_logo.svg/2000px-EBay_logo.svg.png" class="medimager-logo"></a>
+			<a href="index.html"><img src="./assets/img/logo.png" class="medimager-logo"></a>
 			<div id="search-wrapper">
 
-				<input id="search-input searchTerms" formControlName="value" #value (keyup.enter)="onEnter(value.value)">
+				<input id="search-input searchTerms" formControlName="value" #value (keyup.enter)="onEnter(value.value)" placeholder="Sök...">
 				
 				
 				<!--<input class="filled-in" type="hidden" name="searchTerms" id="searchTerms" formControlName="searchTerms">-->
