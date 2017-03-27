@@ -20,12 +20,14 @@ function toggleAdvancedBar(hide)
 	{
 		$("#advanced-bar").css("margin-top", "-100px");
 		setPageWrapperHeight(0);
+		$("#advanced-button").css("transform", "rotate(0deg)");
 		advancedBar = false;
 	}
 	else
 	{
 		$("#advanced-bar").css("margin-top", "0px");
 		setPageWrapperHeight(104);
+		$("#advanced-button").css("transform", "rotate(180deg)");
 		advancedBar = true;
 	}
 }
@@ -35,12 +37,14 @@ function toggleSettingsBar(hide)
 	{
 		$("#settings-bar").css("margin-top", "-50px");
 		setPageWrapperHeight(0);
+		$("#settings-button").css("transform", "rotate(0deg)");
 		settingsBar = false;
 	}
 	else
 	{
 		$("#settings-bar").css("margin-top", "0px");
 		setPageWrapperHeight(52);
+		$("#settings-button").css("transform", "rotate(180deg)");
 		settingsBar = true;
 	}
 }

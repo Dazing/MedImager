@@ -115,24 +115,6 @@ $(document).ready(function () {
 			currentAutoSearchPos = 0;
 		markAutoSearch();
 	});
-	$('.spin-menu-button').click(function(event){
-		var booleanChecker = false;
-		if($(this).attr("id") == "advanced-button")
-		{
-			booleanChecker = advancedBar;
-			advancedBar = !advancedBar;
-		}
-		else if($(this).attr("id") == "settings-button")
-		{
-			booleanChecker = settingsBar;
-			settingsBar = !settingsBar;
-		}
-		
-		if(booleanChecker)
-			$(this).css("transform", "rotate(0deg)");
-		else
-			$(this).css("transform", "rotate(180deg)");
-	});
 
 	//$(".dnd-source").on("dragstart",handleDragStart);
 	//$(".dnd-target").on("dragenter",handleDragEnter);
