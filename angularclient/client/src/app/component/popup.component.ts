@@ -13,6 +13,9 @@ export class PopupComponent {
     private popup;
     private visible = false;
     private arrowsVisible = false;
+    private resolutionLoaded = false;
+    private imageHeight: number;
+    private imageWidth: number;
 
     constructor(
 		private searchService: SearchService,
@@ -28,6 +31,16 @@ export class PopupComponent {
 		this.popupService.popup.subscribe(popup => {
 			this.popup = popup;
             this.visible = true;
+            this.resolutionLoaded = false;
+            var img = new Image();
+            var popupScopeHandle = this;
+
+            img.onload = function(){
+                popupScopeHandle.imageHeight = img.height;
+                popupScopeHandle.imageWidth = img.width;
+                popupScopeHandle.resolutionLoaded = true;
+            }
+            img.src = this.getUrl();
 		})
 	}
 

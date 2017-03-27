@@ -8,6 +8,9 @@
 	<div id="popup-image-data">
 		<i id="popup-close-button" class='small material-icons' (click)="hidePopup()">close</i>
 
+		<label *ngIf="resolutionLoaded" >Upplösning</label>
+		<p *ngIf="resolutionLoaded">{{imageWidth}} x {{imageHeight}}</p>
+
 		<label *ngIf="notNull(popup.examinationID)" >Undersökningsnummer</label>
 		<p *ngIf="notNull(popup.examinationID)">{{popup.examinationID}}</p>
 
