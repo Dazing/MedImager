@@ -15,6 +15,9 @@ hs_err_pid*
 *.DS_Store
 .DS_Store
 
+# Windows
+Thumbs.db
+
 # Sass #
 .sass-cache/
 /server/src/JavaApplication1/nbproject/private/
