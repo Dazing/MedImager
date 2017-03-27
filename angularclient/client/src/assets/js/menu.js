@@ -5,8 +5,8 @@ function showExtraBar(bar)
 {
 	if(bar == "advanced")
 	{
-		toggleAdvancedBar();
 		toggleSettingsBar(true);
+		toggleAdvancedBar();
 	}
 	else if(bar == "settings")
 	{
