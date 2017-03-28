@@ -29,7 +29,7 @@
 		<label *ngIf="popup.disPast.length > 0 && popup.disPast != 'Nej'" >Tidigare sjukdom</label>
 		<p *ngIf="popup.disPast.length > 0  && popup.disPast != 'Nej'">{{listToText(popup.disPast)}}</p>
 
-		<label *ngIf="popup.gender == '1'|| popup.gender == '2'" >Kön:</label>
+		<label *ngIf="popup.gender == '1'|| popup.gender == '2'" >Kön</label>
 		<p *ngIf="popup.gender == '1'">Man</p>
 		<p *ngIf="popup.gender == '2'">Kvinna</p>
 
@@ -54,7 +54,7 @@
 		<label *ngIf="popup.lesnOn.length > 0" >lesnOn</label>
 		<p *ngIf="popup.lesnOn.length > 0">{{listToText(popup.lesnOn)}}</p>
 
-		<label *ngIf="popup.lesnSite.length > 0" >lesnSite</label>
+		<label *ngIf="popup.lesnSite.length > 0" >lesnSite</label>		
 		<p *ngIf="popup.lesnSite.length > 0">{{listToText(popup.lesnSite)}}</p>
 
 		<label *ngIf="popup.skinPbl.length > 0" >Hudproblem</label>
@@ -72,7 +72,7 @@
 		<label *ngIf="popup.symptSite.length > 0" >Symptomplats</label>
 		<p *ngIf="popup.symptSite.length > 0">{{listToText(popup.symptSite)}}</p>
 
-		<label *ngIf="popup.treatType.length > 0" >treatType</label>
+		<label *ngIf="popup.treatType.length > 0" >Behandling</label>
 		<p *ngIf="popup.treatType.length > 0">{{listToText(popup.treatType)}}</p>
 
 		<label *ngIf="popup.vasNow.length > 0" >vasNow</label>
