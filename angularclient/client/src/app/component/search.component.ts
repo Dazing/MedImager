@@ -19,7 +19,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 @Component({
 	selector: 'search',
 	templateUrl: '../template/search.component.html',
-	providers: [PopupService]
+	providers: [] // Changed from "PopupService" to none, start here if popup breaks
 })
 export class SearchComponent {
 	images: Image[];

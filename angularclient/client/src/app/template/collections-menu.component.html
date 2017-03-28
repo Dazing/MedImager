@@ -1,7 +1,7 @@
 <ul class="side-nav fixed collections-menu menu-bar-margin">
-    <li *ngIf="myCollections.length > 0"><a class="subheader">Mina samlingar</a></li>
-    <li *ngFor="let myCollection of myCollections"><a class="image-collection my-collection waves-effect" [attr.data-id]="myCollection.id" droppableCollection>{{myCollection.name}}</a></li>
-    <li *ngIf="myCollections.length > 0"><div class="divider"></div></li>
+    <li *ngIf="collections?.length > 0"><a class="subheader">Mina samlingar</a></li>
+    <li *ngFor="let collection of collections"><a class="image-collection my-collection waves-effect" [attr.data-id]="collection.id" droppableCollection>{{collection.name}}</a></li>
+    <li *ngIf="collections?.length > 0"><div class="divider"></div></li>
 
     <li *ngIf="sharedCollections.length > 0"><a class="subheader">Delade med mig</a></li>
     <li *ngFor="let sharedCollection of sharedCollections"><a class="image-collection shared-collection waves-effect" [attr.data-id]="sharedCollection.id" droppableCollection>{{sharedCollection.name}}</a></li>

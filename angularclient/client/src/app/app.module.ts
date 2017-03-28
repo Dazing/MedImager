@@ -20,6 +20,8 @@ import { PopupComponent } from './component/popup.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SearchService } from './service/search.service';
+import { PopupService } from './service/popup.service';
+import { CollectionService } from './service/collection.service';
 import { UserService } from './service/user.service';
 import { Server } from './model/server'
 
@@ -50,13 +52,15 @@ import { DroppableCollectionDirective } from './directive/droppableCollection.di
 		AppRoutingModule,
 		ReactiveFormsModule
 	],
-	providers: [SearchService, UserService, Server],
+	providers: [SearchService, PopupService, CollectionService, UserService, Server],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
 
 	constructor(
 		private searchService: SearchService, 
+		private popupService: PopupService,
+		private collectionService: CollectionService,
 		private userService: UserService,
 		private server: Server
 	) {

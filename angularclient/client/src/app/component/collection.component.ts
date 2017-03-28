@@ -7,8 +7,14 @@ import { Image } from '../model/image';
 	templateUrl: '../template/collection.component.html',
 	providers: []
 })
-export class CollectionComponent {
+export class CollectionComponent implements OnInit {
 	private collectionsMenuVisible = false;
+
+	ngOnInit(): void {
+
+		
+	
+	}
 	
 	toggleCollectionsMenu() {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
