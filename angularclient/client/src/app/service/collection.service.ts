@@ -15,7 +15,7 @@ import { Server } from '../model/server';
 
 
 @Injectable()
-export class PopupService{
+export class CollectionService {
 	private headers = new Headers({'Content-Type': 'application/json'});
 	collections:Observable<Collection[]>;
 	private privCollections: Subject<Collection[]>;
@@ -23,9 +23,7 @@ export class PopupService{
 	constructor(private http: Http, private router: Router, ) {
 		this.privCollections = new Subject<Collection[]>();
         this.collections = this.privCollections.asObservable();
-	}
-
-	ngOnInit(): void {
+		
 		this.privCollections.next(
 			[
 				new Collection(0,"Min Samling", {
@@ -123,6 +121,8 @@ export class PopupService{
 				})
 			]
 		);
+		
+		
 	}
 
 	removeCollection(id: number): void {

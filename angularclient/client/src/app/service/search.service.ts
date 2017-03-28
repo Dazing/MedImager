@@ -15,7 +15,7 @@ import { Server } from '../model/server';
 
 
 @Injectable()
-export class SearchService{
+export class SearchService {
 	private headers = new Headers({'Content-Type': 'application/json'});
 
 	searchTerms: string[];
@@ -72,7 +72,7 @@ export class SearchService{
 			})
 			.catch(e => {
 				console.log("Get search "+e);
-				
+				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
 			});
 

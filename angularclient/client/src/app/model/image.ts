@@ -5,14 +5,14 @@ export class Image {
 }
 
 export class Collection {
-    id: number;
-    name: string;
-    images: any[];
+    public id: number;
+    public name: string;
+    public images: any[];
 
-    constructor(id: number, name: string, image:any) {
+    constructor(id: number, name: string, images:any) {
         this.id = id;
         this.name = name;
-        this.images.push(image);
+        this.images = images;
 	}
 
     addImage(image:any): void {
@@ -25,8 +25,7 @@ export class Collection {
                 if (i > -1) {
                     this.images.splice(i, 1);
                 }       
-            }
-            
+            } 
         }
 	}
 
