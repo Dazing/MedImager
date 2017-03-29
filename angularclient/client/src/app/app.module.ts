@@ -11,7 +11,7 @@ import { FooterComponent } from './component/footer.component';
 import { SearchComponent } from './component/search.component';
 import { ThumbnailComponent } from './component/thumbnail.component';
 import { ImagePageComponent } from './component/imagepage.component';
-import { CollectionsMenuComponent } from './component/collections-menu.component';
+import { CollectionsMenu } from './component/collections-menu.component';
 import { CollectionComponent } from './component/collection.component';
 import { NotFound } from './component/not-found.component';
 import { ServerUnreachable } from './component/server-unreachable.component';
@@ -37,7 +37,7 @@ import { DroppableCollectionDirective } from './directive/droppableCollection.di
 		SearchComponent,
 		ThumbnailComponent,
 		ImagePageComponent,
-		CollectionsMenuComponent,
+		CollectionsMenu,
 		CollectionComponent,
 		PopupComponent,
 		NotFound,

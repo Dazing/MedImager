@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 import { Image } from '../model/image';
@@ -6,6 +6,7 @@ import { Image } from '../model/image';
 import { PopupService } from '../service/popup.service';
 import { SearchService } from '../service/search.service';
 import { PopupComponent } from './popup.component';
+import { CollectionsMenu } from './collections-menu.component';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -24,6 +25,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
+
+	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
 	form;
 
@@ -63,6 +66,8 @@ export class SearchComponent {
 
   toggleCollectionsMenu() {
 	this.collectionsMenuVisible = !this.collectionsMenuVisible;
+	this.collectionsMenu.show(this.collectionsMenuVisible);
+	
   }
 
 }

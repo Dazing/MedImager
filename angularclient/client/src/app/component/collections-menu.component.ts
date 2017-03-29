@@ -9,9 +9,10 @@ import { Image, Collection } from '../model/image';
 	providers: []
 })
 
-export class CollectionsMenuComponent implements OnInit {
+export class CollectionsMenu implements OnInit {
 
 	private collections;
+	private visible;
 
 	constructor(
 		private collectionService: CollectionService,
@@ -28,6 +29,11 @@ export class CollectionsMenuComponent implements OnInit {
 			
 		})
 	}
+
+	show(visible: boolean): void {
+		this.visible = visible;
+	}
+
 	//myCollections = [{name:"Tandsten genom tiderna", id:"111111"}, {name:"Karies och baktus", id:"222222"},{name:"Bland tomtar och tandtroll", id:"3333"}];
 	sharedCollections = [{name:"extern samling 1", id:"1232123"},{name:"extern samling 1", id:"1232123"}];
 
