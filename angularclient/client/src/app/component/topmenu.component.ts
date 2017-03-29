@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 
@@ -14,6 +14,8 @@ import { Subject } from 'rxjs/Subject';
 export class TopMenuComponent {
 	form;
 	active : boolean;
+	@ViewChild('value') searchBox; 
+
 	autocompleteList= ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];;
 
 	tags = [];
@@ -56,6 +58,15 @@ export class TopMenuComponent {
 	addTag(term: string): void {
 		console.log("ADD TAG");
 		this.tags.push(term);
+		console.log(this.tags);
+		//this.searchBox.setAttribute("value", "");
+		this.searchBox.nativeElement.value = "";
+		
+	}
+
+	removeTag(index: number): void {
+		this.tags.splice(index, 1);
+		console.log("REMOVE TAG");
 		console.log(this.tags);
 	}
 

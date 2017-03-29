@@ -21,12 +21,13 @@
 					</span>
 
 				</div>
+
 				<div id="selected-tags">
 
 					<!-- Display selected tags -->
 					<div *ngFor="let tag of tags; let i=index" class="chip">
 						{{tag}}
-						<i id="generateTagId(i)" class="removeTag close material-icons">close</i>
+						<i id="generateTagId(i)" class="removeTag close material-icons" (click)="removeTag(i)">close</i>
 					</div>
 
 				</div>
