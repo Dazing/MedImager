@@ -78,6 +78,13 @@
 	input
 		display: inline-block
 
+.filled-in[type="checkbox"]:checked + label::after, [type="radio"]:checked + label::after, .with-gap[type="radio"]:checked + label::after, 
+	border: 2px solid $primary-colour
+	background-color: $primary-colour
+
+[type="radio"]:checked + label::after, .with-gap[type="radio"]:checked + label::before, .with-gap[type="radio"]:checked + label::after
+	border: 2px solid $primary-colour
+
 #settings-bar
 	+extra-bar
 	height: 50px

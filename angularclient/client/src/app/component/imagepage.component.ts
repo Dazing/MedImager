@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { Server } from '../model/server';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -17,9 +18,23 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class ImagePageComponent {
 	private collectionsMenuVisible = false;
+	private examinationIn: String;
+	private imageIn: String;
+	private displayOrNot: String = "block";
 
-  toggleCollectionsMenu() {
-	this.collectionsMenuVisible = !this.collectionsMenuVisible;
-  }
+	constructor(private router: Router, private server: Server) {
+		this.router.routerState.root.queryParams.subscribe(params => {
+			this.examinationIn = params['examination'];
+			this.imageIn = params['image'];
+		});
+	 }
+
+	private getPhoto(): string {
+        return this.server.getUrl() + '/image/' + this.examinationIn +'/' + this.imageIn;
+    }
+
+	toggleCollectionsMenu() {
+		this.collectionsMenuVisible = !this.collectionsMenuVisible;
+	}
 
 }

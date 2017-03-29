@@ -65,6 +65,10 @@ export class PopupComponent {
         return this.server.getUrl() + '/image/' + this.popup.examinationID +'/' + this.popup.imageIndex;
     }
 
+    private getIndex(): string {
+        return this.popup.imageIndex;
+    }
+
     nextImage(): void {
         this.popupService.setNextImage(this.popup.searchIndex, this.popup.imageIndex);
     }
