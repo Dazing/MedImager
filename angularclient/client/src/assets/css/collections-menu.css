@@ -34,8 +34,8 @@
 .collections-menu {
   margin-top: 69px;
   z-index: 0;
-  transition: margin 0.4s;
-  transition: width 0.4s; }
+  left: 0;
+  transition: margin-top 0.4s, left 0.4s; }
 
 .collections-menu-hidden {
   width: 0; }

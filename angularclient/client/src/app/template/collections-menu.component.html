@@ -1,4 +1,4 @@
-<ul class="side-nav fixed collections-menu menu-bar-margin">
+<ul class="side-nav fixed collections-menu menu-bar-margin" [ngStyle]="{'left': this.visible ? '0px' : '-300px'}">
     <li *ngIf="collections?.length > 0"><a class="subheader">Mina samlingar</a></li>
     <li *ngFor="let collection of collections"><a class="image-collection my-collection waves-effect" [attr.data-id]="collection.id" droppableCollection>{{collection.name}}</a></li>
     <li *ngIf="collections?.length > 0"><div class="divider"></div></li>
