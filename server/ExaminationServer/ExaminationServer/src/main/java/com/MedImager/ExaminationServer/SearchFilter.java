@@ -3,7 +3,15 @@ package com.MedImager.ExaminationServer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.UriInfo;
+
 import medview.datahandling.InvalidPIDException;
 import medview.datahandling.MedViewDataHandler;
 import medview.datahandling.NoSuchTermException;
@@ -22,6 +30,8 @@ public class SearchFilter {
 	private String gender;
 	private Boolean smoke;
 	private Boolean snuff;
+	
+	private Map<String, List<String>> termToValuesMap = new HashMap<>();
 	
 	public String getGender() {
 		return gender;
@@ -68,6 +78,53 @@ public class SearchFilter {
 			this.snuff = snuff;
 		}
 	}
+	
+	public SearchFilter(UriInfo uriInfo){
+//		MultivaluedMap<String, String> myMap = uriInfo.getQueryParameters();
+		termToValuesMap.putAll(uriInfo.getQueryParameters());
+//		System.out.println("gg");
+	}
+	
+	public Boolean filterSatisfied2(ExaminationIdentifier eid){
+		MedViewDataHandler handler = MedViewDataHandler.instance();
+		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
+		
+		try {
+			if(ageLower > 0 && handler.getAge(eid.getPID(), eid.getTime()) < ageLower){
+				return false;
+			}
+			if(ageUpper > 0 && handler.getAge(eid.getPID(), eid.getTime()) > ageUpper){
+				return false;
+			}
+			
+			ExaminationValueContainer evc = handler.getExaminationValueContainer(eid);
+			
+			for(String term : termToValuesMap.keySet()){
+				if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
+					boolean termSatisfied = false;
+					for(String examTermValue : evc.getValues(term)){
+						for(String termValue : termToValuesMap.get(term)){
+							if(examTermValue.toLowerCase().contains(termValue.toLowerCase())){
+								termSatisfied = true;
+							}
+						}
+					}
+					
+					if(!termSatisfied){
+						return false;
+					}
+					
+				}else{
+					return false;
+				}
+			}
+		} catch (IOException | NoSuchExaminationException | NoSuchTermException | InvalidPIDException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+	
 	public List<String> getValues() {
 		return values;
 	}
@@ -225,64 +282,5 @@ public class SearchFilter {
 		}
 		
 		return true;
-	}
-	
-	/*
-	 * Old version, kept for now for possible future reference
-	 */
-	public Boolean valueSatisfiedOld(String value, ExaminationIdentifier eid){
-		MedViewDataHandler handler = MedViewDataHandler.instance();
-		handler.setExaminationDataLocation(Constants.EXAMINATION_DATA_LOCATION);
-		
-		try {
-			ExaminationValueContainer evc = handler.getExaminationValueContainer(eid);
-			if(terms.isEmpty()){
-				boolean examinationContainsValue = false;
-				for(String term : evc.getTermsWithValues()){
-					if(Arrays.asList(evc.getValues(term)).contains(value)){
-						examinationContainsValue = true;
-					}
-				}
-				if(examinationContainsValue == false){
-					return false;
-				}
-			}else{
-				for(String term : terms){
-					if(!Arrays.asList(evc.getTermsWithValues()).contains(term)){
-						return false;
-					}else{
-						List<String> termValues = new ArrayList<>(Arrays.asList(evc.getValues(term)));
-						if(!termValues.contains(value)){
-							return false;
-						}
-					}
-				}
-			}
-			if(ageLower > 0 && handler.getAge(eid.getPID(), eid.getTime()) < ageLower){
-				return false;
-			}
-			if(ageUpper > 0 && handler.getAge(eid.getPID(), eid.getTime()) > ageUpper){
-				return false;
-			}
-			
-			/*
-			 * Check for what the user specified about smoking and compare it to
-			 * what information the examination has about smoking
-			 */
-//			if(smokes == null){
-//				return true;
-//			}else{
-//				if(!Arrays.asList(evc.getTermsWithValues()).contains("Smoke")){
-//					return false;
-//				}else{
-//					return (Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == false) ||
-//					(!Arrays.asList(evc.getValues("Smoke")).contains("Nej") && smokes == true);
-//				}
-//			}
-		} catch (IOException | NoSuchExaminationException | NoSuchTermException | InvalidPIDException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
 	}
 }

@@ -52,6 +52,10 @@ public class SearchTermParser {
     public ArrayList<Examination> getResultListWithFilter() throws MethodNotSupportedException{
         return findTerm(filter);
     }
+    
+    public ArrayList<Examination> getResultListWithFilter2() throws MethodNotSupportedException{
+        return findTerm2(filter);
+    }
 
     /*
     NOT COMPLETE
@@ -94,6 +98,26 @@ public class SearchTermParser {
             for (PatientIdentifier pid : handler.getPatients()) {
                 for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
                 	if(filter.filterSatisfied(eid)){
+                		ExaminationBuilder exBuilder = new ExaminationBuilder();
+                		Examination ex = exBuilder.getExamination(eid);
+                		if(ex.getImagePaths().size()!=0){
+                			resultList.add(ex);
+                		}
+                	}
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resultList;
+    }
+    
+    private ArrayList<Examination> findTerm2(SearchFilter filter) throws MethodNotSupportedException {
+        ArrayList<Examination> resultList = new ArrayList<Examination>();
+        try {
+            for (PatientIdentifier pid : handler.getPatients()) {
+                for (ExaminationIdentifier eid : handler.getExaminations(pid)) {
+                	if(filter.filterSatisfied2(eid)){
                 		ExaminationBuilder exBuilder = new ExaminationBuilder();
                 		Examination ex = exBuilder.getExamination(eid);
                 		if(ex.getImagePaths().size()!=0){
