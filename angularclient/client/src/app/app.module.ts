@@ -23,10 +23,13 @@ import { SearchService } from './service/search.service';
 import { PopupService } from './service/popup.service';
 import { CollectionService } from './service/collection.service';
 import { UserService } from './service/user.service';
+
 import { Server } from './model/server'
 
 import { DraggableImageDirective } from './directive/draggableImage.directive';
 import { DroppableCollectionDirective } from './directive/droppableCollection.directive';
+
+import { SearchCompletion } from './pipe/search-completion.pipe';
 
 @NgModule({
 	declarations: [
@@ -43,7 +46,8 @@ import { DroppableCollectionDirective } from './directive/droppableCollection.di
 		NotFound,
 		ServerUnreachable,
 		DraggableImageDirective,
-		DroppableCollectionDirective
+		DroppableCollectionDirective,
+		SearchCompletion
 	],
 	imports: [
 		BrowserModule,

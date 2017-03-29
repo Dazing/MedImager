@@ -14,7 +14,9 @@ import { Subject } from 'rxjs/Subject';
 export class TopMenuComponent {
 	form;
 	active : boolean;
-	autocompleteList;
+	autocompleteList= ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];;
+
+	tags = [];
 
 	constructor(
 		private router: Router, 
@@ -43,6 +45,7 @@ export class TopMenuComponent {
 			this.searchService.getSearch(data);
 		});
 
+
 	}
 
 	onEnter(term: string){
@@ -50,10 +53,18 @@ export class TopMenuComponent {
 		
 	}
 
-	search(){
-		
+	addTag(term: string): void {
+		console.log("ADD TAG");
+		this.tags.push(term);
+		console.log(this.tags);
 	}
 
+	generateAutocompleteItemId(index: number): string {
+		return ("sugg-"+index);
+	}
 
+	generateTagId(index: number): string {
+		return ("tag-"+index);
+	}
 
 }

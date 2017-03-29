@@ -9,17 +9,24 @@
 				
 				<!--<input class="filled-in" type="hidden" name="searchTerms" id="searchTerms" formControlName="searchTerms">-->
 
-				<div id="auto-search-results">
-
-					<!-- Autocomplete -->
+				<div id="auto-search-results" style="display:block;" ng-if="(autocompleteList | searchCompletion: value.value).length > 0" >
+					
+					<span 
+						*ngFor="let term of (autocompleteList | searchCompletion: value.value); let i = index" 
+						id="{{generateAutocompleteItemId(i)}}" 
+						style="display:block;"
+						(click)="addTag(term);"
+					>
+						{{term}}
+					</span>
 
 				</div>
 				<div id="selected-tags">
 
 					<!-- Display selected tags -->
 					<div *ngFor="let tag of tags; let i=index" class="chip">
-						tandtroll
-						<i id="generateId(i)" class="removeTag close material-icons">close</i>
+						{{tag}}
+						<i id="generateTagId(i)" class="removeTag close material-icons">close</i>
 					</div>
 
 				</div>
