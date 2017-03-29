@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Server } from '../model/server';
 import { Observable } from 'rxjs';
+import { CollectionsMenu } from './collections-menu.component';
 import { Subject } from 'rxjs/Subject';
 
 // Observable class extensions
@@ -17,6 +18,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 	templateUrl: '../template/imagepage.component.html'
 })
 export class ImagePageComponent {
+	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
+
 	private collectionsMenuVisible = false;
 	private examinationIn: String;
 	private imageIn: String;
@@ -35,6 +38,7 @@ export class ImagePageComponent {
 
 	toggleCollectionsMenu() {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
-	}
+		this.collectionsMenu.show(this.collectionsMenuVisible);
+  }
 
 }

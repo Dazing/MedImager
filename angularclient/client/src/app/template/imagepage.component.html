@@ -1,11 +1,11 @@
 <top-menu></top-menu>
 
-<div id="page-wrapper">
+<collections-menu #collectionsMenu>
+</collections-menu>
 
-	<ul id="slide-out" class="side-nav">
+<div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	</ul>
-	<a href="#" data-activates="slide-out" class="button-collapse" id="collections-togglebutton"><span>></span></a>
+	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
 
 	<div id="image-wrapper" [style.display]="displayOrNot">
 		<img src="{{getPhoto()}}" id="full-image">	
