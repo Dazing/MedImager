@@ -141,4 +141,8 @@
     #selected-tags span span {
       cursor: pointer; }
 
+.chip {
+  border-radius: 4px;
+  background-color: #1de9b6; }
+
 /*# sourceMappingURL=menu.css.map */
