@@ -77,27 +77,21 @@ export class TopMenuComponent {
 	}
 
 	onNavpress(keycode): void {
-		console.log(keycode);
-		
 		if (keycode == 40) { //down arrow
-			console.log("down");
 			this.selectedAutocompleteIndex++;
-			if (this.selectedAutocompleteIndex >= this.suggestedAutocomplete.length) {
+			if (this.selectedAutocompleteIndex >= this.suggestedAutocomplete.length) { //take care of looping
 				this.selectedAutocompleteIndex = 0;
 			}
 		} else if (keycode == 38) { //up arrow
-			console.log("up");
 			this.selectedAutocompleteIndex--;
-			if (this.selectedAutocompleteIndex < 0) {
+			if (this.selectedAutocompleteIndex < 0) { //take care of looping
 				this.selectedAutocompleteIndex = this.suggestedAutocomplete.length -1;
 			}
 		} else if (keycode == 13) {
-			console.log("enter");
 			if (this.selectedAutocompleteIndex > -1 && this.selectedAutocompleteIndex <= this.suggestedAutocomplete.length) {
 				this.addTag(this.suggestedAutocomplete[this.selectedAutocompleteIndex]);
 			}
 		} else if (keycode == 27) {
-			console.log("escape");
 			this.searchFieldBlurred = true;
 			this.selectedAutocompleteIndex = -1;
 		}
