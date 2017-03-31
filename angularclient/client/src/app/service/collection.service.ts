@@ -125,9 +125,6 @@ export class CollectionService {
 		
 	}
 
-	removeCollection(id: number): void {
-		
-	}
 
 	addImage(image:any, imageIndex: number, collId: number): void {
 		var data = {
@@ -153,15 +150,11 @@ export class CollectionService {
 	}
 
 	removeImage(image:any, imageIndex: number, collId: number): void {
-		var data = {
-			examinationID: image.examinationID,
-			imageIndex: imageIndex,
-			collId: collId
-		}
+		var str = 'examinationID='+image.examinationID+'&imageIndex='+imageIndex;
 
-		var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId);
+		var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId+'?'+str);
 		
-		this.http.post(url,data)
+		this.http.delete(url)
 			.toPromise()
 			.then(response => {
 				if (response) {
@@ -175,6 +168,27 @@ export class CollectionService {
 			});
 	}
 
+	createCollection(): void {
+
+	}
+
+	removeCollection(image:any, imageIndex: number, collId: number): void {
+				var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId);
+		
+		
+		this.http.delete(url)
+			.toPromise()
+			.then(response => {
+				if (response) {
+					
+				}
+			})
+			.catch(e => {
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
+	}
 	
 
 }
