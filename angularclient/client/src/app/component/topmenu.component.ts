@@ -14,6 +14,10 @@ import { Subject } from 'rxjs/Subject';
 export class TopMenuComponent {
 	form;
 	active : boolean;
+	suggestedAutocomplete;
+	selectedAutocompleteIndex = -1;
+	maxAutocompleteSuggestions = 7;
+	searchFieldBlurred = true;
 	@ViewChild('value') searchBox; 
 
 	autocompleteList= ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];;
@@ -38,20 +42,78 @@ export class TopMenuComponent {
 
 		this.form.valueChanges.debounceTime(400).subscribe(data => {
 			this.active = this.router.isActive(this.router.url,false);
-		
+			
 			if (!(this.active)){
 				this.router.navigate(['/search', { query: data }]);
 			}
 			console.log(data);
 			
 			this.searchService.getSearch(data);
+
+			
 		});
 
 
 	}
 
+	emptySearchField(): void {
+		this.searchBox.nativeElement.value = "";
+		this.suggestedAutocomplete = [];
+		this.selectedAutocompleteIndex = -1;
+	}
+
+	onSearchFieldBlur(): void {
+		this.searchFieldBlurred = true;
+		this.selectedAutocompleteIndex = -1;
+	}
+
+	onSearchFieldFocus(): void {
+		this.searchFieldBlurred = false;
+	}
+
 	onEnter(term: string){
 		console.log(this.form.getRawValue());
+		
+	}
+
+	onNavpress(keycode): void {
+		if (keycode == 40) { //down arrow
+			this.selectedAutocompleteIndex++;
+			if (this.selectedAutocompleteIndex >= this.suggestedAutocomplete.length) { //take care of looping
+				this.selectedAutocompleteIndex = 0;
+			}
+		} else if (keycode == 38) { //up arrow
+			this.selectedAutocompleteIndex--;
+			if (this.selectedAutocompleteIndex < 0) { //take care of looping
+				this.selectedAutocompleteIndex = this.suggestedAutocomplete.length -1;
+			}
+		} else if (keycode == 13) {
+			if (this.selectedAutocompleteIndex > -1 && this.selectedAutocompleteIndex <= this.suggestedAutocomplete.length) {
+				this.addTag(this.suggestedAutocomplete[this.selectedAutocompleteIndex]);
+			}
+		} else if (keycode == 27) {
+			this.searchFieldBlurred = true;
+			this.selectedAutocompleteIndex = -1;
+		}
+	}
+
+	onSearchFieldChange(newValue): void {
+		if (this.searchBox.nativeElement.value == "") {
+			this.suggestedAutocomplete = [];
+		} else {
+			let textToMatch = this.searchBox.nativeElement.value;
+
+			this.suggestedAutocomplete = this.autocompleteList.filter(
+				function(el) {
+					return el.toLowerCase().indexOf(textToMatch.toLowerCase()) > -1;
+				}
+			);
+			if (this.suggestedAutocomplete.length > this.maxAutocompleteSuggestions) {
+				this.suggestedAutocomplete = this.suggestedAutocomplete.slice(0, this.maxAutocompleteSuggestions);
+			}
+			this.selectedAutocompleteIndex = -1;
+			this.searchFieldBlurred = false;
+		}
 		
 	}
 
@@ -60,8 +122,7 @@ export class TopMenuComponent {
 		this.tags.push(term);
 		console.log(this.tags);
 		//this.searchBox.setAttribute("value", "");
-		this.searchBox.nativeElement.value = "";
-		
+		this.emptySearchField();
 	}
 
 	removeTag(index: number): void {
