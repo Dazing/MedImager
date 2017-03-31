@@ -4,18 +4,31 @@
 			<a href="index.html"><img src="./assets/img/logo.png" class="medimager-logo"></a>
 			<div id="search-wrapper">
 
-				<input id="search-input searchTerms" formControlName="value" #value (keyup.enter)="onEnter(value.value)" placeholder="Sök..." autocomplete="off">
+				<input 
+					id="search-input searchTerms" 
+					formControlName="value" 
+					[ngModel]="searchFieldModel" 
+					#value 
+					(keyup.enter)="onEnter(value.value)" 
+					(keydown)="onNavpress($event.keyCode)"
+					(blur)="onSearchFieldBlur()"
+					(focus)="onSearchFieldFocus()"
+					(ngModelChange)="onSearchFieldChange($event)" 
+					placeholder="Sök..." 
+					autocomplete="off"
+				>
 				
 				
 				<!--<input class="filled-in" type="hidden" name="searchTerms" id="searchTerms" formControlName="searchTerms">-->
 
-				<div id="auto-search-results" style="display:block;" ng-if="(autocompleteList | searchCompletion: value.value).length > 0" >
+				<div id="auto-search-results" style="display:block;" *ngIf="suggestedAutocomplete.length > 0 && !searchFieldBlurred" >
 					
 					<span 
-						*ngFor="let term of (autocompleteList | searchCompletion: value.value); let i = index" 
+						*ngFor="let term of suggestedAutocomplete; let i = index" 
 						id="{{generateAutocompleteItemId(i)}}" 
 						style="display:block;"
 						(click)="addTag(term);"
+						[ngStyle]="{'background-color': selectedAutocompleteIndex==i ? '#e7e7e7' : '#ffffff'}"
 					>
 						{{term}}
 					</span>
