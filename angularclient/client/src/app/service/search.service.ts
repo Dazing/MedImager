@@ -34,7 +34,7 @@ export class SearchService {
         this.tags = this.privTags.asObservable();
 
 		this.searchTerms = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
-		this.privTags.next(this.searchTerms);
+
 	}
 
 
@@ -64,7 +64,7 @@ export class SearchService {
 		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
 		console.log("URL: "+url+", Q: "+str);
 		
-		/*this.http.get(url)
+		this.http.get(url)
 			.toPromise()
 			.then(response => {
 				this.privImages.next(response.json());
@@ -75,7 +75,7 @@ export class SearchService {
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
 			});
-		*/
+
 	}
 
 	autoComplete(term: string): string[]{
