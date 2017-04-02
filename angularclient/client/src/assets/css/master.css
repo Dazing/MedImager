@@ -419,6 +419,19 @@ a, a:visited {
 .login-box {
   width: 100%; }
 
+#loginErrorIcon {
+  vertical-align: middle;
+  display: inline;
+  font-size: 18px; }
+
+#loginErrorMsg {
+  vertical-align: middle;
+  display: inline;
+  font-size: 16px; }
+
+#registerFields {
+  margin: 30px 0px 30px 0px; }
+
 #image-wrapper {
   padding-top: 40px;
   margin-bottom: 100px;

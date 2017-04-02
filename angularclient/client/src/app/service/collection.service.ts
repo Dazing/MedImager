@@ -123,19 +123,70 @@ export class CollectionService {
 		
 	}
 
-	removeCollection(id: number): void {
+
+	addImage(image:any, imageIndex: number, collId: number): void {
+		var data = {
+			examinationID: image.examinationID,
+			imageIndex: imageIndex,
+			collId: collId
+		}
+
+		var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId);
 		
+		this.http.post(url,data)
+			.toPromise()
+			.then(response => {
+				if (response) {
+					
+				}
+			})
+			.catch(e => {
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
 	}
 
-	addImage(image:JSON, imageId: number, collId: number): void {
-		image['imageId'] = imageId;
-		this.privCollections[collId].addImage(image,imageId);
+	removeImage(image:any, imageIndex: number, collId: number): void {
+		var str = 'examinationID='+image.examinationID+'&imageIndex='+imageIndex;
+
+		var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId+'?'+str);
+		
+		this.http.delete(url)
+			.toPromise()
+			.then(response => {
+				if (response) {
+					
+				}
+			})
+			.catch(e => {
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
 	}
 
-	removeImage(examId:number, imageId: number, collId: number): void {
-		this.privCollections[collId].removeImage(imageId, examId);
+	createCollection(): void {
+
 	}
 
+	removeCollection(image:any, imageIndex: number, collId: number): void {
+				var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId);
+		
+		
+		this.http.delete(url)
+			.toPromise()
+			.then(response => {
+				if (response) {
+					
+				}
+			})
+			.catch(e => {
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
+	}
 	
 
 }
