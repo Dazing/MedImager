@@ -11,7 +11,7 @@
 		<label>Upplösning</label>
 		<p>{{imageWidth}} x {{imageHeight}}</p>
 
-		<label *ngIf="notNull(popup.examinationID)" >Undersökningsnummer</label>
+		<label *ngIf="notNull(popup.examinationID)">Undersökningsnummer</label>
 		<p *ngIf="notNull(popup.examinationID)">{{popup.examinationID}}</p>
 
 		<label *ngIf="popup.diagDef.length > 0" >Diagnos</label>

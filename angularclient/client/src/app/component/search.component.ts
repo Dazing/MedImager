@@ -35,9 +35,7 @@ export class SearchComponent {
 	constructor(
 		private searchService: SearchService,
 		private popupService: PopupService
-	){
-		
-	}
+	){}
 
 	/*ngOnInit(): void {
 		this.images = this.searchTerms
@@ -57,7 +55,6 @@ export class SearchComponent {
 	*/
 	onEnter(term: string){
 		 console.log(JSON.stringify(this.images));
-
 	}
 
 	search(term: string): void {
@@ -69,5 +66,4 @@ export class SearchComponent {
 	this.collectionsMenu.show(this.collectionsMenuVisible);
 	
   }
-
 }

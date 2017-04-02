@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Server } from '../model/server';
+import { ImagePageService } from '../service/imagepage.service';
 import { Observable } from 'rxjs';
 import { CollectionsMenu } from './collections-menu.component';
 import { Subject } from 'rxjs/Subject';
@@ -15,22 +16,28 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
 	selector: 'imagepage',
-	templateUrl: '../template/imagepage.component.html'
+	templateUrl: '../template/imagepage.component.html',
+	providers: []
 })
 export class ImagePageComponent {
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
 	private collectionsMenuVisible = false;
-	private examinationIn: String;
-	private imageIn: String;
+	private examinationIn: Number;
+	private imageIn: Number;
+	private imageData:JSON;
 	private displayOrNot: String = "block";
 
-	constructor(private router: Router, private server: Server) {
+	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService) {
 		this.router.routerState.root.queryParams.subscribe(params => {
 			this.examinationIn = params['examination'];
 			this.imageIn = params['image'];
 		});
-	 }
+	}
+
+	ngOnInit(): void {
+		this.imagePageService.getImageData(this.examinationIn);
+	}
 
 	private getPhoto(): string {
         return this.server.getUrl() + '/image/' + this.examinationIn +'/' + this.imageIn;

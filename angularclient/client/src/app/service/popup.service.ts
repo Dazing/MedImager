@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -11,8 +11,6 @@ import 'rxjs/add/operator/map';
 import { Image } from '../model/image';
 import { PopupNavArgs } from '../model/popupNavArgs';
 import { Server } from '../model/server';
-
-
 
 @Injectable()
 export class PopupService{
