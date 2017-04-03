@@ -9,9 +9,9 @@
 		(click)="onImageClick(i,j)"
 	>
 		<div class="opacity-wrapper" *ngIf="gridType == 'search'">
-			<div *ngIf="searchresults[i].diagDef.length > 0" class="inner-text"><b>Diagnos:</b> {{getDiagDef(i)}}</div>
-			<div *ngIf="searchresults[i].diagTent.length > 0" class="inner-text"><b>Tentativ diagnos:</b> {{getDiagTent(i)}}</div>
-			<div *ngIf="searchresults[i].diagHist.length > 0" class="inner-text"><b>Tidigare diagnos:</b> {{getDiagHist(i)}}</div>
+			<div [hidden]="searchresults[i].diagDef.length > 0" *ngIf="searchresults[i].diagDef.length > 0" class="inner-text"><b>Diagnos:</b> {{getDiagDef(i)}}</div>
+			<div [hidden]="searchresults[i].diagTent.length > 0" *ngIf="searchresults[i].diagTent.length > 0" class="inner-text"><b>Tentativ diagnos:</b> {{getDiagTent(i)}}</div>
+			<div [hidden]="searchresults[i].diagHist.length > 0" *ngIf="searchresults[i].diagHist.length > 0" class="inner-text"><b>Tidigare diagnos:</b> {{getDiagHist(i)}}</div>
 			<div class="inner-text"><b>Ålder:</b> {{getAge(i)}} år</div>
 		</div>
 	</span>

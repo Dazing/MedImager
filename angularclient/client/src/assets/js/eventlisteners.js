@@ -52,7 +52,6 @@ $(document).ready(function () {
 	})
 
 	$("#menu-bar").resize(function() {
-		console.log("resized menu bar");
 		setPageWrapperHeight((advancedBar ? 104 : 0) + (settingsBar ? 52 : 0));
 	})
 
