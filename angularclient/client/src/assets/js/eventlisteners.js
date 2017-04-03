@@ -51,6 +51,11 @@ $(document).ready(function () {
 		);
 	})
 
+	$("#menu-bar").resize(function() {
+		console.log("resized menu bar");
+		setPageWrapperHeight((advancedBar ? 104 : 0) + (settingsBar ? 52 : 0));
+	})
+
 	//$("#search-results span").on('mouseup', function(event) {
 	//	var thisId = event.target.id;
 	//	currentImage = thisId;

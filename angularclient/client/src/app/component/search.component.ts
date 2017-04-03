@@ -53,8 +53,8 @@ export class SearchComponent {
 				console.log(error);
 				return Observable.of<Image[]>([]);
 			});
-		}
-	*/
+	}*/
+	
 	onEnter(term: string){
 		 console.log(JSON.stringify(this.images));
 
@@ -67,7 +67,6 @@ export class SearchComponent {
   toggleCollectionsMenu() {
 	this.collectionsMenuVisible = !this.collectionsMenuVisible;
 	this.collectionsMenu.show(this.collectionsMenuVisible);
-	
   }
 
 }

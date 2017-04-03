@@ -33,7 +33,7 @@ export class SearchService {
 		this.privTags = new Subject<string[]>();
         this.tags = this.privTags.asObservable();
 
-		this.searchTerms = ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
+		this.searchTerms = ["planus", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
 
 	}
 

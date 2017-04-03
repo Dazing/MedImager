@@ -19,10 +19,11 @@ export class TopMenuComponent {
 	maxAutocompleteSuggestions = 7;
 	searchFieldBlurred = true;
 	@ViewChild('value') searchBox; 
+	@ViewChild('menuBar') menuBar;
 
 	autocompleteList= ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];;
 
-	tags = [];
+	tags: string[] = [];
 
 	constructor(
 		private router: Router, 
@@ -101,13 +102,19 @@ export class TopMenuComponent {
 		if (this.searchBox.nativeElement.value == "") {
 			this.suggestedAutocomplete = [];
 		} else {
-			let textToMatch = this.searchBox.nativeElement.value;
+			let thisHandle = this;
 
 			this.suggestedAutocomplete = this.autocompleteList.filter(
 				function(el) {
-					return el.toLowerCase().indexOf(textToMatch.toLowerCase()) > -1;
+					for (let alreadySelectedTag of thisHandle.tags) {
+						if (el.toLowerCase() == alreadySelectedTag.toLowerCase()) {
+							return false;
+						}
+					}
+					return el.toLowerCase().indexOf(newValue.toLowerCase()) > -1;
 				}
 			);
+			
 			if (this.suggestedAutocomplete.length > this.maxAutocompleteSuggestions) {
 				this.suggestedAutocomplete = this.suggestedAutocomplete.slice(0, this.maxAutocompleteSuggestions);
 			}
@@ -122,13 +129,19 @@ export class TopMenuComponent {
 		this.tags.push(term);
 		console.log(this.tags);
 		//this.searchBox.setAttribute("value", "");
-		this.emptySearchField();
+		this.emptySearchField(); 
+		setTimeout(()=>{ 
+			this.menuBar.nativeElement.dispatchEvent(new Event('resize'));
+		}, 250)
 	}
 
 	removeTag(index: number): void {
 		this.tags.splice(index, 1);
 		console.log("REMOVE TAG");
 		console.log(this.tags);
+		setTimeout(()=>{ 
+			this.menuBar.nativeElement.dispatchEvent(new Event('resize'));
+		}, 250)
 	}
 
 	generateAutocompleteItemId(index: number): string {
@@ -137,6 +150,12 @@ export class TopMenuComponent {
 
 	generateTagId(index: number): string {
 		return ("tag-"+index);
+	}
+
+	handleMousedown(term: string, event): void {
+		if (event.button == 0) {
+			this.addTag(term);
+		}
 	}
 
 }
