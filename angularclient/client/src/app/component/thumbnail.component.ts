@@ -29,16 +29,18 @@ export class ThumbnailComponent implements OnInit {
 		var a = this.searchService.images;
 		console.log(a);
 		
-		if (this.gridType == "search") {
-			this.searchService.images.subscribe(images => {
+		// if (this.gridType == "search") {
+		// 	this.searchService.images.subscribe(images => {
+		// 		this.searchresults = images;
+		// 	})
+		// } else if (this.gridType == "collection") {
+		// 	this.searchService.images.subscribe(images => {
+		// 		this.searchresults = images;
+		// 	})
+		// }
+		this.searchService.images.subscribe(images => {
 				this.searchresults = images;
-			})
-		} else if (this.gridType == "collection") {
-			this.searchService.images.subscribe(images => {
-				this.searchresults = images;
-			})
-		}
-		
+		 	})
 		
 
 		this.popupService.searchResult.subscribe(searchResult => {
