@@ -18,12 +18,13 @@ export class ImagePageService {
 
     getImageData(examinationIn:Number): void {
         var url = ('http://localhost:8080/ExaminationServer/examData/api/examination/'+examinationIn);
-        var responsejson:JSON;
 
         this.http.get(url)
 			.toPromise()
 			.then(response => {
-                    responsejson = response.json();
+                   var responsejson = response.json();
+                   this.privImageData.next(responsejson);
+                   console.log(responsejson);
 			})
 			.catch(e => {
 				alert("Server unreachable, try again later!");

@@ -25,7 +25,7 @@ export class ImagePageComponent {
 	private collectionsMenuVisible = false;
 	private examinationIn: Number;
 	private imageIn: Number;
-	private imageData:JSON;
+	private imageData:any;
 	private displayOrNot: String = "block";
 
 	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService) {
@@ -33,9 +33,14 @@ export class ImagePageComponent {
 			this.examinationIn = params['examination'];
 			this.imageIn = params['image'];
 		});
+
+		
 	}
 
 	ngOnInit(): void {
+		this.imagePageService.imageData.subscribe(imageData => {
+			this.imageData = imageData;
+		})
 		this.imagePageService.getImageData(this.examinationIn);
 	}
 
@@ -47,5 +52,4 @@ export class ImagePageComponent {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
 		this.collectionsMenu.show(this.collectionsMenuVisible);
   }
-
 }

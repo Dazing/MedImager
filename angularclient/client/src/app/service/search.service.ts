@@ -35,7 +35,6 @@ export class SearchService {
 
 	}
 
-
 	getSearch(query:JSON): void {
 		var str = "";
 
