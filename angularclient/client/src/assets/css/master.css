@@ -376,7 +376,8 @@
     display: inline-block;
     background-size: cover;
     background-position: center;
-    cursor: pointer; }
+    cursor: pointer;
+    vertical-align: top; }
     #search-results span .opacity-wrapper {
       height: 100%;
       padding: 10px;

@@ -29,18 +29,16 @@ export class ThumbnailComponent implements OnInit {
 		var a = this.searchService.images;
 		console.log(a);
 		
-		// if (this.gridType == "search") {
-		// 	this.searchService.images.subscribe(images => {
-		// 		this.searchresults = images;
-		// 	})
-		// } else if (this.gridType == "collection") {
-		// 	this.searchService.images.subscribe(images => {
-		// 		this.searchresults = images;
-		// 	})
-		// }
-		this.searchService.images.subscribe(images => {
+		if (this.gridType == "search") {
+			this.searchService.images.subscribe(images => {
 				this.searchresults = images;
-		 	})
+			})
+		} else if (this.gridType == "collection") {
+			this.searchService.images.subscribe(images => {
+				this.searchresults = images;
+			})
+		}
+		console.log("gridType: " + this.gridType);
 		
 
 		this.popupService.searchResult.subscribe(searchResult => {
@@ -128,6 +126,36 @@ export class ThumbnailComponent implements OnInit {
 		return this.searchresults[index].age;
 	}
 
+	getDiagListAsString(diags: string[]): string {
+		var diagnoses = "";
+		for (let diag of diags) { 
+			if (diag != "") {
+				if (diagnoses != "") {
+					diagnoses += ", ";
+				}
+				diagnoses += diag;
+			}
+		}
+		return diagnoses;
+	}
+
+	constructInnerText(i: number): string {
+		let innerText = "";
+		if (this.searchresults[i].diagDef.length > 0) {
+			innerText += "<b>Diagnos: </br>" 
+			+ this.getDiagListAsString(this.searchresults[i].diagDef)
+			+ "<br>";
+		}
+
+		if (this.searchresults[i].diagTent.length > 0) {
+			innerText += "<b>Diagnos: </br>" 
+			+ this.getDiagListAsString(this.searchresults[i].diagTent)
+			+ "<br>";
+		}
+
+		return innerText;
+
+	}
 
 
 }
