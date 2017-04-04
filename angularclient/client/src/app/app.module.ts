@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
@@ -20,6 +21,7 @@ import { PopupComponent } from './component/popup.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { SearchService } from './service/search.service';
+import { ImagePageService } from './service/imagepage.service';
 import { PopupService } from './service/popup.service';
 import { CollectionService } from './service/collection.service';
 import { UserService } from './service/user.service';
@@ -56,13 +58,14 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		AppRoutingModule,
 		ReactiveFormsModule
 	],
-	providers: [SearchService, PopupService, CollectionService, UserService, Server],
+	providers: [SearchService, ImagePageService, PopupService, CollectionService, UserService, Server],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
 
 	constructor(
 		private searchService: SearchService, 
+		private imagePageService: ImagePageService, 
 		private popupService: PopupService,
 		private collectionService: CollectionService,
 		private userService: UserService,

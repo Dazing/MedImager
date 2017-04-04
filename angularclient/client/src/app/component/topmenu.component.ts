@@ -48,6 +48,8 @@ export class TopMenuComponent {
 				this.router.navigate(['/search', { query: data }]);
 			}
 			console.log(data);
+
+			data.value=this.tags;
 			
 			this.searchService.getSearch(data);
 

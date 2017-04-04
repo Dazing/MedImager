@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Subject} from 'rxjs/Subject';
+import { Subject } from 'rxjs/Subject';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
@@ -11,8 +11,6 @@ import 'rxjs/add/operator/map';
 import { Image } from '../model/image';
 
 import { Server } from '../model/server';
-
-
 
 @Injectable()
 export class SearchService {
@@ -26,7 +24,7 @@ export class SearchService {
 	tags:Observable<string[]>;
 	private privTags: Subject<string[]>;
 
-	constructor(private http: Http, private router: Router, ) {
+	constructor(private http: Http, private router: Router) {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
 
@@ -36,7 +34,6 @@ export class SearchService {
 		this.searchTerms = ["planus", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
 
 	}
-
 
 	getSearch(query:JSON): void {
 		var str = "";
@@ -75,7 +72,6 @@ export class SearchService {
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
 			});
-
 	}
 
 	autoComplete(term: string): string[]{

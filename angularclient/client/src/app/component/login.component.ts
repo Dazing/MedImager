@@ -39,7 +39,27 @@ export class LoginComponent {
     }
 
 	register():void {
-		console.log("hello");
+		if(
+			this.model.mail &&
+			this.model.password &&
+			this.model.firstname &&
+			this.model.surname &&
+			this.model.workplace
+		) {
+			this.userService.login(this.model.username, this.model.password)
+				.subscribe(result => {
+					if (result === true) {
+						// login successful
+						this.router.navigate(['/']);
+					} else {
+						// login failed
+						this.error = 'Username or password is incorrect';
+					}
+				});
+		}
+		else {
+			this.error = 'Complete the form';
+		}
 	}
 
 	setRegister(): void {

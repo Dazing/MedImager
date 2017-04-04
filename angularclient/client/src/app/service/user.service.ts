@@ -21,20 +21,29 @@ export class UserService {
 	constructor(private http: Http, private server: Server) {
 	}
 
-	register(email:string, password:string): void {
-		var url = (this.server.getUrl()+"/register");
-
+	register(email:string, password:string): Observable<Boolean> {
+		var url = (this.server.getUrl()+"/login");
 		var data = {
 			email: email,
 			password: password
 		}
 
-		this.http.post(url,data)
-			.toPromise()
-			.then(response => {
-				console.log("Register sent succesfully!");
-			})
-			.catch(this.handleError);
+		return this.http.post('/api/authenticate', JSON.stringify({ email: email, password: password }))
+			.map((response: Response) => {
+				// login successful if there's a jwt token in the response
+				let user = response.json();
+				if (user.email && user.token) {
+					// store email and jwt token in local storage to keep user logged in between page refreshes
+					localStorage.setItem('currentUser', user);
+ 
+					// return true to indicate successful login
+					return true;
+				} 
+				else {
+					// return false to indicate failed login
+					return false;
+				}
+		});
 	}
 	
 	login(email:string, password:string): Observable<Boolean> {

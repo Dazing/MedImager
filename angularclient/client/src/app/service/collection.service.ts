@@ -12,8 +12,6 @@ import { Image, Collection } from '../model/image';
 
 import { Server } from '../model/server';
 
-
-
 @Injectable()
 export class CollectionService {
 	private headers = new Headers({'Content-Type': 'application/json'});
