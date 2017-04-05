@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import { Server } from '../model/server';
 import { SearchService } from '../service/search.service';
@@ -13,6 +13,7 @@ export class ThumbnailComponent implements OnInit {
 
 	private searchresults;
 	private url;
+	@Input() gridType: string; //'search' if list of search results, 'collection' if viewing collection
 
 	constructor(
 		private searchService: SearchService,
@@ -28,10 +29,17 @@ export class ThumbnailComponent implements OnInit {
 		var a = this.searchService.images;
 		console.log(a);
 		
-
-		this.searchService.images.subscribe(images => {
-			this.searchresults = images;
-		})
+		if (this.gridType == "search") {
+			this.searchService.images.subscribe(images => {
+				this.searchresults = images;
+			})
+		} else if (this.gridType == "collection") {
+			this.searchService.images.subscribe(images => {
+				this.searchresults = images;
+			})
+		}
+		console.log("gridType: " + this.gridType);
+		
 
 		this.popupService.searchResult.subscribe(searchResult => {
 			if (searchResult.direction > 0) {
@@ -118,6 +126,36 @@ export class ThumbnailComponent implements OnInit {
 		return this.searchresults[index].age;
 	}
 
+	getDiagListAsString(diags: string[]): string {
+		var diagnoses = "";
+		for (let diag of diags) { 
+			if (diag != "") {
+				if (diagnoses != "") {
+					diagnoses += ", ";
+				}
+				diagnoses += diag;
+			}
+		}
+		return diagnoses;
+	}
+
+	constructInnerText(i: number): string {
+		let innerText = "";
+		if (this.searchresults[i].diagDef.length > 0) {
+			innerText += "<b>Diagnos: </br>" 
+			+ this.getDiagListAsString(this.searchresults[i].diagDef)
+			+ "<br>";
+		}
+
+		if (this.searchresults[i].diagTent.length > 0) {
+			innerText += "<b>Diagnos: </br>" 
+			+ this.getDiagListAsString(this.searchresults[i].diagTent)
+			+ "<br>";
+		}
+
+		return innerText;
+
+	}
 
 
 }

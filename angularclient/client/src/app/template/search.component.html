@@ -13,12 +13,9 @@
 	<p id="results-count"><span></span> resultat</p>
 
 	<div id="search-results">
-		<thumbnail></thumbnail>
+		<thumbnail [gridType]="'search'"></thumbnail>
 	</div>
-
-	<div *ngFor="let image of images">
-		<p>Image: {{image.name}}</p>
-	</div>
+	
 </div>
 
 <page-footer></page-footer>

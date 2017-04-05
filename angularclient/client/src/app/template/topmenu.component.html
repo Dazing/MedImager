@@ -1,11 +1,11 @@
 <div id="menu-wrapper">
 	<form [formGroup]="form" action="">
-		<div id="menu-bar">
+		<div id="menu-bar" #menuBar>
 			<a href="index.html"><img src="./assets/img/logo.png" class="medimager-logo"></a>
 			<div id="search-wrapper">
 
 				<input 
-					id="search-input searchTerms" 
+					id="search-input searchTerms"
 					formControlName="value" 
 					[ngModel]="searchFieldModel" 
 					#value 
@@ -27,7 +27,7 @@
 						*ngFor="let term of suggestedAutocomplete; let i = index" 
 						id="{{generateAutocompleteItemId(i)}}" 
 						style="display:block;"
-						(click)="addTag(term);"
+						(mousedown)="handleMousedown(term, $event);"
 						[ngStyle]="{'background-color': selectedAutocompleteIndex==i ? '#e7e7e7' : '#ffffff'}"
 					>
 						{{term}}
@@ -38,7 +38,7 @@
 				<div id="selected-tags">
 
 					<!-- Display selected tags -->
-					<div *ngFor="let tag of tags; let i=index" class="chip">
+					<div *ngFor="let tag of tags; let i=index" class="chip unselectable">
 						{{tag}}
 						<i id="generateTagId(i)" class="removeTag close material-icons" (click)="removeTag(i)">close</i>
 					</div>
