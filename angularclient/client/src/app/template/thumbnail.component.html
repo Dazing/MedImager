@@ -15,10 +15,13 @@
 			<div class="inner-text"><b>Ålder:</b> {{getAge(i)}} år</div>
 		</div>
 
+		<div class="opacity-wrapper" *ngIf="gridType == 'collection' && getNote(i,j)">
+			{{getNote(i,j)}}
+		</div>
 		<div class="collection-image-button-container" *ngIf="gridType == 'collection'">
-			<div style="height: 50px;background-color: #ffff00;">
-				hello
-			</div>
+			<a class="btn-floating btn-large waves-effect waves-light" (click)="setNote(i,j,'test:'+i+','+j)">
+				<i class="material-icons">mode_edit</i>
+			</a>
 		</div>
 	</span>
 </template>

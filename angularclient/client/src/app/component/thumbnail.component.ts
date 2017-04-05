@@ -14,8 +14,8 @@ export class ThumbnailComponent implements OnInit {
 	private searchresults;
 	private url;
 	@Input() gridType: string; //'search' if list of search results, 'collection' if viewing collection
-	private focusi:number;
-	private focusj:number;
+
+	
 
 	constructor(
 		private searchService: SearchService,
@@ -162,5 +162,20 @@ export class ThumbnailComponent implements OnInit {
 
 	}
 
+	editCollectionImageNote(examinationID: number, imageIndex: number, examinationIndex: number): void {
+		console.log("examinationID: "+examinationID);
+		console.log("imageIndex: "+imageIndex);
+		this.searchresults[examinationIndex]["note"] = "hej";
+		console.log("note: " + this.searchresults[examinationIndex]["note"]);
+		
+	}
+
+	getNote(i:number, j: number): string {
+		return this.searchresults[i]["note"+j];
+	}
+
+	setNote(i:number, j: number, note: string): void {
+		this.searchresults[i]["note"+j] = note;
+	}
 
 }
