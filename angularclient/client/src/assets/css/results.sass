@@ -8,6 +8,7 @@
 
 #search-results
 	padding: 10px
+	position: relative
 	text-align: center
 	margin-bottom: 39px
 	span
@@ -15,11 +16,16 @@
 		width: 100vw
 		height: 210px
 		margin: 5px
+		position: relative
 		display: inline-block
 		background-size: cover
 		background-position: center
 		cursor: pointer
 		vertical-align: top
+		&:hover .collection-image-button-container
+			opacity: 1
+			height: auto
+			z-index: 6
 		.opacity-wrapper
 			height: 100%
 			padding: 10px
@@ -35,6 +41,16 @@
 			opacity: 1
 			margin: 5px
 			text-align: left
+		.collection-image-button-container
+			transition: opacity .15s ease-out
+			opacity: 0
+			height: 0
+			overflow: hidden
+			z-index: 0
+			position: absolute
+			top: 100%
+			width: 100%
+
 
 
 #results-count

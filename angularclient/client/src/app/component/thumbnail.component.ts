@@ -14,6 +14,8 @@ export class ThumbnailComponent implements OnInit {
 	private searchresults;
 	private url;
 	@Input() gridType: string; //'search' if list of search results, 'collection' if viewing collection
+	private focusi:number;
+	private focusj:number;
 
 	constructor(
 		private searchService: SearchService,
@@ -29,17 +31,20 @@ export class ThumbnailComponent implements OnInit {
 		var a = this.searchService.images;
 		console.log(a);
 		
-		if (this.gridType == "search") {
-			this.searchService.images.subscribe(images => {
-				this.searchresults = images;
-			})
-		} else if (this.gridType == "collection") {
-			this.searchService.images.subscribe(images => {
-				this.searchresults = images;
-			})
-		}
+		// if (this.gridType == "search") {
+		// 	this.searchService.images.subscribe(images => {
+		// 		this.searchresults = images;
+		// 	})
+		// } else if (this.gridType == "collection") {
+		// 	this.searchService.images.subscribe(images => {
+		// 		this.searchresults = images;
+		// 	})
+		// }
 		console.log("gridType: " + this.gridType);
-		
+		this.searchService.images.subscribe(images => {
+			this.searchresults = images;
+		})
+
 
 		this.popupService.searchResult.subscribe(searchResult => {
 			if (searchResult.direction > 0) {
