@@ -8,7 +8,7 @@
 
 <div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
+	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()" (dragover)="toggleCollectionsMenu()"><span></span></a>
 
 	<p id="results-count"><span></span> resultat</p>
 

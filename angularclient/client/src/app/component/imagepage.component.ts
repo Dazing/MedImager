@@ -32,9 +32,7 @@ export class ImagePageComponent {
 		this.router.routerState.root.queryParams.subscribe(params => {
 			this.examinationIn = params['examination'];
 			this.imageIn = params['image'];
-		});
-
-		
+		});	
 	}
 
 	ngOnInit(): void {

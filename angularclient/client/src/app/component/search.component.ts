@@ -61,8 +61,18 @@ export class SearchComponent {
     this.searchTerms.next(term);
   }
 
-  toggleCollectionsMenu() {
-	this.collectionsMenuVisible = !this.collectionsMenuVisible;
-	this.collectionsMenu.show(this.collectionsMenuVisible);
+	toggleCollectionsMenu(show: boolean) {
+		if(show == null) {
+			this.collectionsMenuVisible = !this.collectionsMenuVisible;
+			this.collectionsMenu.show(this.collectionsMenuVisible);
+		}
+		else if(show) {
+			this.collectionsMenuVisible = true;
+			this.collectionsMenu.show(true);
+		}
+		else {
+			this.collectionsMenuVisible = false;
+			this.collectionsMenu.show(false);
+		}
   }
 }

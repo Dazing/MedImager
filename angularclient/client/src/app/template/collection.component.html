@@ -5,7 +5,7 @@
 
 <div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
+	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()" (dragover)="toggleCollectionsMenu(true)"><span></span></a>
 
 	<div id="search-results">
 		<thumbnail [gridType]="collection"></thumbnail>
