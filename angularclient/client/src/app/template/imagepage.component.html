@@ -8,12 +8,15 @@
 	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
 
 	<div id="image-wrapper" [style.display]="displayOrNot">
-		<img src="{{getPhoto()}}" id="full-image">	
+		<img src="{{getPhoto()}}" id="full-image">
 		<div id="image-data">
-		<label>Examinations-ID</label>
-		<p>{{examinationIn}}</p>
-		<p>ID från server: {{imageData?.examinationID}}</p>
-		<div>Bramarkera</div>
+			
+			<label>Upplösning</label>
+			<p>{{imageWidth}} x {{imageHeight}}</p>
+
+			<p>{{imageData?.examinationID}}</p>
+			<p>{{listToText(imageData?.diagDef)}}</p>
+
 		</div>
 	</div>
 </div>

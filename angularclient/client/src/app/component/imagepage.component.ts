@@ -42,7 +42,28 @@ export class ImagePageComponent {
 			this.imageData = imageData;
 		})
 		this.imagePageService.getImageData(this.examinationIn);
+		
 	}
+
+	notNull(value: any){
+        if (value.length > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+	listToText(items: string[]): string {
+        let tot = "";
+        for (let item of items) {
+            if (tot != "") {
+                tot += ", "
+            }
+            tot += item;
+        }
+        return tot;
+    }
 
 	private getPhoto(): string {
         return this.server.getUrl() + '/image/' + this.examinationIn +'/' + this.imageIn;

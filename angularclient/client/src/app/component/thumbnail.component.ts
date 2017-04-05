@@ -22,7 +22,7 @@ export class ThumbnailComponent implements OnInit {
 	){}
 
 	ngOnInit(): void {
-		console.log("Thumbnai init");
+		console.log("Thumbnail init");
 		this.url = this.server.getUrl();
 		
 		var a = this.searchService.images;

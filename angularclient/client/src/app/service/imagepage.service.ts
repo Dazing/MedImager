@@ -7,6 +7,7 @@ import { Image } from '../model/image';
 
 @Injectable()
 export class ImagePageService {
+    private headers = new Headers({'Content-Type': 'application/json'});
     imageData:Observable<string[]>;
 
     private privImageData: Subject<string[]>;
