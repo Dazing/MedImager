@@ -15,7 +15,11 @@ export class ThumbnailComponent implements OnInit {
 	private url;
 	@Input() gridType: string; //'search' if list of search results, 'collection' if viewing collection
 
-	
+	//note edit helper functions:
+	private editMode: boolean = false;
+	private editi: number;
+	private editj: number;
+	private editText: string;
 
 	constructor(
 		private searchService: SearchService,
@@ -174,8 +178,17 @@ export class ThumbnailComponent implements OnInit {
 		return this.searchresults[i]["note"+j];
 	}
 
-	setNote(i:number, j: number, note: string): void {
-		this.searchresults[i]["note"+j] = note;
+	setNote(i:number, j: number, note?: string): void {
+		let noteEdit: any  = document.getElementById('note-edit-' + i + '-' + j);
+		this.searchresults[i]["note"+j] = noteEdit.value;
+		this.editMode = false;
+	}
+
+	editNote(i:number,j:number): void {
+		this.editMode = true;
+		this.editi = i;
+		this.editj = j;
+		this.editText = this.searchresults[i]["note"+j] ? this.searchresults[i]["note"+j] : "";
 	}
 
 }
