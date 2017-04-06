@@ -7,15 +7,82 @@
 
 	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
 
-	<div id="image-wrapper" [style.display]="displayOrNot" *ngIf="imageDataLoaded">
-		<img src="{{getPhoto()}}" id="full-image">
+	<div id="image-wrapper" *ngIf="imageDataLoaded && displayOrNot">
+		<img src="{{getPhoto()}}" id="full-image" draggable="true" 
+		[attr.data-examinationid]="imageData.examinationID"
+		[attr.data-imageIndex]="getImageIn()"
+		draggableImage>
 		<div id="image-data">
 			
 			<label>Upplösning</label>
 			<p>{{imageWidth}} x {{imageHeight}}</p>
 
-			<p>{{imageData?.examinationID}}</p>
-			<p>{{listToText(imageData?.diagDef)}}</p>
+			<label *ngIf="notNull(imageData.examinationID)">Undersökningsnummer</label>
+			<p *ngIf="notNull(imageData.examinationID)">{{imageData.examinationID}}</p>
+
+			<label *ngIf="imageData.diagDef.length > 0" >Diagnos</label>
+			<p *ngIf="imageData.diagDef.length > 0">{{listToText(imageData.diagDef)}}</p>
+
+			<label *ngIf="imageData.diagTent.length > 0" >Tentativ diagnos</label>
+			<p *ngIf="imageData.diagTent.length > 0">{{listToText(imageData.diagTent)}}</p>
+
+			<label *ngIf="imageData.diagHist.length > 0" >Tidigare diagnos</label>
+			<p *ngIf="imageData.diagHist.length > 0">{{listToText(imageData.diagHist)}}</p>
+
+			<label *ngIf="imageData.disNow.length > 0 && imageData.disNow != 'Nej'" >Sjukdom</label>
+			<p *ngIf="imageData.disNow.length > 0 && imageData.disNow != 'Nej'">{{listToText(imageData.disNow)}}</p>
+
+			<label *ngIf="imageData.disPast.length > 0 && imageData.disPast != 'Nej'" >Tidigare sjukdom</label>
+			<p *ngIf="imageData.disPast.length > 0  && imageData.disPast != 'Nej'">{{listToText(imageData.disPast)}}</p>
+
+			<label *ngIf="imageData.gender == '1'|| imageData.gender == '2'" >Kön</label>
+			<p *ngIf="imageData.gender == '1'">Man</p>
+			<p *ngIf="imageData.gender == '2'">Kvinna</p>
+
+			<label *ngIf="notNull(imageData.age)" >Ålder</label>
+			<p  *ngIf="notNull(imageData.age)" >{{imageData.age}} år</p>
+
+			<label *ngIf="notNull(imageData.allergy) && imageData.allergy != 'Nej'">Allergi</label>
+			<p *ngIf="notNull(imageData.allergy) && imageData.allergy != 'Nej'" >{{imageData.allergy}}</p>
+
+			<label *ngIf="imageData.drug.length > 0 && imageData.drug != 'Nej'" >Läkemedel</label>
+			<p *ngIf="imageData.drug.length > 0 && imageData.drug != 'Nej'">{{listToText(imageData.drug)}}</p>
+
+			<label *ngIf="imageData.biopsySite.length > 0 && imageData.biopsySite != 'Nej'" >Biopsiplats</label>
+			<p *ngIf="imageData.biopsySite.length > 0 && imageData.biopsySite != 'Nej'">{{listToText(imageData.biopsySite)}}</p>
+
+			<label *ngIf="imageData.factorNeg.length > 0 && imageData.factorNeg != 'Nej'" >Negativ faktor</label>
+			<p *ngIf="imageData.factorNeg.length > 0 && imageData.factorNeg != 'Nej'">{{listToText(imageData.factorNeg)}}</p>
+
+			<label *ngIf="imageData.factorPos.length > 0 && imageData.factorPos != 'Nej'" >Positiv faktor</label>
+			<p *ngIf="imageData.factorPos.length > 0 && imageData.factorPos != 'Nej'">{{listToText(imageData.factorPos)}}</p>
+
+			<label *ngIf="imageData.lesnOn.length > 0" >lesnOn</label>
+			<p *ngIf="imageData.lesnOn.length > 0">{{listToText(imageData.lesnOn)}}</p>
+
+			<label *ngIf="imageData.lesnSite.length > 0" >lesnSite</label>		
+			<p *ngIf="imageData.lesnSite.length > 0">{{listToText(imageData.lesnSite)}}</p>
+
+			<label *ngIf="imageData.skinPbl.length > 0" >Hudproblem</label>
+			<p *ngIf="imageData.skinPbl.length > 0">{{listToText(imageData.skinPbl)}}</p>
+
+			<label *ngIf="imageData.smoke.length > 0" >Rökare</label>
+			<p *ngIf="imageData.smoke.length > 0">{{listToText(imageData.smoke)}}</p>
+
+			<label *ngIf="imageData.snuff.length > 0" >Snusare</label>
+			<p *ngIf="imageData.snuff.length > 0">{{listToText(imageData.snuff)}}</p>
+
+			<label *ngIf="imageData.symptNow.length > 0" >Symptom</label>
+			<p *ngIf="imageData.symptNow.length > 0">{{listToText(imageData.symptNow)}}</p>
+
+			<label *ngIf="imageData.symptSite.length > 0" >Symptomplats</label>
+			<p *ngIf="imageData.symptSite.length > 0">{{listToText(imageData.symptSite)}}</p>
+
+			<label *ngIf="imageData.treatType.length > 0" >Behandling</label>
+			<p *ngIf="imageData.treatType.length > 0">{{listToText(imageData.treatType)}}</p>
+
+			<label *ngIf="imageData.vasNow.length > 0" >vasNow</label>
+			<p *ngIf="imageData.vasNow.length > 0">{{listToText(imageData.vasNow)}}</p>
 
 		</div>
 	</div>

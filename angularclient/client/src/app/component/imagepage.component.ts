@@ -69,6 +69,10 @@ export class ImagePageComponent {
         return this.server.getUrl() + '/image/' + this.examinationIn +'/' + this.imageIn;
     }
 
+	private getImageIn(): Number {
+        return this.imageIn;
+    }
+
 	toggleCollectionsMenu() {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
 		this.collectionsMenu.show(this.collectionsMenuVisible);
