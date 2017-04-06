@@ -19,8 +19,7 @@ import io.jsonwebtoken.impl.crypto.MacProvider;
 //TODO: Thread safety - Close connections, connection pooling etc.
 public class UserHandler{
 	
-//	private static long TOKEN_TTL_MILLIS = 3600000;
-	private static long TOKEN_TTL_MILLIS = 20000;
+	private static long TOKEN_TTL_MILLIS = 3600000;
 	
 	// TODO: Possibly swap for key stored on server
 	private static final Key key = MacProvider.generateKey();
