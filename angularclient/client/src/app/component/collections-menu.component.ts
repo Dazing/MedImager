@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { CollectionService } from '../service/collection.service';
 import { Image, Collection } from '../model/image';
@@ -14,19 +14,17 @@ export class CollectionsMenu implements OnInit {
 	private collections;
 	private visible;
 
+	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
+	private collectionsMenuVisible = false;
+
 	constructor(
 		private collectionService: CollectionService,
-	){
-		
-	}
-
+	){}
 
 	ngOnInit(): void {
 		this.collectionService.collections.subscribe(collections => {
 			console.log("sub: "+collections);
 			this.collections = collections;
-			
-			
 		})
 	}
 
@@ -34,7 +32,12 @@ export class CollectionsMenu implements OnInit {
 		this.visible = visible;
 	}
 
+	toggleCollectionsMenu(show?: boolean) {
+		this.collectionsMenuVisible = !this.collectionsMenuVisible;
+		this.collectionsMenuVisible = show==undefined ? this.collectionsMenuVisible : show;
+		this.show(this.collectionsMenuVisible);
+  	}
+
 	//myCollections = [{name:"Tandsten genom tiderna", id:"111111"}, {name:"Karies och baktus", id:"222222"},{name:"Bland tomtar och tandtroll", id:"3333"}];
 	sharedCollections = [{name:"extern samling 1", id:"1232123"},{name:"extern samling 1", id:"1232123"}];
-
 }
