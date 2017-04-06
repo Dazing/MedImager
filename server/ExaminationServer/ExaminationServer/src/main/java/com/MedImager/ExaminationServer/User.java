@@ -27,6 +27,10 @@ public class User {
 		this.token = token;
 	}
 	
+	public User (int id, String username, String email, String firstname, String lastname, String userPermission){
+		
+	}
+	
 	public String getUsername() {
 		return username;
 	}

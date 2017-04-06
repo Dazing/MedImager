@@ -28,8 +28,8 @@ public class AuthenticationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(@HeaderParam("Username") String username, @HeaderParam("Password") String password){
         try {
-            MockUserDatabase.authenticateUser(username, password);
-            String token = MockUserDatabase.issueToken(username);
+            UserHandler.authenticateUser(username, password);
+            String token = UserHandler.issueToken(username);
             return Response.ok(token).build();
         } catch (Exception e){
             return Response.status(Response.Status.UNAUTHORIZED).build();

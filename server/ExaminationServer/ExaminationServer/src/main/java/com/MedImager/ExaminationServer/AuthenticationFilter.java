@@ -2,6 +2,8 @@ package com.MedImager.ExaminationServer;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Priority;
 import javax.ws.rs.NotAuthorizedException;
@@ -20,45 +22,19 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException{
-		
 		String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-		validateToken(token);
+		UserHandler.validateToken(token);
 		
-		String tempUsername = "";
-		String tempRole = "";
+//		Map<String, String> userInfo = UserHandler.getUserInfo(token);
+//		
+//		final String username = userInfo.get("username");
+//		final String role = userInfo.get("userPermission");
 		
-		// Get the user's username and role
-		for(User user : MockUserDatabase.users){
-    		if(user.getToken() != null && user.getToken().equals(token)){
-    			tempUsername = user.getUsername();
-    			tempRole = user.getRole();
-    		}
-    	}
+		final String username = "rune";
+		final String role = "normal";
 		
-		final String username = tempUsername;
-		final String role = tempRole;
-		
-		// Store the user's info so it can be retrieved by methods needing this info
+		// Store the user's info so it can easily be retrieved if needed
 		storeUserInfo(username, role, requestContext);
-	}
-	
-	private void validateToken(String token){
-		if (token == null) {
-			throw new NotAuthorizedException("Authorization header must be provided");
-		}
-		
-		// TODO:
-		// Check if it was issued by the server and if it's not expired.
-		// Throw an Exception if the token is invalid.
-		
-		// Mock
-		for(User user : MockUserDatabase.users){
-    		if(user.getToken() != null && user.getToken().equals(token)){
-    			return;
-    		}
-    	}
-		
-		throw new NotAuthorizedException("Token not valid");
 	}
 	
 	/*
@@ -66,10 +42,8 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 	 * Storing of name possibly not needed since token should be tied to user in database.
 	 */
 	private void storeUserInfo(final String username, final String role, ContainerRequestContext requestContext){
-		
 		final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
 		requestContext.setSecurityContext(new SecurityContext(){
-			
 			@Override
 			public Principal getUserPrincipal(){
 				return new Principal(){
@@ -97,6 +71,5 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 				return currentSecurityContext.getAuthenticationScheme();
 			}
 		});
-		
 	}
 }
