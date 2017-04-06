@@ -19,34 +19,35 @@ import javax.ws.rs.ext.Provider;
 @Secured
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter{
-
+	
 	@Override
-	public void filter(ContainerRequestContext requestContext) throws IOException{
+	public void filter(ContainerRequestContext requestContext){
 		String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		UserHandler.validateToken(token);
 		
-//		Map<String, String> userInfo = UserHandler.getUserInfo(token);
-//		
-//		final String username = userInfo.get("username");
-//		final String role = userInfo.get("userPermission");
+		User user = UserHandler.getUserByToken(token);
 		
-		final String username = "rune";
-		final String role = "normal";
+		final String username = user.getUsername();
+		final String userPermission = user.getUserPermission();
 		
 		// Store the user's info so it can easily be retrieved if needed
-		storeUserInfo(username, role, requestContext);
+		storeUserInfo(username, userPermission, requestContext);
 	}
 	
 	/*
-	 * Stores the user's name and role for methods needing access to that information.
-	 * Storing of name possibly not needed since token should be tied to user in database.
+	 * Stores the user's name and role for methods needing access to that
+	 * information. Storing of name possibly not needed since token should be
+	 * tied to user in database.
 	 */
-	private void storeUserInfo(final String username, final String role, ContainerRequestContext requestContext){
+	private void storeUserInfo(final String username, final String userPermission,
+			ContainerRequestContext requestContext){
+		
 		final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
 		requestContext.setSecurityContext(new SecurityContext(){
 			@Override
 			public Principal getUserPrincipal(){
 				return new Principal(){
+					
 					@Override
 					public String getName(){
 						// Mock
@@ -56,9 +57,9 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 			}
 			
 			@Override
-			public boolean isUserInRole(String roleToCheck){
+			public boolean isUserInRole(String userPermissionRequired){
 				// TODO: Use token to find the user's role in the user database
-				return role.equals(roleToCheck);
+				return userPermission.equals(userPermissionRequired);
 			}
 			
 			@Override
