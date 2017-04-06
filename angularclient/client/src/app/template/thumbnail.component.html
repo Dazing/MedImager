@@ -3,6 +3,7 @@
 		*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
 		draggableImage
 		id="{{'result-image-'+i+j}}" 
+		class="unselectable"
 		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
 		data-id="{{i}}"
 		[attr.data-examinationid]="searchresult.examinationID"
@@ -22,6 +23,7 @@
 	<span  
 		*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
 		id="{{'result-image-'+i+j}}" 
+		class="unselectable"
 		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
 		data-id="{{i}}"
 		[attr.data-examinationid]="searchresult.examinationID"
