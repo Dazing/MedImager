@@ -26,11 +26,7 @@ export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
 
-	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
-
 	form;
-
-	private collectionsMenuVisible = false;
 
 	constructor(
 		private searchService: SearchService,
@@ -60,10 +56,4 @@ export class SearchComponent {
 	search(term: string): void {
     this.searchTerms.next(term);
   }
-
-	toggleCollectionsMenu(show?: boolean) {
-		this.collectionsMenuVisible = !this.collectionsMenuVisible;
-		this.collectionsMenuVisible = show==undefined ? this.collectionsMenuVisible : show;
-		this.collectionsMenu.show(this.collectionsMenuVisible);
-  	}
 }
