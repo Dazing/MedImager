@@ -392,6 +392,7 @@
       background-color: rgba(0, 0, 0, 0.6);
       color: #ffffff;
       opacity: 0;
+      text-align: left;
       transition: opacity 0.15s ease-in-out;
       -moz-transition: opacity 0.15s ease-in-out;
       -webkit-transition: opacity 0.15s ease-in-out; }

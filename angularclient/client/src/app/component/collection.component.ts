@@ -19,8 +19,9 @@ export class CollectionComponent implements OnInit {
 	
 	}
 	
-	toggleCollectionsMenu() {
+	toggleCollectionsMenu(show?: boolean) {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
+		this.collectionsMenuVisible = show==undefined ? this.collectionsMenuVisible : show;
 		this.collectionsMenu.show(this.collectionsMenuVisible);
-	}
+  	}
 }

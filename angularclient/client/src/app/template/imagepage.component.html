@@ -7,7 +7,7 @@
 
 	<a id="collections-togglebutton" (click)="toggleCollectionsMenu()"><span></span></a>
 
-	<div id="image-wrapper" [style.display]="displayOrNot">
+	<div id="image-wrapper" [style.display]="displayOrNot" *ngIf="imageDataLoaded">
 		<img src="{{getPhoto()}}" id="full-image">
 		<div id="image-data">
 			

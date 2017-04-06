@@ -27,6 +27,7 @@ export class ImagePageComponent {
 	private imageIn: Number;
 	private imageData:any;
 	private displayOrNot: String = "block";
+	private imageDataLoaded = false;
 
 	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService) {
 		this.router.routerState.root.queryParams.subscribe(params => {
@@ -38,6 +39,7 @@ export class ImagePageComponent {
 	ngOnInit(): void {
 		this.imagePageService.imageData.subscribe(imageData => {
 			this.imageData = imageData;
+			this.imageDataLoaded = true;
 		})
 		this.imagePageService.getImageData(this.examinationIn);
 		

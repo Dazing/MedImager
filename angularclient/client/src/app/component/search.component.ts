@@ -65,5 +65,5 @@ export class SearchComponent {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
 		this.collectionsMenuVisible = show==undefined ? this.collectionsMenuVisible : show;
 		this.collectionsMenu.show(this.collectionsMenuVisible);
-  }
+  	}
 }
