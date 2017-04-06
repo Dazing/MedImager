@@ -14,9 +14,9 @@ export class CollectionComponent implements OnInit {
 	private collectionsMenuVisible = false;
 
 	ngOnInit(): void {
-
-		
-	
+		this.collectionsMenu.isVisible.subscribe(visible => {
+			this.collectionsMenuVisible = visible;
+		});
 	}
 	
 	toggleCollectionsMenu(show?: boolean) {

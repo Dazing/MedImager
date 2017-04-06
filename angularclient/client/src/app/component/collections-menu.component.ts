@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Subject} from 'rxjs/Subject';
 
 import { CollectionService } from '../service/collection.service';
 import { Image, Collection } from '../model/image';
+
 
 @Component({
 	selector: 'collections-menu',
@@ -17,9 +20,15 @@ export class CollectionsMenu implements OnInit {
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 	private collectionsMenuVisible = false;
 
+	public isVisible: Observable<boolean>;
+	private privIsVisible: Subject<boolean>;
+
 	constructor(
 		private collectionService: CollectionService,
-	){}
+	){
+		this.privIsVisible = new Subject<boolean>();
+		this.isVisible = this.privIsVisible.asObservable();
+	}
 
 	ngOnInit(): void {
 		this.collectionService.collections.subscribe(collections => {
@@ -36,6 +45,7 @@ export class CollectionsMenu implements OnInit {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
 		this.collectionsMenuVisible = show==undefined ? this.collectionsMenuVisible : show;
 		this.show(this.collectionsMenuVisible);
+		this.privIsVisible.next(this.collectionsMenuVisible);
   	}
 
 	//myCollections = [{name:"Tandsten genom tiderna", id:"111111"}, {name:"Karies och baktus", id:"222222"},{name:"Bland tomtar och tandtroll", id:"3333"}];
