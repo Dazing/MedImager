@@ -25,15 +25,29 @@ public class UserHandler{
 	private static final Key key = MacProvider.generateKey();
 	
 	public static void authenticateUser(String username, String password){
-		Connection connection = Database.getConnection();
-		String query = "SELECT * FROM users WHERE " + "Username = '" + username + "' AND Password = '" + password
-				+ "'";
-				
-		try{
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
-			if(!resultSet.isBeforeFirst()) {
-				throw new NotAuthorizedException("Credentials not valid");
+		try(Connection con = Database.getConnection();){
+			
+			//Check if username is in database
+			String query = "SELECT * FROM users WHERE Username = ?";
+			try(PreparedStatement ps = con.prepareStatement(query);){
+				ps.setString(1, username);
+				try(ResultSet rs = ps.executeQuery();){
+					if(!rs.isBeforeFirst()) {
+						throw new NotAuthorizedException("Username not valid");
+					}
+				}
+			}
+			
+			//Confirmed that username is in database, check now if password is correct
+			query = "SELECT * FROM users WHERE Username = ? AND Password = ?";
+			try(PreparedStatement ps = con.prepareStatement(query);){
+				ps.setString(1, username);
+				ps.setString(2, password);
+				try(ResultSet rs = ps.executeQuery();){
+					if(!rs.isBeforeFirst()) {
+						throw new NotAuthorizedException("Password not valid");
+					}
+				}
 			}
 		}catch(SQLException e){
 			throw new WebApplicationException();
@@ -41,24 +55,23 @@ public class UserHandler{
 	}
 	
 	public static String issueToken(String username){
-		Connection connection = Database.getConnection();
-		String query = "SELECT * FROM users WHERE Username = '" + username + "'";
+		String query = "SELECT * FROM users WHERE Username = ?";
 		
-		try{
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+		try(Connection con = Database.getConnection();
+				PreparedStatement ps = con.prepareStatement(query);){
+			ps.setString(1, username);
 			
-			resultSet.next();
-			
-			String userPermission = resultSet.getString("UserPermission");
-			Date exp = new Date(System.currentTimeMillis() + TOKEN_TTL_MILLIS);
-			
-			String compactJws = Jwts.builder().claim("username", username)
-					.claim("userpermission", "testpermission").setExpiration(exp)
-					.signWith(SignatureAlgorithm.HS512, key).compact();
-					
-			return compactJws;
-			
+			try(ResultSet rs = ps.executeQuery();){
+				rs.next();
+				
+				String userPermission = rs.getString("UserPermission");
+				Date exp = new Date(System.currentTimeMillis() + TOKEN_TTL_MILLIS);
+				String compactJws = Jwts.builder().claim("username", username)
+						.claim("userpermission", userPermission).setExpiration(exp)
+						.signWith(SignatureAlgorithm.HS512, key).compact();
+						
+				return compactJws;
+			}
 		}catch(SQLException e){
 			throw new WebApplicationException();
 		}
@@ -69,15 +82,9 @@ public class UserHandler{
 			throw new NotAuthorizedException("Authorization header must be provided");
 		}
 		
-		// TODO:
-		// Check if it was issued by the server and if it's not expired.
-		
-		// This line will throw an exception if it is not a signed JWS (as
-		// expected)
 		try{
-			Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token)
-					.getBody();
-					
+			Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+			
 			System.out.println("username: " + claims.get("username").toString());
 			System.out.println("Permission: " + claims.get("userpermission").toString());
 			System.out.println("Expiration: " + claims.getExpiration().toString());
@@ -88,50 +95,33 @@ public class UserHandler{
 		}
 	}
 	
+	/*
+	 * Assumes that token has been verified
+	 */
 	public static User getUserByToken(String token){
-		// TODO: Extract user info using token and querying database
-		
 		Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
 		String username = claims.get("username").toString();
 		
-		Connection connection = Database.getConnection();
-		String query = "SELECT * FROM users WHERE Username = '" + username + "'";
+		String query = "SELECT * FROM users WHERE Username = ?";
 		
-		try{
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(query);
+		try(Connection con = Database.getConnection();
+				PreparedStatement ps = con.prepareStatement(query);){
 			
-			resultSet.next();
-			String id = resultSet.getString("ID");
-			String userPermission = resultSet.getString("UserPermission");
-			String email = resultSet.getString("Email");
-			String firstName = resultSet.getString("FirstName");
-			String lastName = resultSet.getString("LastName");
+			ps.setString(1, username);
 			
-			return new User(id, username, userPermission, email, firstName, lastName);
-			
+			try(ResultSet rs = ps.executeQuery();){
+				rs.next();
+				
+				String id = rs.getString("ID");
+				String userPermission = rs.getString("UserPermission");
+				String email = rs.getString("Email");
+				String firstName = rs.getString("FirstName");
+				String lastName = rs.getString("LastName");
+				
+				return new User(id, username, userPermission, email, firstName, lastName);
+			}
 		}catch(SQLException e){
 			throw new WebApplicationException();
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -41,32 +41,26 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 	 */
 	private void storeUserInfo(final String username, final String userPermission,
 			ContainerRequestContext requestContext){
-		
 		final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
 		requestContext.setSecurityContext(new SecurityContext(){
 			@Override
 			public Principal getUserPrincipal(){
 				return new Principal(){
-					
 					@Override
 					public String getName(){
-						// Mock
 						return username;
 					}
 				};
 			}
-			
 			@Override
 			public boolean isUserInRole(String userPermissionRequired){
 				// TODO: Use token to find the user's role in the user database
 				return userPermission.equals(userPermissionRequired);
 			}
-			
 			@Override
 			public boolean isSecure(){
 				return currentSecurityContext.isSecure();
 			}
-			
 			@Override
 			public String getAuthenticationScheme(){
 				return currentSecurityContext.getAuthenticationScheme();
