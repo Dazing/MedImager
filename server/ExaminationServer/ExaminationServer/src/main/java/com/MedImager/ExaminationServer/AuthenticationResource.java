@@ -38,7 +38,7 @@ public class AuthenticationResource{
 	@Path("restricted")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getRestricted(){
-		return Response.status(Response.Status.OK).entity("Welcome authorized user!").build();
+		return Response.ok("Welcome authorized user!").build();
 	}
 	
 	// A mocked secure endpoint requiring token issued to an admin
@@ -48,6 +48,6 @@ public class AuthenticationResource{
 	@Path("adminrestricted")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAdminRestricted(){
-		return Response.status(Response.Status.OK).entity("Welcome authorized user!").build();
+		return Response.ok("Welcome admin!").build();
 	}
 }
