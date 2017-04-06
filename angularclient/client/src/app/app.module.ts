@@ -17,6 +17,7 @@ import { CollectionComponent } from './component/collection.component';
 import { NotFound } from './component/not-found.component';
 import { ServerUnreachable } from './component/server-unreachable.component';
 import { PopupComponent } from './component/popup.component';
+import { AdvancedFormComponent } from './component/advanced-form.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -45,6 +46,7 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		CollectionsMenu,
 		CollectionComponent,
 		PopupComponent,
+		AdvancedFormComponent,
 		NotFound,
 		ServerUnreachable,
 		DraggableImageDirective,

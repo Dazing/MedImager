@@ -1,7 +1,7 @@
 <div id="menu-wrapper">
 	<form [formGroup]="form" action="">
 		<div id="menu-bar" #menuBar>
-			<a href="index.html"><img src="./assets/img/logo.png" class="medimager-logo"></a>
+			<span style="font-size: 40px; padding-right: 10px;">HEJ CARL-HENRIK BRAW</span>
 			<div id="search-wrapper">
 
 				<input 
@@ -49,38 +49,9 @@
 			<i class='spin-menu-button material-icons unselectable' id="settings-button" onclick="showExtraBar('settings');">settings</i>
 		</div>
 
-		<div id="advanced-bar">
-			<div class="row ">
-				<div class="valign-wrapper col s4 ">
-					<input class="filled-in" formControlName="smoke" type="checkbox" id="smokerCheck"><label for="smokerCheck">Rökare</label>
-					<input class="filled-in" formControlName="snuff" type="checkbox" id="snusCheck"><label for="snusCheck">Snusare</label>
-				</div>
-				<div class="valign-wrapper col s4">
-					(ålder)
-				</div>
-				<div class="valign-wrapper col s4"> 
-					<input class="with-gap valign-center" name="gender" value="all" formControlName="gender" type="radio" id="anyGender" checked>
-					<label for="anyGender">Alla kön</label>
-					<input class="with-gap valign-center" name="gender" value="women" formControlName="gender" type="radio" id="womenOnly">
-					<label for="womenOnly">Kvinnor</label>
-					<input class="with-gap valign-center" name="gender" value="men" formControlName="gender" type="radio" id="menOnly">
-					<label for="menOnly">Män</label>
-				</div>
-			</div>
+		
+			<advanced-form></advanced-form>
 
-			<div class="row">
-				<div class="valign-wrapper col s4 ">
-					<input class="filled-in" formControlName="includeTentative" type="checkbox" id="diagTentCheck"><label for="diagTentCheck">Inkludera tentativa diagnoser</label>
-				</div>
-				<div class="valign-wrapper col s4">
-					<input class="filled-in" formControlName="includeHist" type="checkbox" id="diagHistCheck"><label for="diagHistCheck">Inkludera tidigare diagnoser</label>
-				</div>
-				<div class="valign-wrapper col s4"> 
-					<input class="filled-in" formControlName="includeDiseasePast" type="checkbox" id="diseasePastCheck"><label for="diseasePastCheck">Inkludera tidigare sjukdomar</label>
-				</div>
-			</div>
-
-		</div>
 		<div id="settings-bar">
 			Dina inställningar
 		</div>
