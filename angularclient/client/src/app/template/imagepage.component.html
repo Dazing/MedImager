@@ -5,7 +5,23 @@
 
 <div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	<div id="image-wrapper" *ngIf="imageDataLoaded && displayOrNot">
+	<div class="preloader-wrapper big active center-preloader" *ngIf="!display">
+		<div class="spinner-layer spinner-primary-color-only">
+			<div class="circle-clipper left">
+			<div class="circle"></div>
+			</div><div class="gap-patch">
+			<div class="circle"></div>
+			</div><div class="circle-clipper right">
+			<div class="circle"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="error404" *ngIf="error">
+		Bilden du försöker nå existerar tyvärr inte.
+	</div>
+
+	<div id="image-wrapper" *ngIf="imageDataLoaded && display && !error">
 		<img src="{{getPhoto()}}" id="full-image" draggable="true" 
 		[attr.data-examinationid]="imageData.examinationID"
 		[attr.data-imageIndex]="getImageIn()"

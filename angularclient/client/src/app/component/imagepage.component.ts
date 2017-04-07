@@ -26,8 +26,10 @@ export class ImagePageComponent {
 	private examinationIn: Number;
 	private imageIn: Number;
 	private imageData:any;
-	private displayOrNot: String = "block";
-	private imageDataLoaded = false;
+	private display: boolean = false;
+	private imageDataLoaded: boolean = false;
+	private error: boolean = false;
+	private examination404 = false;
 
 	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService) {
 		this.router.routerState.root.queryParams.subscribe(params => {
@@ -38,11 +40,23 @@ export class ImagePageComponent {
 
 	ngOnInit(): void {
 		this.imagePageService.imageData.subscribe(imageData => {
-			this.imageData = imageData;
-			this.imageDataLoaded = true;
-		})
+			if(imageData == null) {
+				this.error = true;
+				this.display = true;
+			}
+			else{
+				this.imageData = imageData;
+				this.imageDataLoaded = true;
+				
+				if(this.imageData.imagePaths.length-1 >= this.imageIn && this.imageIn >= 0)
+					this.display = true;
+				else {
+					this.error = true;
+					this.display = true;
+				}
+			}
+		});
 		this.imagePageService.getImageData(this.examinationIn);
-		
 	}
 
 	notNull(value: any){

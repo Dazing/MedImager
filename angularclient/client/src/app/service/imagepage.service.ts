@@ -28,7 +28,7 @@ export class ImagePageService {
                    console.log(responsejson);
 			})
 			.catch(e => {
-				alert("Server unreachable, try again later!");
+                this.privImageData.next(null);
 			});
     }
 
