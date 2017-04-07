@@ -16,17 +16,12 @@
 .tertiary-colour-text {
   color: #a7ffeb; }
 
-.medimager-logo {
-  float: left;
-  height: 50px;
-  padding: 5px;
-  margin-right: 15px; }
-
 #menu-wrapper {
-  width: 100%;
+  text-align: left;
   position: fixed;
+  left: 300px;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 100; }
 
 #menu-bar {
@@ -113,7 +108,7 @@
 
 #search-wrapper {
   display: inline-table;
-  width: 35%;
+  width: 50%;
   min-width: 200px; }
 
 #auto-search-results {
@@ -121,7 +116,7 @@
   position: absolute;
   display: none;
   background-color: #ffffff;
-  width: 35%;
+  width: 50%;
   min-width: 200px; }
   #auto-search-results span {
     display: block;
@@ -141,7 +136,7 @@
     #selected-tags span span {
       cursor: pointer; }
 
-.chip {
+.menu-wrapper .chip {
   border-radius: 4px;
   background-color: #1de9b6; }
 

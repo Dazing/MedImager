@@ -25,6 +25,13 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
+	private collectionsMenuVisible = true;
+
+	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
+
+	private modeSelected = false;
+	public searchMode: boolean;
+	public selectedCollection: number;
 
 	form;
 
@@ -33,7 +40,20 @@ export class SearchComponent {
 		private popupService: PopupService
 	){}
 
-	/*ngOnInit(): void {
+
+
+	ngAfterViewInit(): void {
+		this.collectionsMenu.searchMode.subscribe(mode => {
+			this.searchMode = mode;
+		});
+		this.collectionsMenu.selectedCollection.subscribe(sel => {
+			this.selectedCollection = sel;
+		});
+		this.collectionsMenu.emitMode();
+		this.modeSelected = true;
+	}
+	
+	/*ngOnInit(): void{
 		this.images = this.searchTerms
 		.debounceTime(300)        // wait 300ms after each keystroke before considering the term
 		.distinctUntilChanged()   // ignore if next search term is same as previous

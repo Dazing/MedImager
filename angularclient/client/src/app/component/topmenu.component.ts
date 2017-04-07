@@ -129,6 +129,7 @@ export class TopMenuComponent {
 	addTag(term: string): void {
 		console.log("ADD TAG");
 		this.tags.push(term);
+		this.searchService.addTag(term);
 		console.log(this.tags);
 		//this.searchBox.setAttribute("value", "");
 		this.emptySearchField(); 
@@ -138,6 +139,7 @@ export class TopMenuComponent {
 	}
 
 	removeTag(index: number): void {
+		this.searchService.removeTag(this.tags[index]);
 		this.tags.splice(index, 1);
 		console.log("REMOVE TAG");
 		console.log(this.tags);

@@ -23,6 +23,7 @@ export class SearchService {
 
 	tags:Observable<string[]>;
 	private privTags: Subject<string[]>;
+	private currentTags: string[] = [];
 
 	constructor(private http: Http, private router: Router) {
 		this.privImages = new Subject<string[]>();
@@ -84,6 +85,28 @@ export class SearchService {
 
 	getSearchTerms(): string[] {
 		return ["tandtroll","tandvärk","tandsten"];
+	}
+
+	addTag(tagToAdd: string): boolean {
+		for (let tag of this.currentTags) {
+			if (tag.toLowerCase() == tagToAdd.toLowerCase()) {
+				return false;
+			}
+		}
+		this.currentTags.push(tagToAdd);
+		this.privTags.next(this.currentTags);
+		return true;
+	}
+
+	removeTag(tagToRemove: string): boolean {
+		for (let i = 0; i < this.currentTags.length;i++) {
+			if (this.currentTags[i].toLowerCase() == tagToRemove.toLowerCase()) {
+				this.currentTags.splice(i,1);
+				this.privTags.next(this.currentTags);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private handleError(error: any): Promise<any> {
