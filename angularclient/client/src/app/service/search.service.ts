@@ -25,7 +25,7 @@ export class SearchService {
 	private privTags: Subject<string[]>;
 	private currentTags: string[] = [];
 
-	constructor(private http: Http, private router: Router) {
+	constructor(private http: Http, private router: Router, private server: Server) {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
 
@@ -59,7 +59,7 @@ export class SearchService {
 			str = str.substr(1);
 		}	
 
-		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
+		var url = (this.server.getUrl() + '/search?'+str);
 		console.log("URL: "+url+", Q: "+str);
 		
 		this.http.get(url)
