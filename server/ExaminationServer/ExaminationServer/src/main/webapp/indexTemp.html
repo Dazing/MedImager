@@ -5,25 +5,98 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
-function resultJSON(){
-	$("#imgContainer").empty();
-	console.log($("#searchTerm").val());
-	$.getJSON("examData/api/" + $("#searchTerm").val(), function(data){
-		data.forEach(function(exam){
-			exam.imagePaths.forEach(function(path){
-				$("#imgContainer").prepend($('<img>',{id:'theImg',src:path,title:exam.AGE}))
-			});
-		});
-	});
-}
-
+var ctxPath = "examData";
+$(function(){
+    $("#postPerson, #postMessage").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection/"+$(collectionID).val(),
+            type: "POST",
+            data: '{"examinationID":"' + $(examinationID).val() + '", "index":"' + $(index).val() + '"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+    $("#createCollection").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection",
+            type: "POST",
+            data: '{"userID":"' + $(userID).val() + '", "collectionName":"' + $(collectionName).val() + '", "collectionDescr":"' + $(collectionDescr).val() + '"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+    $("#addNote").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection",
+            type: "PUT",
+            data: '{"note":"'+$(note).val()+'", "collectionID":"'+$(noteCollectionID).val() +'", "collectionitemID":"'+$(noteCollectionitemID).val()+'"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+    $("#makeShareable").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection/share",
+            type: "PUT",
+            data: '{ "collectionID":"'+$(shareCollectionID).val() +'"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+    $("#deleteCollection").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection",
+            type: "DELETE",
+            data: '{"collectionID":"'+$(deleteCollectionID).val()+'"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+    $("#deleteImage").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection/"+$(deleteImageCollectionID).val(),
+            type: "DELETE",
+            data: '{"collectionitemID":"'+$(deleteImageImageID).val()+'"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+});
 </script>
+
 </head>
 <body>
-<p> Exempel på söktermer: Pollen, Nötter, Gummi, Getingstick</p>
-<input type=text id="searchTerm">
-<input type="submit" onclick="resultJSON();">
-<div id="imgContainer">
+<p> Create collection</p>
+<input type=text id="userID" placeholder="user ID">
+<input type=text id="collectionName" placeholder="collection name">
+<input type=text id="collectionDescr" placeholder="collection descr">
+<li><button id="createCollection">Create collection</button></li>
+<p> Add image to collection</p>
+<input type=text id="collectionID" placeholder="Collection ID">
+<input type=text id="examinationID" placeholder="exam id">
+<input type=text id="index" placeholder="index">
+<li><button id="postPerson">Add image to collection</button></li>
+<p> Add note to image</p>
+<input type=text id="noteCollectionID" placeholder="Collection id">
+<input type=text id="noteCollectionitemID" placeholder="Image id">
+<input type=text id="note" placeholder="note">
+<li><button id="addNote">Add Note</button></li>
+<p> Delete collection</p>
+<input type=text id="deleteCollectionID" placeholder="Collection ID">
+<li><button id="deleteCollection">Delete collection</button></li>
+<p> Delete image from collection</p>
+<input type=text id="deleteImageCollectionID" placeholder="Collection ID">
+<input type=text id="deleteImageImageID" placeholder="Image ID">
+<li><button id="deleteImage">Delete image</button></li>
+<p> Make collection shareable</p>
+<input type=text id="shareCollectionID" placeholder="Collection ID">
+<li><button id="makeShareable">Share collection</button></li>
 </div>
 </body>
 </html>

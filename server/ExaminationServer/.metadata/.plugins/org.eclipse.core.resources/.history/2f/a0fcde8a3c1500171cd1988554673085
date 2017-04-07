@@ -1,0 +1,14 @@
+package com.MedImager.ExaminationServer;
+
+public class CollectionItem {
+	private String collectionID;
+	private String examinationID;
+	private int index;
+	
+	public CollectionItem(String collectionID, String examinationID, int index){
+		this.collectionID = collectionID;
+		this.examinationID = examinationID;
+		this.index = index;
+	}
+
+}

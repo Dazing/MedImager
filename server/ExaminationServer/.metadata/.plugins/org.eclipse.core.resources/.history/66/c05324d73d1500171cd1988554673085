@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+var ctxPath = "<%=request.getContextPath() %>";
+$(function(){                
+    $("#postPerson, #postMessage").on("click", function(){
+        $.ajax({
+            url: $(this).attr("id") === "postMessage" ? ctxPath+"/api/post" : ctxPath+"/aoi/post",
+            type: "POST",
+            data: '{"firstName":"Michael", "lastName":"Jordan"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "json"
+        });
+    });                
+});
+</script>
+
+</head>
+<body>
+<p> Exempel på söktermer: Pollen, Nötter, Gummi, Getingstick</p>
+<input type=text id="searchTerm">
+<input type="submit" onclick="resultJSON();">
+<li><button id="postPerson">Post Person</button></li>
+<div id="imgContainer">
+</div>
+</body>
+</html>

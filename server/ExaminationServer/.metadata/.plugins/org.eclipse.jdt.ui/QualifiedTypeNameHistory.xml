@@ -4,4 +4,5 @@
 <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
 <fullyQualifiedTypeName name="medview.datahandling.examination.MVDHandler"/>
 <fullyQualifiedTypeName name="medview.datahandling.examination.ExaminationIdentifier"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
 </qualifiedTypeNameHistroy>

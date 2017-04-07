@@ -1,0 +1,22 @@
+package com.MedImager.ExaminationServer;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Properties;
+
+public class DatabaseConnection {
+	static String dbClassName = "com.mysql.jdbc.Driver";
+	final String CONNECTION = "jdbc:mysql://127.0.0.1/collections";
+    Connection c = null;
+   	public DatabaseConnection(){}
+    try{
+	   	Properties p = new Properties();
+	    p.put("user","medimager");
+	    p.put("password","medimager123");
+    }finally{
+	    Connection c = DriverManager.getConnection(CONNECTION,p);
+    }
+	public Connection getConnection(){
+    	return c;
+    }
+}

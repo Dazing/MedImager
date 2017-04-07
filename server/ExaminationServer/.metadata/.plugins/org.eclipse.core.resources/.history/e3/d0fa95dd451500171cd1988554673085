@@ -1,0 +1,19 @@
+package com.MedImager.ExaminationServer;
+
+import java.util.List;
+
+public class Collection {
+	private List<CollectionItem> collection;
+	public Collection(){
+		collection = new List<CollectionItem>();
+	}
+	public List<CollectionItem> getCollection() {
+		return collection;
+	}
+	public void setCollection(List<CollectionItem> collection) {
+		this.collection = collection;
+	}
+	public void addItem(CollectionItem item){
+		collection.add(item);
+	}
+}

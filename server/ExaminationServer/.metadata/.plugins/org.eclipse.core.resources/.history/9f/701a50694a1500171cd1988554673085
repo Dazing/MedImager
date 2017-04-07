@@ -1,0 +1,44 @@
+package com.MedImager.ExaminationServer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CollectionItem {
+	private String collectionID;
+	private String examinationID;
+	private int index;
+	
+	public CollectionItem(){}
+
+	public String getCollectionID() {
+		return collectionID;
+	}
+
+	public String getExaminationID() {
+		return examinationID;
+	}
+
+	public int getIndex() {
+		return index;
+	}
+	
+	public Examination getExamination() throws IOException{
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		Examination ex = eidParser.getMoreFromExamination(examinationID));
+		ex.setImagePaths(ex.getImagePaths().get(index));
+	}
+
+	public void setCollectionID(String collectionID) {
+		this.collectionID = collectionID;
+	}
+
+	public void setExaminationID(String examinationID) {
+		this.examinationID = examinationID;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+}

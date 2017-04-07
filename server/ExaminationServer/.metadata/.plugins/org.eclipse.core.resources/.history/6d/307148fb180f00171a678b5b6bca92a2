@@ -1,5 +1,0 @@
-package com.MedImager.ExaminationServer;
-
-public class CorsResponseFilter {
-
-}
