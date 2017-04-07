@@ -51,6 +51,8 @@ export class TopMenuComponent {
 
 			data.value=this.tags;
 			
+			console.log("Search"+JSON.stringify(data));
+			
 			this.searchService.getSearch(data);
 
 			
