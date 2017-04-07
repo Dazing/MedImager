@@ -51,6 +51,6 @@ function toggleSettingsBar(hide)
 
 function setPageWrapperHeight(extra)
 {
-	$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
-	$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
+	//$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
+	//$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
 }

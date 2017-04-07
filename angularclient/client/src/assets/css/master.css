@@ -34,17 +34,12 @@
 .tertiary-colour-text {
   color: #a7ffeb; }
 
-.medimager-logo {
-  float: left;
-  height: 50px;
-  padding: 5px;
-  margin-right: 15px; }
-
 #menu-wrapper {
-  width: 100%;
+  text-align: left;
   position: fixed;
+  left: 300px;
   top: 0;
-  left: 0;
+  right: 0;
   z-index: 100; }
 
 #menu-bar {
@@ -131,7 +126,7 @@
 
 #search-wrapper {
   display: inline-table;
-  width: 35%;
+  width: 50%;
   min-width: 200px; }
 
 #auto-search-results {
@@ -139,7 +134,7 @@
   position: absolute;
   display: none;
   background-color: #ffffff;
-  width: 35%;
+  width: 50%;
   min-width: 200px; }
   #auto-search-results span {
     display: block;
@@ -159,7 +154,7 @@
     #selected-tags span span {
       cursor: pointer; }
 
-.chip {
+.menu-wrapper .chip {
   border-radius: 4px;
   background-color: #1de9b6; }
 
@@ -325,14 +320,87 @@
     #collections-togglebutton {
       display: none; } }
 
+.medimager-logo-container {
+  height: 69px;
+  width: 300px; }
+
+.medimager-logo {
+  float: left;
+  max-width: 300px;
+  height: 50px;
+  padding: 5px;
+  margin-right: 15px; }
+  .medimager-logo:hover {
+    background-color: #ffffff; }
+
+.search-params-container {
+  position: relative;
+  background: linear-gradient(to bottom, #c0c0c0 50%, #1de9b6 50%);
+  background-size: 100% 200%;
+  background-position: left top;
+  transition: background-position 0.2s ease; }
+  .search-params-container.search-mode {
+    background-position: left bottom; }
+  .search-params-container .tags {
+    padding: 4px; }
+  .search-params-container .search-params-header {
+    height: 30px; }
+  .search-params-container .search-params-click-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    pointer-events: all;
+    z-index: 10; }
+
 .collections-menu {
-  margin-top: 69px;
   z-index: 95;
   left: 0;
   transition: margin-top 0.4s, left 0.4s; }
+  .collections-menu .chip {
+    border-radius: 4px;
+    height: 20px;
+    line-height: 20px; }
+    .collections-menu .chip i {
+      cursor: pointer;
+      float: right;
+      font-size: 16px;
+      line-height: 20px;
+      padding-left: 8px; }
+  .collections-menu li {
+    transition: height 0.15s;
+    position: relative;
+    overflow: hidden;
+    pointer: default; }
+  .collections-menu a {
+    transition: background-color 0.2s;
+    transition-delay: 0.1s;
+    position: relative;
+    overflow: hidden;
+    pointer: default; }
+    .collections-menu a.collection-selected {
+      background-color: #1de9b6; }
+  .collections-menu .subheader {
+    pointer-events: auto;
+    cursor: default;
+    position: relative;
+    overflow: hidden; }
+    .collections-menu .subheader i {
+      transition: transform 0.15s; }
+  .collections-menu input {
+    width: 70%;
+    height: 30px; }
+    .collections-menu input:focus {
+      border-bottom: 1px solid #9e9e9e !important;
+      border-radius: 0; }
+    .collections-menu input .valid {
+      border-bottom: 1px solid #4CAF50;
+      box-shadow: 0 1px 0 0 #4CAF50; }
 
-.collections-menu-hidden {
-  width: 0; }
+.top-menu-margin {
+  margin-top: 69px; }
 
 .collections-menu-margin {
   margin-left: 300px; }
@@ -359,7 +427,6 @@
   color: #a7ffeb; }
 
 #page-wrapper {
-  margin-top: 64px;
   height: 100%;
   background-color: #ffffff;
   transition: margin 0.4s; }

@@ -15,15 +15,16 @@ import { Server } from '../model/server';
 @Injectable()
 export class CollectionService {
 	private headers = new Headers({'Content-Type': 'application/json'});
+
 	collections:Observable<Collection[]>;
 	private privCollections: Subject<Collection[]>;
+	private collectionsList: Collection[];
 
 	constructor(private http: Http, private router: Router, ) {
 		this.privCollections = new Subject<Collection[]>();
         this.collections = this.privCollections.asObservable();
-		
-		this.privCollections.next(
-			[
+
+		this.collectionsList = [
 				new Collection(0,"Min Samling", {
 					"age":["70"],
 					"allergy":["Nej"],
@@ -117,12 +118,14 @@ export class CollectionService {
 					"vasNow":["3.2"],
 					"imageId":["0"]
 				})
-			]
-		);
+			];
 		
 		
 	}
 
+	getCollections(): void {
+		this.privCollections.next(this.collectionsList);
+	}
 
 	addImage(image:any, imageIndex: number, collId: number): void {
 		var data = {
@@ -166,8 +169,12 @@ export class CollectionService {
 			});
 	}
 
-	createCollection(): void {
-
+	createCollection(name: string): void {
+		let coll = new Collection(Math.floor(Math.random()*999999), name, []);
+		console.log(coll);
+		
+		this.collectionsList.push(coll);
+		this.privCollections.next(this.collectionsList);
 	}
 
 	removeCollection(image:any, imageIndex: number, collId: number): void {

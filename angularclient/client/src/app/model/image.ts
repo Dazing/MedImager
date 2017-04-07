@@ -7,12 +7,14 @@ export class Image {
 export class Collection {
     public id: number;
     public name: string;
+    public description: string;
     public images: any[];
 
-    constructor(id: number, name: string, images:any) {
+    constructor(id: number, name: string, images:any, description?: string) {
         this.id = id;
         this.name = name;
         this.images = images;
+        this.description = description;
 	}
 
     addImage(image:any): void {

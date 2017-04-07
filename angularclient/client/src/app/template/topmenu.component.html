@@ -1,7 +1,7 @@
-<div id="menu-wrapper">
+<div id="menu-wrapper" class="z-depth-1">
 	<form [formGroup]="form" action="">
 		<div id="menu-bar" #menuBar>
-			<a href="index.html"><img src="./assets/img/logo.png" class="medimager-logo"></a>
+			
 			<div id="search-wrapper">
 
 				<input 
@@ -37,23 +37,18 @@
 
 				<div id="selected-tags">
 
-					<!-- Display selected tags -->
+					<!-- Display selected tags 
 					<div *ngFor="let tag of tags; let i=index" class="chip unselectable">
 						{{tag}}
 						<i id="generateTagId(i)" class="removeTag close material-icons" (click)="removeTag(i)">close</i>
 					</div>
-
+					-->
 				</div>
 			</div>
 			<i class='spin-menu-button material-icons unselectable' id="advanced-button" onclick="showExtraBar('advanced');">filter_list</i>
 			<i class='spin-menu-button material-icons unselectable' id="settings-button" onclick="showExtraBar('settings');">settings</i>
 		</div>
-
 		
 			<advanced-form></advanced-form>
-
-		<div id="settings-bar">
-			Dina inställningar
-		</div>
 	</form>
 </div>
