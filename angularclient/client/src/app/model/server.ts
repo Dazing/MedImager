@@ -1,5 +1,5 @@
 export class Server {
-    private url: string = "http://localhost:8080/api";
+    private url: string = "http://www.medimager.com/api";
     
 	getUrl(): string  {
 		return this.url;
