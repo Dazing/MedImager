@@ -361,7 +361,7 @@
 #page-wrapper {
   margin-top: 64px;
   height: 100%;
-  background-color: #ffffff;
+  background-color: #f5f5f5;
   transition: margin 0.4s; }
 
 #search-results {
@@ -447,6 +447,9 @@ body {
 a, a:visited {
   color: #000000; }
 
+h2 {
+  font-size: 25px; }
+
 .vertical-center {
   position: absolute;
   top: 50%;
@@ -469,29 +472,54 @@ a, a:visited {
   margin: 30px 0px 30px 0px; }
 
 #image-wrapper {
-  padding-top: 40px;
-  margin-bottom: 100px;
-  text-align: center; }
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: #212124;
+  height: 80vh;
+  position: relative; }
+  #image-wrapper tr td {
+    text-align: center; }
 
 #full-image {
   margin: 0 auto;
   max-width: 70%;
   max-height: 80vh;
   display: inline-block;
-  vertical-align: top;
-  margin-right: 20px; }
+  vertical-align: top; }
 
 #image-data {
-  max-width: 30%;
   margin: 0 auto;
-  display: inline-block;
-  vertical-align: top;
-  text-align: left;
-  font-size: 20px; }
-  #image-data label {
-    font-size: 18px; }
-  #image-data p {
-    margin: 1px 0 16px 0px; }
+  text-align: center;
+  margin-bottom: 100px;
+  padding-top: 35px; }
+  #image-data .image-data-column {
+    text-align: left;
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 20px;
+    padding: 20px; }
+    #image-data .image-data-column label {
+      font-size: 18px; }
+    #image-data .image-data-column p {
+      margin: 1px 0 16px 0px; }
+
+#related-images {
+  position: absolute;
+  top: 50%;
+  right: 5px; }
+  #related-images span {
+    width: 80px;
+    height: 50px;
+    display: block;
+    margin: 5px;
+    background-size: cover;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.4s; }
+    #related-images span:hover {
+      opacity: 1; }
 
 #error404 {
   display: block;

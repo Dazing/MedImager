@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Server } from '../model/server';
+import {Location } from '@angular/common';
 import { ImagePageService } from '../service/imagepage.service';
 import { Observable } from 'rxjs';
 import { CollectionsMenu } from './collections-menu.component';
@@ -30,8 +31,11 @@ export class ImagePageComponent {
 	private imageDataLoaded: boolean = false;
 	private error: boolean = false;
 	private examination404 = false;
+	private otherImages:string[];
+	private url;
 
-	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService) {
+	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService, private location: Location) {
+		this.url = this.server.getUrl();
 		this.router.routerState.root.queryParams.subscribe(params => {
 			this.examinationIn = params['examination'];
 			this.imageIn = params['image'];
@@ -46,6 +50,8 @@ export class ImagePageComponent {
 			}
 			else{
 				this.imageData = imageData;
+				this.otherImages = this.imageData.imagePaths;
+				console.log(this.otherImages);
 				this.imageDataLoaded = true;
 				
 				if(this.imageData.imagePaths.length-1 >= this.imageIn && this.imageIn >= 0)
@@ -83,9 +89,20 @@ export class ImagePageComponent {
         return this.server.getUrl() + '/image/' + this.examinationIn +'/' + this.imageIn;
     }
 
+	private getThumbnailUrl(imageId): string {
+		var string = "'background-image': 'url(' + this.url +'/thumbnail/' + this.examinationIn + '/' + imageId + ')'";
+		//alert(string);
+		return string;
+	}
+
 	private getImageIn(): Number {
         return this.imageIn;
     }
+
+	private onRelatedClick(imageId): void {
+		this.location.replaceState("/image?examination=" + this.examinationIn + "&image=" + imageId);
+		this.imageIn = imageId;
+	}
 
 	toggleCollectionsMenu() {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
