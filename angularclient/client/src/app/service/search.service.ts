@@ -54,9 +54,14 @@ export class SearchService {
 				}
 			}
 		}
+
 		if (str.charAt(0) === "&"){
 			str = str.substr(1);
 		}	
+
+		if (str == "") {
+			return;
+		}
 
 		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
 		console.log("URL: "+url+", Q: "+str);

@@ -1,0 +1,147 @@
+package com.MedImager.ExaminationServer;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.sql.*;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.UriInfo;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+
+import medview.datahandling.examination.NoSuchExaminationException;
+import misc.foundation.MethodNotSupportedException;
+
+/**
+ * Root resource (exposed at "myresource" path)
+ */
+@Path("api")
+public class MyResource {
+	
+	@GET
+	@Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List <Examination> search(@QueryParam("value") List<String> values,
+    										 @QueryParam("term") List<String> terms,
+    										 @QueryParam("ageLower") String ageLower,
+    										 @QueryParam("ageUpper") String ageUpper, 
+    										 @QueryParam("gender") String gender,
+    										 @QueryParam("smoke") Boolean smoke,
+    										 @QueryParam("snuff") Boolean snuff) throws MethodNotSupportedException{
+		SearchTermParser stp = new SearchTermParser(new SearchFilter(values, terms, ageLower, ageUpper, gender, smoke, snuff));
+		return stp.getResultListWithFilter();
+    }
+	
+	@GET
+	@Path("/search2")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List <Examination> search2(@Context UriInfo uriInfo) throws MethodNotSupportedException{
+		SearchTermParser stp = new SearchTermParser(new SearchFilter(uriInfo));
+		return stp.getResultListWithFilter2();
+    }
+
+	@GET
+	@Path("/patient/{examinationID}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public List<Examination> getPatientJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException, IOException{
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		return eidParser.getMoreFromPatient(examinationID);
+	}
+
+	@GET
+	@Path("/examination/{examinationID}")
+    @Produces(MediaType.APPLICATION_JSON)
+	public Examination getExaminationJSON(@PathParam("examinationID") String examinationID) throws MethodNotSupportedException, IOException{
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		return eidParser.getMoreFromExamination(examinationID);
+	}
+
+	@GET
+	@Path("/image/{examinationID}/{index}")
+	@Produces("image/jpg")
+	public Response getFile(@PathParam("examinationID") String examinationID, @PathParam("index") int index) throws IOException {
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		String path = eidParser.getMoreFromExamination(examinationID).getImagePaths().get(index);
+		File file = new File(path);
+		ResponseBuilder response = Response.ok((Object) file);
+		response.header("Content-Disposition",
+			"attachment; filename=" + examinationID + "-" + index + ".jpg");
+		return response.build();
+
+	}
+	@GET
+	@Path("/thumbnail/{examinationID}/{index}")
+	@Produces("image/jpg")
+	public Response getThumbnailFile(@PathParam("examinationID") String examinationID, @PathParam("index") int index) throws IOException {
+		ExaminationIDParser eidParser = new ExaminationIDParser();
+		String path = eidParser.getMoreFromExamination(examinationID).getImagePaths().get(index);
+		ThumbnailBuilder thumbBuilder = new ThumbnailBuilder();
+		File file = thumbBuilder.getThumbnail(path, examinationID, index);
+		ResponseBuilder response = Response.ok((Object) file);
+		response.header("Content-Disposition",
+			"attachment; filename=" + examinationID + "-" + index + "-thumb.jpg");
+		return response.build();
+
+	}
+	static Collection collection = new Collection();
+	static int userID = 0;
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/collection/{collectionid}")
+    public List<Examination> addItem(CollectionItem item, @PathParam("collectionid") int collectionid) throws Exception{
+    	collection.addItem(item);
+	    Connection c = new DatabaseConnection().getConnection();
+	    String addQuerry = "INSERT INTO collectionitem(examinationID,imageindex,collection_id) VALUES('"+item.getExaminationID()+"',"+item.getIndex()+","+collectionid+");";
+	    PreparedStatement preparedStatement = null;
+	    preparedStatement = c.prepareStatement(addQuerry);
+	    preparedStatement.executeUpdate();
+	    c.close();
+        return collection.getExaminations();
+    }
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/collection")
+    public List<Examination> createCollectiion(Collection item) throws Exception{
+    	Connection c = new DatabaseConnection().getConnection();
+	    String addQuerry = "INSERT INTO collection(userID,name,descr,date) VALUES('"+item.getuserID()+"','"+item.getCollectionName()+"','"+item.getCollectionDescr()+"', NOW());";
+	    PreparedStatement preparedStatement = null;
+	    preparedStatement = c.prepareStatement(addQuerry);
+	    preparedStatement.executeUpdate();	    
+	    c.close();
+        return collection.getExaminations();
+    }
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/collection/{collectionid}")
+    public List<Collection> getCollection(@PathParam("collectionid") int collectionid) throws Exception{
+	    Connection c = new DatabaseConnection().getConnection();
+	    String addQuerry = "SELECT id,name,descr,date FROM collection WHERE userID = " + userID +  ";
+	    PreparedStatement preparedStatement = null;
+	    preparedStatement = c.prepareStatement(addQuerry);
+	    preparedStatement.executeUpdate();
+	    c.close();
+        return null;
+    }
+	@GET
+	@Path("/initValues")
+    @Produces(MediaType.APPLICATION_JSON)
+	public InitValues getTreatTypesJSON() throws IOException, NoSuchExaminationException{
+		ServerInitializer init = new ServerInitializer();
+		return init.initialize();
+	}
+}

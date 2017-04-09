@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+var ctxPath = "examData";
+$(function(){
+    $("#postPerson, #postMessage").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection",
+            type: "POST",
+            data: '{"examinationID":"' + $(examinationID).val() + '", "index":"' + $(index).val() + '"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+    $("#createCollection").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/addcollection",
+            type: "POST",
+            data: '{"userID":' + $(userID).val() + ', "collectionName":"' + $(collectionName).val() + '", "collectionDescr":"' + $(collectionDescr).val() + '"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
+});
+</script>
+
+</head>
+<body>
+<p> Exempel på söktermer: Pollen, Nötter, Gummi, Getingstissck</p>
+<input type=text id="examinationID">
+<input type=text id="index">
+<li><button id="postPerson">Post Person</button></li>
+<input type=text id="userID">
+<input type=text id="collectionName">
+<input type=text id="collectionDescr">
+<li><button id="createCollection">Create collection</button></li>
+<div id="imgContainer">
+</div>
+</body>
+</html>

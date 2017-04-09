@@ -1,0 +1,43 @@
+package com.MedImager.ExaminationServer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Collection {
+	private String collectionName;
+	private int collectionID;
+	private List<CollectionItem> collection;
+	public Collection(){
+		this.collection = new ArrayList<CollectionItem>();
+	}
+	public List<CollectionItem> getCollection() {
+		return collection;
+	}
+	public List<Examination> getExaminations() throws IOException{
+		List<Examination> examinations = new ArrayList<Examination>();
+		for(CollectionItem item:collection){
+			examinations.add(item.getExamination());
+		}
+		return examinations;
+	}
+	
+	public void setCollection(List<CollectionItem> collection) {
+		this.collection = collection;
+	}
+	public void addItem(CollectionItem item){
+		collection.add(item);
+	}
+	public String getCollectionName() {
+		return collectionName;
+	}
+	public void setCollectionName(String collectionName) {
+		this.collectionName = collectionName;
+	}
+	public int getCollectionID() {
+		return collectionID;
+	}
+	public void setCollectionID(String collectionID) {
+		this.collectionID = collectionID;
+	}
+}

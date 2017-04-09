@@ -1,8 +1,0 @@
-package com.MedImager.ExaminationServer;
-
-import java.util.List;
-
-public class TreatTypes {
-	List<String> treatTypes;
-	public TreatTypes(){}
-}
