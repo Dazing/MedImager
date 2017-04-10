@@ -18,6 +18,7 @@ export class TopMenuComponent {
 	selectedAutocompleteIndex = -1;
 	maxAutocompleteSuggestions = 7;
 	searchFieldBlurred = true;
+	searchFieldModel;
 	@ViewChild('value') searchBox; 
 	@ViewChild('menuBar') menuBar;
 
