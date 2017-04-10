@@ -10,12 +10,12 @@ import { PopupService } from '../service/popup.service';
 	templateUrl: '../template/popup.component.html'
 })
 export class PopupComponent {
-    private popup;
-    private visible = false;
-    private arrowsVisible = false;
-    private resolutionLoaded = false;
-    private imageHeight: number;
-    private imageWidth: number;
+    public popup;
+    public visible = false;
+    public arrowsVisible = false;
+    public resolutionLoaded = false;
+    public imageHeight: number;
+    public imageWidth: number;
 
     constructor(
 		private searchService: SearchService,

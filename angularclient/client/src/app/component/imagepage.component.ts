@@ -22,12 +22,12 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class ImagePageComponent {
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
-	private collectionsMenuVisible = false;
-	private examinationIn: Number;
-	private imageIn: Number;
-	private imageData:any;
-	private displayOrNot: String = "block";
-	private imageDataLoaded = false;
+	public collectionsMenuVisible = false;
+	public examinationIn: Number;
+	public imageIn: Number;
+	public imageData:any;
+	public displayOrNot: String = "block";
+	public imageDataLoaded = false;
 
 	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService) {
 		this.router.routerState.root.queryParams.subscribe(params => {
