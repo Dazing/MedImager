@@ -12,6 +12,8 @@ $(document).ready(function () {
 		selectTag(selectedTagId);
 	}
 
+	setSearchResultsGridWidth();
+
 	$('#searchSideWrapper').width(
 		$('body').width()-500
 	);
@@ -49,6 +51,8 @@ $(document).ready(function () {
 		$('#searchSideWrapper').width(
 			$('body').width()-500
 		);
+
+		setSearchResultsGridWidth();
 	})
 
 	$("#menu-bar").resize(function() {

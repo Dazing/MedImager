@@ -59,9 +59,11 @@ export class SearchService {
 			str = str.substr(1);
 		}	
 
-		if (str == "") {
+		console.log("Q:"+str);
+		
+		/*if (str == "") {
 			return;
-		}
+		}*/
 
 		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
 		console.log("URL: "+url+", Q: "+str);

@@ -25,15 +25,22 @@
 #search-results {
   padding: 10px;
   position: relative;
-  text-align: center;
-  margin-bottom: 39px; }
+  margin: 0 auto;
+  margin-bottom: 50px; }
+  #search-results:after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both; }
   #search-results span {
     max-width: 300px;
     width: 100vw;
     height: 210px;
     margin: 5px;
     position: relative;
-    display: inline-block;
+    display: block;
+    float: left;
     background-size: cover;
     background-position: center;
     cursor: pointer;
