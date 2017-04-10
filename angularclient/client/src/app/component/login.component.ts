@@ -9,9 +9,9 @@ import { UserService } from '../service/user.service';
 })
 
 export class LoginComponent {
-	private error = '';
-	private setRegi: boolean = false;
-	private model: any = {}
+	public error = '';
+	public setRegi: boolean = false;
+	public model: any = {}
 
 	constructor (
 		private userService: UserService,

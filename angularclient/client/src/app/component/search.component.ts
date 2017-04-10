@@ -29,7 +29,7 @@ export class SearchComponent {
 
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
-	private modeSelected = false;
+	public modeSelected = false;
 	public searchMode: boolean;
 	public selectedCollection: number;
 

@@ -15,27 +15,27 @@ import { Image, Collection } from '../model/image';
 
 export class CollectionsMenu implements OnInit {
 
-	private collections;
-	private visible = true;
-	private myCollectionsExpanded: boolean = true;
-	private sharedCollectionsExpanded: boolean = true;
-	private searchModeEnabled: boolean = true;
-	private selectedCollectionId: number;
-	private newCollectionValid: string = "none";
+	public collections;
+	public visible = true;
+	public myCollectionsExpanded: boolean = true;
+	public sharedCollectionsExpanded: boolean = true;
+	public searchModeEnabled: boolean = true;
+	public selectedCollectionId: number;
+	public newCollectionValid: string = "none";
 
 	@ViewChild('searchParamsContainer') searchParamsContainer;
 	@ViewChild('newCollectionInput') newCollectionInput;
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
 	public searchMode: Observable<boolean>;
-	private privSearchMode: Subject<boolean>;
+	public privSearchMode: Subject<boolean>;
 	public selectedCollection: Observable<number>;
-	private privSelectedCollection: Subject<number>;
+	public privSelectedCollection: Subject<number>;
 
 	public isVisible: Observable<boolean>;
-	private privIsVisible: Subject<boolean>;
+	public privIsVisible: Subject<boolean>;
 
-	private tags: string[] = [];
+	public tags: string[] = [];
 
 	constructor(
 		private collectionService: CollectionService,
