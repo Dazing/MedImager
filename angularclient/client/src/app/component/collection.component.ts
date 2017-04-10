@@ -11,7 +11,7 @@ import { Image } from '../model/image';
 export class CollectionComponent implements OnInit {
 	
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
-	private collectionsMenuVisible = false;
+	public collectionsMenuVisible = false;
 
 	ngOnInit(): void {
 		this.collectionsMenu.isVisible.subscribe(visible => {
