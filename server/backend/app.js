@@ -28,8 +28,9 @@ app.use('/*', function(req, res, next) {
 });
 
 
+app.use('*', express.static('angular'));
 
-app.use('/', router);
+//app.use('/', router);
 
 // ----------------------------------------------------
 // Server functionality
