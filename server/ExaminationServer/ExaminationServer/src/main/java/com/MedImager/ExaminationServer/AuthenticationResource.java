@@ -2,6 +2,7 @@ package com.MedImager.ExaminationServer;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -37,11 +38,20 @@ public class AuthenticationResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response register(@HeaderParam("Username") String username, 
 							@HeaderParam("Password") String password, 
-							@HeaderParam("Password") String email,
-							@HeaderParam("Password") String firstName,
-							@HeaderParam("Password") String lastName){
-		UserHandler.registerUser(username, password, email, firstName, lastName);
+							@HeaderParam("FirstName") String firstName,
+							@HeaderParam("LastName") String lastName){
+		UserHandler.registerUser(username, password, firstName, lastName);
 		return Response.ok("Preliminary registration complete, awaiting approval").build();
+	}
+	
+	@Secured
+	@DELETE
+	@Path("unregister")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response unregister(@Context SecurityContext securityContext){
+		String username = securityContext.getUserPrincipal().getName();
+		UserHandler.unregisterUser(username);
+		return Response.ok("User unregistered").build();
 	}
 	
 	// A mocked secure endpoint requiring a valid token
