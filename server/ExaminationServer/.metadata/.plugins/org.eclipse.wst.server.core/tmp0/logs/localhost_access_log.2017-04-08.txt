@@ -1,0 +1,6 @@
+127.0.0.1 - - [08/Apr/2017:18:36:44 +0200] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [08/Apr/2017:18:36:45 +0200] "GET /ExaminationServer/WEB-INF/classes/com/MedImager/ExaminationServer/MyResource.java HTTP/1.1" 404 949
+127.0.0.1 - - [08/Apr/2017:18:37:13 +0200] "GET /ExaminationServer/examData/api/thumbnail/990604122120/0 HTTP/1.1" 200 12272
+127.0.0.1 - - [08/Apr/2017:18:38:14 +0200] "GET /ExaminationServer/examData/api/thumbnail/980205141528/0 HTTP/1.1" 200 10137
+127.0.0.1 - - [08/Apr/2017:18:39:02 +0200] "GET /ExaminationServer/examData/api/picture/980205141528/0 HTTP/1.1" 404 967
+127.0.0.1 - - [08/Apr/2017:18:39:09 +0200] "GET /ExaminationServer/examData/api/image/980205141528/0 HTTP/1.1" 200 128878
