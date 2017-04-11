@@ -114,7 +114,7 @@ public class UserHandler{
 				String id = rs.getString("id");
 				String userPermission = rs.getString("user_permission");
 				String email = rs.getString("email");
-				String firstName = rs.getString("first_ame");
+				String firstName = rs.getString("first_name");
 				String lastName = rs.getString("last_name");
 				
 				return new User(id, username, userPermission, email, firstName, lastName);
