@@ -32,6 +32,18 @@ public class AuthenticationResource{
 		return Response.ok(token).build();
 	}
 	
+	@POST
+	@Path("register")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response register(@HeaderParam("Username") String username, 
+							@HeaderParam("Password") String password, 
+							@HeaderParam("Password") String email,
+							@HeaderParam("Password") String firstName,
+							@HeaderParam("Password") String lastName){
+		UserHandler.registerUser(username, password, email, firstName, lastName);
+		return Response.ok("Preliminary registration complete, awaiting approval").build();
+	}
+	
 	// A mocked secure endpoint requiring a valid token
 	@Secured
 	@GET
