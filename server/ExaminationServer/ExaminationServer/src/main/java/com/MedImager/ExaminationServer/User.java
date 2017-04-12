@@ -23,7 +23,6 @@ public class User{
 	
 	public User(String id, String username, String userPermission, String firstName,
 			String lastName){
-		super();
 		this.id = id;
 		this.username = username;
 		this.userPermission = userPermission;

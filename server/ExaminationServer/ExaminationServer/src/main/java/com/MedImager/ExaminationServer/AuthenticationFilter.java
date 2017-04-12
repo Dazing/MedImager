@@ -1,17 +1,11 @@
 package com.MedImager.ExaminationServer;
 
-import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Priority;
-import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 
@@ -24,8 +18,9 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 	public void filter(ContainerRequestContext requestContext){
 		String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		UserHandler.validateToken(token);
-		User user = UserHandler.getUserByToken(token);
+		User user = UserHandler.getUser(token);
 		
+		// Store relevant user info in case resources require them
 		final String username = user.getUsername();
 		final String userPermission = user.getUserPermission();
 		storeUserInfo(username, userPermission, requestContext);
@@ -46,7 +41,6 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 			}
 			@Override
 			public boolean isUserInRole(String userPermissionRequired){
-				// TODO: Use token to find the user's role in the user database
 				return userPermission.equals(userPermissionRequired);
 			}
 			@Override

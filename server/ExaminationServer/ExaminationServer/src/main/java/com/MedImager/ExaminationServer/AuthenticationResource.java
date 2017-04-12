@@ -14,9 +14,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@Path("/authentication")
+@Path("/user")
 public class AuthenticationResource{
-	
 	@GET
 	@Path("login")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -54,7 +53,7 @@ public class AuthenticationResource{
 		return Response.ok("User unregistered").build();
 	}
 	
-	// A mocked secure endpoint requiring a valid token
+	// A mocked secure resource requiring a valid token
 	@Secured
 	@GET
 	@Path("restricted")
@@ -63,7 +62,7 @@ public class AuthenticationResource{
 		return Response.ok("Welcome authorized user!").build();
 	}
 	
-	// A mocked secure endpoint requiring token issued to an admin
+	// A mocked secure resource requiring token issued to an admin
 	@Secured
 	@RolesAllowed("admin")
 	@GET

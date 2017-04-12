@@ -6,7 +6,9 @@ import java.util.Map;
 
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
+import org.mindrot.jbcrypt.BCrypt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -23,7 +25,7 @@ public class UserHandler{
 	// TODO: Possibly swap for key stored on server
 	private static final Key key = MacProvider.generateKey();
 	
-	public static void authenticateUser(String username, String password){
+	public static void authenticateUser(String username, String inputPassword){
 		try(Connection con = Database.getConnection();){
 			
 			//Check if username is in database
@@ -32,19 +34,24 @@ public class UserHandler{
 				ps.setString(1, username);
 				try(ResultSet rs = ps.executeQuery();){
 					if(!rs.isBeforeFirst()) {
-						throw new NotAuthorizedException("Username not valid");
+						throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+								.header("WWW-Authenticate", "Username not valid")
+								.entity("Username not valid").build());
 					}
 				}
 			}
 			
-			//Confirmed that username is in database, check now if password is correct
-			query = "SELECT * FROM users WHERE username = ? AND password = ?";
+			//Confirmed that username is in database, check if password is correct
+			query = "SELECT * FROM users WHERE username = ?";
 			try(PreparedStatement ps = con.prepareStatement(query);){
 				ps.setString(1, username);
-				ps.setString(2, password);
 				try(ResultSet rs = ps.executeQuery();){
-					if(!rs.isBeforeFirst()) {
-						throw new NotAuthorizedException("Password not valid");
+					rs.next();
+					String storedPassword = rs.getString("password");
+					if(!isPasswordValid(inputPassword, storedPassword)) {
+						throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+								.header("WWW-Authenticate", "Password not valid")
+								.entity("Password not valid").build());
 					}
 				}
 			}
@@ -62,11 +69,19 @@ public class UserHandler{
 			
 			try(ResultSet rs = ps.executeQuery();){
 				rs.next();
+				String id = rs.getString("id");
 				String userPermission = rs.getString("user_permission");
+				String firstName = rs.getString("first_name");
+				String lastName = rs.getString("last_name");
 				Date exp = new Date(System.currentTimeMillis() + TOKEN_TTL_MILLIS);
-				String compactJws = Jwts.builder().claim("username", username)
-						.claim("user_permission", userPermission).setExpiration(exp)
-						.signWith(SignatureAlgorithm.HS512, key).compact();
+				
+				String compactJws = Jwts.builder()
+						.claim("id", id)
+						.claim("username", username)
+						.claim("user_permission", userPermission)
+						.claim("first_name", firstName)
+						.claim("last_name", lastName)
+						.setExpiration(exp).signWith(SignatureAlgorithm.HS512, key).compact();
 						
 				return compactJws;
 			}
@@ -77,75 +92,60 @@ public class UserHandler{
 	
 	public static void validateToken(String token){
 		if(token == null) {
-			throw new NotAuthorizedException("Authorization header must be provided");
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+					.header("WWW-Authenticate", "Authorization header must be provided")
+					.entity("Authorization header must be provided").build());
 		}
 		
 		try{
 			Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
-			
-			// For testing purposes
-			System.out.println("Username: " + claims.get("username").toString());
-			System.out.println("Permission: " + claims.get("user_permission").toString());
-			System.out.println("Expiration: " + claims.getExpiration().toString());
 		}catch(SignatureException | MalformedJwtException | UnsupportedJwtException e){
-			throw new NotAuthorizedException("Token not valid");
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+					.header("WWW-Authenticate", "Token not valid")
+					.entity("Token not valid").build());
 		}catch(ExpiredJwtException e){
-			throw new NotAuthorizedException("Token expired");
+			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+					.header("WWW-Authenticate", "Token expired")
+					.entity("Token expired").build());
 		}
 	}
 	
 	/*
 	 * Assumes that token has been verified
 	 */
-	public static User getUserByToken(String token){
+	public static User getUser(String token){
 		Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+		String id = claims.get("id").toString();
 		String username = claims.get("username").toString();
-		String query = "SELECT * FROM users WHERE username = ?";
+		String userPermission = claims.get("user_permission").toString();
+		String firstName = claims.get("first_name").toString();
+		String lastName = claims.get("last_name").toString();
 		
-		try(Connection con = Database.getConnection();
-				PreparedStatement ps = con.prepareStatement(query);){
-			ps.setString(1, username);
-			
-			try(ResultSet rs = ps.executeQuery();){
-				rs.next();
-				String id = rs.getString("id");
-				String userPermission = rs.getString("user_permission");
-				String firstName = rs.getString("first_name");
-				String lastName = rs.getString("last_name");
-				return new User(id, username, userPermission, firstName, lastName);
-			}
-		}catch(SQLException e){
-			throw new WebApplicationException();
-		}
+		return new User(id, username, userPermission, firstName, lastName);
 	}
 	
-	public static void registerUser(String username, String password,  
-			String firstName, String lastName){
+	public static void registerUser(String username, String password, String firstName, String lastName){
 		try(Connection con = Database.getConnection();){
 			String query = "SELECT * FROM users WHERE username = ?";
 			
 			try(PreparedStatement ps = con.prepareStatement(query);){
 				ps.setString(1, username);
-				
 				try(ResultSet rs = ps.executeQuery();){
 					if(rs.isBeforeFirst()) {
-						throw new WebApplicationException("Account already registered", 409);
-//						throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
-//								.header("WWW-Authenticate", "Account already registered").build());
+						throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+								.entity("Account already registered").build());
 					}
 				}
 			}
 			
-			query = "INSERT INTO users (username, password, first_name, last_name) "
-					+ "VALUES(?, ?, ?, ?)";
+			query = "INSERT INTO users (username, password, first_name, last_name) VALUES(?, ?, ?, ?)";
 			try(PreparedStatement ps = con.prepareStatement(query);){
 				ps.setString(1, username);
-				ps.setString(2, password);
+				ps.setString(2, generateHashedPassword(password));
 				ps.setString(3, firstName);
 				ps.setString(4, lastName);
 				ps.executeUpdate();
 			}
-			
 		}catch(SQLException e){
 			throw new WebApplicationException();
 		}
@@ -161,6 +161,14 @@ public class UserHandler{
 		}catch(SQLException e){
 			throw new WebApplicationException();
 		}
+	}
+	
+	private static String generateHashedPassword(String password){
+		return BCrypt.hashpw(password, BCrypt.gensalt());
+	}
+	
+	private static boolean isPasswordValid(String inputPassword, String storedPassword){
+		return BCrypt.checkpw(inputPassword, storedPassword);
 	}
 }
 
