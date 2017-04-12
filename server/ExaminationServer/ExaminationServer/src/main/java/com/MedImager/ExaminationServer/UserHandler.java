@@ -110,10 +110,37 @@ public class UserHandler{
 		}
 	}
 	
+	public static User getUser(String id){
+		String query = "SELECT * FROM users WHERE id = ?";
+		
+		try(Connection con = Database.getConnection();
+				PreparedStatement ps = con.prepareStatement(query);){
+			ps.setString(1, id);
+			
+			try(ResultSet rs = ps.executeQuery();){
+				if(!rs.isBeforeFirst()) {
+					throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+							.entity("ID not valid").build());
+				}
+				
+				rs.next();
+				
+				String username = rs.getString("username");
+				String userPermission = rs.getString("user_permission");
+				String firstName = rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+				
+				return new User(id, username, userPermission, firstName, lastName);
+			}
+		}catch(SQLException e){
+			throw new WebApplicationException();
+		}
+	}
+	
 	/*
 	 * Assumes that token has been verified
 	 */
-	public static User getUser(String token){
+	public static User getUserByToken(String token){
 		Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
 		String id = claims.get("id").toString();
 		String username = claims.get("username").toString();

@@ -18,7 +18,7 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 	public void filter(ContainerRequestContext requestContext){
 		String token = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		UserHandler.validateToken(token);
-		User user = UserHandler.getUser(token);
+		User user = UserHandler.getUserByToken(token);
 		
 		// Store relevant user info in case resources require them
 		final String username = user.getUsername();

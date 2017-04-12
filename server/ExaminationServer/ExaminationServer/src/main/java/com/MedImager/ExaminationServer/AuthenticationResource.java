@@ -18,14 +18,14 @@ import javax.ws.rs.core.SecurityContext;
 public class AuthenticationResource{
 	@GET
 	@Path("login")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response login(){
 		return Response.ok("Proceed with login").build();
 	}
 	
 	@POST
 	@Path("login")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response login(@HeaderParam("Username") String username, @HeaderParam("Password") String password){
 		UserHandler.authenticateUser(username, password);
 		String token = UserHandler.issueToken(username);
@@ -34,7 +34,7 @@ public class AuthenticationResource{
 	
 	@POST
 	@Path("register")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response register(@HeaderParam("Username") String username, 
 							@HeaderParam("Password") String password, 
 							@HeaderParam("FirstName") String firstName,
@@ -46,18 +46,27 @@ public class AuthenticationResource{
 	@Secured
 	@DELETE
 	@Path("unregister")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response unregister(@Context SecurityContext securityContext){
 		String username = securityContext.getUserPrincipal().getName();
 		UserHandler.unregisterUser(username);
 		return Response.ok("User unregistered").build();
 	}
 	
+	@Secured
+	@RolesAllowed("admin")
+	@GET
+	@Path("getuser")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@HeaderParam("ID") String id){
+		return UserHandler.getUser(id);
+	}
+	
 	// A mocked secure resource requiring a valid token
 	@Secured
 	@GET
 	@Path("restricted")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response getRestricted(){
 		return Response.ok("Welcome authorized user!").build();
 	}
@@ -67,7 +76,7 @@ public class AuthenticationResource{
 	@RolesAllowed("admin")
 	@GET
 	@Path("adminrestricted")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	public Response getAdminRestricted(){
 		return Response.ok("Welcome admin!").build();
 	}
