@@ -2,6 +2,8 @@ package com.MedImager.ExaminationServer;
 
 import java.security.Key;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.NotAuthorizedException;
@@ -132,6 +134,36 @@ public class UserHandler{
 				
 				return new User(id, username, userPermission, firstName, lastName);
 			}
+		}catch(SQLException e){
+			throw new WebApplicationException();
+		}
+	}
+	
+	public static List<User> getUsers(){
+		String query = "SELECT * FROM users";
+		
+		try(Connection con = Database.getConnection();
+			PreparedStatement ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();){
+		
+			if(!rs.isBeforeFirst()) {
+				throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+						.entity("No users in user database").build());
+			}
+			
+			List<User> userList = new ArrayList<>();
+			
+			while(rs.next()){
+				String id = rs.getString("id");
+				String username = rs.getString("username");
+				String userPermission = rs.getString("user_permission");
+				String firstName = rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+				
+				userList.add(new User(id, username, userPermission, firstName, lastName));
+			}
+			
+			return userList;
 		}catch(SQLException e){
 			throw new WebApplicationException();
 		}

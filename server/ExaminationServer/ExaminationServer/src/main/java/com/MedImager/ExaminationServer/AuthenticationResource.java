@@ -1,5 +1,7 @@
 package com.MedImager.ExaminationServer;
 
+import java.util.List;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -60,6 +62,15 @@ public class AuthenticationResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUser(@HeaderParam("ID") String id){
 		return UserHandler.getUser(id);
+	}
+	
+	@Secured
+	@RolesAllowed("admin")
+	@GET
+	@Path("getusers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getUsers(){
+		return UserHandler.getUsers();
 	}
 	
 	// A mocked secure resource requiring a valid token
