@@ -9,6 +9,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -46,6 +47,7 @@ public class AuthenticationResource{
 	}
 	
 	@Secured
+	@RolesAllowed({"normal", "admin"})
 	@DELETE
 	@Path("unregister")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -71,6 +73,18 @@ public class AuthenticationResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers(){
 		return UserHandler.getUsers();
+	}
+	
+	@Secured
+	@RolesAllowed({"normal", "admin"})
+	@PUT
+	@Path("updatepassword")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response updatePassword(@HeaderParam("NewPassword") String newPassword,
+									@Context SecurityContext securityContext){
+		String username = securityContext.getUserPrincipal().getName();
+		UserHandler.updatePassword(username, newPassword);
+		return Response.ok("Password updated").build();
 	}
 	
 	// A mocked secure resource requiring a valid token

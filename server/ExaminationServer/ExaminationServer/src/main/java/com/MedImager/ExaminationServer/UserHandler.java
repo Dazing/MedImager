@@ -197,7 +197,7 @@ public class UserHandler{
 				}
 			}
 			
-			query = "INSERT INTO users (username, password, first_name, last_name) VALUES(?, ?, ?, ?)";
+			query = "INSERT INTO users (username, password, first_name, last_name) VALUES (?, ?, ?, ?)";
 			try(PreparedStatement ps = con.prepareStatement(query);){
 				ps.setString(1, username);
 				ps.setString(2, generateHashedPassword(password));
@@ -216,6 +216,24 @@ public class UserHandler{
 		try(Connection con = Database.getConnection();
 				PreparedStatement ps = con.prepareStatement(query);){
 			ps.setString(1, username);
+			ps.executeUpdate();
+		}catch(SQLException e){
+			throw new WebApplicationException();
+		}
+	}
+	
+	public static void updatePassword(String username, String newPassword){
+		if(newPassword == null){
+			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+					.entity("No new password provided").build());
+		}
+		
+		String query = "UPDATE users SET password = ? WHERE username = ?";
+		try(Connection con = Database.getConnection();
+				PreparedStatement ps = con.prepareStatement(query);){
+			
+			ps.setString(1, generateHashedPassword(newPassword));
+			ps.setString(2, username);
 			ps.executeUpdate();
 		}catch(SQLException e){
 			throw new WebApplicationException();
