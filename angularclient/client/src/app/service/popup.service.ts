@@ -17,15 +17,22 @@ export class PopupService{
 	private headers = new Headers({'Content-Type': 'application/json'});
 	popup:Observable<JSON>;
 	private privPopup: Subject<JSON>;
+
 	searchResult:Observable<PopupNavArgs>;
 	private privSearchResult: Subject<PopupNavArgs>;
+
+	dialogs:Observable<string>;
+	private privDialogs: Subject<string>;
+	private booleanReturnSubject: Subject<boolean>;
+
 
 	constructor(private http: Http, private router: Router, ) {
 		this.privPopup = new Subject<JSON>();
         this.popup = this.privPopup.asObservable();
 		this.privSearchResult = new Subject<PopupNavArgs>();
         this.searchResult = this.privSearchResult.asObservable();
-
+		this.privDialogs = new Subject<string>();
+        this.dialogs = this.privDialogs.asObservable();
 	}
 
 	ngOnInit(): void {
@@ -62,6 +69,18 @@ export class PopupService{
 		this.privPopup.next(examination);
 	}
 
+	returnDialog(answer: boolean): void {
+		if (this.booleanReturnSubject != undefined) {
+			this.booleanReturnSubject.next(answer);
+			this.booleanReturnSubject = undefined;
+		}
+	}
+
+	collectionDeletionDialog(): Observable<boolean> {
+		this.privDialogs.next('collectionDeletion');
+		this.booleanReturnSubject = new Subject<boolean>();
+		return this.booleanReturnSubject.asObservable();
+	}
 
 
 }
