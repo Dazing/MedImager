@@ -86,6 +86,22 @@
 	</div>
 </div>
 
+<div *ngIf="dialogVisible && dialogType == 'collectionDeletion'" id="black-back" (click)="confirmDialog(false)">
+</div>
+<div *ngIf="dialogVisible && dialogType == 'collectionDeletion'" id="popup-image-wrapper">
+	<div class="card tertiary-colour collection-deletion-dialog">
+		<div class="card-content black-text">
+			<span class="card-title">Ta bort samling?</span>
+			<p>Detta kommer ta bort denna samling permanent.</p>
+		</div>
+		<div class="card-action">
+			<a (click)="confirmDialog(true)" class="black-text">Godkänn</a>
+			<a (click)="confirmDialog(false)" class="black-text">Avbryt</a>
+		</div>
+	</div>
+</div>
+
+
 <!-- 
 	{
 		"examinationID":"980122112626",
