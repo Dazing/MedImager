@@ -28,13 +28,16 @@ app.use('/*', function(req, res, next) {
 });
 
 
-app.use('*', express.static('angular'));
+app.use('*', express.static('static'));
 
 //app.use('/', router);
+app.use('*', function(req, res, next) {
+	res.sendFile(path.join(__dirname + '/index.html'));
+});
 
 // ----------------------------------------------------
 // Server functionality
 
-app.listen(3000, function () {
+app.listen(4200, function () {
 	console.log('App listening on port 3000!');
 });
