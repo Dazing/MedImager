@@ -2,34 +2,19 @@ package com.MedImager.ExaminationServer;
 
 public class User{
 	
-	private static final String DEFAULT_USER_PERMISSION = "normal";
-	
 	private String id;
 	private String username;
-	private String password;
 	private String userPermission;
-	private String email;
 	private String firstName;
 	private String lastName;
 	
-	public User(String id, String username, String password, String userPermission, String email,
-			String firstName, String lastName){
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.userPermission = userPermission;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+	public User(){}
 	
-	public User(String id, String username, String userPermission, String email, String firstName,
+	public User(String id, String username, String userPermission, String firstName,
 			String lastName){
-		super();
 		this.id = id;
 		this.username = username;
 		this.userPermission = userPermission;
-		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -50,28 +35,12 @@ public class User{
 		this.username = username;
 	}
 	
-	public String getPassword(){
-		return password;
-	}
-	
-	public void setPassword(String password){
-		this.password = password;
-	}
-	
 	public String getUserPermission(){
 		return userPermission;
 	}
 	
 	public void setUserPermission(String userPermission){
 		this.userPermission = userPermission;
-	}
-	
-	public String getEmail(){
-		return email;
-	}
-	
-	public void setEmail(String email){
-		this.email = email;
 	}
 	
 	public String getFirstName(){

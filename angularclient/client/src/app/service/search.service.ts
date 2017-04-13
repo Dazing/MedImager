@@ -60,10 +60,13 @@ export class SearchService {
 			str = str.substr(1);
 		}	
 
+		console.log("Q:"+str);
+		
 		if (str == "") {
 			return;
 		}
 		var url = (this.server.getUrl() + '/search?'+str);
+		
 		console.log("URL: "+url+", Q: "+str);
 		
 		this.http.get(url)

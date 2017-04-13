@@ -7,6 +7,7 @@ import java.util.List;
 public class Collection {
 	private String collectionName;
 	private String collectionDescr;
+	private String uniqueShareID;
 	private int collectionID;
 	private int userID;
 	
@@ -33,5 +34,11 @@ public class Collection {
 	}
 	public void setCollectionID(int collectionID) {
 		this.collectionID = collectionID;
+	}
+	public String getUniqueShareID() {
+		return uniqueShareID;
+	}
+	public void setUniqueShareID(String uniqueShareID) {
+		this.uniqueShareID = uniqueShareID;
 	}
 }

@@ -12,6 +12,8 @@ $(document).ready(function () {
 		selectTag(selectedTagId);
 	}
 
+	//setSearchResultsGridWidth();
+
 	$('#searchSideWrapper').width(
 		$('body').width()-500
 	);
@@ -49,11 +51,16 @@ $(document).ready(function () {
 		$('#searchSideWrapper').width(
 			$('body').width()-500
 		);
+
+		//setSearchResultsGridWidth();
 	})
 
 	$("#menu-bar").resize(function() {
 		setPageWrapperHeight((advancedBar ? 104 : 0) + (settingsBar ? 52 : 0));
 	})
+
+	var marginTopRelatedImages = $("#related-images").outerHeight()/2;
+	$("#related-images").css("marginTop", "-" + marginTopRelatedImages + "px");
 
 	//$("#search-results span").on('mouseup', function(event) {
 	//	var thisId = event.target.id;

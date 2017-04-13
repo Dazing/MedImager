@@ -1,0 +1,17 @@
+127.0.0.1 - - [10/Apr/2017:13:27:09 +0200] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [10/Apr/2017:13:27:11 +0200] "GET /ExaminationServer/WEB-INF/classes/com/MedImager/ExaminationServer/MyResource.java HTTP/1.1" 404 949
+127.0.0.1 - - [10/Apr/2017:13:27:16 +0200] "GET /ExaminationServer/examData/api/search HTTP/1.1" 200 28808
+127.0.0.1 - - [10/Apr/2017:13:27:16 +0200] "GET /favicon.ico HTTP/1.1" 404 973
+127.0.0.1 - - [10/Apr/2017:13:27:37 +0200] "GET /ExaminationServer/examData/api/collection HTTP/1.1" 200 230
+127.0.0.1 - - [10/Apr/2017:13:27:54 +0200] "GET /ExaminationServer/examData/api/collection/1 HTTP/1.1" 200 229
+127.0.0.1 - - [10/Apr/2017:13:31:16 +0200] "GET /ExaminationServer/examData/api/image/980421130515/0 HTTP/1.1" 200 121279
+127.0.0.1 - - [10/Apr/2017:13:34:49 +0200] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [10/Apr/2017:13:34:50 +0200] "GET /ExaminationServer/WEB-INF/classes/com/MedImager/ExaminationServer/MyResource.java HTTP/1.1" 404 949
+127.0.0.1 - - [10/Apr/2017:13:35:58 +0200] "GET /ExaminationServer/examData/api/search HTTP/1.1" 200 28808
+127.0.0.1 - - [10/Apr/2017:13:37:39 +0200] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [10/Apr/2017:13:37:51 +0200] "GET /ExaminationServer/examData/api/search HTTP/1.1" 200 723208
+127.0.0.1 - - [10/Apr/2017:13:38:22 +0200] "GET /ExaminationServer/examData/api/image/150126102038 HTTP/1.1" 404 967
+127.0.0.1 - - [10/Apr/2017:13:38:26 +0200] "GET /ExaminationServer/examData/api/image/150126102038/0 HTTP/1.1" 200 254116
+127.0.0.1 - - [10/Apr/2017:13:41:29 +0200] "GET /ExaminationServer/examData/api/image/150218092527/0 HTTP/1.1" 200 3168089
+127.0.0.1 - - [10/Apr/2017:13:44:18 +0200] "GET / HTTP/1.1" 404 951
+127.0.0.1 - - [10/Apr/2017:13:44:28 +0200] "GET /ExaminationServer/examData/api/initValues HTTP/1.1" 200 22817

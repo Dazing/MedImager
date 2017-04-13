@@ -37,10 +37,10 @@ $(function(){
             dataType: "text"
         });
     });
-    $("#makeShareable").on("click", function(){
+    $("#shareTo").on("click", function(){
         $.ajax({
-            url: ctxPath+"/api/collection/share",
-            type: "PUT",
+            url: ctxPath+"/api/collection/share/"+$(shareUser).val(),
+            type: "POST",
             data: '{ "collectionID":"'+$(shareCollectionID).val() +'"}',
             contentType: "application/json",
             cache: false,
@@ -94,9 +94,10 @@ $(function(){
 <input type=text id="deleteImageCollectionID" placeholder="Collection ID">
 <input type=text id="deleteImageImageID" placeholder="Image ID">
 <li><button id="deleteImage">Delete image</button></li>
-<p> Make collection shareable</p>
+<p> Share Collection to user:</p>
 <input type=text id="shareCollectionID" placeholder="Collection ID">
-<li><button id="makeShareable">Share collection</button></li>
+<input type=text id="shareUser" placeholder="Target user ID">
+<li><button id="shareTo">Share collection</button></li>
 </div>
 </body>
 </html>

@@ -6,11 +6,13 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
 public class ThumbnailBuilder {
 	public ThumbnailBuilder(){
+		System.out.println(Paths.get(".").toAbsolutePath().normalize().toString());
 		new File("thumbnail").mkdir();
 	}
 	public File getThumbnail(String path, String examinationID, int index){

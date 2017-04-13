@@ -1,0 +1,37 @@
+package com.MedImager.ExaminationServer;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Collection {
+	private String collectionName;
+	private String collectionDescr;
+	private int collectionID;
+	private int userID;
+	
+	public String getCollectionName() {
+		return collectionName;
+	}
+	public void setCollectionName(String collectionName) {
+		this.collectionName = collectionName;
+	}
+	public int getuserID() {
+		return userID;
+	}
+	public void setuserID(int userID) {
+		this.userID = userID;
+	}
+	public String getCollectionDescr() {
+		return collectionDescr;
+	}
+	public void setCollectionDescr(String collectionDescr) {
+		this.collectionDescr = collectionDescr;
+	}
+	public int getCollectionID() {
+		return collectionID;
+	}
+	public void setCollectionID(int collectionID) {
+		this.collectionID = collectionID;
+	}
+}
