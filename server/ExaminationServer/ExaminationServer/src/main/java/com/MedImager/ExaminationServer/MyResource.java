@@ -99,14 +99,15 @@ public class MyResource {
 	}
 	
 	static int userID = 2;
+	
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/collection")
     public void createCollectiion(Collection item) throws Exception{
     	Connection c = new DatabaseConnection().getConnection();
-	    String uniqueID = UUID.randomUUID().toString();
-	    String addQuerry = "INSERT INTO collection(user_id,name,descr,date,share_id)"
-	    		+ " VALUES('"+userID+"','"+item.getCollectionName()+"','"+item.getCollectionDescr()+"', NOW(),'"+ uniqueID + "');";
+    	
+	    String addQuerry = "INSERT INTO collection(user_id,name,descr,date)"
+	    		+ " VALUES('"+userID+"','"+item.getCollectionName()+"','"+item.getCollectionDescr()+"', NOW());";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();	    
@@ -168,7 +169,7 @@ public class MyResource {
     }
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
-    @Path("/collection/")
+    @Path("/collection/note")
     public void addNote(CollectionItem col) throws SQLException{
 	    Connection c = new DatabaseConnection().getConnection();
 	    String addQuerry = "UPDATE collectionitem SET note ='"+col.getNote()+"'"
@@ -179,6 +180,18 @@ public class MyResource {
 	    c.close();
     }
     
+    @PUT
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("/collection/description")
+    public void addDescription(Collection col) throws SQLException{
+	    Connection c = new DatabaseConnection().getConnection();
+	    String addQuerry = "UPDATE collection SET descr ='"+col.getCollectionDescr()+"'"
+	    		+ " WHERE user_id = " + userID + " AND id = " + col.getCollectionID() + ";";
+	    PreparedStatement preparedStatement = null;
+	    preparedStatement = c.prepareStatement(addQuerry);
+	    preparedStatement.executeUpdate();
+	    c.close();
+    }
 
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON})
@@ -211,14 +224,7 @@ public class MyResource {
     @Path("/collection/share/{targetUserID}")
     public void shareCollectiion(Collection item, @PathParam("targetUserID") int targetUserID) throws Exception{
     	Connection c = new DatabaseConnection().getConnection();
-	    String addQuerry = "SELECT share_id FROM collection WHERE id=" +item.getCollectionID() + " AND user_id =" + userID + ";";
-	    Statement stmt = c.createStatement();
-	    ResultSet rs = stmt.executeQuery(addQuerry);
-	    String shareID = null;
-	    while(rs.next()){
-		    shareID = rs.getString("share_id");
-	    }
-	    addQuerry = "INSERT INTO bookmark(user_id,share_id) VALUES('"+targetUserID+"','"+ shareID + "');";
+	    String addQuerry = "INSERT INTO bookmark(user_id,collection_id) VALUES('"+targetUserID+"','"+ item.getCollectionID() + "');";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();	    
@@ -256,7 +262,7 @@ public class MyResource {
     public List<Collection> getSharedCollections() throws Exception{
 	    Connection c = new DatabaseConnection().getConnection();
 	    String addQuerry = "SELECT id,name,descr FROM collection"
-	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id=2 AND bookmark.share_id=collection.share_id);";
+	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id="+ userID +" AND bookmark.collection_id=collection.id);";
 	    Statement stmt = c.createStatement();
 	    ResultSet rs = stmt.executeQuery(addQuerry);
 	    List<Collection> result = new ArrayList<Collection>();
@@ -268,6 +274,7 @@ public class MyResource {
 	    	result.add(col);
 	    }
 	    c.close();
+	    rs.close();
         return result;
     }
     @GET
@@ -275,38 +282,24 @@ public class MyResource {
     @Path("/collection/share/{collectionID}")
     public List<CollectionItem> getSharedCollectionItems(@PathParam("collectionID") int collectionID) throws Exception{
 	    Connection c = new DatabaseConnection().getConnection();
-	    String addQuerry = "SELECT share_id FROM bookmark WHERE user_id = " + userID + ";";
+	    String addQuerry = "SELECT examinationID,imageindex,note,collection_id,collectionitem_id FROM collectionitem"
+	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id= " + userID + " AND bookmark.collection_id=" + collectionID + ")"
+	    		+ " AND collection_id="+ collectionID +";";
 	    Statement stmt = c.createStatement();
 	    ResultSet rs = stmt.executeQuery(addQuerry);
 	    List<CollectionItem> result = new ArrayList<CollectionItem>();
-	    String shareID = null;
 	    while(rs.next()){
-	    	shareID = rs.getString("share_id");
-	    	addQuerry = "SELECT id FROM collection WHERE id="+ collectionID + " AND share_id='" + shareID + "';";
-	    	Statement reqStmt = c.createStatement();
-	    	ResultSet req = reqStmt.executeQuery(addQuerry);
-	    	if(req.next()){
-	    		req.close();
-	    		String innerquerry= "SELECT examinationID,imageindex,note,collection_id,collectionitem_id FROM collectionitem WHERE collection_id =" + collectionID + ";"; 	
-		    	Statement innerstmt = c.createStatement();
-			    ResultSet innerrs = innerstmt.executeQuery(innerquerry);
-			    while(innerrs.next()){
-			    	CollectionItem col = new CollectionItem();
-			    	col.setExaminationID(innerrs.getString("examinationID"));
-			    	col.setIndex(innerrs.getInt("imageindex"));
-			    	col.setNote(innerrs.getString("note"));
-			    	col.setCollectionID(innerrs.getInt("collection_id"));
-			    	col.setCollectionitemID(innerrs.getInt("collectionitem_id"));
-			    	result.add(col);
-			    }
-			    innerrs.close();
-	    	}
+	    	CollectionItem col = new CollectionItem();
+	    	col.setExaminationID(rs.getString("examinationID"));
+	    	col.setIndex(rs.getInt("imageindex"));
+	    	col.setNote(rs.getString("note"));
+	    	col.setCollectionID(rs.getInt("collection_id"));
+	    	col.setCollectionitemID(rs.getInt("collectionitem_id"));
+	    	result.add(col);
 	    }
-	    rs.close();
 	    c.close();
         return result;
     }
-    
 	@GET
 	@Path("/initValues")
     @Produces(MediaType.APPLICATION_JSON)
