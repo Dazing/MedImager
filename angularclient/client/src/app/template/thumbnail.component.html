@@ -19,7 +19,7 @@
 	</span>
 </template>
 
-<template *ngIf="gridType == 'collection'" ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
+<template *ngIf="gridType == 'collection'" ngFor let-searchresult [ngForOf]="searchresults" let-i="index">
 	<span  
 		*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
 		id="{{'result-image-'+i+j}}" 
