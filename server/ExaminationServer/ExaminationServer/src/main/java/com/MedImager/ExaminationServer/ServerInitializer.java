@@ -23,18 +23,37 @@ public class ServerInitializer {
 		initValues = new InitValues();
 	}
 	public InitValues initialize() throws IOException, NoSuchExaminationException{
-		setTreatTypes();
-		setSearchableValues();
+		initValues.setAllergy(getValues("Allergy"));
+		initValues.setBiopsySite(getValues("Biopsy-site"));
+		initValues.setDiagDef(getValues("Diag-def"));
+		initValues.setDiagHist(getValues("Diag-hist"));
+		initValues.setDiagTent(getValues("Diag-tent"));
+		initValues.setDisNow(getValues("Dis-now"));
+		initValues.setDisPast(getValues("Dis-past"));
+		initValues.setDrug(getValues("Drug"));
+		initValues.setFactorNeg(getValues("Factor-neg"));
+		initValues.setFactorPos(getValues("Factor-pos"));
+		initValues.setFamily(getValues("Family"));
+		initValues.setGender(getValues("Gender"));
+		initValues.setLesnOn(getValues("Lesn-on"));
+		initValues.setLesnSite(getValues("Lesn-site"));
+		initValues.setSkinPbl(getValues("Skin-pbl"));
+		initValues.setSmoke(getValues("Smoke"));
+		initValues.setSnuff(getValues("Snuff"));
+		initValues.setSymptNow(getValues("Sympt-now"));
+		initValues.setSymptSite(getValues("Sympt-site"));
+		initValues.setTreatType(getValues("Treat-type"));
+		initValues.setVasNow(getValues("Vas-now"));
 		return initValues;
 	}
-	private void setTreatTypes() throws IOException, NoSuchExaminationException{
+	private List<String> getValues(String valueType) throws IOException, NoSuchExaminationException{
 		List<String> results = new ArrayList<String>();
 		for(PatientIdentifier pid : handler.getPatients()){
 			for(ExaminationIdentifier eid : handler.getExaminations(pid)){
             	ExaminationValueContainer container;
 					container = handler.getExaminationValueContainer(eid);
 	                    try {
-							for (String s : container.getValues("Treat-type")) {
+							for (String s : container.getValues(valueType)) {
 								if(!results.contains(s)){
 									results.add(s);
 								}
@@ -43,9 +62,7 @@ public class ServerInitializer {
 						}
 	                }
 				}
-			
-		
-		initValues.setTreatTypes(results);
+			return results;
 	}
 	private void setSearchableValues(){
         Map<String, Integer> result = new HashMap<>();

@@ -1,0 +1,14 @@
+package com.MedImager.ExaminationServer;
+
+import javax.ws.rs.ApplicationPath;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
+
+@ApplicationPath("api")
+public class MyApp extends ResourceConfig {
+	public MyApp() {
+		super(AuthenticationResource.class);
+		System.out.println("Fitta på fredag");
+		register(RolesAllowedDynamicFeature.class);
+    }
+}

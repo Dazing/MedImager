@@ -68,7 +68,11 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.40</version>
 		</dependency>
-				
+		<dependency>
+		    <groupId>org.mindrot</groupId>
+		    <artifactId>jbcrypt</artifactId>
+		    <version>0.4</version>
+		</dependency>
     </dependencies>
     <properties>
         <jersey.version>2.25</jersey.version>

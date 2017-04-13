@@ -8,6 +8,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 public class MyApp extends ResourceConfig {
 	public MyApp() {
 		super(AuthenticationResource.class);
+		System.out.println("MyApp Found!");
 		register(RolesAllowedDynamicFeature.class);
     }
 }

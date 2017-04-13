@@ -1,0 +1,54 @@
+package com.MedImager.ExaminationServer;
+
+import java.util.List;
+import java.util.Map;
+
+public class InitValues {
+	public static final String[] relevantTerms = {
+			"Age", "Allergy", "Biopsy-site", "Diag-def", "Diag-hist", 
+			"Diag-Tent", "Dis-now", "Dis-past", "Drug", "Factor-neg", 
+			"Factor-pos", "Family", "Gender", "Lesn-on", "Lesn-site", 
+			"Skin-pbl", "Smoke", "Snuff", "Sympt-now", "Sympt-site", 
+			"Treat-type", "Vas-now"
+			};
+	public static final String[] primaryRelevantTerms = {
+			"Diag-def", "Dis-now", "Sympt-now", "Sympt-site"
+			};
+	private List<String> allergy;
+	private List<String> biopsySite;
+	private List<String> diagDef;
+	private List<String> diagHist;
+	private List<String> diagTent;
+	private List<String> disNow;
+	private List<String> disPast;
+	private List<String> drug;
+	private List<String> factorNeg;
+	private List<String> factorPos;
+	private List<String> family;
+	private List<String> gender;
+	private List<String> lesnOn;
+	private List<String> lesnSite;
+	private List<String> skinPbl;
+	private List<String> smoke;
+	private List<String> snuff;
+	private List<String> symptNow;
+	private List<String> symptSite;
+	private List<String> treatType;
+	private List<String> vasNow;
+	private Map<String, Integer> searchableValues;
+	
+	public Map<String, Integer> getSearchableValues() {
+		return searchableValues;
+	}
+	public void setSearchableValues(Map<String, Integer> searchableValues) {
+		this.searchableValues = searchableValues;
+	}
+	public List<String> getTreatTypes() {
+		return treatTypes;
+	}
+	public void setTreatTypes(List<String> treatTypes) {
+		this.treatTypes = treatTypes;
+	}
+	public InitValues(){
+	}
+}

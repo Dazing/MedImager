@@ -29,7 +29,7 @@ $(function(){
     });
     $("#addNote").on("click", function(){
         $.ajax({
-            url: ctxPath+"/api/collection",
+            url: ctxPath+"/api/collection/note",
             type: "PUT",
             data: '{"note":"'+$(note).val()+'", "collectionID":"'+$(noteCollectionID).val() +'", "collectionitemID":"'+$(noteCollectionitemID).val()+'"}',
             contentType: "application/json",
@@ -67,6 +67,16 @@ $(function(){
             dataType: "text"
         });
     });
+    $("#addDescr").on("click", function(){
+        $.ajax({
+            url: ctxPath+"/api/collection/description",
+            type: "PUT",
+            data: '{"collectionDescr":"'+$(descrText).val()+'", "collectionID":"'+$(descrCollectionID).val() +'"}',
+            contentType: "application/json",
+            cache: false,
+            dataType: "text"
+        });
+    });
 });
 </script>
 
@@ -94,6 +104,10 @@ $(function(){
 <input type=text id="deleteImageCollectionID" placeholder="Collection ID">
 <input type=text id="deleteImageImageID" placeholder="Image ID">
 <li><button id="deleteImage">Delete image</button></li>
+<p> Add description to collection
+<input type=text id="descrCollectionID" placeholder="Collection ID">
+<input type=text id="descrText" placeholder="Description">
+<li><button id="addDescr">Add description</button></li>
 <p> Share Collection to user:</p>
 <input type=text id="shareCollectionID" placeholder="Collection ID">
 <input type=text id="shareUser" placeholder="Target user ID">
