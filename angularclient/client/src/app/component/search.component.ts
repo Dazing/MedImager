@@ -8,6 +8,7 @@ import { SearchService } from '../service/search.service';
 import { PopupComponent } from './popup.component';
 import { CollectionsMenu } from './collections-menu.component';
 import { CollectionTopMenu } from './collection-topmenu.component';
+import { CollectionThumbnailComponent } from './collection-thumbnail.component';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -30,6 +31,7 @@ export class SearchComponent {
 
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 	@ViewChild('collectionTopmenu') collectionTopmenu: CollectionTopMenu;
+	@ViewChild('collectionThumbnail') collectionThumbnail: CollectionTopMenu;
 
 	public modeSelected = false;
 	public searchMode: boolean;
@@ -52,6 +54,7 @@ export class SearchComponent {
 			if (sel != undefined) {
 				this.selectedCollection = sel;
 				this.collectionTopmenu.setCollection(sel);
+				this.collectionThumbnail.setCollection(sel);
 			}
 		});
 		this.collectionTopmenu.collectionDeleted.subscribe(del => {

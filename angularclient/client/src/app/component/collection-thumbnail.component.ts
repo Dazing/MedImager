@@ -18,8 +18,9 @@ export class CollectionThumbnailComponent implements OnInit {
 	public results;
 	public url;
 
-	private resultSubject: Subject<Image[]>;
-	private resultObserver: Observable<Image[]>;
+	private loaded = false;
+	private collection: Collection;
+	private searchresults;
 
 	//note edit helper functions:
 	public editMode: boolean = false;
@@ -35,7 +36,7 @@ export class CollectionThumbnailComponent implements OnInit {
 	){}
 
 	ngOnInit(): void {
-		
+		this.url = this.server.getUrl();
 
 		this.popupService.searchResult.subscribe(searchResult => {
 			if (searchResult.direction > 0) {
@@ -47,12 +48,22 @@ export class CollectionThumbnailComponent implements OnInit {
 	}
 
 	setCollection(collection: Collection) {
-		this.resultSubject = new Subject<Image[]>();
-		this.resultObserver = this.resultSubject.asObservable();
-		this.resultObserver.subscribe(images => {
-			this.results = images;
-		});
-		this.collectionService.getCollection(collection.id, this.resultSubject);
+		this.loaded = false;
+		this.collection = collection;
+		this.collectionService.getCollection(collection.id, this.receiveImages, this);
+	}
+
+	receiveImages(collID: number, images: any[]): void {
+		if (this.collection.id == collID) {
+			console.log("collection thumbnail got images:");
+			console.log(images);
+			this.searchresults = images;
+			this.loaded = true;
+		} else {
+			console.log("some sort of weird overlapping bug thing probably happened here");
+		}
+		
+		
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {

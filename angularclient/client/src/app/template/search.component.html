@@ -17,8 +17,8 @@
 	</div>
 
 	<collection-topmenu [hidden]="searchMode" #collectionTopmenu> </collection-topmenu>
-	<div id="search-results" class="top-menu-margin" *ngIf="!searchMode">
-		<thumbnail [gridType]="'collection'" ></thumbnail>
+	<div id="search-results" class="top-menu-margin" [hidden]="searchMode">
+		<collection-thumbnail #collectionThumbnail [hidden]="searchMode"></collection-thumbnail>
 	</div>
 	
 </div>

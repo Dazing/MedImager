@@ -2,7 +2,7 @@ import { Component, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
-import { Collection } from '../model/image';
+import { Image, Collection } from '../model/image';
 import { CollectionService } from '../service/collection.service';
 import { PopupService } from '../service/popup.service';
 
@@ -49,6 +49,7 @@ export class CollectionTopMenu {
             }
         });
     }
+
 
     resetMenu(): void {
         this.editMode = false;

@@ -1,6 +1,6 @@
 export class Image {
-    id: string;
-    url: string;
+    examinationID: number;
+    imageIndex: number;
     name: string;
 }
 

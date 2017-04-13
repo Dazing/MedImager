@@ -57,7 +57,7 @@ export class CollectionService {
 
 	}
 
-	getCollection(collectionID: number, returnTo: Subject<Image[]>): void {
+	getCollection(collectionID: number, callback: (collID: number, images: any[]) => void, thisHandle: any): void {
 		var url = (this.server.getUrl() + '/collection/'+collectionID);
 		console.log("Request collection: "+url);
 		
@@ -66,7 +66,15 @@ export class CollectionService {
 			.then(response => {
 				console.log("collection request http GET response:");
 				console.log(response.json());
-				returnTo.next(response.json());
+				let images = [];
+				for (let image of response.json()) {
+					images.push(image);
+					
+				}
+				console.log("IMAGES:");
+				console.log(images);
+				
+				callback.call(thisHandle, collectionID, images);
 			})
 			.catch(e => {
 				console.log("Get search "+e);

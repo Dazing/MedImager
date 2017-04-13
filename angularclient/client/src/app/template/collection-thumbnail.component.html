@@ -1,14 +1,15 @@
-<template *ngIf="gridType == 'collection'" ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
+<template *ngIf="loaded" ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
 	<span  
-		*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
-		id="{{'result-image-'+i+j}}" 
+		id="{{'result-image-'+i+'-'+searchresult.index}}" 
 		class="unselectable"
-		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
-		data-id="{{i}}"
+		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +searchresult.index + ')'}" 
 		[attr.data-examinationid]="searchresult.examinationID"
-		[attr.data-imageIndex]="j"
-		(click)="onImageClick(i,j)"
-	>
+		[attr.data-imageIndex]="searchresult.index"
+		(click)="onImageClick(i,searchresult.index)"
+	><!--
+
+
+
 		<div class="opacity-wrapper" *ngIf="getNote(i,j) && !editMode">
 			{{getNote(i,j)}}
 		</div>
@@ -17,6 +18,8 @@
 				<i class="material-icons" draggable="false">mode_edit</i>
 			</a>
 		</div>
+
+
 
 
 		<div class="opacity-wrapper-always-on valign-wrapper" *ngIf="editMode && editi == i && editj == j">
@@ -29,6 +32,6 @@
 			<a class="btn-floating btn-large waves-effect waves-light" (click)="editMode=false" *ngIf="editMode && editi==i && editj==j">
 				<i class="material-icons" style="transform: rotate(45deg)" draggable="false">add</i>
 			</a>
-		</div>
+		</div>-->
 	</span>
 </template>
