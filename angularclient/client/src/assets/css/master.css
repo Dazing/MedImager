@@ -40,7 +40,7 @@
   left: 300px;
   top: 0;
   right: 0;
-  z-index: 100; }
+  z-index: 90; }
 
 #menu-bar {
   z-index: 100;
@@ -157,6 +157,91 @@
 .menu-wrapper .chip {
   border-radius: 4px;
   background-color: #1de9b6; }
+
+.collection-topmenu-title {
+  line-height: 69px;
+  margin-left: 20px;
+  font-size: 21px; }
+
+.collection-topmenu-settings-button {
+  line-height: 67px; }
+
+.collection-topmenu-details-button {
+  line-height: 69px;
+  position: absolute;
+  cursor: pointer;
+  color: #1de9b6;
+  font-size: 3rem;
+  right: 70px; }
+
+.collection-topmenu-details-container {
+  position: absolute;
+  right: 65%;
+  top: 65%;
+  background-color: #ffffff;
+  width: 350px;
+  cursor: default;
+  transition: max-height 0.2s;
+  overflow: hidden;
+  color: #000000;
+  row-height: 20px;
+  border: none;
+  max-height: 0; }
+  .collection-topmenu-details-container.expanded {
+    border: 1px solid #e7e7e7;
+    max-height: 400px; }
+  .collection-topmenu-details-container h4 {
+    line-height: 20px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 7px; }
+  .collection-topmenu-details-container .row {
+    padding: 3px 3px 3px 0px;
+    width: 100%;
+    margin-bottom: 0; }
+    .collection-topmenu-details-container .row .btn {
+      width: 100%;
+      line-height: 36px;
+      font-size: 16px;
+      padding-left: 10px; }
+      .collection-topmenu-details-container .row .btn i {
+        font-size: 20px;
+        line-height: 36px; }
+    .collection-topmenu-details-container .row .col {
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 10px; }
+  .collection-topmenu-details-container .wordwrap {
+    overflow-x: none;
+    overflow-y: auto;
+    font-size: 15px;
+    line-height: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 15px; }
+  .collection-topmenu-details-container .edit-button {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    height: 28px;
+    width: 28px;
+    line-height: 28px; }
+    .collection-topmenu-details-container .edit-button.confirm {
+      right: 40px; }
+    .collection-topmenu-details-container .edit-button i {
+      line-height: 28px;
+      font-size: 25px;
+      position: relative;
+      top: 0; }
+  .collection-topmenu-details-container textarea {
+    display: block;
+    width: calc(100% - 14px);
+    margin: 4px 7px 4px 7px;
+    line-height: 18px;
+    font-size: 15px;
+    resize: none;
+    height: 200px; }
 
 .primary-colour {
   background-color: #1de9b6; }
@@ -286,6 +371,9 @@
       background-color: #64ffda; }
       #popup-image-data-buttons div:nth-of-type(2):hover {
         background-color: #1de9b6; }
+
+.collection-deletion-dialog a {
+  cursor: pointer; }
 
 .primary-colour {
   background-color: #1de9b6; }
@@ -583,5 +671,12 @@ a, a:visited {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none; }
+
+.wordwrap {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word; }
 
 /*# sourceMappingURL=master.css.map */

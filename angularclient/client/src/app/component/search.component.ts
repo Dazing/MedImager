@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
-import { Image } from '../model/image';
+import { Image, Collection } from '../model/image';
 
 import { PopupService } from '../service/popup.service';
 import { SearchService } from '../service/search.service';
 import { PopupComponent } from './popup.component';
 import { CollectionsMenu } from './collections-menu.component';
+import { CollectionTopMenu } from './collection-topmenu.component';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -28,10 +29,11 @@ export class SearchComponent {
 	private collectionsMenuVisible = true;
 
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
+	@ViewChild('collectionTopmenu') collectionTopmenu: CollectionTopMenu;
 
 	public modeSelected = false;
 	public searchMode: boolean;
-	public selectedCollection: number;
+	public selectedCollection: Collection;
 
 	form;
 
@@ -47,7 +49,14 @@ export class SearchComponent {
 			this.searchMode = mode;
 		});
 		this.collectionsMenu.selectedCollection.subscribe(sel => {
-			this.selectedCollection = sel;
+			if (sel != undefined) {
+				this.selectedCollection = sel;
+				this.collectionTopmenu.setCollection(sel);
+			}
+		});
+		this.collectionTopmenu.collectionDeleted.subscribe(del => {
+			this.collectionTopmenu.resetMenu();
+			this.collectionsMenu.goToSearch();
 		});
 		this.collectionsMenu.emitMode();
 		this.modeSelected = true;
