@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
-import { Image } from '../model/image';
+import { Image, Collection } from '../model/image';
 
 import { PopupService } from '../service/popup.service';
 import { SearchService } from '../service/search.service';
 import { PopupComponent } from './popup.component';
 import { CollectionsMenu } from './collections-menu.component';
+import { CollectionTopMenu } from './collection-topmenu.component';
+import { CollectionThumbnailComponent } from './collection-thumbnail.component';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -25,6 +27,15 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
+	private collectionsMenuVisible = true;
+
+	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
+	@ViewChild('collectionTopmenu') collectionTopmenu: CollectionTopMenu;
+	@ViewChild('collectionThumbnail') collectionThumbnail: CollectionTopMenu;
+
+	public modeSelected = false;
+	public searchMode: boolean;
+	public selectedCollection: Collection;
 
 	form;
 
@@ -33,7 +44,28 @@ export class SearchComponent {
 		private popupService: PopupService
 	){}
 
-	/*ngOnInit(): void {
+
+
+	ngAfterViewInit(): void {
+		this.collectionsMenu.searchMode.subscribe(mode => {
+			this.searchMode = mode;
+		});
+		this.collectionsMenu.selectedCollection.subscribe(sel => {
+			if (sel != undefined) {
+				this.selectedCollection = sel;
+				this.collectionTopmenu.setCollection(sel);
+				this.collectionThumbnail.setCollection(sel);
+			}
+		});
+		this.collectionTopmenu.collectionDeleted.subscribe(del => {
+			this.collectionTopmenu.resetMenu();
+			this.collectionsMenu.goToSearch();
+		});
+		this.collectionsMenu.emitMode();
+		this.modeSelected = true;
+	}
+	
+	/*ngOnInit(): void{
 		this.images = this.searchTerms
 		.debounceTime(300)        // wait 300ms after each keystroke before considering the term
 		.distinctUntilChanged()   // ignore if next search term is same as previous

@@ -11,15 +11,15 @@ import { PopupService } from '../service/popup.service';
 })
 export class ThumbnailComponent implements OnInit {
 
-	private searchresults;
-	private url;
+	public searchresults;
+	public url;
 	@Input() gridType: string; //'search' if list of search results, 'collection' if viewing collection
 
 	//note edit helper functions:
-	private editMode: boolean = false;
-	private editi: number;
-	private editj: number;
-	private editText: string;
+	public editMode: boolean = false;
+	public editi: number;
+	public editj: number;
+	public editText: string;
 
 	constructor(
 		private searchService: SearchService,

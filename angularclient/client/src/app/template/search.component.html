@@ -1,4 +1,4 @@
-<top-menu></top-menu>
+
 
 <popup>
 </popup>
@@ -6,12 +6,19 @@
 <collections-menu #collectionsMenu>
 </collections-menu>
 
-<div id="page-wrapper" [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
+<div [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
+	
 
 	<p id="results-count"><span></span> resultat</p>
 
-	<div id="search-results">
-		<thumbnail [gridType]="'search'"></thumbnail>
+	<top-menu *ngIf="searchMode"></top-menu>
+	<div id="search-results" class="top-menu-margin" *ngIf="searchMode">
+		<thumbnail [gridType]="'search'" ></thumbnail>
+	</div>
+
+	<collection-topmenu [hidden]="searchMode" #collectionTopmenu> </collection-topmenu>
+	<div id="search-results" class="top-menu-margin" [hidden]="searchMode">
+		<collection-thumbnail #collectionThumbnail [hidden]="searchMode"></collection-thumbnail>
 	</div>
 	
 </div>

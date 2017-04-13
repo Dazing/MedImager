@@ -10,12 +10,15 @@ import { PopupService } from '../service/popup.service';
 	templateUrl: '../template/popup.component.html'
 })
 export class PopupComponent {
-    private popup;
-    private visible = false;
-    private arrowsVisible = false;
-    private resolutionLoaded = false;
-    private imageHeight: number;
-    private imageWidth: number;
+    public popup;
+    public visible = false;
+    public arrowsVisible = false;
+    public resolutionLoaded = false;
+    public imageHeight: number;
+    public imageWidth: number;
+
+    private dialogVisible = false;
+    private dialogType: string;
 
     constructor(
 		private searchService: SearchService,
@@ -42,6 +45,11 @@ export class PopupComponent {
             }
             img.src = this.getUrl();
 		})
+
+        this.popupService.dialogs.subscribe(dialog => {
+            this.dialogType = dialog;
+            this.dialogVisible = true;
+        });
 	}
 
     notNull(value: any){
@@ -86,6 +94,12 @@ export class PopupComponent {
             tot += item;
         }
         return tot;
+    }
+
+    confirmDialog(answer: boolean): void {
+        this.dialogVisible = false;
+        this.dialogType = undefined;
+        this.popupService.returnDialog(answer);
     }
 
     

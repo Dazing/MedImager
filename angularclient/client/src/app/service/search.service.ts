@@ -23,8 +23,9 @@ export class SearchService {
 
 	tags:Observable<string[]>;
 	private privTags: Subject<string[]>;
+	private currentTags: string[] = [];
 
-	constructor(private http: Http, private router: Router) {
+	constructor(private http: Http, private router: Router, private server: Server) {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
 
@@ -61,11 +62,11 @@ export class SearchService {
 
 		console.log("Q:"+str);
 		
-		/*if (str == "") {
+		if (str == "") {
 			return;
-		}*/
-
-		var url = ('http://localhost:8080/ExaminationServer/examData/api/search?'+str);
+		}
+		var url = (this.server.getUrl() + '/search?'+str);
+		
 		console.log("URL: "+url+", Q: "+str);
 		
 		this.http.get(url)
@@ -91,6 +92,28 @@ export class SearchService {
 
 	getSearchTerms(): string[] {
 		return ["tandtroll","tandvärk","tandsten"];
+	}
+
+	addTag(tagToAdd: string): boolean {
+		for (let tag of this.currentTags) {
+			if (tag.toLowerCase() == tagToAdd.toLowerCase()) {
+				return false;
+			}
+		}
+		this.currentTags.push(tagToAdd);
+		this.privTags.next(this.currentTags);
+		return true;
+	}
+
+	removeTag(tagToRemove: string): boolean {
+		for (let i = 0; i < this.currentTags.length;i++) {
+			if (this.currentTags[i].toLowerCase() == tagToRemove.toLowerCase()) {
+				this.currentTags.splice(i,1);
+				this.privTags.next(this.currentTags);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private handleError(error: any): Promise<any> {

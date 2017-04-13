@@ -8,9 +8,11 @@ import { RouterModule }   from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login.component';
 import { TopMenuComponent } from './component/topmenu.component';
+import { CollectionTopMenu } from './component/collection-topmenu.component';
 import { FooterComponent } from './component/footer.component';
 import { SearchComponent } from './component/search.component';
 import { ThumbnailComponent } from './component/thumbnail.component';
+import { CollectionThumbnailComponent } from './component/collection-thumbnail.component';
 import { ImagePageComponent } from './component/imagepage.component';
 import { CollectionsMenu } from './component/collections-menu.component';
 import { CollectionComponent } from './component/collection.component';
@@ -40,9 +42,11 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		AppComponent,
 		LoginComponent,
 		TopMenuComponent,
+		CollectionTopMenu,
 		FooterComponent,
 		SearchComponent,
 		ThumbnailComponent,
+		CollectionThumbnailComponent,
 		ImagePageComponent,
 		CollectionsMenu,
 		CollectionComponent,
