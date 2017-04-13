@@ -7,7 +7,14 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 @ApplicationPath("api")
 public class MyApp extends ResourceConfig {
 	public MyApp() {
+		
 		super(AuthenticationResource.class);
-		register(RolesAllowedDynamicFeature.class);
+		try {
+			register(RolesAllowedDynamicFeature.class);
+		}
+		catch(Exception e){
+			System.out.println("Exception: "+e);
+		}
+		
     }
 }

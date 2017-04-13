@@ -457,6 +457,9 @@ a, a:visited {
 h2 {
   font-size: 25px; }
 
+select {
+  display: block; }
+
 .vertical-center {
   position: absolute;
   top: 50%;

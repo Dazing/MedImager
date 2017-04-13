@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 
 import { SearchService } from '../service/search.service';
+import { AdvancedFormService } from '../service/advanced-form.service';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -12,16 +13,25 @@ import { Subject } from 'rxjs/Subject';
   	providers: [FormBuilder]
 })
 export class AdvancedFormComponent {
-	
 
+	private searchableStuff: any;
+	private searchableStuffLists;
+	private jsonReady = false;
 
 	constructor(
 		private router: Router, 
 		private ar: ActivatedRoute,
 		private formBuilder: FormBuilder,
-		private searchService: SearchService
-	){
+		private searchService: SearchService,
+		private advancedFormService: AdvancedFormService
+	){}
 
+	ngOnInit(): void {
+		this.advancedFormService.searchableStuff.subscribe(searchableStuff => {
+			this.searchableStuffLists = Object.getOwnPropertyNames(searchableStuff);
+			this.searchableStuff = searchableStuff;
+			this.jsonReady = true;
+		});
+		this.advancedFormService.getSearchableStuff();
 	}
-
 }

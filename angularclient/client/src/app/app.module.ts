@@ -26,6 +26,7 @@ import { ImagePageService } from './service/imagepage.service';
 import { PopupService } from './service/popup.service';
 import { CollectionService } from './service/collection.service';
 import { UserService } from './service/user.service';
+import { AdvancedFormService } from './service/advanced-form.service';
 
 import { Server } from './model/server'
 
@@ -60,14 +61,15 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		AppRoutingModule,
 		ReactiveFormsModule
 	],
-	providers: [SearchService, ImagePageService, PopupService, CollectionService, UserService, Server],
+	providers: [SearchService, ImagePageService, PopupService, CollectionService, AdvancedFormService, UserService, Server],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
 
 	constructor(
 		private searchService: SearchService, 
-		private imagePageService: ImagePageService, 
+		private imagePageService: ImagePageService,
+		private advancedFormService: AdvancedFormService,
 		private popupService: PopupService,
 		private collectionService: CollectionService,
 		private userService: UserService,

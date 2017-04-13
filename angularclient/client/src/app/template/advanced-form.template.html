@@ -1,10 +1,22 @@
 <div id="advanced-bar">
 	<div class="row">
-		<div class="valign-wrapper input-field col s4 ">
-			<p>Hej</p>
-			<input name="diagTentCheck" class="filled-in" type="checkbox" id="diagTentCheck">
-
-			
+		<div class="valign-wrapper input-field col s5">
+			<select>
+				<template ngFor let-searchableStuffLists [ngForOf]="searchableStuffLists" let-i="index">
+					<option value="{{i}}">
+						{{searchableStuffLists}}
+					</option>
+				</template>
+			</select>
+		</div>
+		<div class="valign-wrapper input-field col offset-s1 s5">
+			<select *ngIf="jsonReady">
+				<template ngFor let-searchableStuffStrings [ngForOf]="searchableStuff.kossor" let-i="index">
+					<option value="{{i}}">
+						{{searchableStuffStrings}}
+					</option>
+				</template>
+			</select>
 		</div>
 	</div>
 </div>
