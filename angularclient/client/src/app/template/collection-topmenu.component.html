@@ -1,5 +1,29 @@
-<div id="menu-wrapper">
-    här skall namnet vara
+<div id="menu-wrapper" class="z-depth-1" *ngIf="collectionSet">
+    <span class="collection-topmenu-title">{{collection.name}}</span>
 
-    här skall det vara en längre beskrivning av samlingen
+    <i class="material-icons unselectable collection-topmenu-details-button" (click)="clickDetailsButton($event)">reorder
+            <div class="collection-topmenu-details-container z-depth-1" 
+            [ngClass]="{'expanded': detailsVisible}">
+                <h4 *ngIf="!(descriptionNotNull() || editMode)">Ingen beskrivning angiven.</h4>
+                <h4 *ngIf="descriptionNotNull() || editMode">Beskrivning:</h4>
+
+                <a *ngIf="!editMode" class="btn-floating btn waves-effect waves-light primary-colour edit-button" (click)="editMode = true"><i class="material-icons">edit</i></a>
+                <textarea id="description-edit-input" *ngIf="editMode">{{collection.description}}</textarea>
+                <a *ngIf="editMode" class="btn-floating btn waves-effect waves-light primary-colour edit-button" (click)="cancelEdit()"><i class="material-icons">clear</i></a>
+                <a *ngIf="editMode" class="btn-floating btn waves-effect waves-light primary-colour edit-button confirm" (click)="acceptEdit()"><i class="material-icons">done</i></a>
+
+                <div class="wordwrap" *ngIf="descriptionNotNull() && !editMode">{{collection.description}}</div>  
+                
+                <div class="row">
+                    <div class="col s6">
+                        <a class="btn primary-colour waves-effect waves-light"><i class="material-icons left">share</i>Dela med…</a>
+                    </div>
+                    <div class="col s6 offset-6">
+                        <a class="btn primary-colour waves-effect waves-light" (click)="deleteCollectionDialog()"><i class="material-icons left">delete_forever</i>Ta bort</a>
+                    </div>
+                </div>
+                
+            </div>
+        </i>
+    <i class='material-icons unselectable collection-topmenu-settings-button' id="settings-button">settings</i>
 </div>

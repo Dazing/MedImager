@@ -12,6 +12,7 @@ import { CollectionTopMenu } from './component/collection-topmenu.component';
 import { FooterComponent } from './component/footer.component';
 import { SearchComponent } from './component/search.component';
 import { ThumbnailComponent } from './component/thumbnail.component';
+import { CollectionThumbnailComponent } from './component/collection-thumbnail.component';
 import { ImagePageComponent } from './component/imagepage.component';
 import { CollectionsMenu } from './component/collections-menu.component';
 import { CollectionComponent } from './component/collection.component';
@@ -44,6 +45,7 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		FooterComponent,
 		SearchComponent,
 		ThumbnailComponent,
+		CollectionThumbnailComponent,
 		ImagePageComponent,
 		CollectionsMenu,
 		CollectionComponent,

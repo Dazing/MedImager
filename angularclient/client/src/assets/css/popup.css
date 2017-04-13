@@ -127,4 +127,7 @@
       #popup-image-data-buttons div:nth-of-type(2):hover {
         background-color: #1de9b6; }
 
+.collection-deletion-dialog a {
+  cursor: pointer; }
+
 /*# sourceMappingURL=popup.css.map */

@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject} from 'rxjs/Subject';
@@ -20,138 +20,86 @@ export class CollectionService {
 	private privCollections: Subject<Collection[]>;
 	private collectionsList: Collection[];
 
-	constructor(private http: Http, private router: Router, ) {
+	images:Observable<string[]>;
+	private privImages: Subject<string[]>;
+
+	private userID = 1; //TODO: make this use the logged in user id
+
+	constructor(private http: Http, private router: Router, private server: Server) {
 		this.privCollections = new Subject<Collection[]>();
         this.collections = this.privCollections.asObservable();
-
-		this.collectionsList = [
-				new Collection(0,"Min Samling", {
-					"age":["70"],
-					"allergy":["Nej"],
-					"biopsySite":[],
-					"diagDef":["Atrofisk lichen planus"],
-					"diagHist":[],
-					"diagTent":[],
-					"disNow":["Atopiskt eksem"],
-					"disPast":["Nej"],
-					"drug":["Nej"],
-					"examinationID":"980122112626",
-					"factorNeg":["Hård föda"],
-					"factorPos":["Förbättrad munhygien"],
-					"family":["Broder"],
-					"gender":["1"],
-					"imagePaths":[
-						"TestData.mvd\\Pictures\\G0222\\g02223.jpg",
-						"TestData.mvd\\Pictures\\G0222\\g02222.jpg",
-						"TestData.mvd\\Pictures\\G0222\\g02221.jpg"
-					],
-					"lesnOn":[],
-					"lesnSite":[],
-					"skinPbl":["Torr hud","Eksem"],
-					"smoke":["Nej"],
-					"snuff":["Nej"],
-					"symptNow":[],
-					"symptSite":[],
-					"treatType":["Information"],
-					"vasNow":["3.2"],
-					"imageId":["2"]
-				}),
-				new Collection(1,"Guardians of the Mouth", {
-					"age":["70"],
-					"allergy":["Nej"],
-					"biopsySite":[],
-					"diagDef":["Atrofisk lichen planus"],
-					"diagHist":[],
-					"diagTent":[],
-					"disNow":["Atopiskt eksem"],
-					"disPast":["Nej"],
-					"drug":["Nej"],
-					"examinationID":"980122112626",
-					"factorNeg":["Hård föda"],
-					"factorPos":["Förbättrad munhygien"],
-					"family":["Broder"],
-					"gender":["1"],
-					"imagePaths":[
-						"TestData.mvd\\Pictures\\G0222\\g02223.jpg",
-						"TestData.mvd\\Pictures\\G0222\\g02222.jpg",
-						"TestData.mvd\\Pictures\\G0222\\g02221.jpg"
-					],
-					"lesnOn":[],
-					"lesnSite":[],
-					"skinPbl":["Torr hud","Eksem"],
-					"smoke":["Nej"],
-					"snuff":["Nej"],
-					"symptNow":[],
-					"symptSite":[],
-					"treatType":["Information"],
-					"vasNow":["3.2"],
-					"imageId":["1"]
-				}),
-				new Collection(2,"Tandväktarna", {
-					"age":["70"],
-					"allergy":["Nej"],
-					"biopsySite":[],
-					"diagDef":["Atrofisk lichen planus"],
-					"diagHist":[],
-					"diagTent":[],
-					"disNow":["Atopiskt eksem"],
-					"disPast":["Nej"],
-					"drug":["Nej"],
-					"examinationID":"980122112626",
-					"factorNeg":["Hård föda"],
-					"factorPos":["Förbättrad munhygien"],
-					"family":["Broder"],
-					"gender":["1"],
-					"imagePaths":[
-						"TestData.mvd\\Pictures\\G0222\\g02223.jpg",
-						"TestData.mvd\\Pictures\\G0222\\g02222.jpg",
-						"TestData.mvd\\Pictures\\G0222\\g02221.jpg"
-					],
-					"lesnOn":[],
-					"lesnSite":[],
-					"skinPbl":["Torr hud","Eksem"],
-					"smoke":["Nej"],
-					"snuff":["Nej"],
-					"symptNow":[],
-					"symptSite":[],
-					"treatType":["Information"],
-					"vasNow":["3.2"],
-					"imageId":["0"]
-				})
-			];
 		
-		
+		this.privImages = new Subject<string[]>();
+        this.images = this.privImages.asObservable();
 	}
 
-	getCollections(): void {
-		this.privCollections.next(this.collectionsList);
-	}
-
-	addImage(image:any, imageIndex: number, collId: number): void {
-		var data = {
-			examinationID: image.examinationID,
-			imageIndex: imageIndex,
-			collId: collId
-		}
-
-		var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId);
+	getCollectionList(): void {
+		var url = (this.server.getUrl() + '/collection/');
+		console.log("Fetch collections, url: "+url);
 		
-		this.http.post(url,data)
+		this.http.get(url)
 			.toPromise()
 			.then(response => {
-				if (response) {
-					
+				this.collectionsList = [];
+				for (let col of response.json()) {
+					this.collectionsList.push(new Collection(col.collectionID, col.collectionName, col.collectionDescr));
 				}
+				console.log("collections: ");
+				console.log(response.json());
+				console.log(this.collectionsList);
+				this.privCollections.next(this.collectionsList);
 			})
 			.catch(e => {
 				console.log("Get search "+e);
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
 			});
+
+	}
+
+	getCollection(collectionID: number, returnTo: Subject<Image[]>): void {
+		var url = (this.server.getUrl() + '/collection/'+collectionID);
+		console.log("Request collection: "+url);
+		
+		this.http.get(url)
+			.toPromise()
+			.then(response => {
+				console.log("collection request http GET response:");
+				console.log(response.json());
+				returnTo.next(response.json());
+			})
+			.catch(e => {
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});	
+	}
+
+	addImage(examinationID: number, imageIndex: number, collID: number): void {
+		var url = (this.server.getUrl() + '/collection/' + collID);
+		console.log("Add image to collection, url: "+url);
+
+		let payload = {examinationID: examinationID, index: imageIndex};
+
+		let headers = new Headers({ 'Content-Type': 'application/json'});
+  		let options = new RequestOptions({ headers: headers });
+
+		this.http.post(url, JSON.stringify(payload), options)
+			.toPromise()
+			.then(response => {
+				console.log(response);
+			})
+			.catch(e => {
+				console.log("POST error:");
+				console.log(e);
+				
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
 	}
 
 	removeImage(image:any, imageIndex: number, collId: number): void {
-		var str = 'examinationID='+image.examinationID+'&imageIndex='+imageIndex;
+		/*var str = 'examinationID='+image.examinationID+'&imageIndex='+imageIndex;
 
 		var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId+'?'+str);
 		
@@ -166,25 +114,49 @@ export class CollectionService {
 				console.log("Get search "+e);
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
+			});*/
+	}
+
+	createCollection(name: string, description?: string): void {
+		var url = (this.server.getUrl() + '/collection/');
+		console.log("Add image to collection, url: "+url);
+
+		let payload = {userID: this.userID, collectionName: name, collectionDescr: (description==undefined ? "" : description)};
+
+		let headers = new Headers({ 'Content-Type': 'application/json'});
+  		let options = new RequestOptions({ headers: headers });
+
+		this.http.post(url, JSON.stringify(payload), options)
+			.toPromise()
+			.then(response => {
+				console.log("http POST response:");
+				console.log(response);
+				this.getCollectionList();
+			})
+			.catch(e => {
+				console.log("POST error:");
+				console.log(e);
+				
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
 			});
+		
 	}
 
-	createCollection(name: string): void {
-		let coll = new Collection(Math.floor(Math.random()*999999), name, []);
-		console.log(coll);
-		
-		this.collectionsList.push(coll);
-		this.privCollections.next(this.collectionsList);
-	}
+	removeCollection(collId: number): void {
+		var url = (this.server.getUrl()  + '/collection/');
 
-	removeCollection(image:any, imageIndex: number, collId: number): void {
-				var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId);
-		
-		
-		this.http.delete(url)
+		let payload = {collectionID: collId};
+
+		let headers = new Headers({ 'Content-Type': 'application/json'});
+  		let options = new RequestOptions({ headers: headers, body: payload });
+
+		this.http.delete(url, options)
 			.toPromise()
 			.then(response => {
 				if (response) {
+					this.getCollectionList();
+					console.log("delete collection:" + collId);
 					
 				}
 			})

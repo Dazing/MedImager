@@ -1,12 +1,15 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
+import { CollectionService } from '../service/collection.service';
+import { AppModule } from '../app.module';
+
 
 @Directive({ 
     selector: '[droppableCollection]' 
 })
 
 export class DroppableCollectionDirective {
-    constructor(el: ElementRef) {
+    constructor(private el: ElementRef, private collectionService: CollectionService) {
     }
 
     @HostListener('dragenter', ['$event']) handleDragEnter(event) {
@@ -28,7 +31,10 @@ export class DroppableCollectionDirective {
         var type = event.dataTransfer.getData("sourceType");
         if (type == "draggableImage") {
             //TODO: actually make this add to collection
-            alert("image "+ examinationID + "/" + imageIndex + " added to collection '" + targetCollectionName + "' (id: " + targetCollectionID + ")");
+            alert("image "+ examinationID + "/" + imageIndex + " added to collection (id: " + targetCollectionID + ")");
+            this.collectionService.addImage(examinationID, imageIndex, targetCollectionID);
+            
         }
+
     }
 }

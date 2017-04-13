@@ -10,7 +10,7 @@
 	left: 300px
 	top: 0
 	right: 0
-	z-index: 100
+	z-index: 90
 	
 #menu-bar
 	z-index: 100
@@ -122,3 +122,102 @@
 .menu-wrapper .chip
 	border-radius: 4px
 	background-color: $primary-colour
+	
+	
+.collection-topmenu-title
+	line-height: 69px
+	margin-left: 20px
+	font-size: 21px
+	
+.collection-topmenu-settings-button
+	line-height: 67px
+	
+.collection-topmenu-details-button
+	line-height: 69px
+	position: absolute
+	cursor: pointer
+	color: $primary-colour
+	font-size: 3rem
+	right: 70px
+	
+.collection-topmenu-details-container
+	position: absolute
+	right: 65%
+	top: 65%
+	background-color: #ffffff
+	width: 350px
+	cursor: default
+	transition: max-height 0.2s
+	overflow: hidden
+	color: #000000
+	row-height: 20px
+	border: none
+	max-height: 0
+	&.expanded
+		border: 1px solid $grey
+		max-height: 400px
+	h4
+		line-height: 20px
+		font-size: 20px
+		margin-top: 10px
+		margin-bottom: 10px
+		margin-left: 7px
+	.row
+		padding: 3px 3px 3px 0px
+		width: 100%
+		margin-bottom: 0
+		.btn
+			width: 100%
+			line-height: 36px
+			font-size: 16px
+			padding-left: 10px
+			i
+				font-size: 20px
+				line-height: 36px
+		.col
+			height: 40px
+			line-height: 40px
+			margin-bottom: 10px
+	.wordwrap
+		overflow-x: none
+		overflow-y: auto
+		font-size: 15px
+		line-height: 18px
+		margin-left: 10px
+		margin-right: 10px
+		margin-bottom: 15px
+	.edit-button
+		position: absolute
+		right: 7px
+		top: 7px
+		height: 28px
+		width: 28px
+		line-height: 28px
+		&.confirm
+			right: 40px
+		i
+			line-height: 28px
+			font-size: 25px
+			position: relative
+			top: 0
+	textarea
+		display: block
+		width: calc(100% - 14px)
+		margin: 4px 7px 4px 7px
+		line-height: 18px
+		font-size: 15px
+		resize: none
+		height: 200px
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	

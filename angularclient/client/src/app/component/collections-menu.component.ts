@@ -15,7 +15,7 @@ import { Image, Collection } from '../model/image';
 
 export class CollectionsMenu implements OnInit {
 
-	public collections;
+	public collections: Collection[];
 	public visible = true;
 	public myCollectionsExpanded: boolean = true;
 	public sharedCollectionsExpanded: boolean = true;
@@ -29,8 +29,8 @@ export class CollectionsMenu implements OnInit {
 
 	public searchMode: Observable<boolean>;
 	public privSearchMode: Subject<boolean>;
-	public selectedCollection: Observable<number>;
-	public privSelectedCollection: Subject<number>;
+	public selectedCollection: Observable<Collection>;
+	public privSelectedCollection: Subject<Collection>;
 
 	public isVisible: Observable<boolean>;
 	public privIsVisible: Subject<boolean>;
@@ -43,7 +43,7 @@ export class CollectionsMenu implements OnInit {
 	){
 		this.privSearchMode = new Subject<boolean>();
 		this.searchMode = this.privSearchMode.asObservable();
-		this.privSelectedCollection = new Subject<number>();
+		this.privSelectedCollection = new Subject<Collection>();
 		this.selectedCollection = this.privSelectedCollection.asObservable();
 	}
 
@@ -59,7 +59,7 @@ export class CollectionsMenu implements OnInit {
 			
 		});
 
-		this.collectionService.getCollections();
+		this.collectionService.getCollectionList();
 	}
 
 	show(visible: boolean): void {
@@ -98,17 +98,26 @@ export class CollectionsMenu implements OnInit {
 		this.privSearchMode.next(this.searchModeEnabled);
 	}
 
+	private getCollectionById(id: number): Collection {
+		for (let col of this.collections) {
+			if (col.id == id) {
+				return col
+			}
+		}
+		return undefined;
+	}
+
 	collectionClicked(event): void {
 		this.searchModeEnabled = false;
 		console.log("clicked collection id: " + event.currentTarget.getAttribute("data-id"));
 		this.selectedCollectionId = event.currentTarget.getAttribute("data-id");
-		this.privSelectedCollection.next(this.selectedCollectionId);
+		this.privSelectedCollection.next(this.getCollectionById(this.selectedCollectionId));
 		this.privSearchMode.next(this.searchModeEnabled);
 	}
 
 	emitMode(): void {
 		this.privSearchMode.next(this.searchModeEnabled);
-		this.privSelectedCollection.next(this.selectedCollectionId);
+		this.privSelectedCollection.next( !this.searchModeEnabled ? this.getCollectionById(this.selectedCollectionId) : undefined);
 	}
 
 	//myCollections = [{name:"Tandsten genom tiderna", id:"111111"}, {name:"Karies och baktus", id:"222222"},{name:"Bland tomtar och tandtroll", id:"3333"}];

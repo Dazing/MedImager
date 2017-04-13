@@ -1,0 +1,34 @@
+<template *ngIf="gridType == 'collection'" ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
+	<span  
+		*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
+		id="{{'result-image-'+i+j}}" 
+		class="unselectable"
+		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
+		data-id="{{i}}"
+		[attr.data-examinationid]="searchresult.examinationID"
+		[attr.data-imageIndex]="j"
+		(click)="onImageClick(i,j)"
+	>
+		<div class="opacity-wrapper" *ngIf="getNote(i,j) && !editMode">
+			{{getNote(i,j)}}
+		</div>
+		<div class="collection-image-button-container" *ngIf="!editMode" >
+			<a class="btn-floating btn-large waves-effect waves-light" (click)="editNote(i,j)" >
+				<i class="material-icons" draggable="false">mode_edit</i>
+			</a>
+		</div>
+
+
+		<div class="opacity-wrapper-always-on valign-wrapper" *ngIf="editMode && editi == i && editj == j">
+			<textarea [attr.id]="'note-edit-' + i + '-' + j" [value]="editText" class="materialize-textarea valign-center" maxlength="128"></textarea>
+		</div>
+		<div class="collection-image-button-container-always-on" *ngIf="editMode">
+			<a class="btn-floating btn-large waves-effect waves-light" (click)="setNote(i,j)" *ngIf="editMode && editi==i && editj==j">
+				<i class="material-icons" draggable="false">done</i>
+			</a>
+			<a class="btn-floating btn-large waves-effect waves-light" (click)="editMode=false" *ngIf="editMode && editi==i && editj==j">
+				<i class="material-icons" style="transform: rotate(45deg)" draggable="false">add</i>
+			</a>
+		</div>
+	</span>
+</template>

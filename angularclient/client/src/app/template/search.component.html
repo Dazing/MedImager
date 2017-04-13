@@ -6,7 +6,7 @@
 <collections-menu #collectionsMenu>
 </collections-menu>
 
-<div [ngClass]="{'collections-menu-margin': collectionsMenuVisible}" *ngIf="modeSelected">
+<div [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 	
 
 	<p id="results-count"><span></span> resultat</p>
@@ -16,7 +16,7 @@
 		<thumbnail [gridType]="'search'" ></thumbnail>
 	</div>
 
-	<collection-topmenu *ngIf="!searchMode"> </collection-topmenu>
+	<collection-topmenu [hidden]="searchMode" #collectionTopmenu> </collection-topmenu>
 	<div id="search-results" class="top-menu-margin" *ngIf="!searchMode">
 		<thumbnail [gridType]="'collection'" ></thumbnail>
 	</div>
