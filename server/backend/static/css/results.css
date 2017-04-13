@@ -1,0 +1,97 @@
+.primary-colour {
+  background-color: #1de9b6; }
+
+.primary-colour-text {
+  color: #1de9b6; }
+
+.secondary-colour {
+  background-color: #64ffda; }
+
+.secondary-colour-text {
+  color: #64ffda; }
+
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
+
+#page-wrapper {
+  height: 100%;
+  background-color: #ffffff;
+  transition: margin 0.4s; }
+
+#search-results {
+  padding: 10px;
+  position: relative;
+  text-align: center;
+  margin-bottom: 39px; }
+  #search-results span {
+    max-width: 300px;
+    width: 100vw;
+    height: 210px;
+    margin: 5px;
+    position: relative;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    vertical-align: top; }
+    #search-results span:hover .collection-image-button-container {
+      opacity: 1;
+      height: auto;
+      z-index: 6; }
+    #search-results span:hover .opacity-wrapper {
+      opacity: 1; }
+    #search-results span .opacity-wrapper {
+      height: 100%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      opacity: 0;
+      text-align: left;
+      transition: opacity 0.15s ease-in-out;
+      -moz-transition: opacity 0.15s ease-in-out;
+      -webkit-transition: opacity 0.15s ease-in-out; }
+    #search-results span .opacity-wrapper-always-on {
+      height: 100%;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #ffffff;
+      opacity: 1;
+      transition: opacity 0.15s ease-in-out;
+      -moz-transition: opacity 0.15s ease-in-out;
+      -webkit-transition: opacity 0.15s ease-in-out; }
+      #search-results span .opacity-wrapper-always-on textarea {
+        height: 80% !important;
+        overflow-y: auto !important; }
+    #search-results span .inner-text {
+      opacity: 1;
+      margin: 5px;
+      text-align: left; }
+    #search-results span .collection-image-button-container {
+      transition: opacity 0.15s ease-out;
+      opacity: 0;
+      height: 0;
+      overflow: hidden;
+      z-index: 0;
+      text-align: center;
+      position: absolute;
+      bottom: -28px;
+      width: 100%; }
+    #search-results span .collection-image-button-container-always-on {
+      z-index: 10;
+      text-align: center;
+      position: absolute;
+      bottom: -28px;
+      width: 100%; }
+
+#results-count {
+  margin-right: 15px;
+  padding-top: 10px;
+  text-align: right;
+  font-size: 22px;
+  color: #424242;
+  display: none; }
+
+/*# sourceMappingURL=results.css.map */

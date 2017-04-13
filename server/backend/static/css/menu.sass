@@ -1,0 +1,124 @@
+@import "colours"
+
+=search-input-size
+	width: 50%
+	min-width: 200px
+	
+#menu-wrapper
+	text-align: left
+	position: fixed
+	left: 300px
+	top: 0
+	right: 0
+	z-index: 100
+	
+#menu-bar
+	z-index: 100
+	width: 100%
+	background-color: $menu-colour
+	padding: 7px
+	box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8)
+	input
+		padding: 0 5px
+		background-color: #ffffff
+		border: 0
+		width: 100%
+		margin-bottom: 0
+		border-bottom: 1px solid #aaaaaa
+
+=menu-buttons
+	margin-top: 2px
+	font-size: 3rem
+	position: absolute
+	cursor: pointer
+	transition: transform 0.4s
+	color: $primary-colour
+		
+#settings-button
+	+menu-buttons
+	right: 10px
+	
+#advanced-button
+	+menu-buttons
+	margin-left: 10px
+
+=advanced-bar-font-size
+	font-size: 1.3vw
+	max-font-size: 18px
+	min-font-size: 12px
+
+=extra-bar
+	z-index: -1
+	background-color: #ffffff
+	width: 100%
+	box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8)
+	transition: margin 0.4s
+	position: fixed
+
+#advanced-bar
+	+extra-bar
+	height: 100px
+	margin-top: -100px
+	.row
+		margin: 0
+		+advanced-bar-font-size
+		.col
+			height: 50px
+			padding-left: 25px
+			label
+				color: #000000
+	label
+		margin-right: 20px
+		+advanced-bar-font-size
+	input
+		display: inline-block
+
+.filled-in[type="checkbox"]:checked + label::after, [type="radio"]:checked + label::after, .with-gap[type="radio"]:checked + label::after, 
+	border: 2px solid $primary-colour
+	background-color: $primary-colour
+
+[type="radio"]:checked + label::after, .with-gap[type="radio"]:checked + label::before, .with-gap[type="radio"]:checked + label::after
+	border: 2px solid $primary-colour
+
+#settings-bar
+	+extra-bar
+	height: 50px
+	margin-top: -50px
+
+.slider
+	display: inline-block
+	width: 300px
+	height: 10px
+	margin: 0 10px
+		
+#search-wrapper
+	display: inline-table
+	+search-input-size
+	
+#auto-search-results
+	border: 1px solid #aaa
+	position: absolute
+	display: none
+	background-color: #ffffff
+	+search-input-size
+	span
+		display: block
+		padding: 5px
+		width: 100%
+		cursor: pointer
+	
+#selected-tags
+	margin-top: 10px
+	span
+		padding: 4px
+		border: 1px solid $secondary-colour
+		display: inline-block
+		background-color: $tertiary-colour
+		margin: 4px
+		border-radius: 5px
+		span
+			cursor: pointer
+
+.menu-wrapper .chip
+	border-radius: 4px
+	background-color: $primary-colour
