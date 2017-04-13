@@ -18,7 +18,7 @@ export class AdvancedFormService {
     }
 
     getSearchableStuff(): void {
-        var url = ('http://localhost:4200/assets/json/searchablestuff.json');
+        var url = ('http://medimager.com/api/initValues');
 
         this.http.get(url)
 			.toPromise()
