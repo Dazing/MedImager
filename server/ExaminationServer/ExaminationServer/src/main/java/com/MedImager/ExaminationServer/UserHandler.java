@@ -210,30 +210,30 @@ public class UserHandler{
 		}
 	}
 	
-	public static void unregisterUser(String username){
-		String query = "DELETE FROM users WHERE username = ?";
+	public static void unregisterUser(String id){
+		String query = "DELETE FROM users WHERE id = ?";
 		
 		try(Connection con = Database.getConnection();
 				PreparedStatement ps = con.prepareStatement(query);){
-			ps.setString(1, username);
+			ps.setString(1, id);
 			ps.executeUpdate();
 		}catch(SQLException e){
 			throw new WebApplicationException();
 		}
 	}
 	
-	public static void updatePassword(String username, String newPassword){
+	public static void updatePassword(String id, String newPassword){
 		if(newPassword == null){
 			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
 					.entity("No new password provided").build());
 		}
 		
-		String query = "UPDATE users SET password = ? WHERE username = ?";
+		String query = "UPDATE users SET password = ? WHERE id = ?";
 		try(Connection con = Database.getConnection();
 				PreparedStatement ps = con.prepareStatement(query);){
 			
 			ps.setString(1, generateHashedPassword(newPassword));
-			ps.setString(2, username);
+			ps.setString(2, id);
 			ps.executeUpdate();
 		}catch(SQLException e){
 			throw new WebApplicationException();

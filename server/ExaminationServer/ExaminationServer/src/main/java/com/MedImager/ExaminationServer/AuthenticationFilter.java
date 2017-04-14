@@ -21,12 +21,12 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 		User user = UserHandler.getUserByToken(token);
 		
 		// Store relevant user info in case resources require them
-		final String username = user.getUsername();
+		final String id = user.getId();
 		final String userPermission = user.getUserPermission();
-		storeUserInfo(username, userPermission, requestContext);
+		storeUserInfo(id, userPermission, requestContext);
 	}
 	
-	private void storeUserInfo(final String username, final String userPermission,
+	private void storeUserInfo(final String id, final String userPermission,
 			ContainerRequestContext requestContext){
 		final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
 		requestContext.setSecurityContext(new SecurityContext(){
@@ -35,7 +35,7 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 				return new Principal(){
 					@Override
 					public String getName(){
-						return username;
+						return id;
 					}
 				};
 			}

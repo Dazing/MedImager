@@ -52,8 +52,8 @@ public class AuthenticationResource{
 	@Path("unregister")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response unregister(@Context SecurityContext securityContext){
-		String username = securityContext.getUserPrincipal().getName();
-		UserHandler.unregisterUser(username);
+		String id = securityContext.getUserPrincipal().getName();
+		UserHandler.unregisterUser(id);
 		return Response.ok("User unregistered").build();
 	}
 	
@@ -82,8 +82,8 @@ public class AuthenticationResource{
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response updatePassword(@HeaderParam("NewPassword") String newPassword,
 									@Context SecurityContext securityContext){
-		String username = securityContext.getUserPrincipal().getName();
-		UserHandler.updatePassword(username, newPassword);
+		String id = securityContext.getUserPrincipal().getName();
+		UserHandler.updatePassword(id, newPassword);
 		return Response.ok("Password updated").build();
 	}
 	
