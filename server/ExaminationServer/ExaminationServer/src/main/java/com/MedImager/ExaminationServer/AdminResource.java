@@ -41,4 +41,13 @@ public class AdminResource{
 		return Response.ok("User permission updated").build();
 	}
 	
+	@Secured
+	@RolesAllowed("admin")
+	@POST
+	@Path("removeuser")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response removeUser(@HeaderParam("ID") String id){
+		UserHandler.removeUser(id);
+		return Response.ok("User removed").build();
+	}
 }

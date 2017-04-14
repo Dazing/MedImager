@@ -296,25 +296,37 @@ public class UserHandler{
 					.entity("No new user permission provided").build());
 		}
 		
-		try(Connection con = Database.getConnection();){
-			
-			String query = "SELECT * FROM users WHERE id = ?";
-			try(PreparedStatement ps = con.prepareStatement(query);){
-				ps.setString(1, id);
-				try(ResultSet rs = ps.executeQuery();){
-					if(!rs.isBeforeFirst()) {
-						throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
-								.entity("User ID not valid").build());
-					}
-				}
+		String query = "UPDATE users SET user_permission = ? WHERE id = ?";
+		
+		try(Connection con = Database.getConnection();
+				PreparedStatement ps = con.prepareStatement(query);){
+			ps.setString(1, newUserPermission);
+			ps.setString(2, id);
+			int rowsUpdated = ps.executeUpdate();
+			if(rowsUpdated < 1){
+				throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+						.entity("User ID not valid").build());
 			}
-			
-			query = "UPDATE users SET user_permission = ? WHERE id = ?";
-			try(PreparedStatement ps = con.prepareStatement(query);){
+		}catch(SQLException e){
+			throw new WebApplicationException();
+		}
+	}
+	
+	public static void removeUser(String id){
+		if(id == null){
+			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+					.entity("No user id provided").build());
+		}
 				
-				ps.setString(1, newUserPermission);
-				ps.setString(2, id);
-				ps.executeUpdate();
+		String query = "DELETE FROM users WHERE id = ?";
+		
+		try(Connection con = Database.getConnection();
+				PreparedStatement ps = con.prepareStatement(query);){
+			ps.setString(1, id);
+			int deletedRows = ps.executeUpdate();
+			if(deletedRows < 1){
+				throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+						.entity("User ID not valid").build());
 			}
 		}catch(SQLException e){
 			throw new WebApplicationException();
