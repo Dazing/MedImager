@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -158,7 +159,7 @@ public class UserHandler{
 			try(ResultSet rs = ps.executeQuery();){
 				if(!rs.isBeforeFirst()) {
 					throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
-							.entity("ID not valid").build());
+							.entity("User ID not valid").build());
 				}
 				
 				rs.next();
@@ -282,6 +283,42 @@ public class UserHandler{
 	
 	private static boolean isPasswordValid(String inputPassword, String storedPassword){
 		return BCrypt.checkpw(inputPassword, storedPassword);
+	}
+	
+	public static void updateUserPermission(String id, String newUserPermission){
+		if(id == null){
+			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+					.entity("No user id provided").build());
+		}
+		
+		if(newUserPermission == null){
+			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+					.entity("No new user permission provided").build());
+		}
+		
+		try(Connection con = Database.getConnection();){
+			
+			String query = "SELECT * FROM users WHERE id = ?";
+			try(PreparedStatement ps = con.prepareStatement(query);){
+				ps.setString(1, id);
+				try(ResultSet rs = ps.executeQuery();){
+					if(!rs.isBeforeFirst()) {
+						throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+								.entity("User ID not valid").build());
+					}
+				}
+			}
+			
+			query = "UPDATE users SET user_permission = ? WHERE id = ?";
+			try(PreparedStatement ps = con.prepareStatement(query);){
+				
+				ps.setString(1, newUserPermission);
+				ps.setString(2, id);
+				ps.executeUpdate();
+			}
+		}catch(SQLException e){
+			throw new WebApplicationException();
+		}
 	}
 }
 
