@@ -40,6 +40,12 @@ public class UserHandler{
 								.header("WWW-Authenticate", "Username not valid")
 								.entity("Username not valid").build());
 					}
+					rs.next();
+					if(rs.getString("user_permission").equals("0")) {
+						throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
+								.header("WWW-Authenticate", "Not yet approved by admin")
+								.entity("Not yet approved by admin").build());
+					}
 				}
 			}
 			

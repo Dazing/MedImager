@@ -47,7 +47,6 @@ public class AuthenticationResource{
 	}
 	
 	@Secured
-	@RolesAllowed({"normal", "admin"})
 	@DELETE
 	@Path("unregister")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -76,7 +75,6 @@ public class AuthenticationResource{
 	}
 	
 	@Secured
-	@RolesAllowed({"normal", "admin"})
 	@PUT
 	@Path("updatepassword")
 	@Produces(MediaType.TEXT_PLAIN)
