@@ -143,6 +143,12 @@ public class UserHandler{
 	}
 	
 	public static User getUser(String id){
+		if(id == null){
+			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+					.entity("No user ID provided").build());
+		}
+		
+		
 		String query = "SELECT * FROM users WHERE id = ?";
 		
 		try(Connection con = Database.getConnection();

@@ -1,11 +1,7 @@
 package com.MedImager.ExaminationServer;
 
-import java.util.List;
-
 import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -18,7 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @Path("/user")
-public class AuthenticationResource{
+public class UserResource{
 	@GET
 	@Path("login")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -63,24 +59,6 @@ public class AuthenticationResource{
 	public User getUser(@Context SecurityContext securityContext){
 		String id = securityContext.getUserPrincipal().getName();
 		return UserHandler.getUser(id);
-	}
-	
-	@Secured
-	@RolesAllowed("admin")
-	@GET
-	@Path("admin/getuser")
-	@Produces(MediaType.APPLICATION_JSON)
-	public User getUser(@HeaderParam("ID") String id){
-		return UserHandler.getUser(id);
-	}
-	
-	@Secured
-	@RolesAllowed("admin")
-	@GET
-	@Path("admin/getusers")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUsers(){
-		return UserHandler.getUsers();
 	}
 	
 	@Secured
