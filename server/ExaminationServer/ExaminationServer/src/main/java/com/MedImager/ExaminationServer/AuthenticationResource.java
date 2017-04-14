@@ -57,9 +57,18 @@ public class AuthenticationResource{
 	}
 	
 	@Secured
-	@RolesAllowed("admin")
 	@GET
 	@Path("getuser")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@Context SecurityContext securityContext){
+		String id = securityContext.getUserPrincipal().getName();
+		return UserHandler.getUser(id);
+	}
+	
+	@Secured
+	@RolesAllowed("admin")
+	@GET
+	@Path("admin/getuser")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUser(@HeaderParam("ID") String id){
 		return UserHandler.getUser(id);
@@ -68,7 +77,7 @@ public class AuthenticationResource{
 	@Secured
 	@RolesAllowed("admin")
 	@GET
-	@Path("getusers")
+	@Path("admin/getusers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers(){
 		return UserHandler.getUsers();
