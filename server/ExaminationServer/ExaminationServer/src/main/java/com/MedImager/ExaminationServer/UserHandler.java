@@ -107,6 +107,30 @@ public class UserHandler{
 		
 		try{
 			Claims claims = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+			
+			String oldUserPermission = claims.get("user_permission").toString();
+			String id = claims.get("id").toString();
+			
+			String query = "SELECT * FROM users WHERE id = ?";
+			try(Connection con = Database.getConnection();
+					PreparedStatement ps = con.prepareStatement(query);){
+				
+				ps.setString(1, id);
+				
+				try(ResultSet rs = ps.executeQuery();){
+					rs.next();
+					String newUserPermission = rs.getString("user_permission");
+					
+					if(!newUserPermission.equals(oldUserPermission)){
+						throw new WebApplicationException(
+								Response.status(Response.Status.CONFLICT)
+								.entity("User permission updated, please login again").build());
+					}
+				}
+			}catch(SQLException e){
+				throw new WebApplicationException();
+			}
+			
 		}catch(SignatureException | MalformedJwtException | UnsupportedJwtException e){
 			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 					.header("WWW-Authenticate", "Token not valid")
