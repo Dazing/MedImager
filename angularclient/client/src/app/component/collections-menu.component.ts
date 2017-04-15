@@ -15,27 +15,28 @@ import { Image, Collection } from '../model/image';
 
 export class CollectionsMenu implements OnInit {
 
-	public collections: Collection[];
-	public visible = true;
-	public myCollectionsExpanded: boolean = true;
-	public sharedCollectionsExpanded: boolean = true;
-	public searchModeEnabled: boolean = true;
-	public selectedCollectionId: number;
-	public newCollectionValid: string = "none";
+	private collections: Collection[] = [];
+	private sharedCollections: Collection[] = [];
+	private visible = true;
+	private myCollectionsExpanded: boolean = true;
+	private sharedCollectionsExpanded: boolean = true;
+	private searchModeEnabled: boolean = true;
+	private selectedCollectionId: number;
+	private newCollectionValid: string = "none";
 
 	@ViewChild('searchParamsContainer') searchParamsContainer;
 	@ViewChild('newCollectionInput') newCollectionInput;
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
 	public searchMode: Observable<boolean>;
-	public privSearchMode: Subject<boolean>;
+	private privSearchMode: Subject<boolean>;
 	public selectedCollection: Observable<Collection>;
-	public privSelectedCollection: Subject<Collection>;
+	private privSelectedCollection: Subject<Collection>;
 
 	public isVisible: Observable<boolean>;
-	public privIsVisible: Subject<boolean>;
+	private privIsVisible: Subject<boolean>;
 
-	public tags: string[] = [];
+	private tags: string[] = [];
 
 	constructor(
 		private collectionService: CollectionService,
@@ -51,7 +52,11 @@ export class CollectionsMenu implements OnInit {
 		this.collectionService.collections.subscribe(collections => {
 			console.log("sub: "+collections);
 			this.collections = collections;	
-		})
+		});
+		this.collectionService.sharedCollections.subscribe(collections => {
+			console.log("sub shared: "+collections);
+			this.sharedCollections = collections;	
+		});
 
 		this.searchService.tags.subscribe(tags => {
 			this.tags = tags;
@@ -59,7 +64,10 @@ export class CollectionsMenu implements OnInit {
 			
 		});
 
+
 		this.collectionService.getCollectionList();
+		console.log("TODO: uncomment getSharedCollectionList() in collections-menu when it is fixed om backend");
+		//this.collectionService.getSharedCollectionList();
 	}
 
 	show(visible: boolean): void {
@@ -120,6 +128,4 @@ export class CollectionsMenu implements OnInit {
 		this.privSelectedCollection.next( !this.searchModeEnabled ? this.getCollectionById(this.selectedCollectionId) : undefined);
 	}
 
-	//myCollections = [{name:"Tandsten genom tiderna", id:"111111"}, {name:"Karies och baktus", id:"222222"},{name:"Bland tomtar och tandtroll", id:"3333"}];
-	sharedCollections = [{name:"extern samling 1", id:"111111111"},{name:"extern samling 2", id:"222222222"}];
 }

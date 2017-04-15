@@ -7,7 +7,7 @@ import { PopupService } from '../service/popup.service';
 import { Observable } from 'rxjs';
 import { Subject} from 'rxjs/Subject';
 
-
+declare var Materialize: any;
 
 @Component({
 	selector: 'collection-thumbnail',
@@ -15,18 +15,18 @@ import { Subject} from 'rxjs/Subject';
 })
 export class CollectionThumbnailComponent implements OnInit {
 
-	public results;
-	public url;
+	private url;
 
 	private loaded = false;
 	private collection: Collection;
-	private searchresults;
+	private images;
 
 	//note edit helper functions:
-	public editMode: boolean = false;
-	public editi: number;
-	public editj: number;
-	public editText: string;
+	private editMode: boolean = false;
+	private deleteConfirmation: boolean = false;
+	private deletei: number;
+	private editi: number;
+	private editText: string;
 
 	constructor(
 		private collectionService: CollectionService,
@@ -38,11 +38,11 @@ export class CollectionThumbnailComponent implements OnInit {
 	ngOnInit(): void {
 		this.url = this.server.getUrl();
 
-		this.popupService.searchResult.subscribe(searchResult => {
-			if (searchResult.direction > 0) {
-				this.showNextImage(searchResult.examinationIndex, searchResult.imageIndex);
-			} else if (searchResult.direction < 0) {
-				this.showPreviousImage(searchResult.examinationIndex, searchResult.imageIndex);
+		this.popupService.searchResult.subscribe(image => {
+			if (image.direction > 0) {
+				this.showNextImage(image.examinationIndex, image.imageIndex);
+			} else if (image.direction < 0) {
+				this.showPreviousImage(image.examinationIndex, image.imageIndex);
 			}
 		})
 	}
@@ -50,30 +50,41 @@ export class CollectionThumbnailComponent implements OnInit {
 	setCollection(collection: Collection) {
 		this.loaded = false;
 		this.collection = collection;
-		this.collectionService.getCollection(collection.id, this.receiveImages, this);
+		let thisHandle = this; //handle to 'this' because anonymous callback provides its own higher-scope 'this' object
+		this.collectionService.getCollection(collection.id, (collID, images) => {
+			if (this.collection.id == collID) {
+				console.log("collection thumbnail got images:");
+				console.log(images);
+				thisHandle.images = images;
+				thisHandle.loaded = true;
+			} else {
+				console.log("some sort of weird overlapping bug thing probably happened here, you probably don't have to worry");
+			}
+		});
 	}
 
-	receiveImages(collID: number, images: any[]): void {
-		if (this.collection.id == collID) {
-			console.log("collection thumbnail got images:");
-			console.log(images);
-			this.searchresults = images;
-			this.loaded = true;
-		} else {
-			console.log("some sort of weird overlapping bug thing probably happened here");
-		}
+	deleteImage(index: number): void {
+		this.deleteConfirmation = false;
+		let thisHandle = this;
+		this.collectionService.removeImage(this.collection.id, this.images[index].collectionitemID, () => {
+			thisHandle.setCollection(this.collection); //reload collection when item successfully removed
+		});
 		
-		
+	}
+
+	confirmDelete(index: number): void {
+		this.deletei = index;
+		this.deleteConfirmation = true;
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
-		/*let newImageIndex = (imageIndex + 1) % this.searchresults[examinationIndex].imagePaths.length;
+		/*let newImageIndex = (imageIndex + 1) % this.images[examinationIndex].imagePaths.length;
 		if (newImageIndex == 0) {
 			do {
-				examinationIndex = (examinationIndex + 1) % this.searchresults.length;
-			} while (this.searchresults[examinationIndex].imagePaths.length < 1)
+				examinationIndex = (examinationIndex + 1) % this.images.length;
+			} while (this.images[examinationIndex].imagePaths.length < 1)
 		}
-		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], newImageIndex, examinationIndex);
+		this.popupService.setPopupWithSearchIndex(this.images[examinationIndex], newImageIndex, examinationIndex);
 		*/
 	}
 
@@ -82,28 +93,26 @@ export class CollectionThumbnailComponent implements OnInit {
 		if (imageIndex < 1) {
 			do {
 				if (examinationIndex <= 0) {
-					examinationIndex = this.searchresults.length -1;
+					examinationIndex = this.images.length -1;
 				} else {
 					examinationIndex -= 1;
 				}
-			} while (this.searchresults[examinationIndex].imagePaths.length < 1)
-			newImageIndex = this.searchresults[examinationIndex].imagePaths.length -1;
+			} while (this.images[examinationIndex].imagePaths.length < 1)
+			newImageIndex = this.images[examinationIndex].imagePaths.length -1;
 		} else {
 			newImageIndex = imageIndex - 1;
 		}
-		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], newImageIndex, examinationIndex);
+		this.popupService.setPopupWithSearchIndex(this.images[examinationIndex], newImageIndex, examinationIndex);
 		*/
 	}
 
 	onImageClick(examinationIndex: number, imageIndex: number):void{
-		//this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], imageIndex, examinationIndex);
+		//this.popupService.setPopupWithSearchIndex(this.images[examinationIndex], imageIndex, examinationIndex);
 	}
-
-
 
 	getDiagDef(index: number): string {
 		var diagnoses = "";
-		for (let diag of this.results[index].diagDef) { 
+		for (let diag of this.images[index].diagDef) { 
 			if (diag != "") {
 				if (diagnoses != "") {
 					diagnoses += ", ";
@@ -116,7 +125,7 @@ export class CollectionThumbnailComponent implements OnInit {
 
 	getDiagTent(index: number): string {
 		var diagnoses = "";
-		for (let diag of this.results[index].diagTent) { 
+		for (let diag of this.images[index].diagTent) { 
 			if (diag != "") {
 				if (diagnoses != "") {
 					diagnoses += ", ";
@@ -129,7 +138,7 @@ export class CollectionThumbnailComponent implements OnInit {
 
 	getDiagHist(index: number): string {
 		var diagnoses = "";
-		for (let diag of this.results[index].diagHist) { 
+		for (let diag of this.images[index].diagHist) { 
 			if (diag != "") {
 				if (diagnoses != "") {
 					diagnoses += ", ";
@@ -141,7 +150,7 @@ export class CollectionThumbnailComponent implements OnInit {
 	}
 
 	getAge(index: number): string {
-		return this.results[index].age;
+		return this.images[index].age;
 	}
 
 	getDiagListAsString(diags: string[]): string {
@@ -157,30 +166,26 @@ export class CollectionThumbnailComponent implements OnInit {
 		return diagnoses;
 	}
 
-
-	editCollectionImageNote(examinationID: number, imageIndex: number, examinationIndex: number): void {
-		console.log("examinationID: "+examinationID);
-		console.log("imageIndex: "+imageIndex);
-		this.results[examinationIndex]["note"] = "hej";
-		console.log("note: " + this.results[examinationIndex]["note"]);
-		
+	getNote(i:number): string {
+		return this.images[i]["note"];
 	}
 
-	getNote(i:number, j: number): string {
-		return this.results[i]["note"+j];
-	}
-
-	setNote(i:number, j: number, note?: string): void {
-		let noteEdit: any  = document.getElementById('note-edit-' + i + '-' + j);
-		this.results[i]["note"+j] = noteEdit.value;
+	setNote(i:number, note?: string): void {
+		let noteEdit: any  = document.getElementById('note-edit-' + i);
+		if (!note) {
+			note = noteEdit.value.replace(/\n\s*\n/g, '\n'); //remove double line breaks and lines containing only spaces
+		}
+		Materialize.toast("set note text: "+note, 4000, "primary-colour black-text");
+		this.collectionService.setNote(this.collection.id, this.images[i].collectionitemID, note, () => {
+			this.images[i].note = note;
+		});
 		this.editMode = false;
 	}
 
-	editNote(i:number,j:number): void {
+	editNote(i:number): void {
 		this.editMode = true;
 		this.editi = i;
-		this.editj = j;
-		this.editText = this.results[i]["note"+j] ? this.results[i]["note"+j] : "";
+		this.editText = this.images[i]["note"] ? this.images[i]["note"] : "";
 	}
 
 }

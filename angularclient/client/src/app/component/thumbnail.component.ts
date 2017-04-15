@@ -34,16 +34,7 @@ export class ThumbnailComponent implements OnInit {
 		
 		var a = this.searchService.images;
 		console.log(a);
-		
-		// if (this.gridType == "search") {
-		// 	this.searchService.images.subscribe(images => {
-		// 		this.searchresults = images;
-		// 	})
-		// } else if (this.gridType == "collection") {
-		// 	this.searchService.images.subscribe(images => {
-		// 		this.searchresults = images;
-		// 	})
-		// }
+
 		console.log("gridType: " + this.gridType);
 		this.searchService.images.subscribe(images => {
 			this.searchresults = images;
@@ -89,8 +80,6 @@ export class ThumbnailComponent implements OnInit {
 	onImageClick(examinationIndex: number, imageIndex: number):void{
 		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], imageIndex, examinationIndex);
 	}
-
-
 
 	getDiagDef(index: number): string {
 		var diagnoses = "";

@@ -20,6 +20,10 @@ export class CollectionService {
 	private privCollections: Subject<Collection[]>;
 	private collectionsList: Collection[];
 
+	sharedCollections:Observable<Collection[]>;
+	private privSharedCollections: Subject<Collection[]>;
+	private sharedCollectionsList: Collection[];
+
 	images:Observable<string[]>;
 	private privImages: Subject<string[]>;
 
@@ -28,6 +32,9 @@ export class CollectionService {
 	constructor(private http: Http, private router: Router, private server: Server) {
 		this.privCollections = new Subject<Collection[]>();
         this.collections = this.privCollections.asObservable();
+
+		this.privSharedCollections = new Subject<Collection[]>();
+        this.sharedCollections = this.privSharedCollections.asObservable();
 		
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
@@ -57,24 +64,62 @@ export class CollectionService {
 
 	}
 
-	getCollection(collectionID: number, callback: (collID: number, images: any[]) => void, thisHandle: any): void {
+	getCollection(collectionID: number, callback: (collID: number, images: any[]) => void): void {
 		var url = (this.server.getUrl() + '/collection/'+collectionID);
 		console.log("Request collection: "+url);
 		
 		this.http.get(url)
 			.toPromise()
 			.then(response => {
-				console.log("collection request http GET response:");
-				console.log(response.json());
 				let images = [];
 				for (let image of response.json()) {
 					images.push(image);
-					
 				}
-				console.log("IMAGES:");
-				console.log(images);
-				
-				callback.call(thisHandle, collectionID, images);
+				callback.call(undefined, collectionID, images);
+			})
+			.catch(e => {
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});	
+	}
+	
+	getSharedCollectionList(): void {
+		var url = (this.server.getUrl() + '/collection/share');
+		console.log("Fetch shared collections, url: "+url);
+		
+		this.http.get(url)
+			.toPromise()
+			.then(response => {
+				this.sharedCollectionsList = [];
+				for (let col of response.json()) {
+					this.sharedCollectionsList.push(new Collection(col.collectionID, col.collectionName, col.collectionDescr));
+				}
+				console.log("collections: ");
+				console.log(response.json());
+				console.log(this.sharedCollectionsList);
+				this.privSharedCollections.next(this.sharedCollectionsList);
+			})
+			.catch(e => {
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
+
+	}
+
+	getSharedCollection(collectionID: number, callback: (collID: number, images: any[]) => void): void {
+		var url = (this.server.getUrl() + '/collection/share/'+collectionID);
+		console.log("Request shared collection: "+url);
+		
+		this.http.get(url)
+			.toPromise()
+			.then(response => {
+				let images = [];
+				for (let image of response.json()) {
+					images.push(image);
+				}
+				callback.call(undefined, collectionID, images);
 			})
 			.catch(e => {
 				console.log("Get search "+e);
@@ -83,7 +128,7 @@ export class CollectionService {
 			});	
 	}
 
-	addImage(examinationID: number, imageIndex: number, collID: number): void {
+	addImage(examinationID: number, imageIndex: number, collID: number, callback?:(success: boolean)=>void): void {
 		var url = (this.server.getUrl() + '/collection/' + collID);
 		console.log("Add image to collection, url: "+url);
 
@@ -92,13 +137,81 @@ export class CollectionService {
 		let headers = new Headers({ 'Content-Type': 'application/json'});
   		let options = new RequestOptions({ headers: headers });
 
-		this.http.post(url, JSON.stringify(payload), options)
+		this.getCollection(collID, (collID, images)=>{
+			let imageFound = false;
+			//iterate through collection images to avoid adding duplicates
+			images.forEach(element => {
+				if (element.examinationID == examinationID && element.index == imageIndex) {
+					imageFound = true;
+				}
+			});
+			if (!imageFound) {
+				//if collection didn't contain image to add, then post it to collection
+				this.http.post(url, JSON.stringify(payload), options)
+					.toPromise()
+					.then(response => {
+						console.log("addImage POST response:");
+						console.log(response);
+						callback.call(undefined, true);
+					})
+					.catch(e => {
+						console.log("POST error:");
+						console.log(e);
+						alert("Server unreachable, try again later!")
+						//this.router.navigate(['/serverunreachable']);
+					});
+			} else {
+				callback.call(undefined, false);
+			}
+		});
+
+		
+	}
+
+	removeImage(collId: number, collectionItemId: number, callback?: ()=>void): void {
+		var url = (this.server.getUrl() + '/collection/' + collId);
+
+		let payload = {collectionitemID: collectionItemId};
+
+		let headers = new Headers({ 'Content-Type': 'application/json'});
+  		let options = new RequestOptions({ headers: headers, body: payload });
+		
+		this.http.delete(url, options)
 			.toPromise()
 			.then(response => {
+				console.log("deleted collection item: " + collectionItemId + " from collection: " + collId);
 				console.log(response);
+				if (callback) {
+					callback.call(undefined);
+				}
 			})
 			.catch(e => {
-				console.log("POST error:");
+				console.log("Get search "+e);
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
+	}
+
+	setDescription(collID: number, description: string, callback?:()=>void): void {
+		var url = (this.server.getUrl() + '/collection/description');
+		console.log("attempt to set collection description, url: "+url);
+
+		let payload = {collectionDescr: description, collectionID: collID};
+
+		let headers = new Headers({ 'Content-Type': 'application/json'});
+  		let options = new RequestOptions({ headers: headers });
+
+		this.http.put(url, JSON.stringify(payload), options)
+			.toPromise()
+			.then(response => {
+				console.log("setting collection description was successful:");
+				console.log(response);
+				if (callback) {
+					callback.call(undefined);
+				}
+			})
+			.catch(e => {
+				console.log("setting collection description error:");
 				console.log(e);
 				
 				alert("Server unreachable, try again later!")
@@ -106,23 +219,31 @@ export class CollectionService {
 			});
 	}
 
-	removeImage(image:any, imageIndex: number, collId: number): void {
-		/*var str = 'examinationID='+image.examinationID+'&imageIndex='+imageIndex;
+	setNote(collID: number, collectionitemID:string, note: string, callback?:()=>void): void {
+		var url = (this.server.getUrl() + '/collection/note');
+		console.log("attempt to set image note, collectionitemID: "+collectionitemID, ", collection id: "+collID + ", note: " + note);
 
-		var url = ('http://localhost:8080/ExaminationServer/examData/api/collection/'+collId+'?'+str);
-		
-		this.http.delete(url)
+		let payload = {note: note, collectionID: collID, collectionitemID: collectionitemID};
+
+		let headers = new Headers({ 'Content-Type': 'application/json'});
+  		let options = new RequestOptions({ headers: headers });
+
+		this.http.put(url, JSON.stringify(payload), options)
 			.toPromise()
 			.then(response => {
-				if (response) {
-					
+				console.log("setting collection description was successful:");
+				console.log(response);
+				if (callback){
+					callback.call(undefined);
 				}
 			})
 			.catch(e => {
-				console.log("Get search "+e);
+				console.log("setting collection description error:");
+				console.log(e);
+				
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
-			});*/
+			});
 	}
 
 	createCollection(name: string, description?: string): void {
@@ -152,6 +273,8 @@ export class CollectionService {
 	}
 
 	removeCollection(collId: number): void {
+		console.log("attempt delete collection: " + collId);
+		
 		var url = (this.server.getUrl()  + '/collection/');
 
 		let payload = {collectionID: collId};
@@ -164,16 +287,17 @@ export class CollectionService {
 			.then(response => {
 				if (response) {
 					this.getCollectionList();
-					console.log("delete collection:" + collId);
+					console.log("deleted collection:" + collId);
 					
 				}
 			})
 			.catch(e => {
-				console.log("Get search "+e);
+				console.log("couldn't delete collection: " + collId);
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
 			});
 	}
 	
+
 
 }

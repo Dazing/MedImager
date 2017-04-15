@@ -36,7 +36,6 @@ export class CollectionTopMenu {
     setCollection(coll: Collection): void {
         this.resetMenu();
         this.collection = coll;
-        console.log("coll:" + coll);
         this.collectionSet = true;
     }
 

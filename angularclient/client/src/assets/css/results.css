@@ -93,6 +93,11 @@
       bottom: -28px;
       width: 100%; }
 
+.btn.small-padding {
+  padding-left: 7px;
+  padding-right: 7px;
+  display: block; }
+
 #results-count {
   margin-right: 15px;
   padding-top: 10px;
