@@ -102,8 +102,8 @@ public class UserHandler{
 	public static void validateToken(String token){
 		if(token == null) {
 			throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
-					.header("WWW-Authenticate", "Authorization header must be provided")
-					.entity("Authorization header must be provided").build());
+					.header("WWW-Authenticate", "Token must be provided")
+					.entity("Token must be provided").build());
 		}
 		
 		try{
@@ -182,11 +182,6 @@ public class UserHandler{
 		try(Connection con = Database.getConnection();
 			PreparedStatement ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();){
-		
-			if(!rs.isBeforeFirst()) {
-				throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
-						.entity("No users in user database").build());
-			}
 			
 			List<User> userList = new ArrayList<>();
 			
@@ -288,7 +283,7 @@ public class UserHandler{
 	public static void updateUserPermission(String id, String newUserPermission){
 		if(id == null){
 			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
-					.entity("No user id provided").build());
+					.entity("No user ID provided").build());
 		}
 		
 		if(newUserPermission == null){
@@ -315,7 +310,7 @@ public class UserHandler{
 	public static void removeUser(String id){
 		if(id == null){
 			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
-					.entity("No user id provided").build());
+					.entity("No user ID provided").build());
 		}
 				
 		String query = "DELETE FROM users WHERE id = ?";
