@@ -56,6 +56,16 @@
   color: #1de9b6;
   margin-left: 10px; }
 
+#add-row-button {
+  margin-top: 2px;
+  font-size: 3rem;
+  position: absolute;
+  cursor: pointer;
+  transition: transform 0.4s;
+  color: #1de9b6;
+  margin-left: 20px;
+  position: relative; }
+
 #advanced-bar {
   z-index: -1;
   background-color: #ffffff;

@@ -1,25 +1,27 @@
 <div id="advanced-bar">
-	<div class="row" *ngIf="jsonReady">
-		<div class="valign-wrapper input-field col s4">
-			<select [ngModel]="active" (ngModelChange)="onChangeSearchableStuffList(0, $event)" id="selectedList-0">
-				<template ngFor let-searchableStuffLists [ngForOf]="searchableStuffLists" let-i="index">
-					<option value="{{i}}" [ngValue]="i">
-						{{searchableStuffLists}}
-					</option>
-				</template>
-			</select>
+	<template ngFor [ngForOf]="selectedSearchableStuffLists" let-k="index" *ngIf="jsonReady">
+		<div class="row">
+			<div class="valign-wrapper input-field col s4">
+				<select [ngModel]="searchableStuffLists" (ngModelChange)="onChangeSearchableStuffList(k, $event)" id="selectedList-{{k}}">
+					<template ngFor let-searchableStuffLists [ngForOf]="searchableStuffLists" let-i="index">
+						<option value="{{i}}" [ngValue]="i">
+							{{searchableStuffLists}}
+						</option>
+					</template>
+				</select>
+			</div>
+			<div class="valign-wrapper input-field col s4">
+				<select [ngModel]="searchableStuffStrings" (ngModelChange)="onChangeSearchableStuffString(k, $event)" id="listAlternatives-{{k}}">
+					<template ngFor let-searchableStuffStrings [ngForOf]="searchableStuff[searchableStuffLists[selectedSearchableStuffLists[k]]]" let-j="index">
+						<option value="{{j}}" [ngValue]="j">
+							{{searchableStuffStrings}}
+						</option>
+					</template>
+				</select>
+			</div>
 		</div>
-		<div class="valign-wrapper input-field col s4">
-			<select id="listAlternatives-0">
-				<template ngFor let-searchableStuffStrings [ngForOf]="searchableStuff[searchableStuffLists[selectedSearchableStuffLists[0]]]" let-i="index">
-					<option value="{{i}}" [ngValue]="i">
-						{{searchableStuffStrings}}
-					</option>
-				</template>
-			</select>
-		</div>
-	</div>
-	<button>Lägg till rad...</button>
+	</template>
+	<i class='material-icons unselectable' id="add-row-button" (click)="addRow()">add</i>
 </div>
 
 

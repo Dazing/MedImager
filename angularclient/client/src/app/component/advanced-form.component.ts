@@ -18,6 +18,7 @@ export class AdvancedFormComponent {
 	private searchableStuffLists;
 	private jsonReady = false;
 	private selectedSearchableStuffLists: Array<Number> = [null];
+	private selectedTerms: Array<Number> = [null];
 
 	constructor(
 		private router: Router, 
@@ -39,5 +40,14 @@ export class AdvancedFormComponent {
 	private onChangeSearchableStuffList(selectId, listId){
 		this.selectedSearchableStuffLists[selectId] = listId;
 		console.log("selectId: " + selectId + " ListId: " + listId)
+	}
+
+	private onChangeSearchableStuffString(selectId, listId){
+		this.selectedTerms[selectId] = listId;
+	}
+
+	private addRow(){
+		this.selectedSearchableStuffLists.push(0);
+		this.selectedTerms.push(0);
 	}
 }
