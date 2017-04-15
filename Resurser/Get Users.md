@@ -22,8 +22,9 @@
     **Headers:** None <br />
     **Message Body:** <br />
  
-  ```javascript
+```javascript
 // Example
+
 {
         "firstName": "Börje",
         "id": "4",
@@ -38,7 +39,7 @@
         "userPermission": "normal",
         "username": "nisse@medimager.com"
 }
-  ```
+```
  
 * **Error Response:**
 
