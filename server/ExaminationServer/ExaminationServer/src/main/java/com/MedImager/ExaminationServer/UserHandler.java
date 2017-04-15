@@ -216,6 +216,11 @@ public class UserHandler{
 	}
 	
 	public static void registerUser(String username, String password, String firstName, String lastName){
+		if(username == null || password == null || firstName == null || lastName == null){
+			throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
+					.entity("Required user info missing").build());
+		}
+		
 		try(Connection con = Database.getConnection();){
 			String query = "SELECT * FROM users WHERE username = ?";
 			

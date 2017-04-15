@@ -29,4 +29,9 @@
 
   * **Code:** 409 CONFLICT <br />
     **Headers:** None <br />
+    **Message Body:** `{ Required user info missing }` <br /><br />
+
+    OR
+  * **Code:** 409 CONFLICT <br />
+    **Headers:** None <br />
     **Message Body:** `{ Account already registered }` <br /><br />
