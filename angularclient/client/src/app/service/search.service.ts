@@ -16,6 +16,8 @@ import { Server } from '../model/server';
 export class SearchService {
 	private headers = new Headers({'Content-Type': 'application/json'});
 
+    searchableStuff:Observable<string[]>;
+    privSearchableStuff: Subject<string[]>;
 	searchTerms: string[];
 	
 	images:Observable<string[]>;
@@ -29,6 +31,9 @@ export class SearchService {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
 
+		this.privSearchableStuff = new Subject<string[]>();
+        this.searchableStuff = this.privSearchableStuff.asObservable();
+
 		this.privTags = new Subject<string[]>();
         this.tags = this.privTags.asObservable();
 
@@ -36,10 +41,15 @@ export class SearchService {
 
 	}
 
-	getSearch(query:JSON): void {
+	getSearch(): void {
 		var str = "";
 
-		for (var key in query) {
+		console.log(
+			""
+		);
+		
+
+		/*for (var key in query) {
 			if (query.hasOwnProperty(key) && query[key] != "") {
 				if (key.toString() == "includeTentative") {
 
@@ -54,7 +64,7 @@ export class SearchService {
 					str += "&"+key.toString()+"="+query[key].toString();
 				}
 			}
-		}
+		}*/
 
 		if (str.charAt(0) === "&"){
 			str = str.substr(1);
@@ -81,6 +91,21 @@ export class SearchService {
 				//this.router.navigate(['/serverunreachable']);
 			});
 	}
+
+	getSearchableStuff(): void {
+		var url = (this.server.getUrl()+'/initValues');
+
+        this.http.get(url)
+			.toPromise()
+			.then(response => {
+                   var responsejson = response.json();
+                   this.privSearchableStuff.next(responsejson);
+                   console.log(responsejson);
+			})
+			.catch(e => {
+                this.privSearchableStuff.next(null);
+			});
+    }
 
 	autoComplete(term: string): string[]{
 		return;

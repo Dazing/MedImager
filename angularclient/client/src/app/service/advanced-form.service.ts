@@ -5,20 +5,22 @@ import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { Image } from '../model/image';
 
+import { Server } from '../model/server';
+
 @Injectable()
 export class AdvancedFormService {
-    private headers = new Headers({'Content-Type': 'application/json'});
+    headers = new Headers({'Content-Type': 'application/json'});
     searchableStuff:Observable<string[]>;
 
-    private privSearchableStuff: Subject<string[]>;
+    privSearchableStuff: Subject<string[]>;
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private server: Server) {
         this.privSearchableStuff = new Subject<string[]>();
         this.searchableStuff = this.privSearchableStuff.asObservable();
     }
 
     getSearchableStuff(): void {
-        var url = ('http://medimager.com/api/initValues');
+        var url = (this.server.getUrl()+'/initValues');
 
         this.http.get(url)
 			.toPromise()

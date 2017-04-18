@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { Image } from '../model/image';
 
+import { Server } from '../model/server';
+
 @Injectable()
 export class ImagePageService {
     private headers = new Headers({'Content-Type': 'application/json'});
@@ -12,13 +14,13 @@ export class ImagePageService {
 
     private privImageData: Subject<string[]>;
 
-    constructor(private http: Http, private router: Router) {
+    constructor(private http: Http, private router: Router, private server: Server) {
         this.privImageData = new Subject<string[]>();
         this.imageData = this.privImageData.asObservable();
     }
 
     getImageData(examinationIn:Number): void {
-        var url = ('http://localhost:8080/ExaminationServer/examData/api/examination/'+examinationIn);
+        var url = (this.server.getUrl()+'/examination/'+examinationIn);
 
         this.http.get(url)
 			.toPromise()

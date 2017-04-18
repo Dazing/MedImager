@@ -12,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
   	providers: [FormBuilder]
 })
 export class TopMenuComponent {
-	form;
+	//form;
 	active : boolean;
 	advancedBarVisible: boolean = false;
 	suggestedAutocomplete;
@@ -33,7 +33,7 @@ export class TopMenuComponent {
 		private formBuilder: FormBuilder,
 		private searchService: SearchService
 	){
-		this.form = formBuilder.group({
+		/*this.form = formBuilder.group({
 			value: '',
 			gender: '',
 			smoke: '',
@@ -55,12 +55,16 @@ export class TopMenuComponent {
 			
 			console.log("Search"+JSON.stringify(data));
 			
-			this.searchService.getSearch(data);
+			this.searchService.getSearch();
 
 			
 		});
+*/
 
+	}
 
+	search(): void {
+		this.searchService.getSearch();
 	}
 
 	emptySearchField(): void {
@@ -79,7 +83,7 @@ export class TopMenuComponent {
 	}
 
 	onEnter(term: string){
-		console.log(this.form.getRawValue());
+		//console.log(this.form.getRawValue());
 		
 	}
 

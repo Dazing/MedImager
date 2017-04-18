@@ -27,29 +27,25 @@ export	 class AdvancedFormComponent {
 		private router: Router, 
 		private ar: ActivatedRoute,
 		private formBuilder: FormBuilder,
-		private searchService: SearchService,
-		private advancedFormService: AdvancedFormService
+		private searchService: SearchService
 	){}
 
 	ngOnInit(): void {
-		this.advancedFormService.searchableStuff.subscribe(searchableStuff => {
+		this.searchService.searchableStuff.subscribe(searchableStuff => {
 			this.searchableStuffLists = Object.getOwnPropertyNames(searchableStuff);
 			this.searchableStuff = searchableStuff;
 			this.jsonReady = true;
 		});
-		this.advancedFormService.getSearchableStuff();
+		this.searchService.getSearchableStuff();
 	}
 
 	private onChangeSearchableStuffList(selectId, listId){
 		this.selectedSearchableStuffLists[selectId] = listId;
-		console.log("selectId: " + selectId + " ListId: " + listId);
 	}
 
 
 	private onChangeSearchableStuffString(selectId, listId){
 		this.selectedTerms[selectId] = listId;
-		console.log("selectId: " + selectId + " ListId: " + listId);
-
 	}
 
 	private addRow(){
