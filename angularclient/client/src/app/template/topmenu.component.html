@@ -44,10 +44,12 @@
 					-->
 				</div>
 			</div>
-			<i class='spin-menu-button material-icons unselectable' id="advanced-button" onclick="showExtraBar('advanced');">filter_list</i>
+			<i class='spin-menu-button material-icons unselectable' id="advanced-button" (click)="toggleAdvancedBar()"
+				[ngStyle]="{'transform': advancedBarVisible ? 'rotate(180deg)' : 'rotate(0deg)'}"
+			>filter_list</i>
 			<i class='spin-menu-button material-icons unselectable' id="settings-button" onclick="showExtraBar('settings');">settings</i>
 		</div>
 		
-			<advanced-form></advanced-form>
+			<advanced-form [visible]="advancedBarVisible"></advanced-form>
 	</form>
 </div>

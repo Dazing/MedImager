@@ -1,6 +1,6 @@
 import { Headers, Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { Image } from '../model/image';

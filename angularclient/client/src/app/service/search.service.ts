@@ -62,9 +62,9 @@ export class SearchService {
 
 		console.log("Q:"+str);
 		
-		if (str == "") {
-			return;
-		}
+		// if (str == "") {
+		// 	return;
+		// }
 		var url = (this.server.getUrl() + '/search?'+str);
 		
 		console.log("URL: "+url+", Q: "+str);

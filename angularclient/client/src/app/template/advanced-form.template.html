@@ -1,20 +1,21 @@
-<div id="advanced-bar">
+<div id="advanced-bar" [ngClass]="{'visible': visible}">
 	<template ngFor [ngForOf]="selectedSearchableStuffLists" let-k="index" *ngIf="jsonReady">
 		<div class="row">
 			<div class="valign-wrapper input-field col s4">
-				<select [ngModel]="searchableStuffLists" (ngModelChange)="onChangeSearchableStuffList(k, $event)" id="selectedList-{{k}}">
-					<template ngFor let-searchableStuffLists [ngForOf]="searchableStuffLists" let-i="index">
-						<option value="{{i}}" [ngValue]="i">
-							{{searchableStuffLists}}
+				<select [ngModel]="selectedSearchableStuffLists[k]" (ngModelChange)="onChangeSearchableStuffList(k, $event)" id="selectedList-{{k}}" [attr.data-sel]="selectedSearchableStuffLists[k]">
+					<template ngFor let-searchableStuffList [ngForOf]="searchableStuffLists" let-i="index">
+						<option [ngValue]="i">
+							{{searchableStuffList}}
 						</option>
 					</template>
 				</select>
+
 			</div>
 			<div class="valign-wrapper input-field col s4">
 				<select [ngModel]="searchableStuffStrings" (ngModelChange)="onChangeSearchableStuffString(k, $event)" id="listAlternatives-{{k}}">
-					<template ngFor let-searchableStuffStrings [ngForOf]="searchableStuff[searchableStuffLists[selectedSearchableStuffLists[k]]]" let-j="index">
+					<template ngFor let-searchableStuffString [ngForOf]="searchableStuff[searchableStuffLists[selectedSearchableStuffLists[k]]]" let-j="index">
 						<option value="{{j}}" [ngValue]="j">
-							{{searchableStuffStrings}}
+							{{searchableStuffString}}
 						</option>
 					</template>
 				</select>

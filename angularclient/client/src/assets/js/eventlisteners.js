@@ -17,9 +17,9 @@ $(document).ready(function () {
 	);
 
 	/* Event Listeners */
-	$('#toggleAdvSearch').click(function(){
-		$('#advancedSearch').toggle();
-	});
+	// $('#toggleAdvSearch').click(function(){
+	// 	$('#advancedSearch').toggle();
+	// });
 
 	// TODO set correct class
 	$('.img').click(function(){
@@ -55,9 +55,9 @@ $(document).ready(function () {
 		setSearchResultsGridWidth();
 	})
 
-	$("#menu-bar").resize(function() {
-		setPageWrapperHeight((advancedBar ? 104 : 0) + (settingsBar ? 52 : 0));
-	})
+	// $("#menu-bar").resize(function() {
+	// 	setPageWrapperHeight((advancedBar ? 104 : 0) + (settingsBar ? 52 : 0));
+	// })
 
 	var marginTopRelatedImages = $("#related-images").outerHeight()/2;
 	$("#related-images").css("marginTop", "-" + marginTopRelatedImages + "px");

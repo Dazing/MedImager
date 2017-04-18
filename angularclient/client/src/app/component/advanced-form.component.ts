@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 
@@ -12,13 +12,16 @@ import { Subject } from 'rxjs/Subject';
 	templateUrl: '../template/advanced-form.template.html',
   	providers: [FormBuilder]
 })
-export class AdvancedFormComponent {
+export	 class AdvancedFormComponent {
+	@Input('visible') visible: boolean; 
 
-	private searchableStuff: any;
-	private searchableStuffLists;
-	private jsonReady = false;
-	private selectedSearchableStuffLists: Array<Number> = [null];
-	private selectedTerms: Array<Number> = [null];
+	public searchableStuff: any;
+	public searchableStuffStrings: any;
+	public searchableStuffLists;
+	public jsonReady = false;
+	public selectedSearchableStuffLists: Array<Number> = [null];
+	public selectedTerms: Array<Number> = [null];
+
 
 	constructor(
 		private router: Router, 
@@ -39,11 +42,14 @@ export class AdvancedFormComponent {
 
 	private onChangeSearchableStuffList(selectId, listId){
 		this.selectedSearchableStuffLists[selectId] = listId;
-		console.log("selectId: " + selectId + " ListId: " + listId)
+		console.log("selectId: " + selectId + " ListId: " + listId);
 	}
+
 
 	private onChangeSearchableStuffString(selectId, listId){
 		this.selectedTerms[selectId] = listId;
+		console.log("selectId: " + selectId + " ListId: " + listId);
+
 	}
 
 	private addRow(){

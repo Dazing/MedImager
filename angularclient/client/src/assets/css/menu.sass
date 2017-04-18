@@ -10,6 +10,7 @@
 	left: 300px
 	top: 0
 	right: 0
+	height: 69px
 	z-index: 90
 	
 #menu-bar
@@ -61,9 +62,16 @@
 	position: fixed
 
 #advanced-bar
-	+extra-bar
-	height: 100px
-	margin-top: -100px
+	z-index: -2
+	width: 100%
+	background-color: #ffffff
+	position: absolute
+	bottom: 100%
+	min-height: 100px
+	transition: all 0.4s
+	&.visible
+		top: 100%
+		bottom: initial
 	.row
 		margin: 0
 		+advanced-bar-font-size

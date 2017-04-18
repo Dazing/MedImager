@@ -14,6 +14,7 @@ import { Subject } from 'rxjs/Subject';
 export class TopMenuComponent {
 	form;
 	active : boolean;
+	advancedBarVisible: boolean = false;
 	suggestedAutocomplete;
 	selectedAutocompleteIndex = -1;
 	maxAutocompleteSuggestions = 7;
@@ -163,6 +164,10 @@ export class TopMenuComponent {
 		if (event.button == 0) {
 			this.addTag(term);
 		}
+	}
+
+	toggleAdvancedBar() {
+		this.advancedBarVisible = !this.advancedBarVisible;
 	}
 
 }

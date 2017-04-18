@@ -40,6 +40,7 @@
   left: 300px;
   top: 0;
   right: 0;
+  height: 69px;
   z-index: 90; }
 
 #menu-bar {
@@ -85,14 +86,16 @@
   position: relative; }
 
 #advanced-bar {
-  z-index: -1;
-  background-color: #ffffff;
+  z-index: -2;
   width: 100%;
-  box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8);
-  transition: margin 0.4s;
-  position: fixed;
-  height: 100px;
-  margin-top: -100px; }
+  background-color: #ffffff;
+  position: absolute;
+  bottom: 100%;
+  min-height: 100px;
+  transition: all 0.4s; }
+  #advanced-bar.visible {
+    top: 100%;
+    bottom: initial; }
   #advanced-bar .row {
     margin: 0;
     font-size: 1.3vw;
