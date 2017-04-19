@@ -17,8 +17,10 @@ export class CollectionTopMenu {
     public collectionDeleted: Observable<number>;
     private privCollectionDeleted: Subject<number>;
 
-    private detailsVisible: boolean = false;
+    public detailsVisible: boolean = false;
     private editMode = false;
+
+    @ViewChild('description') descriptionContainer;
 
     constructor(private popupService: PopupService, private collectionService: CollectionService) {
         this.privCollectionDeleted = new Subject<number>();
@@ -28,6 +30,8 @@ export class CollectionTopMenu {
     clickDetailsButton(event): void {
         if ( (" " + event.target.className + " ").replace(/[\n\t]/g, " ").indexOf(" collection-topmenu-details-button ") > -1 ) {
             this.detailsVisible = !this.detailsVisible;
+            console.log("scroll height: "+this.descriptionContainer.nativeElement.scrollHeight);
+            
         }
     }
 
