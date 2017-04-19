@@ -25,8 +25,6 @@ export class CollectionTopMenu {
         this.collectionDeleted = this.privCollectionDeleted.asObservable();
     }
 
-    
-
     clickDetailsButton(event): void {
         if ( (" " + event.target.className + " ").replace(/[\n\t]/g, " ").indexOf(" collection-topmenu-details-button ") > -1 ) {
             this.detailsVisible = !this.detailsVisible;
@@ -64,7 +62,11 @@ export class CollectionTopMenu {
         let textarea: any = document.getElementById("description-edit-input");
         let text = textarea.value.replace(/\n\s*\n/g, '\n');//replace multiple consecutive line breaks, and remove lines containing only spaces
         textarea.value = "";
-        console.log(text);
+        this.collectionService.setDescription(this.collection.id, text, success => {
+            if (success) {
+                this.collection.description = text;
+            }
+        });
         this.editMode = false;
     }
     

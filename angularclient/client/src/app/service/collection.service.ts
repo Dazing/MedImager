@@ -192,7 +192,7 @@ export class CollectionService {
 			});
 	}
 
-	setDescription(collID: number, description: string, callback?:()=>void): void {
+	setDescription(collID: number, description: string, callback?:(success: boolean)=>void): void {
 		var url = (this.server.getUrl() + '/collection/description');
 		console.log("attempt to set collection description, url: "+url);
 
@@ -207,13 +207,13 @@ export class CollectionService {
 				console.log("setting collection description was successful:");
 				console.log(response);
 				if (callback) {
-					callback.call(undefined);
+					callback(true);
 				}
 			})
 			.catch(e => {
 				console.log("setting collection description error:");
 				console.log(e);
-				
+				callback(false);
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
 			});

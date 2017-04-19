@@ -1,7 +1,7 @@
 <template *ngIf="gridType == 'search'" ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
 	<span  
 		*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
-		draggableImage
+		[draggableImage]="searchresult.examinationID + '/' + j"
 		id="{{'result-image-'+i+j}}" 
 		class="unselectable"
 		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
@@ -18,81 +18,3 @@
 		</div>
 	</span>
 </template>
-
-<template *ngIf="gridType == 'collection'" ngFor let-searchresult [ngForOf]="searchresults" let-i="index">
-	<span  
-		*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
-		id="{{'result-image-'+i+j}}" 
-		class="unselectable"
-		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
-		data-id="{{i}}"
-		[attr.data-examinationid]="searchresult.examinationID"
-		[attr.data-imageIndex]="j"
-		(click)="onImageClick(i,j)"
-	>
-		<div class="opacity-wrapper" *ngIf="getNote(i,j) && !editMode">
-			{{getNote(i,j)}}
-		</div>
-		<div class="collection-image-button-container" *ngIf="!editMode" >
-			<a class="btn-floating btn-large waves-effect waves-light" (click)="editNote(i,j)" >
-				<i class="material-icons" draggable="false">mode_edit</i>
-			</a>
-		</div>
-
-
-		<div class="opacity-wrapper-always-on valign-wrapper" *ngIf="editMode && editi == i && editj == j">
-			<textarea [attr.id]="'note-edit-' + i + '-' + j" [value]="editText" class="materialize-textarea valign-center" maxlength="128"></textarea>
-		</div>
-		<div class="collection-image-button-container-always-on" *ngIf="editMode">
-			<a class="btn-floating btn-large waves-effect waves-light" (click)="setNote(i,j)" *ngIf="editMode && editi==i && editj==j">
-				<i class="material-icons" draggable="false">done</i>
-			</a>
-			<a class="btn-floating btn-large waves-effect waves-light" (click)="editMode=false" *ngIf="editMode && editi==i && editj==j">
-				<i class="material-icons" style="transform: rotate(45deg)" draggable="false">add</i>
-			</a>
-		</div>
-	</span>
-</template>
-
-
-<!-- 
-<span draggableImage id="result-image-{{i}}" [ngStyle]="{'background-image': 'url(' + searchresult + ')'}" data-id="{{i}}">
-	<div class="opacity-wrapper">
-		<div class="inner-text"><b>Diagnoser:</b> diagnos1, diagnos2, diagnos3</div>
-		<div class="inner-text"><b>Ålder:</b> 55 år</div>
-		<div class="inner-text"><b>Annan handy info:</b> info info info info info</div>
-	</div>
-</span>
-	
-
-	{
-		"age":["70"],
-		"allergy":["Nej"],
-		"biopsySite":[],
-		"diagDef":["Atrofisk lichen planus"],
-		"diagHist":[],
-		"diagTent":[],
-		"disNow":["Atopiskt eksem"],
-		"disPast":["Nej"],
-		"drug":["Nej"],
-		"examinationID":"980122112626",
-		"factorNeg":["Hård föda"],
-		"factorPos":["Förbättrad munhygien"],
-		"family":["Broder"],
-		"gender":["1"],
-		"imagePaths":[
-			"TestData.mvd\\Pictures\\G0222\\g02223.jpg",
-			"TestData.mvd\\Pictures\\G0222\\g02222.jpg",
-			"TestData.mvd\\Pictures\\G0222\\g02221.jpg"
-		],
-		"lesnOn":[],
-		"lesnSite":[],
-		"skinPbl":["Torr hud","Eksem"],
-		"smoke":["Nej"],
-		"snuff":["Nej"],
-		"symptNow":[],
-		"symptSite":[],
-		"treatType":["Information"],
-		"vasNow":["3.2"]
-	}
--->

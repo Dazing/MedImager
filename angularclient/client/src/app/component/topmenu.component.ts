@@ -1,8 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 
 import { SearchService } from '../service/search.service';
+import { Filter } from '../model/tag';
+import { AdvancedFormComponent } from '../component/advanced-form.component';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -11,7 +13,7 @@ import { Subject } from 'rxjs/Subject';
 	templateUrl: '../template/topmenu.component.html',
   	providers: [FormBuilder]
 })
-export class TopMenuComponent {
+export class TopMenuComponent implements OnInit {
 	//form;
 	active : boolean;
 	advancedBarVisible: boolean = false;
@@ -20,11 +22,14 @@ export class TopMenuComponent {
 	maxAutocompleteSuggestions = 7;
 	searchFieldBlurred = true;
 	searchFieldModel;
+	paramsLoaded = false;
 	@ViewChild('value') searchBox; 
 	@ViewChild('menuBar') menuBar;
+	@ViewChild('advancedForm') advancedForm: AdvancedFormComponent;
 
-	autocompleteList= ["tandtråd", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];;
-
+	params: any;
+	filtersRaw: Filter[] = [];
+	autocompleteList: string[] = [];
 	tags: string[] = [];
 
 	constructor(
@@ -32,35 +37,40 @@ export class TopMenuComponent {
 		private ar: ActivatedRoute,
 		private formBuilder: FormBuilder,
 		private searchService: SearchService
-	){
-		/*this.form = formBuilder.group({
-			value: '',
-			gender: '',
-			smoke: '',
-			snuff: '',
-			includeTentative: '',
-			includeHist: '',
-			includeDiseasePast: ''
-		});
+	){}
 
-		this.form.valueChanges.debounceTime(400).subscribe(data => {
-			this.active = this.router.isActive(this.router.url,false);
-			
-			if (!(this.active)){
-				this.router.navigate(['/search', { query: data }]);
+	ngOnInit(): void {
+		this.searchService.searchParameters.subscribe(params => {
+			this.params = params;
+			this.autocompleteList = params["diagDef"];
+			this.paramsLoaded = true;
+		});
+		
+		this.searchService.selectedParameters.subscribe(filters => {
+			if (!this.paramsLoaded) {
+				return;
 			}
-			console.log(data);
-
-			data.value=this.tags;
-			
-			console.log("Search"+JSON.stringify(data));
-			
-			this.searchService.getSearch();
-
+			this.tags = [];
+			if (filters){
+				let parameterNames = Object.getOwnPropertyNames(this.params);
+				let indexOfDiagDef: number;
+				for (let i=0; i < parameterNames.length;i++) {
+					if (parameterNames[i] == "diagDef") {
+						indexOfDiagDef = i;
+					}
+				}
+				if(filters.length > 0) {
+					for(let filter of filters) {
+						if (filter.parameter == indexOfDiagDef) {
+							this.tags.push(this.params["diagDef"][filter.value]);
+						}
+					}
+				}
+			}
 			
 		});
-*/
 
+		this.searchService.getSearchParameters();
 	}
 
 	search(): void {
@@ -135,15 +145,9 @@ export class TopMenuComponent {
 	}
 
 	addTag(term: string): void {
-		console.log("ADD TAG");
-		this.tags.push(term);
-		this.searchService.addTag(term);
-		console.log(this.tags);
-		//this.searchBox.setAttribute("value", "");
-		this.emptySearchField(); 
-		setTimeout(()=>{ 
-			this.menuBar.nativeElement.dispatchEvent(new Event('resize'));
-		}, 250)
+		console.log("TERM: " + term);
+		this.advancedForm.addDiagDef(term);
+		this.emptySearchField();
 	}
 
 	removeTag(index: number): void {

@@ -10,6 +10,7 @@ declare var Materialize: any;
 })
 
 export class DroppableCollectionDirective {
+    @Input('droppableCollection') collectionId: number;
     constructor(private el: ElementRef, private collectionService: CollectionService) {
     }
 
@@ -27,13 +28,9 @@ export class DroppableCollectionDirective {
         event.preventDefault();
         var examinationID = event.dataTransfer.getData("examinationID");
         var imageIndex = event.dataTransfer.getData("imageIndex");
-        var targetCollectionName = event.target.innerHTML;
-        var targetCollectionID = event.target.getAttribute("data-id");
         var type = event.dataTransfer.getData("sourceType");
         if (type == "draggableImage") {
-            //TODO: actually make this add to collection
-            alert("image "+ examinationID + "/" + imageIndex + " added to collection (id: " + targetCollectionID + ")");
-            this.collectionService.addImage(examinationID, imageIndex, targetCollectionID, (success) => {
+            this.collectionService.addImage(examinationID, imageIndex, this.collectionId, (success) => {
                 if (success) {
                     Materialize.toast("Bild tillagd i samling", 4000, "tertiary-colour black-text");
                 } else {

@@ -15,13 +15,14 @@ import { Subject } from 'rxjs/Subject';
 export	 class AdvancedFormComponent {
 	@Input('visible') visible: boolean; 
 
-	public searchableStuff: any;
-	public searchableStuffStrings: any;
-	public searchableStuffLists;
+	public parameters: any;
+	public parameterStrings: any;
+	public parameterLists;
 	public jsonReady = false;
-	public selectedSearchableStuffLists: Array<Number> = [null];
-	public selectedTerms: Array<Number> = [null];
-
+	public selectedParameterLists: number[] = [-1];
+	public selectedTerms: number[] = [-1];
+	private oldFiltersReceived: boolean = false;
+	private paramsReceived = false;
 
 	constructor(
 		private router: Router, 
@@ -31,25 +32,101 @@ export	 class AdvancedFormComponent {
 	){}
 
 	ngOnInit(): void {
-		this.searchService.searchableStuff.subscribe(searchableStuff => {
-			this.searchableStuffLists = Object.getOwnPropertyNames(searchableStuff);
-			this.searchableStuff = searchableStuff;
+		this.searchService.searchParameters.subscribe(parameters => {
+			this.parameterLists = Object.getOwnPropertyNames(parameters);
+			this.parameters = parameters;
+			this.searchService.getSelectedSearchParameters();
 			this.jsonReady = true;
+			
 		});
-		this.searchService.getSearchableStuff();
+		this.searchService.selectedParameters.subscribe(params => {
+			if (!this.paramsReceived) {
+				if (params.length > 0) {
+					let thisHandle = this;
+					thisHandle.selectedParameterLists = [];
+					thisHandle.selectedTerms = [];
+					params.forEach(param => {
+						thisHandle.selectedParameterLists.push(param.parameter);
+						thisHandle.selectedTerms.push(param.value);
+					});
+				}
+				this.paramsReceived = true;
+			}
+		});
+
+		this.searchService.filterDeletion.subscribe(filter => {
+			let deleted = false;
+			for (let i=0; i < this.selectedParameterLists.length; i++) {
+				if (this.selectedParameterLists[i] == filter.parameter && this.selectedTerms[i] == filter.value) {
+					this.selectedParameterLists.splice(i,1);
+					this.selectedTerms.splice(i,1);
+					if (this.selectedParameterLists.length < 1) {
+						this.selectedParameterLists.push(-1);
+						this.selectedTerms.push(-1);
+					}
+					deleted = true;
+				}
+			}
+			if (!deleted) {
+				console.log("WARNING: didn't delete a filter despite getting filter delete event, something might be wrong in advanced-form.component.ts");
+			}
+		});
+
+		this.searchService.getSearchParameters();
+		
 	}
 
-	private onChangeSearchableStuffList(selectId, listId){
-		this.selectedSearchableStuffLists[selectId] = listId;
+	addDiagDef(value: string): void {
+		for (let i = 0; i < this.parameterLists.length; i++) {
+			if (this.parameterLists[i] == "diagDef") {
+				for (let j=0; j < this.parameters["diagDef"].length;j++) {
+					if (this.parameters["diagDef"][j] == value) {
+						this.selectedParameterLists.unshift(i);
+						this.selectedTerms.unshift(j);
+					}
+				}
+			}
+		}
+		this.sendParamsToService();
 	}
 
 
-	private onChangeSearchableStuffString(selectId, listId){
-		this.selectedTerms[selectId] = listId;
+	public deleteFilter(index: number):void {
+		this.selectedParameterLists.splice(index,1);
+		this.selectedTerms.splice(index,1);
+		if (this.selectedParameterLists.length < 1) {
+			this.selectedParameterLists.push(-1);
+			this.selectedTerms.push(-1);
+		}
+		this.sendParamsToService();
+	}
+
+	private onChangeParameterList(selectId, listId){
+		// console.log("selectId: " + selectId + ", listId: " + listId);
+		// this.selectedParameterLists[selectId] = listId;
+		// console.log("selected parameter lists:");
+		// console.log(this.selectedParameterLists);
+		// console.log("selected parameters:");
+		// console.log(this.selectedTerms);
+		this.sendParamsToService();
+	}
+
+	public sendParamsToService() {
+		this.searchService.setSelectedSearchParameters(this.selectedParameterLists, this.selectedTerms);
+	}
+
+
+	private onChangeParameterString(selectId, listId){
+		// this.selectedTerms[selectId] = listId;
+		// console.log("selected parameter lists:");
+		// console.log(this.selectedParameterLists);
+		// console.log("selected parameters:");
+		// console.log(this.selectedTerms);
+		this.sendParamsToService();
 	}
 
 	private addRow(){
-		this.selectedSearchableStuffLists.push(0);
-		this.selectedTerms.push(0);
+		this.selectedParameterLists.push(-1);
+		this.selectedTerms.push(-1);
 	}
 }

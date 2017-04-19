@@ -228,6 +228,7 @@
   .collection-topmenu-details-container .wordwrap {
     overflow-x: none;
     overflow-y: auto;
+    max-height: 280px;
     font-size: 15px;
     line-height: 18px;
     margin-left: 10px;

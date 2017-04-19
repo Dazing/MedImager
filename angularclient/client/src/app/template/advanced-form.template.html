@@ -1,28 +1,34 @@
 <div id="advanced-bar" [ngClass]="{'visible': visible}">
-	<template ngFor [ngForOf]="selectedSearchableStuffLists" let-k="index" *ngIf="jsonReady">
+	<template ngFor let-selectedParameterList [ngForOf]="selectedParameterLists" let-k="index" *ngIf="jsonReady">
 		<div class="row">
+			<div class="valign-wrapper input-field col s1">
+				<i class="material-icons unselectable delete-filter-button primary-colour-text" (click)="deleteFilter(k)" 
+				style="transform: rotate(45deg);cursor: pointer">add_circle_outline</i>
+			</div>
 			<div class="valign-wrapper input-field col s4">
-				<select [ngModel]="selectedSearchableStuffLists[k]" (ngModelChange)="onChangeSearchableStuffList(k, $event)" id="selectedList-{{k}}" [attr.data-sel]="selectedSearchableStuffLists[k]">
-					<template ngFor let-searchableStuffList [ngForOf]="searchableStuffLists" let-i="index">
-						<option [ngValue]="i">
-							{{searchableStuffList}}
-						</option>
-					</template>
+				<select [(ngModel)]="selectedParameterLists[k]" (ngModelChange)="sendParamsToService()" [attr.id]="'selectedList-'+k">
+					<option [ngValue]="-1" style="display: none">
+						-----
+					</option>
+					<option *ngFor="let parameterList of parameterLists; let i = index" [ngValue]="i">
+						{{parameterList}}
+					</option>
 				</select>
 
 			</div>
 			<div class="valign-wrapper input-field col s4">
-				<select [ngModel]="searchableStuffStrings" (ngModelChange)="onChangeSearchableStuffString(k, $event)" id="listAlternatives-{{k}}">
-					<template ngFor let-searchableStuffString [ngForOf]="searchableStuff[searchableStuffLists[selectedSearchableStuffLists[k]]]" let-j="index">
-						<option value="{{j}}" [ngValue]="j">
-							{{searchableStuffString}}
-						</option>
-					</template>
+				<select [(ngModel)]="selectedTerms[k]" (ngModelChange)="sendParamsToService()" id="listAlternatives-{{k}}">
+					<option [ngValue]="-1" style="display: none">
+						-----
+					</option>
+					<option *ngFor="let parameterString of parameters[parameterLists[selectedParameterLists[k]]]; let j = index" [ngValue]="j">
+						{{parameterString}}
+					</option>
 				</select>
 			</div>
 		</div>
 	</template>
-	<i class='material-icons unselectable' id="add-row-button" (click)="addRow()">add</i>
+	<i *ngIf="selectedParameterLists[selectedParameterLists.length-1]!=-1" class='material-icons unselectable' id="add-row-button" (click)="addRow()">add</i>
 </div>
 
 

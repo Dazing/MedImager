@@ -5,6 +5,7 @@ import { Subject} from 'rxjs/Subject';
 import { CollectionService } from '../service/collection.service';
 import { SearchService } from '../service/search.service';
 import { Image, Collection } from '../model/image';
+import { Filter } from '../model/tag';
 
 
 @Component({
@@ -36,7 +37,10 @@ export class CollectionsMenu implements OnInit {
 	public isVisible: Observable<boolean>;
 	private privIsVisible: Subject<boolean>;
 
-	private tags: string[] = [];
+	public tags: string[] = [];
+	public searchParams = [];
+	public searchParamNames = [];
+	public filters: Filter[] = [];
 
 	constructor(
 		private collectionService: CollectionService,
@@ -50,11 +54,9 @@ export class CollectionsMenu implements OnInit {
 
 	ngOnInit(): void {
 		this.collectionService.collections.subscribe(collections => {
-			console.log("sub: "+collections);
 			this.collections = collections;	
 		});
 		this.collectionService.sharedCollections.subscribe(collections => {
-			console.log("sub shared: "+collections);
 			this.sharedCollections = collections;	
 		});
 
@@ -64,7 +66,17 @@ export class CollectionsMenu implements OnInit {
 			
 		});
 
+		this.searchService.searchParameters.subscribe(parameters => {
+			this.searchParamNames = Object.getOwnPropertyNames(parameters);
+			this.searchParams = parameters;
+			this.searchService.getSelectedSearchParameters();
+		});
 
+		this.searchService.selectedParameters.subscribe(params => {
+			this.filters = params;
+		});
+
+		this.searchService.getSearchParameters();
 		this.collectionService.getCollectionList();
 		console.log("TODO: uncomment getSharedCollectionList() in collections-menu when it is fixed om backend");
 		//this.collectionService.getSharedCollectionList();
@@ -84,12 +96,15 @@ export class CollectionsMenu implements OnInit {
 		this.searchService.removeTag(tag);
 	}
 
+	removeFilter(filter: Filter): void {
+		this.searchService.deleteFilter(filter);
+	}
+
 	toggleSharedCollections(): void {
 		this.sharedCollectionsExpanded = !this.sharedCollectionsExpanded;
 	}
 
 	newCollection(target): boolean {
-		console.log(target.value);
 		if (target.value == "test") { //stick in various kontroller här
 			this.newCollectionValid = 'invalid';
 			return false;
@@ -117,7 +132,6 @@ export class CollectionsMenu implements OnInit {
 
 	collectionClicked(event): void {
 		this.searchModeEnabled = false;
-		console.log("clicked collection id: " + event.currentTarget.getAttribute("data-id"));
 		this.selectedCollectionId = event.currentTarget.getAttribute("data-id");
 		this.privSelectedCollection.next(this.getCollectionById(this.selectedCollectionId));
 		this.privSearchMode.next(this.searchModeEnabled);

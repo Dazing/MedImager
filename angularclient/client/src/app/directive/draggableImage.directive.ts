@@ -5,14 +5,15 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 })
 
 export class DraggableImageDirective {
+    @Input('draggableImage') id: string;
 
     constructor(el: ElementRef) {
         el.nativeElement.setAttribute("draggable", true);
     }
 
     @HostListener('dragstart', ['$event']) onDragStart(event) {
-        event.dataTransfer.setData("examinationID", event.target.getAttribute("data-examinationid"));
-        event.dataTransfer.setData("imageIndex", event.target.getAttribute("data-imageIndex"));
+        event.dataTransfer.setData("examinationID", this.id.split('/')[0]);//event.target.getAttribute("data-examinationid"));
+        event.dataTransfer.setData("imageIndex", this.id.split('/')[1]);//event.target.getAttribute("data-imageIndex"));
         event.dataTransfer.setData("sourceType", "draggableImage");
 
         //DnD ghost images must be drawn on the document, draw a styled (resized) clone thumbnail to assign as DnD ghost:

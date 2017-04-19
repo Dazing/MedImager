@@ -13,12 +13,13 @@
         <li><a class="subheader unselectable">Sökning</a></li>
     
 
-        <div *ngIf="tags.length > 0" class="tags">
-            <div *ngFor="let tag of tags; let i=index" class="chip unselectable white">
-                {{tag}}
-                <i id="generateTagId(i)" class="material-icons" (click)="removeTag(tag)">close</i>
+        <div *ngIf="tags.length > 0 || filters.length > 0" class="tags">
+            <div *ngFor="let filter of filters; let i=index" class="chip unselectable white">
+                {{searchParamNames[filter.parameter] + ': ' +  searchParams[searchParamNames[filter.parameter]][filter.value]}}
+                <i id="generateTagId(i)" class="material-icons" (click)="removeFilter(filter)">close</i>
             </div>
         </div>
+
     </div>
 
     <li><a class="subheader unselectable">Mina samlingar <i class="material-icons unselectable" [ngStyle]="{'transform': myCollectionsExpanded ? 'rotate(-90deg)' : 'rotate(-180deg)'}" (click)="myCollectionsExpanded = !myCollectionsExpanded">keyboard_arrow_left</i></a></li>
@@ -27,7 +28,7 @@
         <a  [ngStyle]="{'height': myCollectionsExpanded ? '48px' : '0px'}"
         [ngClass]="{'collection-selected': (!searchModeEnabled) && selectedCollectionId == collection.id}"
             class="unselectable"
-            [attr.data-id]="collection.id" droppableCollection (click)="collectionClicked($event)">
+            [attr.data-id]="collection.id" [droppableCollection]="collection.id" (click)="collectionClicked($event)">
             <font style="cursor: default">{{collection.name}}</font>
         </a>
     </li>

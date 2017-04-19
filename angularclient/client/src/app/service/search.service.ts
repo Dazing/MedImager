@@ -9,6 +9,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
 import { Image } from '../model/image';
+import { Filter } from '../model/tag';
 
 import { Server } from '../model/server';
 
@@ -16,8 +17,18 @@ import { Server } from '../model/server';
 export class SearchService {
 	private headers = new Headers({'Content-Type': 'application/json'});
 
-    searchableStuff:Observable<string[]>;
-    privSearchableStuff: Subject<string[]>;
+    searchParameters:Observable<string[]>;
+    privSearchParameters: Subject<string[]>;
+	searchParameterList:string[];
+	searchParameterListReceived = false;
+
+	selectedParameters:Observable<Filter[]>;
+    privSelectedParameters: Subject<Filter[]>;
+	selectedParamsList: Filter[] = [];
+
+	privFilterDeletion: Subject<Filter>;
+	filterDeletion: Observable<Filter>;
+
 	searchTerms: string[];
 	
 	images:Observable<string[]>;
@@ -31,59 +42,42 @@ export class SearchService {
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
 
-		this.privSearchableStuff = new Subject<string[]>();
-        this.searchableStuff = this.privSearchableStuff.asObservable();
+		this.privSearchParameters = new Subject<string[]>();
+        this.searchParameters = this.privSearchParameters.asObservable();
+
+		this.privSelectedParameters = new Subject<Filter[]>();
+        this.selectedParameters = this.privSelectedParameters.asObservable();
+
+		this.privFilterDeletion = new Subject<Filter>();
+		this.filterDeletion = this.privFilterDeletion.asObservable();
 
 		this.privTags = new Subject<string[]>();
         this.tags = this.privTags.asObservable();
 
-		this.searchTerms = ["planus", "tandtroll", "tandvärk", "tandsten", "tandpetare", "tandkött", "herpes", "tandlös", "blomkål", "tandkossa", "kossan säger mu", "karies", "baktus"];
-
 	}
 
 	getSearch(): void {
+		let searchParamNames = Object.getOwnPropertyNames(this.searchParameterList);
+		let searchParams = this.searchParameterList;
+
 		var str = "";
-
-		console.log(
-			""
-		);
-		
-
-		/*for (var key in query) {
-			if (query.hasOwnProperty(key) && query[key] != "") {
-				if (key.toString() == "includeTentative") {
-
-				}
-				else if (key.toString() == "includeHist") {
-					
-				}
-				else if (key.toString() == "includeDiseasePast") {
-					str += "&term=Dis-past";
-				}
-				else {
-					str += "&"+key.toString()+"="+query[key].toString();
-				}
+		for (let filter of this.selectedParamsList) {
+			if (str != "") {
+				str += "&";
 			}
-		}*/
+			str += searchParamNames[filter.parameter] + "=" + searchParams[searchParamNames[filter.parameter]][filter.value];
+		}
 
-		if (str.charAt(0) === "&"){
-			str = str.substr(1);
-		}	
-
-		console.log("Q:"+str);
+		var url = (this.server.getUrl() + '/search2?'+str);
 		
-		// if (str == "") {
-		// 	return;
-		// }
-		var url = (this.server.getUrl() + '/search?'+str);
-		
-		console.log("URL: "+url+", Q: "+str);
+		console.log("URL: "+url);
 		
 		this.http.get(url)
 			.toPromise()
 			.then(response => {
 				this.privImages.next(response.json());
 				var responsejson = response.json();
+				console.log("got response with " + response.json().length + " images from image search");
 			})
 			.catch(e => {
 				console.log("Get search "+e);
@@ -92,20 +86,50 @@ export class SearchService {
 			});
 	}
 
-	getSearchableStuff(): void {
-		var url = (this.server.getUrl()+'/initValues');
-
-        this.http.get(url)
-			.toPromise()
-			.then(response => {
-                   var responsejson = response.json();
-                   this.privSearchableStuff.next(responsejson);
-                   console.log(responsejson);
-			})
-			.catch(e => {
-                this.privSearchableStuff.next(null);
-			});
+	getSearchParameters(): void {
+		if (!this.searchParameterListReceived) {
+			var url = (this.server.getUrl()+'/initValues');
+			this.http.get(url)
+				.toPromise()
+				.then(response => {
+					var responsejson = response.json();
+					this.searchParameterList = responsejson;
+					this.searchParameterListReceived = true;
+					this.privSearchParameters.next(this.searchParameterList);
+				})
+				.catch(e => {
+					this.privSearchParameters.next(null);
+				});
+		} else {
+			this.privSearchParameters.next(this.searchParameterList);
+		}
     }
+
+	setSelectedSearchParameters(parameters: Array<number>, values: Array<number>) {
+		let params: Filter[] = [];
+		for (let i=0; i < parameters.length; i++) {
+			if (parameters[i] >= 0 && values[i] >= 0) {
+				params.push(new Filter(parameters[i], values[i]));
+			}
+		}
+		this.selectedParamsList = params;
+		this.privSelectedParameters.next(this.selectedParamsList);
+	}
+
+	getSelectedSearchParameters() {
+		this.privSelectedParameters.next(this.selectedParamsList);
+	}
+
+	deleteFilter(filter: Filter): void {
+		for (let i = 0; i < this.selectedParamsList.length; i++) {
+			if (this.selectedParamsList[i].parameter == filter.parameter && this.selectedParamsList[i].value == filter.value) {
+				this.selectedParamsList.splice(i, 1);
+			}
+		}
+		this.privFilterDeletion.next(filter);
+		this.privSelectedParameters.next(this.selectedParamsList);
+		console.log("deleted filter: (" +filter.parameter+ "," +filter.value+ ")");
+	}
 
 	autoComplete(term: string): string[]{
 		return;
