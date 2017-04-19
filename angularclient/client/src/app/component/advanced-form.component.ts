@@ -24,6 +24,8 @@ export	 class AdvancedFormComponent {
 	private oldFiltersReceived: boolean = false;
 	private paramsReceived = false;
 
+	@ViewChild('advancedBar') advancedBar;
+
 	constructor(
 		private router: Router, 
 		private ar: ActivatedRoute,
@@ -90,6 +92,9 @@ export	 class AdvancedFormComponent {
 		this.sendParamsToService();
 	}
 
+	getBarHeight(): number {
+		return this.advancedBar.offsetHeight;
+	}
 
 	public deleteFilter(index: number):void {
 		this.selectedParameterLists.splice(index,1);
@@ -101,13 +106,8 @@ export	 class AdvancedFormComponent {
 		this.sendParamsToService();
 	}
 
-	private onChangeParameterList(selectId, listId){
-		// console.log("selectId: " + selectId + ", listId: " + listId);
-		// this.selectedParameterLists[selectId] = listId;
-		// console.log("selected parameter lists:");
-		// console.log(this.selectedParameterLists);
-		// console.log("selected parameters:");
-		// console.log(this.selectedTerms);
+	private onChangeParameterList(index: number){
+		this.selectedTerms[index] = -1;
 		this.sendParamsToService();
 	}
 
@@ -115,15 +115,6 @@ export	 class AdvancedFormComponent {
 		this.searchService.setSelectedSearchParameters(this.selectedParameterLists, this.selectedTerms);
 	}
 
-
-	private onChangeParameterString(selectId, listId){
-		// this.selectedTerms[selectId] = listId;
-		// console.log("selected parameter lists:");
-		// console.log(this.selectedParameterLists);
-		// console.log("selected parameters:");
-		// console.log(this.selectedTerms);
-		this.sendParamsToService();
-	}
 
 	private addRow(){
 		this.selectedParameterLists.push(-1);

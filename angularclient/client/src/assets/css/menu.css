@@ -70,14 +70,13 @@
 #advanced-bar {
   z-index: -2;
   width: 100%;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.9);
   position: absolute;
-  bottom: 100%;
-  min-height: 100px;
-  transition: all 0.4s; }
-  #advanced-bar.visible {
-    top: 100%;
-    bottom: initial; }
+  top: -1000px;
+  transition: all 0.35s; }
+  #advanced-bar select {
+    opacity: 1;
+    background-color: white; }
   #advanced-bar .row {
     margin: 0;
     font-size: 1.3vw;

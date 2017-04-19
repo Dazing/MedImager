@@ -1,35 +1,36 @@
-<div id="advanced-bar" [ngClass]="{'visible': visible}">
-	<template ngFor let-selectedParameterList [ngForOf]="selectedParameterLists" let-k="index" *ngIf="jsonReady">
-		<div class="row">
-			<div class="valign-wrapper input-field col s1">
-				<i class="material-icons unselectable delete-filter-button primary-colour-text" (click)="deleteFilter(k)" 
-				style="transform: rotate(45deg);cursor: pointer">add_circle_outline</i>
-			</div>
-			<div class="valign-wrapper input-field col s4">
-				<select [(ngModel)]="selectedParameterLists[k]" (ngModelChange)="sendParamsToService()" [attr.id]="'selectedList-'+k">
-					<option [ngValue]="-1" style="display: none">
-						-----
-					</option>
-					<option *ngFor="let parameterList of parameterLists; let i = index" [ngValue]="i">
-						{{parameterList}}
-					</option>
-				</select>
 
+	<div id="advanced-bar" #advancedBar [ngStyle]="{'top': visible ? '69px' : (69-advancedBar.offsetHeight) + 'px'}">
+		<template ngFor let-selectedParameterList [ngForOf]="selectedParameterLists" let-k="index" *ngIf="jsonReady">
+			<div class="row">
+				<div class="valign-wrapper input-field col s1">
+					<i class="material-icons unselectable delete-filter-button primary-colour-text" (click)="deleteFilter(k)" 
+					style="transform: rotate(45deg);cursor: pointer">add_circle_outline</i>
+				</div>
+				<div class="valign-wrapper input-field col s4">
+					<select [(ngModel)]="selectedParameterLists[k]" (ngModelChange)="onChangeParameterList(k)" [attr.id]="'selectedList-'+k">
+						<option [ngValue]="-1" style="display: none">
+							-----
+						</option>
+						<option *ngFor="let parameterList of parameterLists; let i = index" [ngValue]="i">
+							{{parameterList}}
+						</option>
+					</select>
+
+				</div>
+				<div class="valign-wrapper input-field col s4">
+					<select [(ngModel)]="selectedTerms[k]" (ngModelChange)="sendParamsToService()" id="listAlternatives-{{k}}">
+						<option [ngValue]="-1" style="display: none">
+							-----
+						</option>
+						<option *ngFor="let parameterString of parameters[parameterLists[selectedParameterLists[k]]]; let j = index" [ngValue]="j">
+							{{parameterString}}
+						</option>
+					</select>
+				</div>
 			</div>
-			<div class="valign-wrapper input-field col s4">
-				<select [(ngModel)]="selectedTerms[k]" (ngModelChange)="sendParamsToService()" id="listAlternatives-{{k}}">
-					<option [ngValue]="-1" style="display: none">
-						-----
-					</option>
-					<option *ngFor="let parameterString of parameters[parameterLists[selectedParameterLists[k]]]; let j = index" [ngValue]="j">
-						{{parameterString}}
-					</option>
-				</select>
-			</div>
-		</div>
-	</template>
-	<i *ngIf="selectedParameterLists[selectedParameterLists.length-1]!=-1" class='material-icons unselectable' id="add-row-button" (click)="addRow()">add</i>
-</div>
+		</template>
+		<i *ngIf="selectedParameterLists[selectedParameterLists.length-1]!=-1" class='material-icons unselectable' id="add-row-button" (click)="addRow()">add</i>
+	</div>
 
 
 <!--
