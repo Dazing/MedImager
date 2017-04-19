@@ -65,7 +65,12 @@ export class SearchService {
 			if (str != "") {
 				str += "&";
 			}
-			str += searchParamNames[filter.parameter] + "=" + searchParams[searchParamNames[filter.parameter]][filter.value];
+			str += 
+				searchParamNames[filter.parameter].replace(/([A-Z])/g, function(part) {return '-'+part.toLowerCase()}).charAt(0).toUpperCase() + 
+				searchParamNames[filter.parameter].replace(/([A-Z])/g, function(part) {return '-'+part.toLowerCase()}).slice(1) +
+				"=" + searchParams[searchParamNames[filter.parameter]][filter.value];
+			//okay i know this looks complicated, but it changes from like disNow to Dis-now
+			//it works, just don't worry about it, okie dokie? 
 		}
 
 		var url = (this.server.getUrl() + '/search2?'+str);
@@ -77,7 +82,12 @@ export class SearchService {
 			.then(response => {
 				this.privImages.next(response.json());
 				var responsejson = response.json();
-				console.log("got response with " + response.json().length + " images from image search");
+				let count = 0;
+				for (let exam of response.json()) {
+					count += exam.imagePaths.length;
+				}
+				console.log("got response with " + count + " images from image search");
+				console.log(response.json());
 			})
 			.catch(e => {
 				console.log("Get search "+e);
