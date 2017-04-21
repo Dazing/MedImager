@@ -33,22 +33,22 @@ import misc.foundation.MethodNotSupportedException;
 @Path("api")
 public class MyResource {
 	
-	@GET
-	@Path("/search")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List <Examination> search(@QueryParam("value") List<String> values,
-    										 @QueryParam("term") List<String> terms,
-    										 @QueryParam("ageLower") String ageLower,
-    										 @QueryParam("ageUpper") String ageUpper, 
-    										 @QueryParam("gender") String gender,
-    										 @QueryParam("smoke") Boolean smoke,
-    										 @QueryParam("snuff") Boolean snuff) throws MethodNotSupportedException{
-		SearchTermParser stp = new SearchTermParser(new SearchFilter(values, terms, ageLower, ageUpper, gender, smoke, snuff));
-		return stp.getResultListWithFilter();
-    }
+//	@GET
+//	@Path("/search")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List <Examination> search(@QueryParam("value") List<String> values,
+//    										 @QueryParam("term") List<String> terms,
+//    										 @QueryParam("ageLower") String ageLower,
+//    										 @QueryParam("ageUpper") String ageUpper, 
+//    										 @QueryParam("gender") String gender,
+//    										 @QueryParam("smoke") Boolean smoke,
+//    										 @QueryParam("snuff") Boolean snuff) throws MethodNotSupportedException{
+//		SearchTermParser stp = new SearchTermParser(new SearchFilter(values, terms, ageLower, ageUpper, gender, smoke, snuff));
+//		return stp.getResultListWithFilter();
+//    }
 	
 	@GET
-	@Path("/search2")
+	@Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
     public List <Examination> search2(@Context UriInfo uriInfo) throws MethodNotSupportedException{
 		SearchTermParser stp = new SearchTermParser(new SearchFilter(uriInfo));
