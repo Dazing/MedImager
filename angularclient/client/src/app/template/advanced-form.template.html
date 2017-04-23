@@ -2,10 +2,6 @@
 	<div id="advanced-bar" #advancedBar [ngStyle]="{'top': visible ? '69px' : (69-advancedBar.offsetHeight) + 'px'}">
 		<template ngFor let-selectedParameterList [ngForOf]="selectedParameterLists" let-k="index" *ngIf="jsonReady">
 			<div class="row">
-				<div class="valign-wrapper input-field col s1">
-					<i class="material-icons unselectable delete-filter-button primary-colour-text" (click)="deleteFilter(k)" 
-					style="transform: rotate(45deg);cursor: pointer">add_circle_outline</i>
-				</div>
 				<div class="valign-wrapper input-field col s4">
 					<select [(ngModel)]="selectedParameterLists[k]" (ngModelChange)="onChangeParameterList(k)" [attr.id]="'selectedList-'+k">
 						<option [ngValue]="-1" style="display: none">
@@ -26,6 +22,10 @@
 							{{parameterString}}
 						</option>
 					</select>
+				</div>
+				<div class="valign-wrapper input-field col s1">
+					<i class="material-icons unselectable delete-filter-button primary-colour-text" (click)="deleteFilter(k)" 
+					style="transform: rotate(45deg);cursor: pointer">add_circle_outline</i>
 				</div>
 			</div>
 		</template>

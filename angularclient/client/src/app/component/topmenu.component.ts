@@ -75,6 +75,7 @@ export class TopMenuComponent implements OnInit {
 
 	search(): void {
 		this.searchService.getSearch();
+		this.toggleAdvancedBar();
 	}
 
 	emptySearchField(): void {

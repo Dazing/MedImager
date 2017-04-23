@@ -97,9 +97,15 @@
     pointer-events: auto;
     cursor: default;
     position: relative;
-    overflow: hidden; }
+    overflow: hidden;
+    padding-left: 20px; }
     .collections-menu .subheader i {
-      transition: transform 0.15s; }
+      transition: transform 0.15s;
+      margin-right: 14px !important; }
+  .collections-menu .subsectionlistelement {
+    padding-left: 60px; }
+  .collections-menu .collections-menu-add-new-collection-input-box {
+    padding-left: 55px; }
   .collections-menu input {
     width: 70%;
     height: 30px; }

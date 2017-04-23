@@ -25,9 +25,9 @@
     <li><a class="subheader unselectable">Mina samlingar <i class="material-icons unselectable" [ngStyle]="{'transform': myCollectionsExpanded ? 'rotate(-90deg)' : 'rotate(-180deg)'}" (click)="myCollectionsExpanded = !myCollectionsExpanded">keyboard_arrow_left</i></a></li>
     <!-- list of user collections --> 
     <li *ngFor="let collection of collections" [ngStyle]="{'height': myCollectionsExpanded ? '48px' : '0px'}" > 
-        <a  [ngStyle]="{'height': myCollectionsExpanded ? '48px' : '0px'}"
+        <a [ngStyle]="{'height': myCollectionsExpanded ? '48px' : '0px'}"
         [ngClass]="{'collection-selected': (!searchModeEnabled) && selectedCollectionId == collection.id}"
-            class="unselectable"
+            class="subsectionlistelement unselectable"
             [attr.data-id]="collection.id" [droppableCollection]="collection.id" (click)="collectionClicked($event)">
             <font style="cursor: default">{{collection.name}}</font>
         </a>
@@ -35,7 +35,7 @@
     
     <!-- new collection input row -->
     <li [ngStyle]="{'height': myCollectionsExpanded ? '48px' : '0px'}"> 
-        <a class="subheader unselectable"  [ngStyle]="{'height': myCollectionsExpanded ? '48px' : '0px'}">
+        <a class="subheader unselectable collections-menu-add-new-collection-input-box"  [ngStyle]="{'height': myCollectionsExpanded ? '48px' : '0px'}">
             <i class="material-icons unselectable"  [ngStyle]="{'display': myCollectionsExpanded ? 'block' : 'none'}">add</i>
             <input placeholder="Ny samling" #newCollectionInput id="new-collection-input" type="text" autocomplete="off" 
                 [ngClass]="{'valid': newCollectionValid == 'valid'}"
@@ -50,7 +50,7 @@
     <li *ngIf="sharedCollections.length > 0"><a class="subheader unselectable">Delade med mig <i class="material-icons unselectable" [ngStyle]="{'transform': sharedCollectionsExpanded ? 'rotate(-90deg)' : 'rotate(-180deg)'}" (click)="toggleSharedCollections()">keyboard_arrow_left</i></a></li>
     <li *ngFor="let sharedCollection of sharedCollections"  [ngStyle]="{'height': sharedCollectionsExpanded ? '48px' : '0px'}">
         <a  [ngStyle]="{'height': sharedCollectionsExpanded ? '48px' : '0px'}" 
-            class="unselectable"
+            class="subsectionlistelement unselectable"
             [ngClass]="{'collection-selected': (!searchModeEnabled) && selectedCollectionId == sharedCollection.id}"
             [attr.data-id]="sharedCollection.id" droppableCollection (click)="collectionClicked($event)">
             <font style="cursor: default">{{sharedCollection.name}}</font>
