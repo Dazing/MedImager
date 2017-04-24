@@ -22,13 +22,13 @@ export class UserService {
 	}
 
 	register(email:string, password:string): Observable<Boolean> {
-		var url = (this.server.getUrl()+"/login");
+		var url = (this.server.getUrl()+"/register");
 		var data = {
 			email: email,
 			password: password
 		}
 
-		return this.http.post('/api/authenticate', JSON.stringify({ email: email, password: password }))
+		return this.http.post(url, data)
 			.map((response: Response) => {
 				// login successful if there's a jwt token in the response
 				let user = response.json();
@@ -53,7 +53,7 @@ export class UserService {
 			password: password
 		}
 
-		return this.http.post('/api/authenticate', JSON.stringify({ email: email, password: password }))
+		return this.http.post(url, data)
 			.map((response: Response) => {
 				// login successful if there's a jwt token in the response
 				let user = response.json();

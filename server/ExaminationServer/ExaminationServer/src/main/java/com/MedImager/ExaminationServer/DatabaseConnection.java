@@ -15,8 +15,8 @@ public class DatabaseConnection {
    
    	private void createConnection(){
 	   	Properties p = new Properties();
-	    p.put("user","medimager");
-	    p.put("password","medimager123");
+	    p.put("user","root");
+	    p.put("password","med#imager");
 	    try {
 			Class.forName(dbClassName);
 			c = DriverManager.getConnection(CONNECTION,p);
