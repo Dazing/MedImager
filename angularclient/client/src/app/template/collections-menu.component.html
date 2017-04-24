@@ -15,7 +15,7 @@
 
         <div *ngIf="tags.length > 0 || filters.length > 0" class="tags">
             <div *ngFor="let filter of filters; let i=index" class="chip unselectable white">
-                {{searchParamNames[filter.parameter] + ': ' +  searchParams[searchParamNames[filter.parameter]][filter.value]}}
+                <span>{{searchParamNames[filter.parameter] + ': ' +  searchParams[searchParamNames[filter.parameter]][filter.value]}}</span>
                 <i id="generateTagId(i)" class="material-icons" (click)="removeFilter(filter)">close</i>
             </div>
         </div>
