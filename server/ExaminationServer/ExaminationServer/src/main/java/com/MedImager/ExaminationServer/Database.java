@@ -6,7 +6,7 @@ public class Database{
 	
 	static private final String DB_URL = "jdbc:mysql://localhost/medimager";
 	static private final String USER = "root";
-	static private final String PASS = "1234";
+	static private final String PASS = "med#imager";
 	
 	public static Connection getConnection(){
 		Connection connection = null;
