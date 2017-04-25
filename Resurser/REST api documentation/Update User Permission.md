@@ -4,18 +4,23 @@
 
 * **URL**
 
-  /admin/updateuserpermission
+  /admin/updateuserpermission/{userid}
 
 * **Method:**
 
   `PUT`
+  
+*  **URL Params**
+
+    **Required:**
+    
+   `userid = <integer>` <br />
   
 *  **Header Params**
 
    **Required:**
  
    `Authorization: <token>` <br />
-   `ID: <userid>` <br />
    `NewUserPermission: <newuserpermission>` <br />
 
 * **Success Response:**
@@ -25,12 +30,6 @@
     **Message Body:** `{ User permission updated }` <br /><br />
  
 * **Error Response:**
-
-  * **Code:** 409 CONFLICT <br />
-    **Headers:** None <br />
-    **Message Body:** `{ No user ID provided }` <br /><br />
-
-    OR
 
   * **Code:** 409 CONFLICT <br />
     **Headers:** None <br />

@@ -4,18 +4,23 @@
 
 * **URL**
 
-  /admin/getuser
+  /admin/getuser/{userid}
 
 * **Method:**
 
   `GET`
+  
+*  **URL Params**
+
+    **Required:**
+    
+   `userid = <integer>` <br />
   
 *  **Header Params**
 
    **Required:**
  
    `Authorization: <token>` <br />
-   `ID: <userid>` <br />
 
 * **Success Response:**
 
@@ -35,12 +40,6 @@
 ```
  
 * **Error Response:**
-
-  * **Code:** 409 CONFLICT <br />
-    **Headers:** None <br />
-    **Message Body:** `{ No user ID provided }` <br /><br />
-
-    OR
 
   * **Code:** 409 CONFLICT <br />
     **Headers:** None <br />
