@@ -244,10 +244,9 @@
     .collection-topmenu-details-container .edit-button.confirm {
       right: 40px; }
     .collection-topmenu-details-container .edit-button i {
-      line-height: 28px;
-      font-size: 25px;
+      font-size: 18px;
       position: relative;
-      top: 0; }
+      top: -7px; }
   .collection-topmenu-details-container textarea {
     display: block;
     width: calc(100% - 14px);
