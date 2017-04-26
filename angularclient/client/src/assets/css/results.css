@@ -46,7 +46,7 @@
     vertical-align: top; }
     #search-results span:hover .collection-image-button-container {
       opacity: 1;
-      height: auto;
+      height: 60px;
       z-index: 6; }
     #search-results span:hover .opacity-wrapper {
       opacity: 1; }

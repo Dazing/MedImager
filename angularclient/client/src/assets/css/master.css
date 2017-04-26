@@ -571,7 +571,7 @@
     vertical-align: top; }
     #search-results span:hover .collection-image-button-container {
       opacity: 1;
-      height: auto;
+      height: 60px;
       z-index: 6; }
     #search-results span:hover .opacity-wrapper {
       opacity: 1; }
@@ -739,6 +739,9 @@ select {
 
 .spinner-primary-color-only {
   border-color: #1de9b6; }
+
+.btn-floating {
+  background-color: #1de9b6; }
 
 .circle-clipper .circle {
   border-width: 5px; }
