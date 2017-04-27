@@ -65,13 +65,13 @@ export class LoginComponent {
 			this.model.username &&
 			this.model.password &&
 			this.model.firstname &&
-			this.model.surname
+			this.model.lastname
 		) {
 			let data = {
 				username: this.model.username,
 				password: this.model.password,
 				firstname: this.model.firstname,
-				surname: this.model.surname,
+				surname: this.model.lastname,
 			}
 			this.userService.register(data)
 				.subscribe(result => {
