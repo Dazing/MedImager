@@ -18,7 +18,13 @@ export class UserService {
 
 	private sessionId:string;
 
+	public error: Observable<string[]>;
+	private privError: Subject<string[]>;
+
 	constructor(private http: Http, private server: Server) {
+		this.privError = new Subject<string[]>();
+        this.error = this.privError.asObservable();
+
 	}
 
 	register(email:string, password:string): Observable<Boolean> {
@@ -82,7 +88,7 @@ export class UserService {
 					return false;
 				}
 			}).catch((error: any) => {
-				console.log("erro @UserServiceCatch"+error);
+				console.log("erro @UserServiceCatch"+JSON.stringify(error));
 				
 				return Observable.throw(error);
 			});
