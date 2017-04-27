@@ -82,31 +82,10 @@ export class UserService {
 					return false;
 				}
 			}).catch((error: any) => {
-				console.log(error);
+				console.log("erro @UserServiceCatch"+error);
 				
 				return Observable.throw(error);
 			});
-
-		/*this.http.post(url,data)
-			.toPromise()
-			.then(response => {
-				
-					Response = {
-						email = "email@doman.com",
-						token = "cklmdfglskgfnlsdbgkbdsgkudfghrö214345938ujskjfsdkf"
-					}
-				
-				console.log("response");
-				var user = response.json();
-
-				if (user.email && user.token) {
-					localStorage.setItem('currUser',user);
-				}
-				else {
-
-				}
-			})
-			.catch(this.handleError);*/
 	}
 	
 	private handleError(error: any): Promise<any> {
