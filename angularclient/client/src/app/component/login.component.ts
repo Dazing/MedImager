@@ -23,7 +23,7 @@ export class LoginComponent {
 	login():void {
 		console.log("Running login@LoginComponent, model:"+ JSON.stringify(this.model,null,1));
 		
-		if(this.model.email && this.model.password) {
+		if(this.model.username && this.model.password) {
 			try {
 				console.log("Calling login@UserService");
 				this.userService.login(this.model.username, this.model.password)
@@ -51,7 +51,7 @@ export class LoginComponent {
 
 	register():void {
 		if(
-			this.model.mail &&
+			this.model.username &&
 			this.model.password &&
 			this.model.firstname &&
 			this.model.surname &&

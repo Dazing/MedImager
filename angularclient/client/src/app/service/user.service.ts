@@ -50,12 +50,12 @@ export class UserService {
 			});
 	}
 	
-	login(email:string, password:string): Observable<Boolean> {
+	login(username:string, password:string): Observable<Boolean> {
 		var url = (this.server.getUrl()+"/user/login");
 
 		let headers = new Headers();
 
-		headers.append('username', email);
+		headers.append('username', username);
 		headers.append('password', password);
 
 		let options = new RequestOptions({ headers: headers });
