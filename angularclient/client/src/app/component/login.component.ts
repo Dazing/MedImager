@@ -9,7 +9,7 @@ import { UserService } from '../service/user.service';
 })
 
 export class LoginComponent {
-	public error = '';
+	public error;
 	public setRegi: boolean = false;
 	public model: any = {}
 
@@ -18,6 +18,12 @@ export class LoginComponent {
 		private router: Router
 	) {
 
+	}
+
+	ngAfterViewInit(): void {
+		this.userService.error.subscribe(error => {
+			this.error = error;
+		});
 	}
 
 	login():void {
