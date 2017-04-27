@@ -12,7 +12,7 @@ export class LoginComponent {
 	public error;
 	public setRegi: boolean = false;
 	public model: any = {}
-	public successRegister = false;
+	public successRegister;
 
 	constructor (
 		private userService: UserService,
