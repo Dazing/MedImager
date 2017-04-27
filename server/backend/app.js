@@ -31,8 +31,8 @@ app.use('/*', function(req, res, next) {
 app.use('*', express.static('static'));
 
 //app.use('/', router);
-app.use('/', function(req, res, next) {
-	res.redirect('/login');
+app.use('', function(req, res, next) {
+	res.sendFile(path.join(__dirname + '/index.html'));
 });
 app.use('/login', function(req, res, next) {
 	res.sendFile(path.join(__dirname + '/index.html'));
