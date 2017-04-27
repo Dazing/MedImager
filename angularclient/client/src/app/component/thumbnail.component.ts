@@ -13,6 +13,7 @@ export class ThumbnailComponent implements OnInit {
 
 	public searchresults;
 	public url;
+	public searchMade:boolean = false;
 	@Input() gridType: string; //'search' if list of search results, 'collection' if viewing collection
 
 	//note edit helper functions:
@@ -38,6 +39,7 @@ export class ThumbnailComponent implements OnInit {
 		console.log("gridType: " + this.gridType);
 		this.searchService.images.subscribe(images => {
 			this.searchresults = images;
+			this.searchMade = true;
 		})
 
 

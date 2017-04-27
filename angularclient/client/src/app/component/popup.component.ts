@@ -16,6 +16,7 @@ export class PopupComponent {
     public resolutionLoaded = false;
     public imageHeight: number;
     public imageWidth: number;
+    public liked:boolean = false;
 
     private dialogVisible = false;
     private dialogType: string;
@@ -100,6 +101,10 @@ export class PopupComponent {
         this.dialogVisible = false;
         this.dialogType = undefined;
         this.popupService.returnDialog(answer);
+    }
+
+    likeImage(like:boolean): void{
+        this.liked = !this.liked;
     }
 
     

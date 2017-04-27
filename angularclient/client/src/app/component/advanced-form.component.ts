@@ -13,7 +13,7 @@ import { Subject } from 'rxjs/Subject';
   	providers: [FormBuilder]
 })
 export	 class AdvancedFormComponent {
-	@Input('visible') visible: boolean; 
+	@Input('visible') visible: boolean = false; 
 
 	public parameters: any;
 	public parameterStrings: any;
@@ -24,7 +24,6 @@ export	 class AdvancedFormComponent {
 	private oldFiltersReceived: boolean = false;
 	private paramsReceived = false;
 
-	@ViewChild('advancedBar') advancedBar;
 
 	constructor(
 		private router: Router, 
@@ -90,10 +89,6 @@ export	 class AdvancedFormComponent {
 			}
 		}
 		this.sendParamsToService();
-	}
-
-	getBarHeight(): number {
-		return this.advancedBar.offsetHeight;
 	}
 
 	public deleteFilter(index: number):void {

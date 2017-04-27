@@ -75,7 +75,7 @@ export class TopMenuComponent implements OnInit {
 
 	search(): void {
 		this.searchService.getSearch();
-		this.toggleAdvancedBar();
+		this.toggleAdvancedBar("hide");
 	}
 
 	emptySearchField(): void {
@@ -175,8 +175,13 @@ export class TopMenuComponent implements OnInit {
 		}
 	}
 
-	toggleAdvancedBar() {
-		this.advancedBarVisible = !this.advancedBarVisible;
+	toggleAdvancedBar(state:String) {
+		if(state == "show")
+			this.advancedBarVisible = true;
+		else if(state == "hide")
+			this.advancedBarVisible = false;
+		else
+			this.advancedBarVisible = !this.advancedBarVisible;
 	}
 
 }

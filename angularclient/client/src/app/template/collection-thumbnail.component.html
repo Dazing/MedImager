@@ -1,5 +1,6 @@
 <template *ngIf="loaded" ngFor let-image [ngForOf]="images" let-i="index" >
-	<span  
+	<span 
+		[draggableImage]="image.examinationID + '/' + image.index"
 		[attr.id]="'result-image-'+i" 
 		class="unselectable"
 		[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+image.examinationID +'/' +image.index + ')'}" 

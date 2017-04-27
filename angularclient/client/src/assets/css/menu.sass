@@ -65,10 +65,10 @@
 #advanced-bar
 	z-index: -2
 	width: 100%
-	background-color: rgba(255,255,255, 0.9)
+	background-color: #f7f7f7
 	position: absolute
 	top: -1000px
-	transition: all 0.35s
+	transition: top 0.35s
 	box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8)
 	padding-bottom: 15px
 	select
@@ -162,15 +162,13 @@
 	background-color: #ffffff
 	width: 350px
 	cursor: default
-	transition: max-height 0.2s
+	transition: height 0.2s
 	overflow: hidden
 	color: #000000
 	row-height: 20px
 	border: none
-	max-height: 0
 	&.expanded
 		border: 1px solid $grey
-		max-height: 400px
 	h4
 		line-height: 20px
 		font-size: 20px
@@ -212,10 +210,9 @@
 		&.confirm
 			right: 40px
 		i
-			line-height: 28px
-			font-size: 25px
+			font-size: 18px
 			position: relative
-			top: 0
+			top: -7px
 	textarea
 		display: block
 		width: calc(100% - 14px)

@@ -30,7 +30,7 @@ import misc.foundation.MethodNotSupportedException;
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("api")
+@Path("")
 public class MyResource {
 	
 //	@GET

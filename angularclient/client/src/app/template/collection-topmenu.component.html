@@ -2,8 +2,9 @@
     <span class="collection-topmenu-title">{{collection.name}}</span>
 
     <i class="material-icons unselectable collection-topmenu-details-button" (click)="clickDetailsButton($event)">reorder
-            <div class="collection-topmenu-details-container z-depth-1" 
-            [ngClass]="{'expanded': detailsVisible}">
+            <div #description class="collection-topmenu-details-container z-depth-1" 
+            [ngClass]="{'expanded': detailsVisible}"
+            [ngStyle]="{'height': (detailsVisible ? description.scrollHeight+'px' : '0')}">
                 <h4 *ngIf="!(descriptionNotNull() || editMode)">Ingen beskrivning angiven.</h4>
                 <h4 *ngIf="descriptionNotNull() || editMode">Beskrivning:</h4>
 

@@ -73,7 +73,7 @@ export class SearchService {
 			//it works, just don't worry about it, okie dokie? 
 		}
 
-		var url = (this.server.getUrl() + '/search2?'+str);
+		var url = (this.server.getUrl() + '/search?'+str);
 		
 		console.log("URL: "+url);
 		

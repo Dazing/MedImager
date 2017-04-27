@@ -46,7 +46,7 @@
     vertical-align: top; }
     #search-results span:hover .collection-image-button-container {
       opacity: 1;
-      height: auto;
+      height: 60px;
       z-index: 6; }
     #search-results span:hover .opacity-wrapper {
       opacity: 1; }
@@ -105,5 +105,10 @@
   font-size: 22px;
   color: #424242;
   display: none; }
+
+#search-information {
+  text-align: center;
+  font-size: 30px;
+  color: #424242; }
 
 /*# sourceMappingURL=results.css.map */
