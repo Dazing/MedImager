@@ -8,7 +8,7 @@
      				<i id="loginErrorIcon"  class="material-icons red-text text-lighten-2">info_outline</i>
 					<p id="loginErrorMsg" class="red-text text-lighten-2">{{error}}</p>
 				</div>
-				<template *ng-if="!successRegister">
+				<template *ngIf="!successRegister">
 					<form method="post">
 					
 						<input (keyup.enter)="login()" name="username" #email="ngModel" [(ngModel)]="model.username" type="text" placeholder="E-postadress">
@@ -31,7 +31,7 @@
 
 					</form>
 				</template>
-				<template *ng-if="successRegister">
+				<template *ngIf="successRegister">
 					<h3>Registrering mottagen, du kommer få ett mail när ditt konto har godkännts av administratör.</h3>
 				</template>
 				
