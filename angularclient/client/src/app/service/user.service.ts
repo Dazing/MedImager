@@ -41,9 +41,7 @@ export class UserService {
 
 		return this.http.post(url, null, options)
 			.map((response: Response) => {
-				// login successful if there's a jwt token in the response
-				let user = response.json();
-				console.log(JSON.stringify(response,null,1));
+				console.log(response);
 				
 
 				// return true to indicate successful login
