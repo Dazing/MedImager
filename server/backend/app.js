@@ -32,7 +32,7 @@ app.use('*', express.static('static'));
 
 //app.use('/', router);
 app.use('/', function(req, res, next) {
-	res.sendFile(path.join(__dirname + '/index.html'));
+	res.redirect('/login');
 });
 app.use('/login', function(req, res, next) {
 	res.sendFile(path.join(__dirname + '/index.html'));
