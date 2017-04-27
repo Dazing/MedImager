@@ -25,6 +25,8 @@ export class LoginComponent {
 			console.log("Sub on error @LoginComponent");
 			
 			this.error = error;
+			console.log("error in sub:"+this.error);
+			
 		});
 	}
 
