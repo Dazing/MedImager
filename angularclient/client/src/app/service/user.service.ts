@@ -34,8 +34,8 @@ export class UserService {
 
 		headers.append('username', data.username);
 		headers.append('password', data.password);
-		headers.append('username', data.firstname);
-		headers.append('password', data.lastname);
+		headers.append('firstname', data.firstname);
+		headers.append('lastname', data.lastname);
 
 		let options = new RequestOptions({ headers: headers });
 
