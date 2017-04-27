@@ -70,9 +70,9 @@ export class UserService {
 				console.log("getting response");
 				
 				// login successful if there's a jwt token in the response
-				if (response.toString()) {
+				if (response.text()) {
 					// store email and jwt token in local storage to keep user logged in between page refreshes
-					localStorage.setItem('currentUser', response.toString());
+					localStorage.setItem('currentUser', response.text());
  
 					// return true to indicate successful login
 					return true;
