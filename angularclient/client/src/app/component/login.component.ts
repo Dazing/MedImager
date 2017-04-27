@@ -22,6 +22,8 @@ export class LoginComponent {
 
 	ngAfterViewInit(): void {
 		this.userService.error.subscribe(error => {
+			console.log("Sub on error @LoginComponent");
+			
 			this.error = error;
 		});
 	}
