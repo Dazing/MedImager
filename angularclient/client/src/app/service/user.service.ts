@@ -18,11 +18,11 @@ export class UserService {
 
 	private sessionId:string;
 
-	public error: Observable<string[]>;
-	private privError: Subject<string[]>;
+	public error: Observable<string>;
+	private privError: Subject<string>;
 
 	constructor(private http: Http, private server: Server) {
-		this.privError = new Subject<string[]>();
+		this.privError = new Subject<string>();
         this.error = this.privError.asObservable();
 
 	}
@@ -90,6 +90,8 @@ export class UserService {
 			}).catch((error: any) => {
 				console.log("erro @UserServiceCatch"+JSON.stringify(error));
 				
+				this.privError.next(error.body as string);
+
 				return Observable.throw(error);
 			});
 	}
