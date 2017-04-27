@@ -81,11 +81,8 @@ export class UserService {
 					localStorage.setItem('currentUser', response.text());
  
 					// return true to indicate successful login
+					this.privError.next();
 					return true;
-				} 
-				else {
-					// return false to indicate failed login
-					return false;
 				}
 			}).catch((error: any) => {
 				console.log("erro @UserServiceCatch");
