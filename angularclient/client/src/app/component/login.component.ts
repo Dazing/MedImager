@@ -21,17 +21,28 @@ export class LoginComponent {
 	}
 
 	login():void {
-		if(this.model.mail && this.model.password) {
-			this.userService.login(this.model.username, this.model.password)
-				.subscribe(result => {
-					if (result === true) {
-						// login successful
-						this.router.navigate(['/']);
-					} else {
-						// login failed
-						this.error = 'Username or password is incorrect';
-					}
-				});
+		console.log("Running login@LoginComponent, model:"+ JSON.stringify(this.model,null,1));
+		
+		if(this.model.email && this.model.password) {
+			try {
+				console.log("Calling login@UserService");
+				this.userService.login(this.model.username, this.model.password)
+					.subscribe(result => {
+						if (result === true) {
+							// login successful
+							this.router.navigate(['/']);
+						} else {
+							// login failed
+							this.error = 'Username or password is incorrect';
+						}
+					});
+			} catch (error) {
+				console.log("Logging error @LoginComponent: "+error);
+				
+			}
+			
+		
+		
 		} else {
 			this.error = "Enter email and password"
 		}

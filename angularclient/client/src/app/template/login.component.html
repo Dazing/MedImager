@@ -10,8 +10,8 @@
 				</div>
 				<form method="post">
 					
-					<input name="email" #email="ngModel" [(ngModel)]="model.email" type="text" placeholder="E-postadress">
-					<input name="password" [(ngModel)]="model.password" type="password" placeholder="Lösenord">
+					<input (keyup.enter)="login()" name="email" #email="ngModel" [(ngModel)]="model.email" type="text" placeholder="E-postadress">
+					<input (keyup.enter)="login()" name="password" [(ngModel)]="model.password" type="password" placeholder="Lösenord">
 					
 					<div *ngIf="setRegi" id="registerFields">
 						<input name="firstname" [(ngModel)]="model.firstname" type="text" placeholder="Förnamn">
@@ -26,7 +26,7 @@
 
 					<div *ngIf="setRegi" class="row">
 						<a (click)="setRegister()" class="col s12 m5 l5 left btn-large waves-effect waves-dark white black-text z-depth-1">Login</a>
-						<a (click)="register()" class="col s12 m5 l5 right btn-large waves-effect waves-light primary-colour z-depth-0">Skapa konto</a>
+						<a (keyup.enter)="register()" (click)="register()" class="col s12 m5 l5 right btn-large waves-effect waves-light primary-colour z-depth-0">Skapa konto</a>
 					</div>
 
 				</form>

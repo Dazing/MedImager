@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs';
 import { Subject} from 'rxjs/Subject';
 
@@ -24,7 +24,7 @@ export class UserService {
 	register(email:string, password:string): Observable<Boolean> {
 		var url = (this.server.getUrl()+"/register");
 		var data = {
-			email: email,
+			username: email,
 			password: password
 		}
 
@@ -32,6 +32,8 @@ export class UserService {
 			.map((response: Response) => {
 				// login successful if there's a jwt token in the response
 				let user = response.json();
+				console.log(JSON.stringify(user,null,1));
+				
 				if (user.email && user.token) {
 					// store email and jwt token in local storage to keep user logged in between page refreshes
 					localStorage.setItem('currentUser', user);
@@ -43,21 +45,32 @@ export class UserService {
 					// return false to indicate failed login
 					return false;
 				}
-		});
+			}).catch((error: any) => {
+				return Observable.throw(false);
+			});
 	}
 	
 	login(email:string, password:string): Observable<Boolean> {
-		var url = (this.server.getUrl()+"/login");
-		var data = {
-			email: email,
-			password: password
-		}
+		var url = (this.server.getUrl()+"/user/login");
 
-		return this.http.post(url, data)
+		let headers = new Headers();
+
+		headers.append('username', email);
+		headers.append('password', password);
+
+		let options = new RequestOptions({ headers: headers });
+
+		let loginSuccess = false;
+
+		return this.http.post(url, null, options)
 			.map((response: Response) => {
+				console.log("getting response");
+				
 				// login successful if there's a jwt token in the response
 				let user = response.json();
-				if (user.email && user.token) {
+
+				console.log(JSON.stringify(user,null,1));
+				if (user) {
 					// store email and jwt token in local storage to keep user logged in between page refreshes
 					localStorage.setItem('currentUser', user);
  
@@ -68,7 +81,9 @@ export class UserService {
 					// return false to indicate failed login
 					return false;
 				}
-		});
+			}).catch((error: any) => {
+				return Observable.throw(error);
+			});
 
 		/*this.http.post(url,data)
 			.toPromise()

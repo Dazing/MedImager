@@ -39,7 +39,7 @@ public class UserHandler{
 					if(!rs.isBeforeFirst()) {
 						throw new WebApplicationException(Response.status(Response.Status.UNAUTHORIZED)
 								.header("WWW-Authenticate", "Username not valid")
-								.entity("Username not valid").build());
+								.entity("Username not valid: "+username).build());
 					}
 					rs.next();
 					if(rs.getString("user_permission").equals("0")) {
