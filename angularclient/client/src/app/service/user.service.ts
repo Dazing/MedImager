@@ -62,6 +62,9 @@ export class UserService {
 
 		let loginSuccess = false;
 
+		console.log(headers.toJSON());
+		
+		
 		return this.http.post(url, null, options)
 			.map((response: Response) => {
 				console.log("getting response");
