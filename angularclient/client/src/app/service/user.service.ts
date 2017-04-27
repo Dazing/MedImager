@@ -28,7 +28,7 @@ export class UserService {
 	}
 
 	register(data): Observable<Boolean> {
-		var url = (this.server.getUrl()+"/register");
+		var url = (this.server.getUrl()+"/user/register");
 		
 		let headers = new Headers();
 
