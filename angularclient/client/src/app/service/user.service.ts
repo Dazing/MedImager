@@ -88,7 +88,7 @@ export class UserService {
 					return false;
 				}
 			}).catch((error: any) => {
-				console.log("erro @UserServiceCatch"+JSON.stringify(error.body));
+				console.log("erro @UserServiceCatch"+JSON.stringify(error._body));
 				
 
 				this.privError.next(error.body as string);
