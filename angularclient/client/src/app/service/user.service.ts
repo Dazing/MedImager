@@ -82,6 +82,8 @@ export class UserService {
 					return false;
 				}
 			}).catch((error: any) => {
+				console.log(error);
+				
 				return Observable.throw(error);
 			});
 
