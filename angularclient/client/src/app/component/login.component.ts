@@ -12,6 +12,7 @@ export class LoginComponent {
 	public error;
 	public setRegi: boolean = false;
 	public model: any = {}
+	public successRegister = false;
 
 	constructor (
 		private userService: UserService,
@@ -64,14 +65,18 @@ export class LoginComponent {
 			this.model.username &&
 			this.model.password &&
 			this.model.firstname &&
-			this.model.surname &&
-			this.model.workplace
+			this.model.surname
 		) {
-			this.userService.login(this.model.username, this.model.password)
+			let data = {
+				username: this.model.username,
+				password: this.model.password,
+				firstname: this.model.firstname,
+				surname: this.model.surname,
+			}
+			this.userService.register(data)
 				.subscribe(result => {
 					if (result === true) {
-						// login successful
-						this.router.navigate(['/']);
+						this.successRegister = true;
 					} else {
 						// login failed
 						this.error = 'Username or password is incorrect';

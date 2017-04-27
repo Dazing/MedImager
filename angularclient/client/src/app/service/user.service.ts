@@ -27,32 +27,32 @@ export class UserService {
 
 	}
 
-	register(email:string, password:string): Observable<Boolean> {
+	register(data): Observable<Boolean> {
 		var url = (this.server.getUrl()+"/register");
-		var data = {
-			username: email,
-			password: password
-		}
+		
+		let headers = new Headers();
 
-		return this.http.post(url, data)
+		headers.append('username', data.username);
+		headers.append('password', data.password);
+		headers.append('username', data.firstname);
+		headers.append('password', data.surname);
+
+		let options = new RequestOptions({ headers: headers });
+
+		return this.http.post(url, null, options)
 			.map((response: Response) => {
 				// login successful if there's a jwt token in the response
 				let user = response.json();
-				console.log(JSON.stringify(user,null,1));
+				console.log(JSON.stringify(response,null,1));
 				
-				if (user.email && user.token) {
-					// store email and jwt token in local storage to keep user logged in between page refreshes
-					localStorage.setItem('currentUser', user);
- 
-					// return true to indicate successful login
-					return true;
-				} 
-				else {
-					// return false to indicate failed login
-					return false;
-				}
+
+				// return true to indicate successful login
+				this.privError.next();
+				return true;
+				
 			}).catch((error: any) => {
-				return Observable.throw(false);
+				this.privError.next(JSON.stringify(error._body));
+				return Observable.throw(error);
 			});
 	}
 	
