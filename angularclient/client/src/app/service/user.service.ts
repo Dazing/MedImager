@@ -88,10 +88,10 @@ export class UserService {
 					return false;
 				}
 			}).catch((error: any) => {
-				console.log("erro @UserServiceCatch"+JSON.stringify(error._body));
+				console.log("erro @UserServiceCatch");
 				
 
-				this.privError.next(error.body as string);
+				this.privError.next(JSON.stringify(error._body));
 
 				return Observable.throw(error);
 			});
