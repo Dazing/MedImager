@@ -424,6 +424,9 @@
 .medimager-logo-container {
   height: 69px;
   width: 300px; }
+  .medimager-logo-container a {
+    display: block;
+    margin: 0 auto; }
 
 .medimager-logo {
   display: block;
@@ -657,6 +660,11 @@ select {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); }
+
+.no-style-link {
+  padding: 0 !important; }
+  .no-style-link:hover {
+    background-color: transparent !important; }
 
 .login-box {
   width: 100%; }
