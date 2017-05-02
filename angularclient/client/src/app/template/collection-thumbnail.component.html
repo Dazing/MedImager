@@ -9,8 +9,9 @@
 		(click)="onImageClick(i)"
 	>
 
-
-		<div class="opacity-wrapper wordwrap" *ngIf="getNote(i) && !editMode && !deleteConfirmation">{{getNote(i)}}</div>
+		<div class="opacity-wrapper wordwrap" (mouseenter)="showNoteIcon(i, false)" (mouseleave)="showNoteIcon(i, true)" *ngIf="getNote(i) && !editMode && !deleteConfirmation">{{getNote(i)}}</div>
+		<i class="material-icons notes-exist-icon" id="note-icon-{{i}}" *ngIf="getNote(i) && !editMode && !deleteConfirmation" draggable="false" [style.opacity]="getOpacity(imageId)">speaker_notes</i>
+		
 		<div class="collection-image-button-container" *ngIf="!editMode && !deleteConfirmation" >
 			<a class="btn-floating btn-large waves-effect waves-light" (click)="editNote(i)" >
 				<i class="material-icons" draggable="false">mode_edit</i>
