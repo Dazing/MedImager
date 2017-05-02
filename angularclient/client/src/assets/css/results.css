@@ -42,6 +42,7 @@
     float: left;
     background-size: cover;
     background-position: center;
+    background-color: #dddddd;
     cursor: pointer;
     vertical-align: top; }
     #search-results span:hover .collection-image-button-container {
