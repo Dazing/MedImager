@@ -45,6 +45,8 @@
 
 		<div id="image-data">
 			<div class="image-data-column">
+				<label *ngIf="notNull(imageData.examinationID)">Datum</label>
+				<p *ngIf="notNull(imageData.examinationID)">{{examinationIdToDate(imageData.examinationID)}}</p>
 
 				<label *ngIf="notNull(imageData.examinationID)">Undersökningsnummer</label>
 				<p *ngIf="notNull(imageData.examinationID)">{{imageData.examinationID}}</p>
@@ -114,6 +116,24 @@
 
 				<label *ngIf="imageData.vasNow.length > 0" >vasNow</label>
 				<p *ngIf="imageData.vasNow.length > 0">{{listToText(imageData.vasNow)}}</p>
+			</div>
+		</div>
+
+		<div id="see-more-images-box" *ngIf="otherExams.length > 1">
+			<h2>Andra undersökningar på samma patient</h2>
+			<div id="see-more-image-wrapper">
+				<span *ngFor="let otherExam of otherExams; let cur=index">
+					<a href="/image?examination={{otherExams[cur].examinationID}}&image=0" *ngIf="otherExams[cur].examinationID != imageData.examinationID">
+						<span [ngStyle]="{'background-image': 'url(' + url +'/thumbnail/' + otherExams[cur].examinationID + '/' + 0 + ')'}" class="see-more-image">
+							<span class="see-more-image-fade" (click)="changeExamination(otherExams[cur].examinationID)">
+								{{examinationIdToDate(otherExams[cur].examinationID)}}
+								<p class="see-more-image-number-of-images">
+									{{getNumberOfOtherExamImages(otherExams[cur].imagePaths.length)}}
+								</p>
+							</span>
+						</span>
+					</a>
+				</span>
 			</div>
 		</div>
 	</div>

@@ -33,6 +33,7 @@ export class ImagePageComponent {
 	private error: boolean = false;
 	private examination404 = false;
 	private otherImages:string[];
+	private otherExams:string[] = [];
 	private url;
 
 	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService, private location: Location) {
@@ -63,7 +64,11 @@ export class ImagePageComponent {
 				}
 			}
 		});
+		this.imagePageService.otherExams.subscribe(otherExams => {
+			this.otherExams = otherExams.sort(this.sortAlgorithm);
+		});
 		this.imagePageService.getImageData(this.examinationIn);
+		this.imagePageService.getOtherExaminations(this.examinationIn);
 	}
 
 	notNull(value: any){
@@ -92,7 +97,6 @@ export class ImagePageComponent {
 
 	private getThumbnailUrl(imageId): string {
 		var string = "'background-image': 'url(' + this.url +'/thumbnail/' + this.examinationIn + '/' + imageId + ')'";
-		//alert(string);
 		return string;
 	}
 
@@ -105,8 +109,79 @@ export class ImagePageComponent {
 		this.imageIn = imageId;
 	}
 
+	private changeExamination(examinationId): void {
+		this.router.navigateByUrl("/image?examination=" + examinationId + "&image=0");
+		this.examinationIn = examinationId;
+		this.imageIn = 0;
+	}
+
+	private examinationIdToDate(examinationId): string {
+		var date = examinationId.substring(0,6);
+		var year = date.substring(0,2);
+		var month = date.substring(2,4);
+		var day = date.substring(4,6);
+		var monthString = "";
+		switch(month){
+			case "01":
+				monthString = "januari";
+				break;
+			case "02":
+				monthString = "februari";
+				break;
+			case "03":
+				monthString = "mars";
+				break;
+			case "04":
+				monthString = "april";
+				break;
+			case "05":
+				monthString = "maj";
+				break;
+			case "06":
+				monthString = "juni";
+				break;
+			case "07":
+				monthString = "juli";
+				break;
+			case "08":
+				monthString = "augusti";
+				break;
+			case "09":
+				monthString = "september";
+				break;
+			case "10":
+				monthString = "oktober";
+				break;
+			case "11":
+				monthString = "november";
+				break;
+			case "12":
+				monthString = "december";
+				break;
+			default:
+				monthString = "??";
+				break;
+		}
+		return day + " " + monthString + " '" + year;
+	}
+
+	private getNumberOfOtherExamImages(number): string {
+		if(number == 1)
+			return number + " bild";
+		else
+			return number + " bilder";
+	}
+
+	private sortAlgorithm(object1, object2): number {
+		if (object1.examinationID < object2.examinationID)
+			return -1;
+		if (object1.examinationID > object2.examinationID)
+			return 1;
+		return 0;
+	}
+
 	toggleCollectionsMenu() {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
 		this.collectionsMenu.show(this.collectionsMenuVisible);
-  }
+	}
 }
