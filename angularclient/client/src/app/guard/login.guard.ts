@@ -16,10 +16,10 @@ export class LoginGuard implements CanActivate {
 
 	canActivate(): boolean {
 		if (sessionStorage.getItem('currentUser')) {
+			this.router.navigate(['/search']);
 			return false;
 		}
 		else {
-			this.router.navigate(['/search']);
 			return true;
 		}	
 	}
