@@ -18,7 +18,9 @@ export class LoginComponent {
 		private userService: UserService,
 		private router: Router
 	) {
-
+		if(sessionStorage.getItem("currentUser")) {
+			router.navigate(['/search']);
+		}
 	}
 
 	ngAfterViewInit(): void {

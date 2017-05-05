@@ -11,10 +11,9 @@ import { NotFound }   from './component/not-found.component';
 
 
 import { UserGuard }   from './guard/user.guard';
-import { LoginGuard }   from './guard/login.guard';
 
 const routes: Routes = [
-	{ path: '', canActivate: [LoginGuard], component: LoginComponent },
+	{ path: '', component: LoginComponent },
 	{ path: 'search', canActivate: [UserGuard], component: SearchComponent },
 	//{ path: 'image', component: ImagePageComponent },
 	{ path: 'image/:imagepageexaminationid/:imagepageimageindex', canActivate: [UserGuard], component: SearchComponent },
