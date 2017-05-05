@@ -182,4 +182,13 @@ export class ThumbnailComponent implements OnInit {
 		this.editText = this.searchresults[i]["note"+j] ? this.searchresults[i]["note"+j] : "";
 	}
 
+	getNumberOfResults(): number {
+		var countResults:number;
+		for(var i=0; i<this.searchresults.length; i++){
+				countResults = countResults + this.searchresults[i].imagePaths.length;
+				console.log("Antal resultat: " + this.searchresults[i].imagePaths.length);
+		}
+		console.log(countResults);
+		return countResults;
+	}
 }

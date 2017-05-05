@@ -3,17 +3,16 @@
 <popup>
 </popup>
 
+<user-page></user-page>
+
 <collections-menu #collectionsMenu>
 </collections-menu>
 
 <div [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
-	
-
-	<p id="results-count"><span></span> resultat</p>
 
 	<top-menu *ngIf="searchMode"></top-menu>
 	<div id="search-results" class="top-menu-margin" *ngIf="searchMode">
-		<thumbnail [gridType]="'search'" ></thumbnail>
+		<thumbnail ></thumbnail>
 	</div>
 
 	<collection-topmenu [hidden]="searchMode" #collectionTopmenu> </collection-topmenu>

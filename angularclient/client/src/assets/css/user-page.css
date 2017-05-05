@@ -1,0 +1,48 @@
+.primary-colour {
+  background-color: #1de9b6; }
+
+.primary-colour-text {
+  color: #1de9b6; }
+
+.secondary-colour {
+  background-color: #64ffda; }
+
+.secondary-colour-text {
+  color: #64ffda; }
+
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
+
+#user-page {
+  z-index: 100;
+  position: fixed;
+  left: 302px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background-color: #ffffff; }
+  #user-page .expandable-pane-header {
+    line-height: 50px;
+    border: 1px solid #e7e7e7;
+    vertical-align: top;
+    cursor: pointer; }
+    #user-page .expandable-pane-header i {
+      line-height: 50px;
+      margin: 0 7px 0 15px;
+      float: left;
+      transition: transform 0.2s; }
+    #user-page .expandable-pane-header font {
+      line-height: 50px;
+      display: inline-block; }
+  #user-page .expandable-pane-content {
+    max-height: 0;
+    height: auto;
+    overflow: hidden;
+    transition: max-height 0.2s;
+    padding-right: 10px;
+    padding-left: 10px; }
+
+/*# sourceMappingURL=user-page.css.map */

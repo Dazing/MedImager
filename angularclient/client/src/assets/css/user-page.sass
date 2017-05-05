@@ -1,0 +1,32 @@
+@import "colours"
+
+#user-page
+    z-index: 100
+    position: fixed
+    left: 302px
+    right: 0
+    top: 0
+    height: 100%
+    background-color: #ffffff
+    .expandable-pane-header
+        line-height: 50px
+        border: 1px solid $grey
+        vertical-align: top
+        cursor: pointer
+        i
+            line-height: 50px
+            margin: 0 7px 0 15px
+            float: left
+            transition: transform 0.2s
+        font
+            line-height: 50px
+            display: inline-block
+    .expandable-pane-content
+        max-height: 0
+        height: auto
+        overflow: hidden
+        transition: max-height 0.2s
+        padding-right: 10px
+        padding-left: 10px
+
+    

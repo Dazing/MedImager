@@ -4,6 +4,7 @@ import { Subject} from 'rxjs/Subject';
 
 import { CollectionService } from '../service/collection.service';
 import { SearchService } from '../service/search.service';
+import { UserService } from '../service/user.service';
 import { Image, Collection } from '../model/image';
 import { Filter } from '../model/tag';
 
@@ -44,7 +45,8 @@ export class CollectionsMenu implements OnInit {
 
 	constructor(
 		private collectionService: CollectionService,
-		private searchService: SearchService
+		private searchService: SearchService,
+		private userService: UserService
 	){
 		this.privSearchMode = new Subject<boolean>();
 		this.searchMode = this.privSearchMode.asObservable();
@@ -142,4 +144,7 @@ export class CollectionsMenu implements OnInit {
 		this.privSelectedCollection.next( !this.searchModeEnabled ? this.getCollectionById(this.selectedCollectionId) : undefined);
 	}
 
+	toggleUserPage(): void {
+		this.userService.toggleUserPage();
+	}
 }

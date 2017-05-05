@@ -82,6 +82,16 @@ public class SearchFilter {
 	public SearchFilter(UriInfo uriInfo){
 //		MultivaluedMap<String, String> myMap = uriInfo.getQueryParameters();
 		termToValuesMap.putAll(uriInfo.getQueryParameters());
+		
+		if(termToValuesMap.containsKey("AgeLower")){
+			ageLower = Integer.parseInt(termToValuesMap.get("AgeLower").get(0));
+			termToValuesMap.remove("AgeLower");
+		}
+		if(termToValuesMap.containsKey("AgeUpper")){
+			ageUpper = Integer.parseInt(termToValuesMap.get("AgeUpper").get(0));
+			termToValuesMap.remove("AgeUpper");
+		}
+		
 //		System.out.println("gg");
 	}
 	
@@ -101,18 +111,25 @@ public class SearchFilter {
 			
 			for(String term : termToValuesMap.keySet()){
 				if(Arrays.asList(evc.getTermsWithValues()).contains(term)){
-					boolean termSatisfied = false;
-					for(String examTermValue : evc.getValues(term)){
-						for(String termValue : termToValuesMap.get(term)){
+					
+					for(String termValue : termToValuesMap.get(term)){
+						
+						boolean termSatisfied = false;
+						
+						for(String examTermValue : evc.getValues(term)){
+							
 							if(examTermValue.toLowerCase().contains(termValue.toLowerCase())){
 								termSatisfied = true;
 							}
+							
+						}
+						
+						if(!termSatisfied){
+							return false;
 						}
 					}
 					
-					if(!termSatisfied){
-						return false;
-					}
+					
 					
 				}else{
 					return false;

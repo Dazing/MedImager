@@ -99,23 +99,29 @@ export class TopMenuComponent implements OnInit {
 	}
 
 	onNavpress(keycode): void {
-		if (keycode == 40) { //down arrow
-			this.selectedAutocompleteIndex++;
-			if (this.selectedAutocompleteIndex >= this.suggestedAutocomplete.length) { //take care of looping
-				this.selectedAutocompleteIndex = 0;
+		switch (keycode) {
+			case 40: { //down arrow
+				this.selectedAutocompleteIndex++;
+				if (this.selectedAutocompleteIndex >= this.suggestedAutocomplete.length) { //take care of looping
+					this.selectedAutocompleteIndex = 0;
+				}
+				break;
+			} case 38: { //up arrow
+				this.selectedAutocompleteIndex--;
+				if (this.selectedAutocompleteIndex < 0) { //take care of looping
+					this.selectedAutocompleteIndex = this.suggestedAutocomplete.length -1;
+				}
+				break;
+			} case 13: {
+				if (this.selectedAutocompleteIndex > -1 && this.selectedAutocompleteIndex <= this.suggestedAutocomplete.length) {
+					this.addTag(this.suggestedAutocomplete[this.selectedAutocompleteIndex]);
+				}
+				break;
+			} case 27: {
+				this.searchFieldBlurred = true;
+				this.selectedAutocompleteIndex = -1;
+				break;
 			}
-		} else if (keycode == 38) { //up arrow
-			this.selectedAutocompleteIndex--;
-			if (this.selectedAutocompleteIndex < 0) { //take care of looping
-				this.selectedAutocompleteIndex = this.suggestedAutocomplete.length -1;
-			}
-		} else if (keycode == 13) {
-			if (this.selectedAutocompleteIndex > -1 && this.selectedAutocompleteIndex <= this.suggestedAutocomplete.length) {
-				this.addTag(this.suggestedAutocomplete[this.selectedAutocompleteIndex]);
-			}
-		} else if (keycode == 27) {
-			this.searchFieldBlurred = true;
-			this.selectedAutocompleteIndex = -1;
 		}
 	}
 
@@ -176,6 +182,8 @@ export class TopMenuComponent implements OnInit {
 	}
 
 	toggleAdvancedBar(state:String) {
+		console.log("CALLED: "+state);
+		
 		if(state == "show")
 			this.advancedBarVisible = true;
 		else if(state == "hide")

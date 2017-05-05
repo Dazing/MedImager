@@ -1,0 +1,36 @@
+<div id="user-page" *ngIf="visible">
+    <div class="container">
+        <h3>Inställningar</h3>
+        <div class="row">
+            <div class="col s12 m12 l6">
+
+                <div class="z-depth-1" style="border: 1px solid #e7e7e7">
+                    <div class="expandable-pane-header unselectable" (click)="changePasswordExpanded = !changePasswordExpanded">
+                        <i class="material-icons" [ngStyle]="{'transform': changePasswordExpanded ? 'rotate(90deg)' : 'rotate(0deg)'}">keyboard_arrow_right</i>
+                        Ändra lösenord
+                    </div>
+                    <div class="expandable-pane-content" #changePasswordContent [ngStyle]="{'max-height': changePasswordExpanded ? 50+changePasswordContent.scrollHeight + 'px' : '0'}"> 
+                        <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePassword($event)" >
+
+                            <input formControlName="oldpassword" type="password" placeholder="Gammalt lösenord">
+
+                            
+                            <input formControlName="newpassword" type="password" placeholder="Nytt lösenord">
+
+                            <font [hidden]="!unmatchingPasswords" class="red-text">matchar inte</font>
+                            <input formControlName="confirmpassword" type="password" placeholder="Upprepa nytt lösenord">
+
+                            <button type="submit">Godkänn</button>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="col s12 m12 l6">
+                test text2
+            </div>
+        </div>
+    </div>
+</div>

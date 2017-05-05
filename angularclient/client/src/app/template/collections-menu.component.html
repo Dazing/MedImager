@@ -2,7 +2,7 @@
 
 <ul #collectionsMenu class="side-nav fixed collections-menu menu-bar-margin z-depth-1" [ngStyle]="{'left': this.visible ? '0px' : '-300px'}">
     <div class="medimager-logo-container valign-wrapper">
-        <img src="./assets/img/logo.png" class="medimager-logo valign-center">
+        <a href="/search" class="no-style-link"><img src="./assets/img/logo.png" class="medimager-logo valign-center"></a>
     </div>
 
     <div #searchParamsContainer class="search-params-container" [ngClass]="{'search-mode': searchModeEnabled}" >
@@ -44,8 +44,8 @@
             >
         </a>
     </li>
+    <li *ngIf="collections?.length > 0"><div class="divider"></div></li>
 
-    <li *ngIf="sharedCollections?.length > 0"><div class="divider"></div></li>
     <!-- list of collections shared with user --> 
     <li *ngIf="sharedCollections.length > 0"><a class="subheader unselectable">Delade med mig <i class="material-icons unselectable" [ngStyle]="{'transform': sharedCollectionsExpanded ? 'rotate(-90deg)' : 'rotate(-180deg)'}" (click)="toggleSharedCollections()">keyboard_arrow_left</i></a></li>
     <li *ngFor="let sharedCollection of sharedCollections"  [ngStyle]="{'height': sharedCollectionsExpanded ? '48px' : '0px'}">
@@ -57,4 +57,9 @@
         </a>
     </li>
     <li *ngIf="sharedCollections.length > 0"><div class="divider"></div></li>
+
+    <!-- bottom button for user page -->
+    <div class="user-page-button-container">
+        <i class="material-icons primary-colour-text unselectable" (click)="toggleUserPage()">account_circle</i>
+    </div>
 </ul>

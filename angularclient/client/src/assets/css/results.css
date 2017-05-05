@@ -42,6 +42,7 @@
     float: left;
     background-size: cover;
     background-position: center;
+    background-color: #dddddd;
     cursor: pointer;
     vertical-align: top; }
     #search-results span:hover .collection-image-button-container {
@@ -93,6 +94,12 @@
       bottom: -28px;
       width: 100%; }
 
+.notes-exist-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #ffffff; }
+
 .btn.small-padding {
   padding-left: 7px;
   padding-right: 7px;
@@ -103,8 +110,7 @@
   padding-top: 10px;
   text-align: right;
   font-size: 22px;
-  color: #424242;
-  display: none; }
+  color: #424242; }
 
 #search-information {
   text-align: center;
