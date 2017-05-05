@@ -47,6 +47,7 @@ public class MyResource {
 //		return stp.getResultListWithFilter();
 //    }
 	
+	@Secured
 	@GET
 	@Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
