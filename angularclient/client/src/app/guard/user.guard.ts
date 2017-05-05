@@ -15,7 +15,7 @@ export class UserGuard implements CanActivate {
 	}
 
 	canActivate(): boolean {
-		if (localStorage.getItem('currentUser')) {
+		if (sessionStorage.getItem('currentUser')) {
 			return true;
 		}
 		else {
