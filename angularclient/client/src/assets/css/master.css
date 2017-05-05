@@ -300,6 +300,7 @@
 #popup-image-container {
   background-color: #000000;
   max-width: 100vw;
+  min-width: 500px;
   position: relative; }
 
 #popup-image-previous {
@@ -370,7 +371,7 @@
   right: 0;
   background-color: #ffffff; }
   #popup-image-data-buttons div {
-    width: 50%;
+    width: 100%;
     display: inline-block;
     text-align: center;
     font-size: 20px;
@@ -424,6 +425,9 @@
 .medimager-logo-container {
   height: 69px;
   width: 300px; }
+  .medimager-logo-container a {
+    display: block;
+    margin: 0 auto; }
 
 .medimager-logo {
   display: block;
@@ -579,6 +583,7 @@
     float: left;
     background-size: cover;
     background-position: center;
+    background-color: #dddddd;
     cursor: pointer;
     vertical-align: top; }
     #search-results span:hover .collection-image-button-container {
@@ -630,6 +635,12 @@
       bottom: -28px;
       width: 100%; }
 
+.notes-exist-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #ffffff; }
+
 .btn.small-padding {
   padding-left: 7px;
   padding-right: 7px;
@@ -640,8 +651,7 @@
   padding-top: 10px;
   text-align: right;
   font-size: 22px;
-  color: #424242;
-  display: none; }
+  color: #424242; }
 
 #search-information {
   text-align: center;
@@ -719,6 +729,11 @@ select {
   top: 50%;
   transform: translateY(-50%); }
 
+.no-style-link {
+  padding: 0 !important; }
+  .no-style-link:hover {
+    background-color: transparent !important; }
+
 .login-box {
   width: 100%; }
 
@@ -755,7 +770,7 @@ select {
 #image-data {
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   padding-top: 35px; }
   #image-data .image-data-column {
     text-align: left;
@@ -784,6 +799,34 @@ select {
     transition: opacity 0.4s; }
     #related-images span:hover {
       opacity: 1; }
+
+#see-more-images-box {
+  margin-bottom: 100px;
+  padding: 50px;
+  text-align: center; }
+
+.see-more-image {
+  display: inline-block;
+  position: relative;
+  max-width: 300px;
+  width: 100vw;
+  height: 210px;
+  margin: 5px; }
+
+.see-more-image-fade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  font-size: 25px;
+  padding-top: 23%; }
+
+.see-more-image-number-of-images {
+  font-size: 16px;
+  margin-top: 5px; }
 
 #error404 {
   display: block;

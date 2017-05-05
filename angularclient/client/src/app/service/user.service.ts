@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs';
 import { Subject} from 'rxjs/Subject';
 
@@ -22,81 +22,80 @@ export class UserService {
 	private privUserPageVisible: Subject<boolean>;
 	public userPageVisible: Observable<boolean>;
 
+	public error: Observable<string>;
+	private privError: Subject<string>;
 
 	constructor(private http: Http, private server: Server) {
 		this.privUserPageVisible = new Subject<boolean>();
 		this.userPageVisible = this.privUserPageVisible.asObservable();
+		
+		this.privError = new Subject<string>();
+        this.error = this.privError.asObservable();
 	}
 
-	register(email:string, password:string): Observable<Boolean> {
-		var url = (this.server.getUrl()+"/register");
-		var data = {
-			email: email,
-			password: password
-		}
+	register(data): Observable<Boolean> {
+		var url = (this.server.getUrl()+"/user/register");
+		
+		let headers = new Headers();
 
-		return this.http.post(url, data)
+		headers.append('username', data.username);
+		headers.append('password', data.password);
+		headers.append('firstname', data.firstname);
+		headers.append('lastname', data.lastname);
+
+		let options = new RequestOptions({ headers: headers });
+
+		return this.http.post(url, null, options)
 			.map((response: Response) => {
-				// login successful if there's a jwt token in the response
-				let user = response.json();
-				if (user.email && user.token) {
-					// store email and jwt token in local storage to keep user logged in between page refreshes
-					localStorage.setItem('currentUser', user);
- 
-					// return true to indicate successful login
-					return true;
-				} 
-				else {
-					// return false to indicate failed login
-					return false;
-				}
-		});
+				console.log(response);
+				
+
+				// return true to indicate successful login
+				this.privError.next();
+				return true;
+				
+			}).catch((error: any) => {
+				this.privError.next(JSON.stringify(error._body));
+				return Observable.throw(error);
+			});
 	}
 	
-	login(email:string, password:string): Observable<Boolean> {
-		var url = (this.server.getUrl()+"/login");
-		var data = {
-			email: email,
-			password: password
-		}
+	login(username:string, password:string): Observable<Boolean> {
+		var url = (this.server.getUrl()+"/user/login");
 
-		return this.http.post(url, data)
+		let headers = new Headers();
+
+		headers.append('username', username);
+		headers.append('password', password);
+
+		let options = new RequestOptions({ headers: headers });
+
+		let loginSuccess = false;
+
+		console.log(headers.toJSON());
+		
+		
+		return this.http.post(url, null, options)
 			.map((response: Response) => {
+				console.log("getting response");
+				
 				// login successful if there's a jwt token in the response
-				let user = response.json();
-				if (user.email && user.token) {
+				if (response.text()) {
 					// store email and jwt token in local storage to keep user logged in between page refreshes
-					localStorage.setItem('currentUser', user);
+					localStorage.setItem('currentUser', response.text());
  
 					// return true to indicate successful login
+					this.privError.next();
 					return true;
-				} 
-				else {
-					// return false to indicate failed login
-					return false;
 				}
-		});
-
-		/*this.http.post(url,data)
-			.toPromise()
-			.then(response => {
+			}).catch((error: any) => {
+				console.log("erro @UserServiceCatch");
 				
-					Response = {
-						email = "email@doman.com",
-						token = "cklmdfglskgfnlsdbgkbdsgkudfghrö214345938ujskjfsdkf"
-					}
-				
-				console.log("response");
-				var user = response.json();
 
-				if (user.email && user.token) {
-					localStorage.setItem('currUser',user);
-				}
-				else {
+				this.privError.next(JSON.stringify(error._body));
 
-				}
-			})
-			.catch(this.handleError);*/
+				return Observable.throw(error);
+			});
 	}
 	
 	private handleError(error: any): Promise<any> {

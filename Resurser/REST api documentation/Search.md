@@ -4,7 +4,7 @@
 
 * **URL**
 
-  /api/search?{Term1=a}&{Term2=b}&...&{ageLower=x}&{ageUpper=y}
+  /api/search?{Term1=a}&{Term2=b}&...&{AgeLower=x}&{AgeUpper=y}
 
 * **Method:**
 
@@ -15,12 +15,12 @@
     Refer to documentation about terms for a list of possible terms and more
 
     `Term_ = <string>` <br />
-    `ageLower = <integer>` <br />
-    `ageUpper = <integer>` <br />
+    `AgeLower = <integer>` <br />
+    `AgeUpper = <integer>` <br />
     
     **Example URL:**
     
-    `/api/search?Dis-now=Psoriasisartrit&Snuff=2 dosor/vecka&ageLower=60`
+    `/api/search?Dis-now=Psoriasisartrit&Snuff=2 dosor/vecka&AgeLower=60`
   
 *  **Header Params**
 

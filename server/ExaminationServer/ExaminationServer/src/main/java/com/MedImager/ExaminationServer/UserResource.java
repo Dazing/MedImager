@@ -13,13 +13,23 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import java.util.List;
+
 @Path("/user")
 public class UserResource{
 	@GET
 	@Path("login")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response login(){
-		return Response.ok("Proceed with login").build();
+		List<User> users = UserHandler.getUsers();
+		
+		String str = "";
+		
+		for	(int i = 0; i < users.size(); i++) {
+			str += ("username: "+users.get(i).getUsername()+", ");
+		}
+		
+		return Response.ok(str).build();
 	}
 	
 	@POST

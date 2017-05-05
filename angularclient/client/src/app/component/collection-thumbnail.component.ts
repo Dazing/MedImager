@@ -27,6 +27,7 @@ export class CollectionThumbnailComponent implements OnInit {
 	private deletei: number;
 	private editi: number;
 	private editText: string;
+	private showNotes: Array<number>;
 
 	constructor(
 		private collectionService: CollectionService,
@@ -57,6 +58,9 @@ export class CollectionThumbnailComponent implements OnInit {
 				console.log(images);
 				thisHandle.images = images;
 				thisHandle.loaded = true;
+				this.showNotes = new Array<number>(thisHandle.images.length);
+				for(var i = 0; i<this.showNotes.length; i++)
+					this.showNotes[i] = 1;
 			} else {
 				console.log("some sort of weird overlapping bug thing probably happened here, you probably don't have to worry");
 			}
@@ -188,4 +192,16 @@ export class CollectionThumbnailComponent implements OnInit {
 		this.editText = this.images[i]["note"] ? this.images[i]["note"] : "";
 	}
 
+	showNoteIcon(imageId, show): void {
+		if(show)
+			this.showNotes[imageId] = 1;
+		else
+			this.showNotes[imageId] = 0;
+		console.log(imageId + ": " + this.showNotes[imageId]);
+	}
+
+	getOpacity(imageId): number {
+		console.log("hejsan");
+		return this.showNotes[imageId];
+	}
 }

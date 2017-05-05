@@ -11,12 +11,16 @@ import { Server } from '../model/server';
 export class ImagePageService {
     private headers = new Headers({'Content-Type': 'application/json'});
     imageData:Observable<string[]>;
+    otherExams:Observable<string[]>
 
     private privImageData: Subject<string[]>;
+    private privOtherExams: Subject<string[]>;
 
     constructor(private http: Http, private router: Router, private server: Server) {
         this.privImageData = new Subject<string[]>();
+        this.privOtherExams = new Subject<string[]>();
         this.imageData = this.privImageData.asObservable();
+        this.otherExams = this.privOtherExams.asObservable();
     }
 
     getImageData(examinationIn:Number): void {
@@ -31,6 +35,21 @@ export class ImagePageService {
 			})
 			.catch(e => {
                 this.privImageData.next(null);
+			});
+    }
+
+    getOtherExaminations(examinationIn:Number): void {
+        var url = (this.server.getUrl()+'/patient/'+examinationIn);
+
+        this.http.get(url)
+			.toPromise()
+			.then(response => {
+                   var responsejson = response.json();
+                   this.privOtherExams.next(responsejson);
+                   console.log(responsejson);
+			})
+			.catch(e => {
+                this.privOtherExams.next(null);
 			});
     }
 
