@@ -13,15 +13,14 @@ import { NotFound }   from './component/not-found.component';
 import { UserGuard }   from './guard/user.guard';
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/login', pathMatch: 'full' },
-	{ path: 'login', component: LoginComponent },
-	{ path: 'search', component: SearchComponent },
+	{ path: '', component: LoginComponent },
+	{ path: 'search',canActivate: [UserGuard], component: SearchComponent },
 	//{ path: 'image', component: ImagePageComponent },
-	{ path: 'image/:imagepageexaminationid/:imagepageimageindex', component: SearchComponent },
-	{ path: 'collection', component: CollectionComponent },
+	{ path: 'image/:imagepageexaminationid/:imagepageimageindex',canActivate: [UserGuard], component: SearchComponent },
+	{ path: 'collection',canActivate: [UserGuard], component: CollectionComponent },
 
-	{ path: 'serverunreachable', component: ServerUnreachable },
-	{ path: '**',  component: NotFound }
+	{ path: 'serverunreachable',canActivate: [UserGuard], component: ServerUnreachable },
+	{ path: '**',canActivate: [UserGuard],  component: NotFound }
 
 ];
 

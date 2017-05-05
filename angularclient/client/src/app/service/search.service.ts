@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -79,8 +79,13 @@ export class SearchService {
 		var url = (this.server.getUrl() + '/search?'+str);
 		
 		console.log("URL: "+url);
+
+		// Set authorization header
+		let headers = new Headers();
+		headers.append('authorization', localStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
 		
-		this.http.get(url)
+		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				this.privImages.next(response.json());
@@ -103,7 +108,13 @@ export class SearchService {
 	getSearchParameters(): void {
 		if (!this.searchParameterListReceived) {
 			var url = (this.server.getUrl()+'/initValues');
-			this.http.get(url)
+
+			// Set authorization header
+			let headers = new Headers();
+			headers.append('authorization', localStorage.getItem("currentUser"));
+			let options = new RequestOptions({ headers: headers });
+
+			this.http.get(url, options)
 				.toPromise()
 				.then(response => {
 					var responsejson = response.json();
