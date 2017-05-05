@@ -82,7 +82,7 @@ export class SearchService {
 
 		// Set authorization header
 		let headers = new Headers();
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
 		
 		this.http.get(url, options)
@@ -111,7 +111,7 @@ export class SearchService {
 
 			// Set authorization header
 			let headers = new Headers();
-			headers.append('authorization', localStorage.getItem("currentUser"));
+			headers.append('Authorization', sessionStorage.getItem("currentUser"));
 			let options = new RequestOptions({ headers: headers });
 
 			this.http.get(url, options)

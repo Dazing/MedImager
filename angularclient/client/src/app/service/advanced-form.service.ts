@@ -1,4 +1,4 @@
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -21,7 +21,10 @@ export class AdvancedFormService {
 
     getSearchableStuff(): void {
         var url = (this.server.getUrl()+'/initValues');
-
+        let headers = new Headers({ 'Content-Type': 'application/json'});
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		
+  		let options = new RequestOptions({ headers: headers });
         this.http.get(url)
 			.toPromise()
 			.then(response => {

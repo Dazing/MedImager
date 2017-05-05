@@ -46,7 +46,7 @@ export class CollectionService {
 		
 		 // Set authorization header
 		let headers = new Headers();
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
 
 
@@ -76,7 +76,7 @@ export class CollectionService {
 		
 		 // Set authorization header
 		let headers = new Headers();
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
 
 
@@ -102,7 +102,7 @@ export class CollectionService {
 		
 		 // Set authorization header
 		let headers = new Headers();
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
 
 
@@ -132,7 +132,7 @@ export class CollectionService {
 		
 		 // Set authorization header
 		let headers = new Headers();
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
 
 
@@ -159,7 +159,7 @@ export class CollectionService {
 		let payload = {examinationID: examinationID, index: imageIndex};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
  
   		let options = new RequestOptions({ headers: headers });
 
@@ -202,7 +202,7 @@ export class CollectionService {
 		let payload = {collectionitemID: collectionItemId};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 
   		let options = new RequestOptions({ headers: headers, body: payload });
 		
@@ -229,7 +229,7 @@ export class CollectionService {
 		let payload = {collectionDescr: description, collectionID: collID};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 
   		let options = new RequestOptions({ headers: headers });
 
@@ -258,7 +258,7 @@ export class CollectionService {
 		let payload = {note: note, collectionID: collID, collectionitemID: collectionitemID};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 
   		let options = new RequestOptions({ headers: headers });
 
@@ -287,7 +287,7 @@ export class CollectionService {
 		let payload = {userID: this.userID, collectionName: name, collectionDescr: (description==undefined ? "" : description)};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		
   		let options = new RequestOptions({ headers: headers });
 
@@ -316,7 +316,7 @@ export class CollectionService {
 		let payload = {collectionID: collId};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		
   		let options = new RequestOptions({ headers: headers, body: payload });
 

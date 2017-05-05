@@ -28,7 +28,7 @@ export class ImagePageService {
 
         // Set authorization header
 		let headers = new Headers();
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', localStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
 
         this.http.get(url, options)
@@ -48,7 +48,7 @@ export class ImagePageService {
 
          // Set authorization header
 		let headers = new Headers();
-		headers.append('authorization', localStorage.getItem("currentUser"));
+		headers.append('Authorization', localStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
 
 
