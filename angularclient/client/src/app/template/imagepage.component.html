@@ -123,7 +123,7 @@
 			<h2>Andra undersökningar på samma patient</h2>
 			<div id="see-more-image-wrapper">
 				<span *ngFor="let otherExam of otherExams; let cur=index">
-					<a href="/image?examination={{otherExams[cur].examinationID}}&image=0" *ngIf="otherExams[cur].examinationID != imageData.examinationID">
+					<a href="/image?examination={{otherExams[cur].examinationID}}&image=0" *ngIf="otherExams[cur].examinationID != imageData.examinationID && otherExams[cur].imagePaths.length > 0">
 						<span [ngStyle]="{'background-image': 'url(' + url +'/thumbnail/' + otherExams[cur].examinationID + '/' + 0 + ')'}" class="see-more-image">
 							<span class="see-more-image-fade" (click)="changeExamination(otherExams[cur].examinationID)">
 								{{examinationIdToDate(otherExams[cur].examinationID)}}

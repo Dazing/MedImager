@@ -25,8 +25,8 @@ export class ImagePageComponent {
 
 
 	private collectionsMenuVisible = false;
-	private examinationIn: Number;
-	private imageIn: Number;
+	private examinationIn: number;
+	private imageIn: number;
 	private imageData:any;
 	private display: boolean = false;
 	private imageDataLoaded: boolean = false;
@@ -56,7 +56,7 @@ export class ImagePageComponent {
 				console.log(this.otherImages);
 				this.imageDataLoaded = true;
 				
-				if(this.imageData.imagePaths.length-1 >= this.imageIn && this.imageIn >= 0)
+				if(this.imageData.imagePaths.length-1 >= this.imageIn && this.imageIn >= 0 && this.imageIn)
 					this.display = true;
 				else {
 					this.error = true;
