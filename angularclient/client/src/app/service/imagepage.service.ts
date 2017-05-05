@@ -1,4 +1,4 @@
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -26,7 +26,12 @@ export class ImagePageService {
     getImageData(examinationIn:Number): void {
         var url = (this.server.getUrl()+'/examination/'+examinationIn);
 
-        this.http.get(url)
+        // Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', localStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+
+        this.http.get(url, options)
 			.toPromise()
 			.then(response => {
                    var responsejson = response.json();
@@ -41,7 +46,13 @@ export class ImagePageService {
     getOtherExaminations(examinationIn:Number): void {
         var url = (this.server.getUrl()+'/patient/'+examinationIn);
 
-        this.http.get(url)
+         // Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', localStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+
+
+        this.http.get(url, options)
 			.toPromise()
 			.then(response => {
                    var responsejson = response.json();

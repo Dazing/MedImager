@@ -44,7 +44,13 @@ export class CollectionService {
 		var url = (this.server.getUrl() + '/collection/');
 		console.log("Fetch collections, url: "+url);
 		
-		this.http.get(url)
+		 // Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+
+
+		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				this.collectionsList = [];
@@ -68,7 +74,13 @@ export class CollectionService {
 		var url = (this.server.getUrl() + '/collection/'+collectionID);
 		console.log("Request collection: "+url);
 		
-		this.http.get(url)
+		 // Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+
+
+		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				let images = [];
@@ -88,7 +100,13 @@ export class CollectionService {
 		var url = (this.server.getUrl() + '/collection/share');
 		console.log("Fetch shared collections, url: "+url);
 		
-		this.http.get(url)
+		 // Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+
+
+		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				this.sharedCollectionsList = [];
@@ -112,7 +130,13 @@ export class CollectionService {
 		var url = (this.server.getUrl() + '/collection/share/'+collectionID);
 		console.log("Request shared collection: "+url);
 		
-		this.http.get(url)
+		 // Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+
+
+		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				let images = [];
@@ -135,6 +159,8 @@ export class CollectionService {
 		let payload = {examinationID: examinationID, index: imageIndex};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+ 
   		let options = new RequestOptions({ headers: headers });
 
 		this.getCollection(collID, (collID, images)=>{
@@ -146,6 +172,8 @@ export class CollectionService {
 				}
 			});
 			if (!imageFound) {
+
+
 				//if collection didn't contain image to add, then post it to collection
 				this.http.post(url, JSON.stringify(payload), options)
 					.toPromise()
@@ -174,6 +202,8 @@ export class CollectionService {
 		let payload = {collectionitemID: collectionItemId};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+
   		let options = new RequestOptions({ headers: headers, body: payload });
 		
 		this.http.delete(url, options)
@@ -199,6 +229,8 @@ export class CollectionService {
 		let payload = {collectionDescr: description, collectionID: collID};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+
   		let options = new RequestOptions({ headers: headers });
 
 		this.http.put(url, JSON.stringify(payload), options)
@@ -226,6 +258,8 @@ export class CollectionService {
 		let payload = {note: note, collectionID: collID, collectionitemID: collectionitemID};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+
   		let options = new RequestOptions({ headers: headers });
 
 		this.http.put(url, JSON.stringify(payload), options)
@@ -253,6 +287,8 @@ export class CollectionService {
 		let payload = {userID: this.userID, collectionName: name, collectionDescr: (description==undefined ? "" : description)};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		
   		let options = new RequestOptions({ headers: headers });
 
 		this.http.post(url, JSON.stringify(payload), options)
@@ -280,6 +316,8 @@ export class CollectionService {
 		let payload = {collectionID: collId};
 
 		let headers = new Headers({ 'Content-Type': 'application/json'});
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		
   		let options = new RequestOptions({ headers: headers, body: payload });
 
 		this.http.delete(url, options)

@@ -82,7 +82,7 @@ export class UserService {
 				// login successful if there's a jwt token in the response
 				if (response.text()) {
 					// store email and jwt token in local storage to keep user logged in between page refreshes
-					localStorage.setItem('currentUser', response.text());
+					sessionStorage.setItem('currentUser', response.text());
  
 					// return true to indicate successful login
 					this.privError.next();

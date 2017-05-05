@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -57,7 +57,10 @@ export class SearchService {
 	}
 
 	getSearch(): void {
-		let searchParamNames = Object.getOwnPropertyNames(this.searchParameterList);
+		let searchParamNames;
+		if(this.searchParameterList){ 
+			searchParamNames = Object.getOwnPropertyNames(this.searchParameterList);
+		}
 		let searchParams = this.searchParameterList;
 
 		var str = "";
@@ -76,8 +79,13 @@ export class SearchService {
 		var url = (this.server.getUrl() + '/search?'+str);
 		
 		console.log("URL: "+url);
+
+		// Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
 		
-		this.http.get(url)
+		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				this.privImages.next(response.json());
@@ -87,7 +95,8 @@ export class SearchService {
 					count += exam.imagePaths.length;
 				}
 				console.log("got response with " + count + " images from image search");
-				console.log(response.json());
+				//console.log("Images: "+JSON.stringify(this.images)+", privIm: "+JSON.stringify(this.privImages));
+				
 			})
 			.catch(e => {
 				console.log("Get search "+e);
@@ -99,7 +108,13 @@ export class SearchService {
 	getSearchParameters(): void {
 		if (!this.searchParameterListReceived) {
 			var url = (this.server.getUrl()+'/initValues');
-			this.http.get(url)
+
+			// Set authorization header
+			let headers = new Headers();
+			headers.append('Authorization', sessionStorage.getItem("currentUser"));
+			let options = new RequestOptions({ headers: headers });
+
+			this.http.get(url, options)
 				.toPromise()
 				.then(response => {
 					var responsejson = response.json();

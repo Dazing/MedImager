@@ -18,7 +18,9 @@ export class LoginComponent {
 		private userService: UserService,
 		private router: Router
 	) {
-
+		if(sessionStorage.getItem("currentUser")) {
+			router.navigate(['/search']);
+		}
 	}
 
 	ngAfterViewInit(): void {
@@ -41,7 +43,7 @@ export class LoginComponent {
 					.subscribe(result => {
 						if (result === true) {
 							// login successful
-							this.router.navigate(['/']);
+							this.router.navigate(['/search']);
 						} else {
 							// login failed
 							this.error = 'Username or password is incorrect';

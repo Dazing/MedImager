@@ -40,10 +40,13 @@ export class ThumbnailComponent implements OnInit {
 		this.searchService.images.subscribe(images => {
 			this.searchresults = images;
 			this.searchMade = true;
+			//console.log("SearchResult: "+JSON.stringify(images));
+			
 		})
 
 
 		this.popupService.searchResult.subscribe(searchResult => {
+			
 			if (searchResult.direction > 0) {
 				this.showNextImage(searchResult.examinationIndex, searchResult.imageIndex);
 			} else if (searchResult.direction < 0) {

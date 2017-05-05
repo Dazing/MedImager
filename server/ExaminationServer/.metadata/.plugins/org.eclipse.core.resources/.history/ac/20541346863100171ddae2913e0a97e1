@@ -86,6 +86,8 @@ public class MyResource {
 			"attachment; filename=" + examinationID + "-" + index + "-thumb.jpg");
 		return response.build();
 	}
+	
+	//static int userID = 2;
 	@Secured
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
