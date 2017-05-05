@@ -30,7 +30,7 @@ export class ImagePageComponent {
 	private imageData:any;
 	private display: boolean = false;
 	private imageDataLoaded: boolean = false;
-	private error: boolean = false;
+	private error: boolean = false;	
 	private examination404 = false;
 	private otherImages:string[];
 	private otherExams:string[] = [];
