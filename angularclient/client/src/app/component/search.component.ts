@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 import { Image, Collection } from '../model/image';
@@ -42,8 +43,12 @@ export class SearchComponent {
 
 	constructor(
 		private searchService: SearchService,
-		private popupService: PopupService
-	){}
+		private popupService: PopupService,
+		private route: ActivatedRoute
+	){
+		console.log("ROUTER CHILDREN:");
+		console.log(this.route.params);
+	}
 
 
 
