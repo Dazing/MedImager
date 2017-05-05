@@ -11,16 +11,17 @@ import { NotFound }   from './component/not-found.component';
 
 
 import { UserGuard }   from './guard/user.guard';
+import { LoginGuard }   from './guard/login.guard';
 
 const routes: Routes = [
-	{ path: '', component: LoginComponent },
-	{ path: 'search',canActivate: [UserGuard], component: SearchComponent },
+	{ path: '', canActivate: [LoginGuard], component: LoginComponent },
+	{ path: 'search', canActivate: [UserGuard], component: SearchComponent },
 	//{ path: 'image', component: ImagePageComponent },
-	{ path: 'image/:imagepageexaminationid/:imagepageimageindex',canActivate: [UserGuard], component: SearchComponent },
-	{ path: 'collection',canActivate: [UserGuard], component: CollectionComponent },
+	{ path: 'image/:imagepageexaminationid/:imagepageimageindex', canActivate: [UserGuard], component: SearchComponent },
+	{ path: 'collection', canActivate: [UserGuard], component: CollectionComponent },
 
 	{ path: 'serverunreachable',canActivate: [UserGuard], component: ServerUnreachable },
-	{ path: '**',canActivate: [UserGuard],  component: NotFound }
+	{ path: '**', canActivate: [UserGuard],  component: NotFound }
 
 ];
 
