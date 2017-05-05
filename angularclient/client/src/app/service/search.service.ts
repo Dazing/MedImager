@@ -57,7 +57,10 @@ export class SearchService {
 	}
 
 	getSearch(): void {
-		let searchParamNames = Object.getOwnPropertyNames(this.searchParameterList);
+		let searchParamNames;
+		if(this.searchParameterList){ 
+			searchParamNames = Object.getOwnPropertyNames(this.searchParameterList);
+		}
 		let searchParams = this.searchParameterList;
 
 		var str = "";
@@ -87,7 +90,8 @@ export class SearchService {
 					count += exam.imagePaths.length;
 				}
 				console.log("got response with " + count + " images from image search");
-				console.log(response.json());
+				//console.log("Images: "+JSON.stringify(this.images)+", privIm: "+JSON.stringify(this.privImages));
+				
 			})
 			.catch(e => {
 				console.log("Get search "+e);
