@@ -115,4 +115,10 @@ export	 class AdvancedFormComponent {
 		this.selectedParameterLists.push(-1);
 		this.selectedTerms.push(-1);
 	}
+
+	public getHeight():number {
+		return (15) +  //bottom padding
+		(this.selectedParameterLists.length*64.5) + //row heights
+		(this.selectedParameterLists[this.selectedParameterLists.length-1]!=-1 ? 55 : 0); //add button
+	}
 }

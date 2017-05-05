@@ -18,7 +18,14 @@ export class UserService {
 
 	private sessionId:string;
 
+	private userPageVisibleValue = false;
+	private privUserPageVisible: Subject<boolean>;
+	public userPageVisible: Observable<boolean>;
+
+
 	constructor(private http: Http, private server: Server) {
+		this.privUserPageVisible = new Subject<boolean>();
+		this.userPageVisible = this.privUserPageVisible.asObservable();
 	}
 
 	register(email:string, password:string): Observable<Boolean> {
@@ -96,5 +103,10 @@ export class UserService {
 		console.error('An error occurred', error); // for demo purposes only
 		return Promise.reject(error.message || error);
 	}	
+
+	toggleUserPage(value?:boolean): void {
+		this.userPageVisibleValue = (value != undefined) ? value : !this.userPageVisibleValue;
+		this.privUserPageVisible.next(this.userPageVisibleValue);
+	}
 
 }

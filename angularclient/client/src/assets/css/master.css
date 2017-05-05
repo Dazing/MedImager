@@ -91,7 +91,7 @@
   width: 100%;
   background-color: #f7f7f7;
   position: absolute;
-  top: -1000px;
+  top: -200px;
   transition: top 0.35s;
   box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8);
   padding-bottom: 15px; }
@@ -460,7 +460,9 @@
 .collections-menu {
   z-index: 95;
   left: 0;
-  transition: margin-top 0.4s, left 0.4s; }
+  transition: margin-top 0.4s, left 0.4s;
+  height: 100% !important;
+  padding-bottom: 0; }
   .collections-menu .chip {
     border-radius: 4px;
     padding: 0 8px; }
@@ -521,6 +523,17 @@
   @media only screen and (max-width: 992px) {
     .collections-menu-margin {
       margin-left: 0; } }
+
+.user-page-button-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px; }
+  .user-page-button-container i {
+    line-height: 75px;
+    font-size: 50px;
+    cursor: pointer; }
 
 .primary-colour {
   background-color: #1de9b6; }
@@ -634,6 +647,53 @@
   text-align: center;
   font-size: 30px;
   color: #424242; }
+
+.primary-colour {
+  background-color: #1de9b6; }
+
+.primary-colour-text {
+  color: #1de9b6; }
+
+.secondary-colour {
+  background-color: #64ffda; }
+
+.secondary-colour-text {
+  color: #64ffda; }
+
+.tertiary-colour {
+  background-color: #a7ffeb; }
+
+.tertiary-colour-text {
+  color: #a7ffeb; }
+
+#user-page {
+  z-index: 100;
+  position: fixed;
+  left: 302px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background-color: #ffffff; }
+  #user-page .expandable-pane-header {
+    line-height: 50px;
+    border: 1px solid #e7e7e7;
+    vertical-align: top;
+    cursor: pointer; }
+    #user-page .expandable-pane-header i {
+      line-height: 50px;
+      margin: 0 7px 0 15px;
+      float: left;
+      transition: transform 0.2s; }
+    #user-page .expandable-pane-header font {
+      line-height: 50px;
+      display: inline-block; }
+  #user-page .expandable-pane-content {
+    max-height: 0;
+    height: auto;
+    overflow: hidden;
+    transition: max-height 0.2s;
+    padding-right: 10px;
+    padding-left: 10px; }
 
 * {
   box-sizing: border-box !important;

@@ -70,7 +70,9 @@
 .collections-menu {
   z-index: 95;
   left: 0;
-  transition: margin-top 0.4s, left 0.4s; }
+  transition: margin-top 0.4s, left 0.4s;
+  height: 100% !important;
+  padding-bottom: 0; }
   .collections-menu .chip {
     border-radius: 4px;
     padding: 0 8px; }
@@ -131,5 +133,16 @@
   @media only screen and (max-width: 992px) {
     .collections-menu-margin {
       margin-left: 0; } }
+
+.user-page-button-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding-top: 5px; }
+  .user-page-button-container i {
+    line-height: 75px;
+    font-size: 50px;
+    cursor: pointer; }
 
 /*# sourceMappingURL=collections-menu.css.map */

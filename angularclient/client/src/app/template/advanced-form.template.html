@@ -1,5 +1,5 @@
 
-	<div id="advanced-bar" #advancedBar [ngStyle]="{'top': visible ? '69px' : (69-advancedBar.offsetHeight) + 'px'}">
+	<div id="advanced-bar" #advancedBar [ngStyle]="{'top': visible ? '69px' : (69-getHeight()) + 'px'}">
 		<template ngFor let-selectedParameterList [ngForOf]="selectedParameterLists" let-k="index" *ngIf="jsonReady">
 			<div class="row">
 				<div class="valign-wrapper input-field col s4">

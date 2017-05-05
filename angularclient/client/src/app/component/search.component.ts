@@ -28,6 +28,7 @@ export class SearchComponent {
 	images: Image[];
 	private searchTerms = new Subject<string>();
 	private collectionsMenuVisible = true;
+	private settingsPageOpen = true;
 
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 	@ViewChild('collectionTopmenu') collectionTopmenu: CollectionTopMenu;
