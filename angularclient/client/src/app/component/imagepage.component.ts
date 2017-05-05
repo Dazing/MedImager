@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Server } from '../model/server';
@@ -17,16 +17,16 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
 	selector: 'imagepage',
-	templateUrl: '../template/imagepage.component.html',
-	providers: []
+	templateUrl: '../template/imagepage.component.html'
 })
 export class ImagePageComponent {
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
+	@Input('examinationID') examinationIn: number;
+	@Input('imageIndex') imageIn: number;
 
 	private collectionsMenuVisible = false;
-	private examinationIn: number;
-	private imageIn: number;
+	
 	private imageData:any;
 	private display: boolean = false;
 	private imageDataLoaded: boolean = false;
@@ -36,12 +36,8 @@ export class ImagePageComponent {
 	private otherExams:string[] = [];
 	private url;
 
-	constructor(private router: Router, private server: Server, private imagePageService: ImagePageService, private location: Location) {
+	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location) {
 		this.url = this.server.getUrl();
-		this.router.routerState.root.queryParams.subscribe(params => {
-			this.examinationIn = params['examination'];
-			this.imageIn = params['image'];
-		});	
 	}
 
 	ngOnInit(): void {
@@ -110,7 +106,7 @@ export class ImagePageComponent {
 	}
 
 	private changeExamination(examinationId): void {
-		this.router.navigateByUrl("/image?examination=" + examinationId + "&image=0");
+		//this.router.navigateByUrl("/image?examination=" + examinationId + "&image=0");
 		this.examinationIn = examinationId;
 		this.imageIn = 0;
 	}

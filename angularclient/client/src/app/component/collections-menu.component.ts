@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject} from 'rxjs/Subject';
 
@@ -46,7 +47,9 @@ export class CollectionsMenu implements OnInit {
 	constructor(
 		private collectionService: CollectionService,
 		private searchService: SearchService,
-		private userService: UserService
+		private userService: UserService,
+		private router: Router
+
 	){
 		this.privSearchMode = new Subject<boolean>();
 		this.searchMode = this.privSearchMode.asObservable();
@@ -136,6 +139,7 @@ export class CollectionsMenu implements OnInit {
 		this.searchModeEnabled = false;
 		this.selectedCollectionId = event.currentTarget.getAttribute("data-id");
 		this.privSelectedCollection.next(this.getCollectionById(this.selectedCollectionId));
+		this.router.navigate(['/search']);
 		this.privSearchMode.next(this.searchModeEnabled);
 	}
 

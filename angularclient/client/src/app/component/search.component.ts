@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 import { Image, Collection } from '../model/image';
@@ -25,7 +25,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 	templateUrl: '../template/search.component.html',
 	providers: [] // Changed from "PopupService" to none, start here if popup breaks
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 	images: Image[];
 	private searchTerms = new Subject<string>();
 	private collectionsMenuVisible = true;
@@ -39,18 +39,44 @@ export class SearchComponent {
 	public searchMode: boolean;
 	public selectedCollection: Collection;
 
+	public imagePageOpen: boolean = false;
+	public imagePageExaminationId: string;
+	public imagePageImageIndex: number;
+
 	form;
 
 	constructor(
 		private searchService: SearchService,
 		private popupService: PopupService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private router: Router
 	){
-		console.log("ROUTER CHILDREN:");
-		console.log(this.route.params);
+		
 	}
 
+	ngOnInit(){
+		this.route.url.subscribe(urls => {
+			if (urls.length > 1) {
+				if (urls[0].path == "image") {
+					if (urls.length == 3) {
+						this.imagePageExaminationId = urls[1].path;
+						this.imagePageImageIndex = +urls[2].path;
+						this.imagePageOpen = true;
+						console.log("OPENED IMAGE PAGE");
+						
+					}
+				} else {
+					this.imagePageOpen = false;
+				}
+			}
+			
+		});
 
+		// this.route.params
+		// .switchMap((params: Params) => this.imagePageExaminationId=params['imagepageexaminationid'] )
+		// .
+		
+	}
 
 	ngAfterViewInit(): void {
 		this.collectionsMenu.searchMode.subscribe(mode => {

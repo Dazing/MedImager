@@ -10,16 +10,16 @@
 
 <div [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	<!--<imagepage></imagepage>-->
+	<imagepage *ngIf="imagePageOpen" [examinationID]="'imagePageExaminationId'" [imageIndex]="'imagePageImageIndex'" ></imagepage>
 
-	<top-menu *ngIf="searchMode"></top-menu>
-	<div id="search-results" class="top-menu-margin" *ngIf="searchMode">
+	<top-menu *ngIf="searchMode && !imagePageOpen"></top-menu>
+	<div id="search-results" class="top-menu-margin" *ngIf="searchMode && !imagePageOpen">
 		<thumbnail ></thumbnail>
 	</div>
 
-	<collection-topmenu [hidden]="searchMode" #collectionTopmenu> </collection-topmenu>
-	<div id="search-results" class="top-menu-margin" [hidden]="searchMode">
-		<collection-thumbnail #collectionThumbnail [hidden]="searchMode"></collection-thumbnail>
+	<collection-topmenu [hidden]="searchMode && !imagePageOpen" #collectionTopmenu> </collection-topmenu>
+	<div id="search-results" class="top-menu-margin" [hidden]="searchMode && !imagePageOpen">
+		<collection-thumbnail #collectionThumbnail [hidden]="searchMode && !imagePageOpen"></collection-thumbnail>
 	</div>
 	
 </div>
