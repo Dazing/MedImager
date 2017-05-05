@@ -19,11 +19,10 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+//import org.apache.tomcat.util.http.fileupload.FileUtils;
 
 import medview.datahandling.examination.NoSuchExaminationException;
 import misc.foundation.MethodNotSupportedException;
@@ -34,6 +33,20 @@ import misc.foundation.MethodNotSupportedException;
 @Path("")
 public class MyResource {
 	
+//	@GET
+//	@Path("/search")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public List <Examination> search(@QueryParam("value") List<String> values,
+//    										 @QueryParam("term") List<String> terms,
+//    										 @QueryParam("ageLower") String ageLower,
+//    										 @QueryParam("ageUpper") String ageUpper, 
+//    										 @QueryParam("gender") String gender,
+//    										 @QueryParam("smoke") Boolean smoke,
+//    										 @QueryParam("snuff") Boolean snuff) throws MethodNotSupportedException{
+//		SearchTermParser stp = new SearchTermParser(new SearchFilter(values, terms, ageLower, ageUpper, gender, smoke, snuff));
+//		return stp.getResultListWithFilter();
+//    }
+	
 	@Secured
 	@GET
 	@Path("/search")
@@ -42,7 +55,7 @@ public class MyResource {
 		SearchTermParser stp = new SearchTermParser(new SearchFilter(uriInfo));
 		return stp.getResultListWithFilter2();
     }
-	@Secured
+
 	@GET
 	@Path("/patient/{examinationID}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +63,7 @@ public class MyResource {
 		ExaminationIDParser eidParser = new ExaminationIDParser();
 		return eidParser.getMoreFromPatient(examinationID);
 	}
-	@Secured
+
 	@GET
 	@Path("/examination/{examinationID}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -72,7 +85,6 @@ public class MyResource {
 		return response.build();
 
 	}
-	@Secured
 	@GET
 	@Path("/thumbnail/{examinationID}/{index}")
 	@Produces("image/jpg")
@@ -86,43 +98,41 @@ public class MyResource {
 			"attachment; filename=" + examinationID + "-" + index + "-thumb.jpg");
 		return response.build();
 	}
-	@Secured
+	
+	static int userID = 2;
+	
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/collection")
-    public void createCollectiion(@Context SecurityContext securityContext, Collection item) throws Exception{
+    public void createCollectiion(Collection item) throws Exception{
     	Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
+    	
 	    String addQuerry = "INSERT INTO collection(user_id,name,descr,date)"
-	    		+ " VALUES('"+id+"','"+item.getCollectionName()+"','"+item.getCollectionDescr()+"', NOW());";
+	    		+ " VALUES('"+userID+"','"+item.getCollectionName()+"','"+item.getCollectionDescr()+"', NOW());";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();	    
 	    c.close();
     }
-	@Secured
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/collection/{collectionid}")
-    public void addItem(@Context SecurityContext securityContext, CollectionItem item, @PathParam("collectionid") int collectionid) throws Exception{
+    public void addItem(CollectionItem item, @PathParam("collectionid") int collectionid) throws Exception{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
 	    String addQuerry = "INSERT INTO collectionitem(examinationID,imageindex,collection_id,user_id)"
-	    		+ " VALUES('"+item.getExaminationID()+"',"+item.getIndex()+","+collectionid+","+id+");";
+	    		+ " VALUES('"+item.getExaminationID()+"',"+item.getIndex()+","+collectionid+","+userID+");";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();
 	    c.close();
     }
-    @Secured
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/collection/")
-    public List<Collection> getCollections(@Context SecurityContext securityContext) throws Exception{
+    public List<Collection> getCollections() throws Exception{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
-	    String addQuerry = "SELECT id,name,descr FROM collection WHERE user_id = " + id + ";";
+	    String addQuerry = "SELECT id,name,descr FROM collection WHERE user_id = " + userID + ";";
 	    Statement stmt = c.createStatement();
 	    ResultSet rs = stmt.executeQuery(addQuerry);
 	    List<Collection> result = new ArrayList<Collection>();
@@ -131,21 +141,18 @@ public class MyResource {
 	    	col.setCollectionID(rs.getInt("id"));
 	    	col.setCollectionName(rs.getString("name"));
 	    	col.setCollectionDescr(rs.getString("descr"));
-	    	col.setuserID(id);
 	    	result.add(col);
 	    }
 	    c.close();
         return result;
     }
-    @Secured
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/collection/{collectionID}")
-    public List<CollectionItem> getCollectionItems(@Context SecurityContext securityContext, @PathParam("collectionID") int collectionID) throws Exception{
+    public List<CollectionItem> getCollectionItems(@PathParam("collectionID") int collectionID) throws Exception{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
 	    String addQuerry = "SELECT examinationID,imageindex,note,collection_id,collectionitem_id FROM collectionitem"
-	    		+ " WHERE user_ID = " + id + " AND  collection_id = " + collectionID + ";";
+	    		+ " WHERE user_ID = " + userID + " AND  collection_id = " + collectionID + ";";
 	    Statement stmt = c.createStatement();
 	    ResultSet rs = stmt.executeQuery(addQuerry);
 	    List<CollectionItem> result = new ArrayList<CollectionItem>();
@@ -161,87 +168,102 @@ public class MyResource {
 	    c.close();
         return result;
     }
-    @Secured
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/collection/note")
-    public void addNote(@Context SecurityContext securityContext, CollectionItem col) throws SQLException{
+    public void addNote(CollectionItem col) throws SQLException{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
 	    String addQuerry = "UPDATE collectionitem SET note ='"+col.getNote()+"'"
-	    		+ " WHERE user_id = " + id + " AND collection_id = " + col.getCollectionID() + " AND collectionitem_id = "+ col.getCollectionitemID() +";";
+	    		+ " WHERE user_id = " + userID + " AND collection_id = " + col.getCollectionID() + " AND collectionitem_id = "+ col.getCollectionitemID() +";";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();
 	    c.close();
     }
-    @Secured
+    
     @PUT
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/collection/description")
-    public void addDescription(@Context SecurityContext securityContext, Collection col) throws SQLException{
+    public void addDescription(Collection col) throws SQLException{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
 	    String addQuerry = "UPDATE collection SET descr ='"+col.getCollectionDescr()+"'"
-	    		+ " WHERE user_id = " + id + " AND id = " + col.getCollectionID() + ";";
+	    		+ " WHERE user_id = " + userID + " AND id = " + col.getCollectionID() + ";";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();
 	    c.close();
     }
-    @Secured
+
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/collection/")
-    public void deleteCollection(@Context SecurityContext securityContext, Collection col) throws SQLException{
+    public void deleteCollection(Collection col) throws SQLException{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
-	    String addQuerry = "DELETE FROM collection WHERE user_id=" + id + " AND id=" + col.getCollectionID() + ";";
+	    String addQuerry = "DELETE FROM collection WHERE user_id=" + userID + " AND id=" + col.getCollectionID() + ";";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();
-	    addQuerry = "DELETE FROM collectionitem WHERE user_id=" + id + " AND collection_id=" + col.getCollectionID() + ";";
+	    addQuerry = "DELETE FROM collectionitem WHERE user_id=" + userID + " AND collection_id=" + col.getCollectionID() + ";";
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();
 	    c.close();
     }
-    @Secured
     @DELETE
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/collection/{collectionID}")
-    public void deleteImageInCollection(@Context SecurityContext securityContext, CollectionItem col, @PathParam("collectionID") int collectionID) throws SQLException{
+    public void deleteImageInCollection(CollectionItem col, @PathParam("collectionID") int collectionID) throws SQLException{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
 	    String addQuerry = "DELETE FROM collectionitem"
-	    		+ " WHERE user_id=" + id + " AND collectionitem_id=" + col.getCollectionitemID() + " AND collection_id=" + collectionID +";";
+	    		+ " WHERE user_id=" + userID + " AND collectionitem_id=" + col.getCollectionitemID() + " AND collection_id=" + collectionID +";";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();
 	    c.close();
     }
-    @Secured
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("/collection/share/{targetUserID}")
-    public void shareCollectiion(@Context SecurityContext securityContext, Collection item, @PathParam("targetUserID") int targetUserID) throws Exception{
+    public void shareCollectiion(Collection item, @PathParam("targetUserID") int targetUserID) throws Exception{
     	Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
-	    String addQuerry = "INSERT INTO bookmark(user_id,collection_id) SELECT "+targetUserID+","+ item.getCollectionID() 
-	    		+ " WHERE EXISTS (SELECT 1 FROM collection WHERE collection.id=" + item.getCollectionID() +" AND collection.user_id="+ id +");";
+	    String addQuerry = "INSERT INTO bookmark(user_id,collection_id) VALUES('"+targetUserID+"','"+ item.getCollectionID() + "');";
 	    PreparedStatement preparedStatement = null;
 	    preparedStatement = c.prepareStatement(addQuerry);
 	    preparedStatement.executeUpdate();	    
 	    c.close();
-    }
-    @Secured
+    }/*
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/collection/share")
-    public List<Collection> getSharedCollections(@Context SecurityContext securityContext) throws Exception{
+    public List<Collection> getSharedCollections() throws Exception{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
-	    String addQuerry = "SELECT id,name,descr,user_id FROM collection"
-	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id="+ id +" AND bookmark.collection_id=collection.id);";
+	    String addQuerry = "SELECT share_id FROM bookmark WHERE user_id = " + userID + ";";
+	    Statement stmt = c.createStatement();
+	    ResultSet rs = stmt.executeQuery(addQuerry);
+	    String shareID = null;
+	    List<Collection> result = new ArrayList<Collection>();
+	    while(rs.next()){
+	    	shareID = rs.getString("share_id");
+	    	String innerquerry = "SELECT id,name,descr FROM collection WHERE share_id = '"+ shareID +"';";
+	    	Statement innerstmt = c.createStatement();
+		    ResultSet innerrs = innerstmt.executeQuery(innerquerry);
+		    while(innerrs.next()){
+		    	Collection col = new Collection();
+		    	col.setCollectionID(innerrs.getInt("id"));
+		    	col.setCollectionName(innerrs.getString("name"));
+		    	col.setCollectionDescr(innerrs.getString("descr"));
+		    	result.add(col);
+		    }
+	    }
+	    c.close();
+        return result;
+    }*/
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/collection/share")
+    public List<Collection> getSharedCollections() throws Exception{
+	    Connection c = new DatabaseConnection().getConnection();
+	    String addQuerry = "SELECT id,name,descr FROM collection"
+	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id="+ userID +" AND bookmark.collection_id=collection.id);";
 	    Statement stmt = c.createStatement();
 	    ResultSet rs = stmt.executeQuery(addQuerry);
 	    List<Collection> result = new ArrayList<Collection>();
@@ -250,22 +272,19 @@ public class MyResource {
 	    	col.setCollectionID(rs.getInt("id"));
 	    	col.setCollectionName(rs.getString("name"));
 	    	col.setCollectionDescr(rs.getString("descr"));
-	    	col.setuserID(rs.getInt("user_id"));
 	    	result.add(col);
 	    }
 	    c.close();
 	    rs.close();
         return result;
     }
-    @Secured
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/collection/share/{collectionID}")
-    public List<CollectionItem> getSharedCollectionItems(@Context SecurityContext securityContext,@PathParam("collectionID") int collectionID) throws Exception{
+    public List<CollectionItem> getSharedCollectionItems(@PathParam("collectionID") int collectionID) throws Exception{
 	    Connection c = new DatabaseConnection().getConnection();
-	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
 	    String addQuerry = "SELECT examinationID,imageindex,note,collection_id,collectionitem_id FROM collectionitem"
-	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id= " + id + " AND bookmark.collection_id=" + collectionID + ")"
+	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id= " + userID + " AND bookmark.collection_id=" + collectionID + ")"
 	    		+ " AND collection_id="+ collectionID +";";
 	    Statement stmt = c.createStatement();
 	    ResultSet rs = stmt.executeQuery(addQuerry);

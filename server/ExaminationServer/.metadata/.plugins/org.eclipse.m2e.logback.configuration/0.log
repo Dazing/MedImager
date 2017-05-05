@@ -4229,3 +4229,11 @@
 2017-04-13 13:54:31,681 [Worker-39] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2017-04-13 13:54:31,683 [Worker-39] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2017-04-13 13:54:31,683 [Worker-39] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/marcus/Programming/MedImager/server/ExaminationServer/ExaminationServer/src/test/resources
+2017-05-05 13:37:56,377 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-05-05 13:37:56,431 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2017-05-05 13:37:56,441 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-05-05 13:37:56,441 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/marcus/Programming/MedImager/server/ExaminationServer/ExaminationServer/src/test/resources
+2017-05-05 13:38:54,106 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-05-05 13:38:54,122 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2017-05-05 13:38:54,125 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-05-05 13:38:54,125 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/marcus/Programming/MedImager/server/ExaminationServer/ExaminationServer/src/test/resources
