@@ -41,7 +41,8 @@
     max-height: 0;
     height: auto;
     overflow: hidden;
-    transition: max-height 0.2s;
-    padding: 15px; }
+    transition: max-height 0.2s; }
+    #user-page .expandable-pane-content form {
+      padding: 15px; }
 
 /*# sourceMappingURL=user-page.css.map */
