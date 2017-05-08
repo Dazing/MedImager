@@ -702,8 +702,7 @@
     height: auto;
     overflow: hidden;
     transition: max-height 0.2s;
-    padding-right: 10px;
-    padding-left: 10px; }
+    padding: 15px; }
 
 * {
   box-sizing: border-box !important;
