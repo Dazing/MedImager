@@ -120,7 +120,7 @@ export class SearchService {
 			.toPromise()
 			.then(response => {
 				console.log("SS response:");
-				console.log(response.blob);
+				console.log(response.blob());
 				return response;
 			})
 			.catch(e => {
