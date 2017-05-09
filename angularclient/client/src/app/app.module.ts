@@ -16,7 +16,6 @@ import { CollectionThumbnailComponent } from './component/collection-thumbnail.c
 import { UserPageComponent } from './component/user-page.component';
 import { ImagePageComponent } from './component/imagepage.component';
 import { CollectionsMenu } from './component/collections-menu.component';
-import { CollectionComponent } from './component/collection.component';
 import { NotFound } from './component/not-found.component';
 import { ServerUnreachable } from './component/server-unreachable.component';
 import { PopupComponent } from './component/popup.component';
@@ -51,7 +50,6 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		UserPageComponent,
 		ImagePageComponent,
 		CollectionsMenu,
-		CollectionComponent,
 		PopupComponent,
 		AdvancedFormComponent,
 		NotFound,

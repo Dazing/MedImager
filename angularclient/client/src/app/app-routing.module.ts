@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent }   from './component/login.component';
 import { SearchComponent }   from './component/search.component';
 import { ImagePageComponent }   from './component/imagepage.component';
-import { CollectionComponent }   from './component/collection.component';
 
 import { ServerUnreachable } from './component/server-unreachable.component';
 import { NotFound }   from './component/not-found.component';
@@ -17,7 +16,6 @@ const routes: Routes = [
 	{ path: 'search', canActivate: [UserGuard], component: SearchComponent },
 	//{ path: 'image', component: ImagePageComponent },
 	{ path: 'image/:imagepageexaminationid/:imagepageimageindex', canActivate: [UserGuard], component: SearchComponent },
-	{ path: 'collection', canActivate: [UserGuard], component: CollectionComponent },
 
 	{ path: 'serverunreachable',canActivate: [UserGuard], component: ServerUnreachable },
 	{ path: '**', canActivate: [UserGuard],  component: NotFound }
