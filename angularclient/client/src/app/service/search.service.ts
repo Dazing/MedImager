@@ -108,6 +108,8 @@ export class SearchService {
 
 	getThumbnail(id: number, index:number): any{
 		console.log("RUnning SS getTHumb");
+
+		let thumbnail = false;
 		
 		var url = (this.server.getUrl() + '/thumbnail/'+id+'/'+index);
 		// Set authorization header
@@ -128,9 +130,10 @@ export class SearchService {
 				return response;
 			})
 			.catch(e => {
-				alert("Server unreachable, try again later!")
-				//this.router.navigate(['/serverunreachable']);
+				return Promise.reject(e);
 			});
+
+
 
 	}
 
