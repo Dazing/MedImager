@@ -15,10 +15,7 @@
 	<top-menu *ngIf="searchMode"></top-menu>
 
 	
-	<!--<div id="search-results" class="top-menu-margin" *ngIf="searchMode">-->
-	<div id="search-results" class="top-menu-margin">
-		<thumbnail ></thumbnail>
-	</div>
+	
 
 	<collection-topmenu [hidden]="searchMode" #collectionTopmenu> </collection-topmenu>
 	<div id="search-results" class="top-menu-margin" [hidden]="searchMode">
@@ -26,5 +23,10 @@
 	</div>
 	
 </div>
+
+<!--<div id="search-results" class="top-menu-margin" *ngIf="searchMode">-->
+	<div id="search-results" class="top-menu-margin">
+		<thumbnail ></thumbnail>
+	</div>
 
 <page-footer></page-footer>
