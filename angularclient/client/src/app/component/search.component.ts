@@ -71,10 +71,6 @@ export class SearchComponent implements OnInit {
 			}
 			
 		});
-
-		// this.route.params
-		// .switchMap((params: Params) => this.imagePageExaminationId=params['imagepageexaminationid'] )
-		// .
 		
 	}
 
