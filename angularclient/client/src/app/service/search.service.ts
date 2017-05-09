@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions} from '@angular/http';
+import { Headers, Http, RequestOptions, ResponseContentType} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -16,6 +16,7 @@ import { Server } from '../model/server';
 @Injectable()
 export class SearchService {
 	private headers = new Headers({'Content-Type': 'application/json'});
+	private imgHeaders = new Headers({'Content-Type': 'image/jpg'});
 
     searchParameters:Observable<string[]>;
     privSearchParameters: Subject<string[]>;
@@ -110,13 +111,16 @@ export class SearchService {
 		// Set authorization header
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
-		let options = new RequestOptions({ headers: headers });
+		let options = new RequestOptions({ 
+			headers: this.imgHeaders, 
+			responseType: ResponseContentType.Blob
+		});
 		
 		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				console.log("SS response:");
-				console.log(response);
+				console.log(response.blob);
 				return response;
 			})
 			.catch(e => {
