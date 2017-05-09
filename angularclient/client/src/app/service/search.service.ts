@@ -122,7 +122,7 @@ export class SearchService {
 			responseType: ResponseContentType.Blob
 		});
 
-		this.http.get(url, options)
+		return this.http.get(url, options)
 			.toPromise()
 			.then(response => {
 				console.log("SS response:");
