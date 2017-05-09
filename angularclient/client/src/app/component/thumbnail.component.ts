@@ -38,7 +38,6 @@ export class ThumbnailComponent implements OnInit {
 		this.searchService.images.subscribe(images => {
 			this.searchresults = images;
 			this.searchMade = true;
-			//console.log("SearchResult: "+JSON.stringify(images));
 			
 		})
 
