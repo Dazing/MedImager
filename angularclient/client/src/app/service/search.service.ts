@@ -105,8 +105,7 @@ export class SearchService {
 			});
 	}
 
-	getThumbnail(id: number, index:number){
-
+	getThumbnail(id: number, index:number): any{
 		var url = (this.server.getUrl() + '/thumbnail/'+id+'/'+index);
 		// Set authorization header
 		let headers = new Headers();
