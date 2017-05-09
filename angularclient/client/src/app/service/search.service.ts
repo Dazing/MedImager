@@ -105,6 +105,25 @@ export class SearchService {
 			});
 	}
 
+	getThumbnail(id: number, index:number){
+
+		var url = (this.server.getUrl() + '/thumbnail/'+id+'/'+index);
+		// Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+		
+		this.http.get(url, options)
+			.toPromise()
+			.then(response => {
+				return response;
+			})
+			.catch(e => {
+				alert("Server unreachable, try again later!")
+				//this.router.navigate(['/serverunreachable']);
+			});
+	}
+
 	getSearchParameters(): void {
 		if (!this.searchParameterListReceived) {
 			var url = (this.server.getUrl()+'/initValues');
