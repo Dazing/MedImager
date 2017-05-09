@@ -194,4 +194,10 @@ export class ThumbnailComponent implements OnInit {
 		console.log(countResults);
 		return countResults;
 	}
+
+	getThumbnail(id: number, index:number){
+		var a = this.searchService.getThumbnail(id,index);
+		console.log(a);
+		return 'url('+JSON.stringify(a)+')';
+	}
 }

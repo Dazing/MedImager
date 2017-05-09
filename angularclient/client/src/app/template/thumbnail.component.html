@@ -7,7 +7,7 @@
 			[draggableImage]="searchresult.examinationID + '/' + j"
 			id="{{'result-image-'+i+j}}" 
 			class="unselectable"
-			[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
+			[ngStyle]="{'background-image': getThumbnail(searchresult.examinationID,j)}"
 			data-id="{{i}}"
 			[attr.data-examinationid]="searchresult.examinationID"
 			[attr.data-imageIndex]="j"
@@ -24,3 +24,5 @@
 	<p id="search-information" *ngIf="searchresults.length == 0">Inga bilder matchade valda sökkriterier.</p>
 </div>
 <p id="search-information" *ngIf="!searchMade">Inväntar din sökning</p>
+
+<!--[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" -->

@@ -12,8 +12,15 @@
 
 	<imagepage *ngIf="imagePageOpen" [examinationID]="'imagePageExaminationId'" [imageIndex]="'imagePageImageIndex'" ></imagepage>
 
+<<<<<<< HEAD
 	<top-menu *ngIf="searchMode && !imagePageOpen"></top-menu>
 	<div id="search-results" class="top-menu-margin" *ngIf="searchMode && !imagePageOpen">
+=======
+	<top-menu *ngIf="searchMode"></top-menu>
+
+	
+	<div id="search-results" class="top-menu-margin" *ngIf="searchMode">
+>>>>>>> d461b7236b03ae699868616b2b715e7e39aa2894
 		<thumbnail ></thumbnail>
 	</div>
 
