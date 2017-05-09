@@ -107,15 +107,19 @@ export class SearchService {
 	}
 
 	getThumbnail(id: number, index:number): any{
+		console.log("RUnning SS getTHumb");
+		
 		var url = (this.server.getUrl() + '/thumbnail/'+id+'/'+index);
 		// Set authorization header
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		headers.append('Content-Type', 'image/jpg');
+		
 		let options = new RequestOptions({ 
-			headers: this.imgHeaders, 
+			headers: headers, 
 			responseType: ResponseContentType.Blob
 		});
-		
+
 		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
@@ -127,6 +131,7 @@ export class SearchService {
 				alert("Server unreachable, try again later!")
 				//this.router.navigate(['/serverunreachable']);
 			});
+
 	}
 
 	getSearchParameters(): void {
