@@ -139,7 +139,7 @@ export class CollectionsMenu implements OnInit {
 		this.searchModeEnabled = false;
 		this.selectedCollectionId = event.currentTarget.getAttribute("data-id");
 		this.privSelectedCollection.next(this.getCollectionById(this.selectedCollectionId));
-		this.router.navigate(['/search']);
+		//this.router.navigate(['/search']);
 		this.privSearchMode.next(this.searchModeEnabled);
 	}
 
