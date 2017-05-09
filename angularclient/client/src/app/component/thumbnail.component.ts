@@ -186,9 +186,7 @@ export class ThumbnailComponent implements OnInit {
 		var countResults:number = 0;
 		for(var i=0; i<this.searchresults.length; i++){
 				countResults = countResults + this.searchresults[i].imagePaths.length;
-				console.log("Antal resultat: " + this.searchresults[i].imagePaths.length);
 		}
-		console.log(countResults);
 		return countResults;
 	}
 

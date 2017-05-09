@@ -14,7 +14,6 @@ import { UserGuard }   from './guard/user.guard';
 const routes: Routes = [
 	{ path: '', component: LoginComponent },
 	{ path: 'search', canActivate: [UserGuard], component: SearchComponent },
-	//{ path: 'image', component: ImagePageComponent },
 	{ path: 'image/:imagepageexaminationid/:imagepageimageindex', canActivate: [UserGuard], component: SearchComponent },
 
 	{ path: 'serverunreachable',canActivate: [UserGuard], component: ServerUnreachable },
