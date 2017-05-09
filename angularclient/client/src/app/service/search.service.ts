@@ -115,6 +115,8 @@ export class SearchService {
 		this.http.get(url, options)
 			.toPromise()
 			.then(response => {
+				console.log("SS response:");
+				console.log(response);
 				return response;
 			})
 			.catch(e => {
