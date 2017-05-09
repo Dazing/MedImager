@@ -848,6 +848,9 @@ select {
 .circle-clipper .circle {
   border-width: 5px; }
 
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+  padding: 0 7px; }
+
 #login-box-logo {
   width: 100%;
   margin-top: 30px;
