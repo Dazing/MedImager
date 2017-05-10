@@ -34,13 +34,18 @@
 				
 			$("#search-button").click(function(){
 				console.log("CLICK READY");
-				delay(800);
-				console.log("Delay done");
-				var matches = [];
-				var searchEles = document.getElementById("thumbnailTemplate").children;
-				for(var i = 0; i < searchEles.length; i++) {
-					console.log(searchEles[i]);
-				}
+				var delayMillis = 1000; //1 second
+
+				setTimeout(function() {
+					//your code to be executed after 1 second
+					console.log("Delay done");
+					var matches = [];
+					var searchEles = document.getElementById("thumbnailTemplate").children;
+					for(var i = 0; i < searchEles.length; i++) {
+						console.log(searchEles[i]);
+					}
+				}, delayMillis);
+				
 			});
 		});
 		
