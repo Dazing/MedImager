@@ -39,6 +39,7 @@ export class PopupComponent {
             this.resolutionLoaded = false;
 
             this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex,url=>{
+                console.log('RES URL: '+url);
                 this.imgSrc = url;
 
                 let thisHandle = this;
