@@ -37,19 +37,24 @@ export class PopupComponent {
 			this.popup = popup;
             this.visible = true;
             this.resolutionLoaded = false;
-
+            console.log('request: '+this.popup.examinationID +'/' + this.popup.imageIndex);
             this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex)
-            .subscribe(res => {
+            .toPromise()
+            .then(res => {
                 this.imgSrc = window.URL.createObjectURL(res.blob());
-                var img = new Image();
+                console.log('imgSrc: '+this.imgSrc);
+                //var img = new Image();
                 var popupScopeHandle = this;
 
-                img.onload = function(){
-                    popupScopeHandle.imageHeight = img.height;
-                    popupScopeHandle.imageWidth = img.width;
-                    popupScopeHandle.resolutionLoaded = true;
-                }
-                img.src = this.imgSrc;
+                // img.onload = function(){
+                //     popupScopeHandle.imageHeight = img.height;
+                //     popupScopeHandle.imageWidth = img.width;
+                //     popupScopeHandle.resolutionLoaded = true;
+                // }
+                //img.src = this.imgSrc;
+            })
+            .catch(e => {
+                console.log(e);
             });
 		})
 
