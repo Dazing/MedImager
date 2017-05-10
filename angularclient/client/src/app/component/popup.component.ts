@@ -44,9 +44,6 @@ export class PopupComponent {
                 console.log(url);
                 this.imgSrc=url;
             })
-            
-
-            
         })
 
 

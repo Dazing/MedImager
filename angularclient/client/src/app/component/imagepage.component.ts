@@ -41,9 +41,14 @@ export class ImagePageComponent {
 		this.url = this.server.getUrl();
 		this.examinationIn = route.url[0].split('/')[1];
 		this.imageIn = route.url[0].split('/')[2];
+		route.url.subscribe()
 	}
 
 	ngOnInit(): void {
+		this.route.params.map(params => params['imagepageexaminationid']).subscribe(examId => {
+			console.log('imagepageexaminationid: '+examId);
+		});
+
 		this.imagePageService.imageData.subscribe(imageData => {
 			if(imageData == null) {
 				this.error = true;
