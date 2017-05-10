@@ -109,7 +109,7 @@ export class SearchService {
 	getThumbnail(id: number, index:number): any{
 		console.log("RUnning SS getTHumb");
 
-		let thumbnail = false;
+		let thumbnail;
 		
 		var url = (this.server.getUrl() + '/thumbnail/'+id+'/'+index);
 		// Set authorization header
@@ -124,11 +124,13 @@ export class SearchService {
 
 		this.http.get(url, options)
 			.map(response => {
-				return response;
+				thumbnail = response;
 			})
 			.catch(e => {
 				return e;
 			});
+
+		return thumbnail;
 	}
 
 	getSearchParameters(): void {
