@@ -540,6 +540,11 @@
     font-size: 50px;
     cursor: pointer; }
 
+#log-out-button {
+  cursor: pointer;
+  display: table;
+  margin: 0 auto 20px; }
+
 .primary-colour {
   background-color: #1de9b6; }
 

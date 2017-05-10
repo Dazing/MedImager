@@ -58,4 +58,5 @@ function setPageWrapperHeight(extra)
 function logOut()
 {
 	sessionStorage.clear();
+	window.location.href = "/";
 }
