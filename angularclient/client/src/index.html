@@ -34,6 +34,8 @@
 				
 			$("#search-button").click(function(){
 				console.log("CLICK READY");
+				delay(800);
+				console.log("Delay done");
 				var matches = [];
 				var searchEles = document.getElementById("thumbnailTemplate").children;
 				for(var i = 0; i < searchEles.length; i++) {
