@@ -192,12 +192,12 @@ export class SearchService {
 		//called by AuthenticatedImageDirective to get images that require auth token
 		var url = (this.server.getUrl() + '/image/'+src);
 		// Set authorization header
-		let headers = new Headers();
-		headers.append('Authorization', sessionStorage.getItem("currentUser"));
-		headers.append('Content-Type', 'image/jpg');
+		let imgHeaders = new Headers();
+		imgHeaders.append('Authorization', sessionStorage.getItem("currentUser"));
+		imgHeaders.append('Content-Type', 'image/jpg');
 		
 		let options = new RequestOptions({ 
-			headers: headers, 
+			headers: imgHeaders, 
 			responseType: ResponseContentType.Blob
 		});
 

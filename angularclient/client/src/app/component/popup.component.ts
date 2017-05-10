@@ -40,11 +40,14 @@ export class PopupComponent {
             console.log('request: '+this.popup.examinationID +'/' + this.popup.imageIndex);
             this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex)
             .toPromise()
-            .then(res => {
-                console.log('popup res:');
-                console.log(res);
-                this.imgSrc = window.URL.createObjectURL(res.blob()).replace('blob:', '');
-                console.log('imgSrc: '+this.imgSrc);
+            .then(response => {
+                console.log("got popup response:");
+                console.log(response);
+                console.log("blobified:");
+                console.log(response.blob());
+			    this.imgSrc = window.URL.createObjectURL(response.blob());
+                console.log("img url:");
+                console.log(this.imgSrc);
                 //var img = new Image();
                 var popupScopeHandle = this;
 
