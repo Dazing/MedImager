@@ -1,7 +1,7 @@
 <div *ngIf="searchMade">
 	<p id="results-count">{{getNumberOfResults()}} resultat</p>
 
-	<template ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
+	<template id="thumbnailTemplate" ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
 		<span  
 			*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
 			[draggableImage]="searchresult.examinationID + '/' + j"
