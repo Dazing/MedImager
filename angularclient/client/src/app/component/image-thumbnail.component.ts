@@ -37,7 +37,8 @@ export class ImageThumbnailComponent implements OnInit{
 
     private fetchImage(): void {
         this.searchService.getImage(this.src, url => {
-            this.image.nativeElement.style.backgroundImage = url;
+            this.thumbnailUrl = url;
+            this.thumbnailLoaded = true;
         },true);
 
 		/*var url = (this.server.getUrl() + '/thumbnail/'+this.src);
