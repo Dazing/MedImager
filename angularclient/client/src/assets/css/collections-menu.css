@@ -148,4 +148,9 @@
     font-size: 50px;
     cursor: pointer; }
 
+#log-out-button {
+  cursor: pointer;
+  display: table;
+  margin: 0 auto 20px; }
+
 /*# sourceMappingURL=collections-menu.css.map */
