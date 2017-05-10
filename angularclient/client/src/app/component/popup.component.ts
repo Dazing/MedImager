@@ -41,7 +41,9 @@ export class PopupComponent {
             this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex)
             .toPromise()
             .then(res => {
-                this.imgSrc = window.URL.createObjectURL(res.blob());
+                console.log('popup res:');
+                console.log(res);
+                this.imgSrc = window.URL.createObjectURL(res.blob()).replace('blob:', '');
                 console.log('imgSrc: '+this.imgSrc);
                 //var img = new Image();
                 var popupScopeHandle = this;
