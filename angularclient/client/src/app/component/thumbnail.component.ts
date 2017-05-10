@@ -199,10 +199,8 @@ export class ThumbnailComponent implements OnInit {
 		a.then(
 			any => {
 				console.log(any._body);
-				console.log("response:");
-				console.log(a);
 				var imgUrl: string;
-				//imgUrl = URL.createObjectURL(a);
+				imgUrl = URL.createObjectURL(any._body);
 				return 'url('+imgUrl+')';
 			},
 			error => {
