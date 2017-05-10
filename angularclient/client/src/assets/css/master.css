@@ -653,8 +653,8 @@
   display: block; }
 
 #results-count {
+  margin: 5px;
   margin-right: 15px;
-  padding-top: 10px;
   text-align: right;
   font-size: 22px;
   color: #424242; }
