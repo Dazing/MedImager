@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable, SecurityContext } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Headers, Http, RequestOptions, ResponseContentType, Response} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -167,7 +167,7 @@ export class SearchService {
 		return;
 	}
 
-	getImage(src: string, callback:(url)=>void, thumbnail?:boolean): void {
+	getImage(src: string, callback:(url:SafeResourceUrl)=>void, thumbnail?:boolean): void {
 		//called by AuthenticatedImageDirective to get images that require auth token
 
 		if (!/[0-9]+\/[0-9]+/.test(src)) {
@@ -194,13 +194,13 @@ export class SearchService {
 			.toPromise()
             .then(response => {
 				callback(
-					this.sanitizer.sanitize(SecurityContext.RESOURCE_URL,
-						this.sanitizer.bypassSecurityTrustUrl(
+					//this.sanitizer.sanitize(SecurityContext.URL,
+						this.sanitizer.bypassSecurityTrustResourceUrl(
 							window.URL.createObjectURL(
 								response.blob()
 							)
 						)
-					)
+					//)
 				);
 			})
 			.catch(e => {

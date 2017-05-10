@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import { Server } from '../model/server';
 import { SearchService } from '../service/search.service';
@@ -17,7 +18,7 @@ export class PopupComponent {
     public imageHeight: number;
     public imageWidth: number;
     public liked:boolean = false;
-    public imgSrc = '';
+    public imgSrc:SafeResourceUrl = '';
 
     private dialogVisible = false;
     private dialogType: string;
@@ -39,17 +40,9 @@ export class PopupComponent {
             this.resolutionLoaded = false;
 
             this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex,url=>{
-                console.log('RES URL: '+url);
-                this.imgSrc = url;
-
-                let thisHandle = this;
-                let img = new Image();
-                img.onload = function(){
-                    thisHandle.imageHeight = img.height;
-                    thisHandle.imageWidth = img.width;
-                    thisHandle.resolutionLoaded = true;
-                }
-                img.src = this.imgSrc;
+                console.log('RES URL: ');
+                console.log(url);
+                this.imgSrc=url;
             })
             
 
