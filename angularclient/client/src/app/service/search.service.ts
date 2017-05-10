@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { Injectable } from '@angular/core';
+import { Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Headers, Http, RequestOptions, ResponseContentType, Response} from '@angular/http';
 import { Router } from '@angular/router';
@@ -194,9 +194,11 @@ export class SearchService {
 			.toPromise()
             .then(response => {
 				callback(
-					this.sanitizer.bypassSecurityTrustUrl(
-						window.URL.createObjectURL(
-							response.blob()
+					this.sanitizer.sanitize(SecurityContext.RESOURCE_URL,
+						this.sanitizer.bypassSecurityTrustUrl(
+							window.URL.createObjectURL(
+								response.blob()
+							)
 						)
 					)
 				);
