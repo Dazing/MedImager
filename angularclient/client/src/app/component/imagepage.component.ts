@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Server } from '../model/server';
-import {Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { ImagePageService } from '../service/imagepage.service';
 import { Observable } from 'rxjs';
 import { CollectionsMenu } from './collections-menu.component';

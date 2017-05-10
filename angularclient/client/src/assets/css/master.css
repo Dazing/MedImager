@@ -41,7 +41,8 @@
   top: 0;
   right: 0;
   height: 69px;
-  z-index: 90; }
+  z-index: 90;
+  background-color: #ffffff; }
 
 #menu-bar {
   z-index: 100;
@@ -187,7 +188,7 @@
   cursor: pointer;
   color: #1de9b6;
   font-size: 3rem;
-  right: 70px; }
+  right: 15px; }
 
 .collection-topmenu-details-container {
   position: absolute;

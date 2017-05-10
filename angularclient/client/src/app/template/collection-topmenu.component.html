@@ -1,7 +1,7 @@
 <div id="menu-wrapper" class="z-depth-1" *ngIf="collectionSet">
     <span class="collection-topmenu-title">{{collection.name}}</span>
 
-    <i class="material-icons unselectable collection-topmenu-details-button" (click)="clickDetailsButton($event)">reorder
+    <i class="material-icons unselectable collection-topmenu-details-button" (click)="clickDetailsButton($event)">settings
             <div #description class="collection-topmenu-details-container z-depth-1" 
             [ngClass]="{'expanded': detailsVisible}"
             [ngStyle]="{'height': (detailsVisible ? description.scrollHeight+'px' : '0')}">
@@ -26,5 +26,4 @@
                 
             </div>
         </i>
-    <i class='material-icons unselectable collection-topmenu-settings-button' id="settings-button">settings</i>
 </div>

@@ -54,3 +54,8 @@ function setPageWrapperHeight(extra)
 	//$("#page-wrapper").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
 	//$(".collections-menu").css("margin-top", $("#menu-bar").outerHeight() + extra + "px");
 }
+
+function logOut()
+{
+	$.cookie('currentUser', null, {path: '/'});
+}
