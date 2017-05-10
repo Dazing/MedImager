@@ -24,9 +24,9 @@ export class AuthenticatedImageDirective {
     }
 
     private getImage(): void {
-        this.searchService.getImage(this.src).subscribe(res => {
-            this.el.nativeElement.setAttribute('src', window.URL.createObjectURL(res.blob()))
-        });
+        this.searchService.getImage(this.src, url => {
+            this.el.nativeElement.setAttribute('src', url);
+        })
     }
   
 }
