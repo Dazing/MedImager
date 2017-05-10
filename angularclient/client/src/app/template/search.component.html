@@ -10,7 +10,7 @@
 
 <div [ngClass]="{'collections-menu-margin': collectionsMenuVisible}">
 
-	<imagepage *ngIf="imagePageOpen" [examinationID]="'imagePageExaminationId'" [imageIndex]="'imagePageImageIndex'" ></imagepage>
+	<imagepage *ngIf="imagePageOpen"></imagepage>
 
 
 	<top-menu *ngIf="searchMode && !imagePageOpen"></top-menu>
