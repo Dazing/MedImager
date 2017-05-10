@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Headers, Http, RequestOptions, ResponseContentType, Response} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -112,33 +112,6 @@ export class SearchService {
 			});
 	}
 
-	getThumbnail(id: number, index:number): any{
-		console.log("RUnning SS getTHumb");
-
-		let thumbnail;
-		
-		var url = (this.server.getUrl() + '/thumbnail/'+id+'/'+index);
-		// Set authorization header
-		let headers = new Headers();
-		headers.append('Authorization', sessionStorage.getItem("currentUser"));
-		headers.append('Content-Type', 'image/jpg');
-		
-		let options = new RequestOptions({ 
-			headers: headers, 
-			responseType: ResponseContentType.Blob
-		});
-
-		this.http.get(url, options)
-			.map(response => {
-				thumbnail = response;
-			})
-			.catch(e => {
-				return e;
-			});
-
-		return thumbnail;
-	}
-
 	getSearchParameters(): void {
 		if (!this.searchParameterListReceived) {
 			var url = (this.server.getUrl()+'/initValues');
@@ -194,9 +167,19 @@ export class SearchService {
 		return;
 	}
 
-	getImage(src: string, callback:(url:string)=>void): void {
+	getImage(src: string, callback:(url:SafeUrl)=>void, thumbnail?:boolean): void {
 		//called by AuthenticatedImageDirective to get images that require auth token
-		var url = (this.server.getUrl() + '/image/'+src);
+
+		if (!/[0-9]+\/[0-9]+/.test(src)) {
+            console.warn('WARNING: requested image with src ' +src+'.\n requests to SearchService.getImage() should be on the form n+/n+');
+        }
+
+		var url = this.server.getUrl();
+		if (thumbnail==undefined || thumbnail==false) {
+			url += '/image/'+src;
+		} else {
+			url += '/thumbnail/'+src;
+		}
 		// Set authorization header
 		let imgHeaders = new Headers();
 		imgHeaders.append('Authorization', sessionStorage.getItem("currentUser"));
@@ -210,16 +193,13 @@ export class SearchService {
 		this.http.get(url, options)
 			.toPromise()
             .then(response => {
-                console.log("got thumbnail response:");
-                console.log(response);
-                console.log("blobified:");
-                console.log(response.blob());
-			    let unsanitizedUrl = window.URL.createObjectURL(response.blob());
-				let sanitizedUrl = this.sanitizer.bypassSecurityTrustUrl(unsanitizedUrl);
-                console.log("sanitized url::");
-                console.log(sanitizedUrl);
-				callback(sanitizedUrl);
-
+				callback(
+					this.sanitizer.bypassSecurityTrustUrl(
+						window.URL.createObjectURL(
+							response.blob()
+						)
+					)
+				);
 			})
 			.catch(e => {
 				console.log("error fetching image");

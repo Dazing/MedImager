@@ -26,7 +26,7 @@ export class AuthenticatedImageDirective {
     private getImage(): void {
         this.searchService.getImage(this.src, url => {
             this.el.nativeElement.setAttribute('src', url);
-        })
+        });
     }
   
 }
