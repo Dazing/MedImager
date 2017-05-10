@@ -47,6 +47,10 @@
 						let examId = searchEles[i].dataset.examinationid;
 						let index = searchEles[i].dataset.imageindex;
 						
+						if (!examId || !index) {
+							continue;
+						}
+
 						console.log(searchEles[i].dataset);
 						let url = "https://www.medimager.com/api/thumbnail/"+examId+"/"+index;
 	
