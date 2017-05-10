@@ -5,7 +5,7 @@
 		<span  
 			*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
 			[draggableImage]="searchresult.examinationID + '/' + j"
-			id="{{'result-image-'+i+j}}" 
+			id="generateId(searchresult.examinationID,j)" 
 			class="unselectable"
 			data-id="{{i}}"
 			[attr.data-examinationid]="searchresult.examinationID"
@@ -26,6 +26,6 @@
 <p id="search-information" *ngIf="!searchMade">Inväntar din sökning</p>
 
 <!--[ngStyle]="{'background-image': 'url(' + url+'/thumbnail/'+searchresult.examinationID +'/' +j + ')'}" 
-
+{{'result-image-'+i+j}}
 [ngStyle]="{'background-image': getThumbnail(searchresult.examinationID,j)}"
 -->
