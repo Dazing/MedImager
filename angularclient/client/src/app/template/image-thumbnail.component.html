@@ -1,9 +1,8 @@
 <span [hidden]="!thumbnailLoaded"  
     [draggableImage]="src"
-    #image
     id="{{'result-image-'+examinationID+'-'+imageIndex}}" 
     class="unselectable"
-    [style.backgroundImage]="thumbnailUrl"
+    [ngStyle]="{'background-image':  'url(' + thumbnailUrl  + ')' }"
 >
 
 </span>
@@ -11,7 +10,7 @@
 
 
 <!--
-[ngStyle]="{'background-image':  'url(' + thumbnailUrl  + ')' }"
+
 
 
 <span  

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Http, RequestOptions, ResponseContentType, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -12,7 +12,6 @@ import { SearchService } from '../service/search.service';
 })
 export class ImageThumbnailComponent implements OnInit{
     @Input('src') src: string = '';
-    @ViewChild('image') image;
 
     thumbnailLoaded: boolean = false;
     thumbnailUrl:any = '';
@@ -36,12 +35,8 @@ export class ImageThumbnailComponent implements OnInit{
     }
 
     private fetchImage(): void {
-        this.searchService.getImage(this.src, url => {
-            this.thumbnailUrl = url;
-            this.thumbnailLoaded = true;
-        },true);
 
-		/*var url = (this.server.getUrl() + '/thumbnail/'+this.src);
+		var url = (this.server.getUrl() + '/thumbnail/'+this.src);
 		// Set authorization header
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
@@ -61,6 +56,6 @@ export class ImageThumbnailComponent implements OnInit{
 			.catch(e => {
 				console.log("error fetching image");
 			});
-            */
+            
     }
 }
