@@ -13,7 +13,7 @@ export class ImageThumbnailComponent implements OnInit{
     @Input('src') src: string = '';
 
     thumbnailLoaded: boolean = false;
-    thumbnailUrl: string;
+    thumbnailUrl: string = '';
 
     examinationID = '';
     imageIndex = '';

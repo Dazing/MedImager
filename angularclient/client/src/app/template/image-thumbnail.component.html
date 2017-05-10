@@ -1,8 +1,8 @@
-<span   
+<span [hidden]="!thumbnailLoaded"  
     [draggableImage]="src"
     id="{{'result-image-'+examinationID+'-'+imageIndex}}" 
     class="unselectable"
-    [ngStyle]="{'background-image':  'url('+ (thumbnailLoaded ? thumbnailUrl : '')  +')'}"
+    [ngStyle]="{'background-image':  'url(' + thumbnailUrl  + ')' }"
 >
 
 </span>
