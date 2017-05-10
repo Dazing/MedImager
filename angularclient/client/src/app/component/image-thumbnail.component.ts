@@ -12,7 +12,7 @@ import { Server } from '../model/server';
 export class ImageThumbnailComponent implements OnInit{
     @Input('src') src: string = '';
 
-    thumnailLoaded: boolean = false;
+    thumbnailLoaded: boolean = false;
     thumbnailUrl: string;
 
     examinationID = '';
@@ -56,7 +56,7 @@ export class ImageThumbnailComponent implements OnInit{
 			    this.thumbnailUrl = window.URL.createObjectURL(response.blob());
                 console.log("thumb url:");
                 console.log(this.thumbnailUrl);
-                this.thumnailLoaded = true;
+                this.thumbnailLoaded = true;
 			})
 			.catch(e => {
 				console.log("error fetching image");
