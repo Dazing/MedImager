@@ -194,7 +194,7 @@ export class SearchService {
 		return;
 	}
 
-	getImage(src: string, callback:(url)=>void): void {
+	getImage(src: string, callback:(url:string)=>void): void {
 		//called by AuthenticatedImageDirective to get images that require auth token
 		var url = (this.server.getUrl() + '/image/'+src);
 		// Set authorization header

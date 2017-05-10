@@ -37,19 +37,22 @@ export class PopupComponent {
 			this.popup = popup;
             this.visible = true;
             this.resolutionLoaded = false;
-            console.log('request: '+this.popup.examinationID +'/' + this.popup.imageIndex);
 
             this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex,url=>{
                 this.imgSrc = url;
+
+                let thisHandle = this;
+                let img = new Image();
+                img.onload = function(){
+                    thisHandle.imageHeight = img.height;
+                    thisHandle.imageWidth = img.width;
+                    thisHandle.resolutionLoaded = true;
+                }
+                img.src = this.imgSrc;
             })
             
 
-            // img.onload = function(){
-            //     popupScopeHandle.imageHeight = img.height;
-            //     popupScopeHandle.imageWidth = img.width;
-            //     popupScopeHandle.resolutionLoaded = true;
-            // }
-            //img.src = this.imgSrc;
+            
         })
 
 
