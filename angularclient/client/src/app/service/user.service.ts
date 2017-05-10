@@ -81,9 +81,17 @@ export class UserService {
 				
 				// login successful if there's a jwt token in the response
 				if (response.text()) {
+
+					
 					// store email and jwt token in local storage to keep user logged in between page refreshes
 					sessionStorage.setItem('currentUser', response.text());
- 
+					
+					window.setInterval(function(){
+						
+						sessionStorage.removeItem('currentUser')
+
+					}, 3600000);
+
 					// return true to indicate successful login
 					this.privError.next();
 					return true;
@@ -102,6 +110,10 @@ export class UserService {
 		console.error('An error occurred', error); // for demo purposes only
 		return Promise.reject(error.message || error);
 	}	
+
+	deleteToken(): void {
+
+	}
 
 	toggleUserPage(value?:boolean): void {
 		this.userPageVisibleValue = (value != undefined) ? value : !this.userPageVisibleValue;

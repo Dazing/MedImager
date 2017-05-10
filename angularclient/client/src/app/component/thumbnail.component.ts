@@ -190,6 +190,10 @@ export class ThumbnailComponent implements OnInit {
 		return countResults;
 	}
 
+	generateId(examId: number, index: number):string {
+		return "result-image-"+examId+"-"+index; 
+	}
+
 	getThumbnail(id: number, index:number){
 		this.searchService.getThumbnail(id,index).then(
 			any => {
