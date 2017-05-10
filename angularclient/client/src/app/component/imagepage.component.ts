@@ -37,7 +37,7 @@ export class ImagePageComponent {
 	private url;
 
 	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location, private route:ActivatedRoute) {
-		console.log("URLEN FOLK: " + location.path);
+		console.log("URLEN FOLK: " + route);
 		this.url = this.server.getUrl();
 	}
 
