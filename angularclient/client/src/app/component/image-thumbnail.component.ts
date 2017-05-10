@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Http, RequestOptions, ResponseContentType, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -12,6 +12,7 @@ import { SearchService } from '../service/search.service';
 })
 export class ImageThumbnailComponent implements OnInit{
     @Input('src') src: string = '';
+    @ViewChild('image') image;
 
     thumbnailLoaded: boolean = false;
     thumbnailUrl:any = '';
@@ -34,15 +35,12 @@ export class ImageThumbnailComponent implements OnInit{
         this.imageIndex = srcSplit[1];
     }
 
-    private fetchImage(): void { 
+    private fetchImage(): void {
         this.searchService.getImage(this.src, url => {
-            this.thumbnailUrl = url;
-            this.thumbnailLoaded = true;
+            this.image.nativeElement.style.backgroundImage = url;
         },true);
-        /*
-        console.log("RUnning SS getTHumb");
-		
-		var url = (this.server.getUrl() + '/thumbnail/'+this.src);
+
+		/*var url = (this.server.getUrl() + '/thumbnail/'+this.src);
 		// Set authorization header
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
@@ -57,13 +55,11 @@ export class ImageThumbnailComponent implements OnInit{
 			.toPromise()
             .then(response => {
 			    this.thumbnailUrl = window.URL.createObjectURL(response.blob());
-                console.log("thumb url:");
-                console.log(this.thumbnailUrl);
                 this.thumbnailLoaded = true;
 			})
 			.catch(e => {
 				console.log("error fetching image");
-			});*/
-
+			});
+            */
     }
 }
