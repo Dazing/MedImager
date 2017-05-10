@@ -35,6 +35,7 @@ import { Server } from './model/server'
 
 import { DraggableImageDirective } from './directive/draggableImage.directive';
 import { DroppableCollectionDirective } from './directive/droppableCollection.directive';
+import { AuthenticatedImageDirective } from './directive/authenticatedImage.directive';
 
 import { SearchCompletion } from './pipe/search-completion.pipe';
 
@@ -58,6 +59,7 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		ServerUnreachable,
 		DraggableImageDirective,
 		DroppableCollectionDirective,
+		AuthenticatedImageDirective,
 		SearchCompletion
 	],
 	imports: [

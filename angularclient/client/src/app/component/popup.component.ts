@@ -17,6 +17,7 @@ export class PopupComponent {
     public imageHeight: number;
     public imageWidth: number;
     public liked:boolean = false;
+    public imgSrc = '';
 
     private dialogVisible = false;
     private dialogType: string;
@@ -36,15 +37,20 @@ export class PopupComponent {
 			this.popup = popup;
             this.visible = true;
             this.resolutionLoaded = false;
-            var img = new Image();
-            var popupScopeHandle = this;
 
-            img.onload = function(){
-                popupScopeHandle.imageHeight = img.height;
-                popupScopeHandle.imageWidth = img.width;
-                popupScopeHandle.resolutionLoaded = true;
-            }
-            img.src = this.getUrl();
+            this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex)
+            .subscribe(res => {
+                this.imgSrc = window.URL.createObjectURL(res.blob());
+                var img = new Image();
+                var popupScopeHandle = this;
+
+                img.onload = function(){
+                    popupScopeHandle.imageHeight = img.height;
+                    popupScopeHandle.imageWidth = img.width;
+                    popupScopeHandle.resolutionLoaded = true;
+                }
+                img.src = this.imgSrc;
+            });
 		})
 
         this.popupService.dialogs.subscribe(dialog => {
@@ -70,9 +76,7 @@ export class PopupComponent {
         this.visible = false;
     }
 
-    private getUrl(): string {
-        return this.server.getUrl() + '/image/' + this.popup.examinationID +'/' + this.popup.imageIndex;
-    }
+  
 
     private getIndex(): string {
         return this.popup.imageIndex;

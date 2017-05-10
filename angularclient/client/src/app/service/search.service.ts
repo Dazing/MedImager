@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions, ResponseContentType} from '@angular/http';
+import { Headers, Http, RequestOptions, ResponseContentType, Response} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -188,8 +188,21 @@ export class SearchService {
 		return;
 	}
 
-	getImage(): Image {
-		return new Image();
+	getImage(src: string): Observable<Response> {
+		//called by AuthenticatedImageDirective to get images that require auth token
+		var url = (this.server.getUrl() + '/image/'+src);
+		// Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		headers.append('Content-Type', 'image/jpg');
+		
+		let options = new RequestOptions({ 
+			headers: headers, 
+			responseType: ResponseContentType.Blob
+		});
+
+		return this.http.get(url, options);
+			
 	}
 
 	getSearchTerms(): string[] {

@@ -3,7 +3,8 @@
 
 	<template ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
 		<image-thumbnail *ngFor="let imagePath of searchresult.imagePaths; let j=index"  
-		[src]="searchresult.examinationID + '/' + j"></image-thumbnail>
+		[src]="searchresult.examinationID + '/' + j"
+		(click)="onImageClick(i,j)"></image-thumbnail>
 	</template>
 	
 	<p id="search-information" *ngIf="searchresults.length == 0">Inga bilder matchade valda sökkriterier.</p>
