@@ -36,8 +36,8 @@ export class ImagePageComponent {
 	private otherExams:string[] = [];
 	private url;
 
-	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location) {
-		console.log("URLEN FOLK: " + this.location.path);
+	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location, private route:ActivatedRoute) {
+		console.log("URLEN FOLK: " + location.path);
 		this.url = this.server.getUrl();
 	}
 
