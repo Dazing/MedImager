@@ -122,7 +122,7 @@ export class SearchService {
 			responseType: ResponseContentType.Blob
 		});
 
-		return this.http.get(url, options)
+		this.http.get(url, options)
 			.map(response => {
 				return response;
 			})
