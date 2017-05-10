@@ -198,12 +198,10 @@ export class ThumbnailComponent implements OnInit {
 		var a = this.searchService.getThumbnail(id,index);
 		a.then(
 			any => {
-				console.log(any._body);
-				console.log("response:");
-				console.log(a);
+				console.log("Any:"+any._body);
 				var imgUrl: string;
-				//imgUrl = URL.createObjectURL(a);
-				return 'url('+imgUrl+')';
+				imgUrl = URL.createObjectURL(any._body);
+				 'url('+imgUrl+')';
 			},
 			error => {
 

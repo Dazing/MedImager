@@ -123,14 +123,11 @@ export class SearchService {
 		});
 
 		return this.http.get(url, options)
-			.toPromise()
-			.then(response => {
-				console.log("SS response:");
-				console.log(response.blob());
-				return Promise.resolve(response);
+			.map(response => {
+				return response;
 			})
 			.catch(e => {
-				return Promise.reject(e);
+				return e;
 			});
 	}
 
