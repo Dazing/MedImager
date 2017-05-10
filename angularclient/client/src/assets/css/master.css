@@ -41,7 +41,8 @@
   top: 0;
   right: 0;
   height: 69px;
-  z-index: 90; }
+  z-index: 90;
+  background-color: #ffffff; }
 
 #menu-bar {
   z-index: 100;
