@@ -5,7 +5,7 @@
 		<span  
 			*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
 			[draggableImage]="searchresult.examinationID + '/' + j"
-			id="{{'result-image-'+i+j}}" 
+			id="{{'result-image-'+searchresult.examinationID+'-'+j}}" 
 			class="unselectable"
 			[attr.data-examinationid]="searchresult.examinationID"
 			[attr.data-imageIndex]="j"
