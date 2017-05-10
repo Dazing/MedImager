@@ -28,5 +28,17 @@
 		<app-root>
 			
 		</app-root>
+
+		<script>
+		$('document').ready(function() {
+			console.log("DOC READY");
+			var matches = [];
+			var searchEles = document.getElementById("searchMade").children;
+			for(var i = 0; i < searchEles.length; i++) {
+				console.log(searchEles[i]);
+			}
+		});
+		
+	</script>
 </body>
 </html>
