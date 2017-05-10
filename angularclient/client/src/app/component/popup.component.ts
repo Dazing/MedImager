@@ -38,30 +38,20 @@ export class PopupComponent {
             this.visible = true;
             this.resolutionLoaded = false;
             console.log('request: '+this.popup.examinationID +'/' + this.popup.imageIndex);
-            this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex)
-            .toPromise()
-            .then(response => {
-                console.log("got popup response:");
-                console.log(response);
-                console.log("blobified:");
-                console.log(response.blob());
-			    this.imgSrc = window.URL.createObjectURL(response.blob());
-                console.log("img url:");
-                console.log(this.imgSrc);
-                //var img = new Image();
-                var popupScopeHandle = this;
 
-                // img.onload = function(){
-                //     popupScopeHandle.imageHeight = img.height;
-                //     popupScopeHandle.imageWidth = img.width;
-                //     popupScopeHandle.resolutionLoaded = true;
-                // }
-                //img.src = this.imgSrc;
+            this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex,url=>{
+                this.imgSrc = url;
             })
-            .catch(e => {
-                console.log(e);
-            });
-		})
+            
+
+            // img.onload = function(){
+            //     popupScopeHandle.imageHeight = img.height;
+            //     popupScopeHandle.imageWidth = img.width;
+            //     popupScopeHandle.resolutionLoaded = true;
+            // }
+            //img.src = this.imgSrc;
+        })
+
 
         this.popupService.dialogs.subscribe(dialog => {
             this.dialogType = dialog;

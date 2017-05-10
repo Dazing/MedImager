@@ -1,5 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Headers, Http, RequestOptions, ResponseContentType, Response} from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -39,7 +40,12 @@ export class SearchService {
 	private privTags: Subject<string[]>;
 	private currentTags: string[] = [];
 
-	constructor(private http: Http, private router: Router, private server: Server) {
+	constructor(
+		private http: Http, 
+		private router: Router, 
+		private server: Server,
+		private sanitizer: DomSanitizer
+	){
 		this.privImages = new Subject<string[]>();
         this.images = this.privImages.asObservable();
 
@@ -188,7 +194,7 @@ export class SearchService {
 		return;
 	}
 
-	getImage(src: string): Observable<Response> {
+	getImage(src: string, callback:(url)=>void): void {
 		//called by AuthenticatedImageDirective to get images that require auth token
 		var url = (this.server.getUrl() + '/image/'+src);
 		// Set authorization header
@@ -201,7 +207,23 @@ export class SearchService {
 			responseType: ResponseContentType.Blob
 		});
 
-		return this.http.get(url, options);
+		this.http.get(url, options)
+			.toPromise()
+            .then(response => {
+                console.log("got thumbnail response:");
+                console.log(response);
+                console.log("blobified:");
+                console.log(response.blob());
+			    let unsanitizedUrl = window.URL.createObjectURL(response.blob());
+				let sanitizedUrl = this.sanitizer.bypassSecurityTrustUrl(unsanitizedUrl);
+                console.log("sanitized url::");
+                console.log(sanitizedUrl);
+				callback(sanitizedUrl);
+
+			})
+			.catch(e => {
+				console.log("error fetching image");
+			});
 			
 	}
 
