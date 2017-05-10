@@ -46,7 +46,7 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		CollectionTopMenu,
 		FooterComponent,
 		SearchComponent,
-		ThumbnailComponent,,
+		ThumbnailComponent,
 		ImageThumbnailComponent,
 		CollectionThumbnailComponent,
 		UserPageComponent,
