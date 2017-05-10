@@ -7,6 +7,8 @@
 			[draggableImage]="searchresult.examinationID + '/' + j"
 			id="{{'result-image-'+searchresult.examinationID+'-'+j}}" 
 			class="unselectable"
+
+[ngStyle]="{'background-image': getThumbnail(searchresult.examinationID,j)}"
 			[attr.data-examinationid]="searchresult.examinationID"
 			[attr.data-imageIndex]="j"
 			(click)="onImageClick(i,j)"

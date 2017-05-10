@@ -127,14 +127,11 @@ export class SearchService {
 			.then(response => {
 				console.log("SS response:");
 				console.log(response.blob());
-				return response;
+				return Promise.resolve(response);
 			})
 			.catch(e => {
 				return Promise.reject(e);
 			});
-
-
-
 	}
 
 	getSearchParameters(): void {
