@@ -57,6 +57,7 @@
 						.then(response => response.blob())
 						.then(blob => {
 							let img = document.getElementById('result-image-'+examId+'-'+index);
+							if (!img){ return }
 							let url = URL.createObjectURL(blob);
 							img.style.backgroundImage = `url(${url})`;
 						})
