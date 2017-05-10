@@ -37,11 +37,6 @@ export class ImagePageComponent {
 	private url;
 
 	constructor(private server: Server, private imagePageServiceOld: ImagePageService, private location: Location, private route:ActivatedRoute) {
-		console.log("URLEN FOLK: ");
-		console.log(route.url);
-		this.url = this.server.getUrl();
-		this.examinationIn = route.url[0].split('/')[1];
-		this.imageIn = route.url[0].split('/')[2];
 	}
 
 	ngOnInit(): void {
@@ -51,8 +46,8 @@ export class ImagePageComponent {
 					
 				}
 				console.log(url[0]);
-					console.log(url[1]);
-					console.log(url[2]);
+				console.log(url[1]);
+				console.log(url[2]);
 			}
 		});
 		/*
