@@ -2,24 +2,8 @@
 	<p id="results-count">{{getNumberOfResults()}} resultat</p>
 
 	<template ngFor let-searchresult [ngForOf]="searchresults" let-i="index" >
-		<span  
-			*ngFor="let imagePath of searchresult.imagePaths; let j=index" 
-			[draggableImage]="searchresult.examinationID + '/' + j"
-			id="{{'result-image-'+searchresult.examinationID+'-'+j}}" 
-			class="unselectable"
-
-[ngStyle]="{'background-image': getThumbnail(searchresult.examinationID,j)}"
-			[attr.data-examinationid]="searchresult.examinationID"
-			[attr.data-imageIndex]="j"
-			(click)="onImageClick(i,j)"
-		>
-			<div class="opacity-wrapper" *ngIf="gridType == 'search'">
-				<div *ngIf="searchresults[i].diagDef.length > 0" class="inner-text"><b>Diagnos:</b> {{getDiagDef(i)}}</div>
-				<div *ngIf="searchresults[i].diagTent.length > 0" class="inner-text"><b>Tentativ diagnos:</b> {{getDiagTent(i)}}</div>
-				<div *ngIf="searchresults[i].diagHist.length > 0" class="inner-text"><b>Tidigare diagnos:</b> {{getDiagHist(i)}}</div>
-				<div class="inner-text"><b>Ålder:</b> {{getAge(i)}} år</div>
-			</div>
-		</span>
+		<image-thumbnail *ngFor="let imagePath of searchresult.imagePaths; let j=index"  
+		[src]="searchresult.examinationID + '/' + j"></image-thumbnail>
 	</template>
 	
 	<p id="search-information" *ngIf="searchresults.length == 0">Inga bilder matchade valda sökkriterier.</p>

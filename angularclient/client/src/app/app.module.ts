@@ -20,6 +20,7 @@ import { NotFound } from './component/not-found.component';
 import { ServerUnreachable } from './component/server-unreachable.component';
 import { PopupComponent } from './component/popup.component';
 import { AdvancedFormComponent } from './component/advanced-form.component';
+import { ImageThumbnailComponent } from './component/image-thumbnail.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -45,7 +46,8 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		CollectionTopMenu,
 		FooterComponent,
 		SearchComponent,
-		ThumbnailComponent,
+		ThumbnailComponent,,
+		ImageThumbnailComponent,
 		CollectionThumbnailComponent,
 		UserPageComponent,
 		ImagePageComponent,
