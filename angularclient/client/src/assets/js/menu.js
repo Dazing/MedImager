@@ -57,5 +57,5 @@ function setPageWrapperHeight(extra)
 
 function logOut()
 {
-	$.cookie('currentUser', null, {path: '/'});
+	sessionStorage.clear();
 }
