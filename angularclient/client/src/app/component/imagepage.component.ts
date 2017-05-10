@@ -22,8 +22,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class ImagePageComponent {
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
-	@Input('examinationID') examinationIn: number;
-	@Input('imageIndex') imageIn: number;
+	private examinationIn: number;
+	private imageIn: number;
 
 	private collectionsMenuVisible = false;
 	
@@ -36,8 +36,11 @@ export class ImagePageComponent {
 	private otherExams:string[] = [];
 	private url;
 
-	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location) {
+	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location, private route:ActivatedRoute) {
+		console.log("URLEN FOLK: " + route.url);
 		this.url = this.server.getUrl();
+		this.examinationIn = route.url[0].split('/')[1];
+		this.imageIn = route.url[0].split('/')[2];
 	}
 
 	ngOnInit(): void {
