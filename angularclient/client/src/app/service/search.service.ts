@@ -167,7 +167,7 @@ export class SearchService {
 		return;
 	}
 
-	getImage(src: string, callback:(url:SafeUrl)=>void, thumbnail?:boolean): void {
+	getImage(src: string, callback:(url)=>void, thumbnail?:boolean): void {
 		//called by AuthenticatedImageDirective to get images that require auth token
 
 		if (!/[0-9]+\/[0-9]+/.test(src)) {
