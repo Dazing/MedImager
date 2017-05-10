@@ -18,19 +18,19 @@
 				<div *ngIf="searchresults[i].diagHist.length > 0" class="inner-text"><b>Tidigare diagnos:</b> {{getDiagHist(i)}}</div>
 				<div class="inner-text"><b>Ålder:</b> {{getAge(i)}} år</div>
 			</div>
+			<script>
+					console.log("DOC READY");
+					var matches = [];
+					var searchEles = document.getElementById("searchMade").children;
+					for(var i = 0; i < searchEles.length; i++) {
+						console.log(searchEles[i]);
+					}
+			
+		
+			</script>
 		</span>
 	</template>
-	<script>
-		$('document').ready(function() {
-			console.log("DOC READY");
-			var matches = [];
-			var searchEles = document.getElementById("searchMade").children;
-			for(var i = 0; i < searchEles.length; i++) {
-				console.log(searchEles[i]);
-			}
-		});
-		
-	</script>
+	
 	<p id="search-information" *ngIf="searchresults.length == 0">Inga bilder matchade valda sökkriterier.</p>
 </div>
 <p id="search-information" *ngIf="!searchMade">Inväntar din sökning</p>
