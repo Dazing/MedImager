@@ -36,19 +36,26 @@ export class ImagePageComponent {
 	private otherExams:string[] = [];
 	private url;
 
-	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location, private route:ActivatedRoute) {
-		console.log("URLEN FOLK: " + route.url);
+	constructor(private server: Server, private imagePageServiceOld: ImagePageService, private location: Location, private route:ActivatedRoute) {
+		console.log("URLEN FOLK: ");
+		console.log(route.url);
 		this.url = this.server.getUrl();
 		this.examinationIn = route.url[0].split('/')[1];
 		this.imageIn = route.url[0].split('/')[2];
-		route.url.subscribe()
 	}
 
 	ngOnInit(): void {
-		this.route.params.map(params => params['imagepageexaminationid']).subscribe(examId => {
-			console.log('imagepageexaminationid: '+examId);
+		this.route.url.subscribe(url => {
+			if (url.length == 3) {
+				if (url[0].toString() == 'search') {
+					
+				}
+				console.log(url[0]);
+					console.log(url[1]);
+					console.log(url[2]);
+			}
 		});
-
+		/*
 		this.imagePageService.imageData.subscribe(imageData => {
 			if(imageData == null) {
 				this.error = true;
@@ -73,6 +80,7 @@ export class ImagePageComponent {
 		});
 		this.imagePageService.getImageData(this.examinationIn);
 		this.imagePageService.getOtherExaminations(this.examinationIn);
+		*/
 	}
 
 	notNull(value: any){
