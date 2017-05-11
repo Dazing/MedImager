@@ -1,10 +1,13 @@
 package com.MedImager.ExaminationServer;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 import java.sql.*;
 
 import javax.ws.rs.Consumes;
@@ -24,8 +27,13 @@ import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.zeroturnaround.zip.ZipUtil;
 
+import medview.datahandling.examination.ExaminationIdentifier;
+import medview.datahandling.examination.MVDHandler;
 import medview.datahandling.examination.NoSuchExaminationException;
+import medview.datahandling.examination.filter.ExaminationContentFilter;
+import misc.foundation.DefaultProgressNotifiable;
 import misc.foundation.MethodNotSupportedException;
 
 /**
@@ -282,6 +290,36 @@ public class MyResource {
 	    c.close();
         return result;
     }
+    @Secured
+    @GET
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    @Path("/collection/export/{collectionID}")
+    public Response exportCollection(@Context SecurityContext securityContext,@PathParam("collectionID") int collectionID) throws Exception{
+	    Connection c = new DatabaseConnection().getConnection();
+	    int id = Integer.parseInt(securityContext.getUserPrincipal().getName());
+	    String addQuerry = "SELECT examinationID FROM collectionitem"
+	    		+ " WHERE EXISTS (SELECT 1 FROM bookmark WHERE bookmark.user_id= " + id + " AND bookmark.collection_id=" + collectionID + " OR collectionitem.user_id = " + id + ")"
+	    		+ " AND collection_id="+ collectionID +";";
+	    Statement stmt = c.createStatement();
+	    ResultSet rs = stmt.executeQuery(addQuerry);
+	    List<ExaminationIdentifier> result = new ArrayList<ExaminationIdentifier>();
+	    while(rs.next()){
+	    	ExaminationIDParser eIDp = new ExaminationIDParser();
+	    	ExaminationIdentifier eid = eIDp.getExaminationIdentifier(rs.getString("examinationID"));
+	    	result.add(eid);
+	    }
+	    ExaminationIdentifier[] eidArr = result.toArray(new ExaminationIdentifier[result.size()]);
+	    MVDHandler handler = new MVDHandler();
+	    handler.setExaminationDataLocation("TestData.mvd");
+		DefaultProgressNotifiable pn = new DefaultProgressNotifiable();
+		handler.exportToMVD(eidArr, "TargetMVD.mvd",pn,(ExaminationContentFilter)null, true);
+	    c.close();
+	    ZipUtil.pack(new File("TargetMVD.mvd"), new File("exportedCollection.zip"));
+	    return Response.ok(new File("exportedCollection.zip"), MediaType.APPLICATION_OCTET_STREAM)
+	            .header("Content-Disposition",
+	                    "attachment; filename=exportedCollection.zip").build();
+    }
+    
 	@GET
 	@Path("/initValues")
     @Produces(MediaType.APPLICATION_JSON)
