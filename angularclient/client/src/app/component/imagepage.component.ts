@@ -36,7 +36,7 @@ export class ImagePageComponent {
 	private otherExams:string[] = [];
 	private url;
 
-	constructor(private server: Server, private imagePageServiceOld: ImagePageService, private location: Location, private route:ActivatedRoute) {
+	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location, private route:ActivatedRoute) {
 	}
 
 	ngOnInit(): void {
@@ -45,12 +45,13 @@ export class ImagePageComponent {
 				if (url[0].toString() == 'search') {
 					
 				}
-				console.log(url[0]);
+				this.examinationIn = +url[1].toString()
+				this.imageIn = +url[2].toString();
 				console.log(url[1]);
 				console.log(url[2]);
 			}
 		});
-		/*
+		
 		this.imagePageService.imageData.subscribe(imageData => {
 			if(imageData == null) {
 				this.error = true;
@@ -75,7 +76,6 @@ export class ImagePageComponent {
 		});
 		this.imagePageService.getImageData(this.examinationIn);
 		this.imagePageService.getOtherExaminations(this.examinationIn);
-		*/
 	}
 
 	notNull(value: any){
