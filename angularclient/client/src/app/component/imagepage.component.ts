@@ -36,6 +36,7 @@ export class ImagePageComponent {
 	private otherExams:string[] = [];
 	private url;
 
+
 	constructor(
 		private server: Server, 
 		private imagePageServiceOld: ImagePageService, 
@@ -58,25 +59,6 @@ export class ImagePageComponent {
 			}
 		});
 		/*
-		this.imagePageService.imageData.subscribe(imageData => {
-			if(imageData == null) {
-				this.error = true;
-				this.display = true;
-			}
-			else{
-				this.imageData = imageData;
-				this.otherImages = this.imageData.imagePaths;
-				console.log(this.otherImages);
-				this.imageDataLoaded = true;
-				
-				if(this.imageData.imagePaths.length-1 >= this.imageIn && this.imageIn >= 0 && this.imageIn)
-					this.display = true;
-				else {
-					this.error = true;
-					this.display = true;
-				}
-			}
-		});
 		this.imagePageService.otherExams.subscribe(otherExams => {
 			this.otherExams = otherExams.sort(this.sortAlgorithm);
 		});
@@ -126,7 +108,7 @@ export class ImagePageComponent {
 	private changeExamination(examinationId): void {
 		//this.router.navigateByUrl("/image?examination=" + examinationId + "&image=0");
 		this.examinationIn = examinationId;
-		this.imageIn = 0;
+		//this.imageIn = 0;
 	}
 
 	private examinationIdToDate(examinationId): string {
