@@ -81,6 +81,14 @@ export class CollectionThumbnailComponent implements OnInit {
 		this.deleteConfirmation = true;
 	}
 
+	deleteConfirmed(conf: boolean): void {
+		if (conf) {
+			this.deleteImage(this.deletei);
+		} else {
+			this.deleteConfirmation = false;
+		}
+	}
+
 	showNextImage(examinationIndex: number, imageIndex: number): void {
 		/*let newImageIndex = (imageIndex + 1) % this.images[examinationIndex].imagePaths.length;
 		if (newImageIndex == 0) {
@@ -174,7 +182,7 @@ export class CollectionThumbnailComponent implements OnInit {
 		return this.images[i]["note"];
 	}
 
-	setNote(i:number, note?: string): void {
+	setNote(i:number, confirmed?:boolean, note?: string): void {
 		let noteEdit: any  = document.getElementById('note-edit-' + i);
 		if (!note) {
 			note = noteEdit.value.replace(/\n\s*\n/g, '\n'); //remove double line breaks and lines containing only spaces
@@ -192,13 +200,7 @@ export class CollectionThumbnailComponent implements OnInit {
 		this.editText = this.images[i]["note"] ? this.images[i]["note"] : "";
 	}
 
-	showNoteIcon(imageId, show): void {
-		if(show)
-			this.showNotes[imageId] = 1;
-		else
-			this.showNotes[imageId] = 0;
-		console.log(imageId + ": " + this.showNotes[imageId]);
-	}
+	
 
 	getOpacity(imageId): number {
 		console.log("hejsan");

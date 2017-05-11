@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Http, RequestOptions, ResponseContentType, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -12,9 +12,21 @@ import { SearchService } from '../service/search.service';
 })
 export class CollectionImageThumbnailComponent implements OnInit{
     @Input('src') src: string = '';
+    @Input('index') i: number;
+    @Input('note') note: string = undefined;
+    @Input('deleteConfirmation') deleteConfirmation: boolean;
+    @Input('editMode') editMode: boolean;
+    @Input('deletingThis') deletingThis: boolean;
+    @Input('editingThis') editingThis: boolean;
+
+    @Output() editNote = new EventEmitter(); 
+    @Output() confirmDelete = new EventEmitter();
+    @Output() setNote = new EventEmitter();
 
     thumbnailLoaded: boolean = false;
     thumbnailUrl:any = '';
+
+    showNote: boolean = true;
 
     examinationID = '';
     imageIndex = '';
@@ -58,4 +70,10 @@ export class CollectionImageThumbnailComponent implements OnInit{
 			});
             
     }
+
+    getNote():string {
+        return this.note;
+    }
+
+    
 }

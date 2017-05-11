@@ -2,6 +2,16 @@
 
 	<collection-image-thumbnail 
 		[src]="image.examinationID + '/' +image.index"
+		[index]="i"
+		[editmode]="editMode"
+		[note]="getNote(i)"
+		[deleteConfirmation]="deleteConfirmation"
+		[deletingThis]="deletei == i"
+		[editingThis]="editi == i"
+		(editNote)="editNote(i)"
+		(confirmDelete)="confirmDelete(i)"
+		(deleteConfirmed)="deleteConfirmed($event)"
+		(setNote)="setNote(i)"
 		(click)="onImageClick()"
 	>
 	</collection-image-thumbnail>

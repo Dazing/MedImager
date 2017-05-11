@@ -4,6 +4,68 @@
     class="unselectable"
     [ngStyle]="{'background-image':  'url(' + thumbnailUrl  + ')' }"
 >
+<!-- INPUT PARAMS: 
+index
+editmode, 
+note, 
+deleteConfirmation 
+deletingThis
+editingThis
+
+>editNote
+>confirmDelete
+>deleteConfirmed
+>setNote
+-->
+
+<div class="opacity-wrapper wordwrap" (mouseenter)="showNote=false" (mouseleave)="showNote=true" *ngIf="getNote() && !editMode && !deleteConfirmation">{{getNote()}}</div>
+<i class="material-icons notes-exist-icon" 
+	id="note-icon-{{i}}" 
+	*ngIf="getNote(i) && !editMode && !deleteConfirmation" 
+	draggable="false" 
+	[hidden]="!showNote"
+>speaker_notes</i>
+
+
+<div class="collection-image-button-container" *ngIf="!editMode && !deleteConfirmation" >
+	<a class="btn-floating btn-large waves-effect waves-light" (click)="editNote.emit()" >
+		<i class="material-icons" draggable="false">mode_edit</i>
+	</a>
+	<a class="btn-floating btn-large waves-effect waves-light" (click)="confirmDelete.emit()" >
+		<i class="material-icons" draggable="false">delete_forever</i>
+	</a>
+</div>
+		
+<div class="opacity-wrapper-always-on valign-wrapper" *ngIf="editMode && editingThis">
+	<textarea [attr.id]="'note-edit-'+i" [value]="editText" class="materialize-textarea valign-center" maxlength="128"></textarea>
+</div>
+<div class="collection-image-button-container-always-on" *ngIf="editMode && editingThis">
+	<a class="btn-floating btn-large waves-effect waves-light" (click)="setNote.emit(i)" *ngIf="editMode && editingThis">
+		<i class="material-icons" draggable="false">done</i>
+	</a>
+	<a class="btn-floating btn-large waves-effect waves-light" (click)="editMode=false" *ngIf="editMode && editingThis">
+		<i class="material-icons" style="transform: rotate(45deg)" draggable="false">add</i>
+	</a>
+</div>
+
+
+<div class="opacity-wrapper-always-on valign-wrapper" style="text-align: center" *ngIf="deleteConfirmation && deletingThis">
+	<div class="row" style="width: 100%">
+		<h5>Ta bort bild från samling?</h5>
+		<div class="col s6">
+			<a class="btn waves-effect waves-light small-padding" (click)="deleteConfirmed.emit(true)">
+				<i class="material-icons left" draggable="false">done</i>Godkänn
+			</a>
+		</div>
+		<div class="col s6 offset-6">
+			<a class="btn waves-effect waves-light small-padding" (click)="deleteConfirmed.emit(false)">
+				<i class="material-icons left" draggable="false">cancel</i>Avbryt
+			</a>
+		</div>
+	</div>
+</div>
+
+
 
 </span>
 
@@ -13,30 +75,12 @@
 
 
 
-		<div class="opacity-wrapper wordwrap" (mouseenter)="showNoteIcon(i, false)" (mouseleave)="showNoteIcon(i, true)" *ngIf="getNote(i) && !editMode && !deleteConfirmation">{{getNote(i)}}</div>
-		<i class="material-icons notes-exist-icon" id="note-icon-{{i}}" *ngIf="getNote(i) && !editMode && !deleteConfirmation" draggable="false" [style.opacity]="getOpacity(imageId)">speaker_notes</i>
 		
-		<div class="collection-image-button-container" *ngIf="!editMode && !deleteConfirmation" >
-			<a class="btn-floating btn-large waves-effect waves-light" (click)="editNote(i)" >
-				<i class="material-icons" draggable="false">mode_edit</i>
-			</a>
-			<a class="btn-floating btn-large waves-effect waves-light" (click)="confirmDelete(i)" >
-				<i class="material-icons" draggable="false">delete_forever</i>
-			</a>
-		</div>
+		
+		
 
 
-		<div class="opacity-wrapper-always-on valign-wrapper" *ngIf="editMode && editi == i">
-			<textarea [attr.id]="'note-edit-' + i" [value]="editText" class="materialize-textarea valign-center" maxlength="128"></textarea>
-		</div>
-		<div class="collection-image-button-container-always-on" *ngIf="editMode && editi == i">
-			<a class="btn-floating btn-large waves-effect waves-light" (click)="setNote(i)" *ngIf="editMode && editi==i">
-				<i class="material-icons" draggable="false">done</i>
-			</a>
-			<a class="btn-floating btn-large waves-effect waves-light" (click)="editMode=false" *ngIf="editMode && editi==i">
-				<i class="material-icons" style="transform: rotate(45deg)" draggable="false">add</i>
-			</a>
-		</div>
+		
 
 
 		<div class="opacity-wrapper-always-on valign-wrapper" style="text-align: center" *ngIf="deleteConfirmation && deletei == i">
