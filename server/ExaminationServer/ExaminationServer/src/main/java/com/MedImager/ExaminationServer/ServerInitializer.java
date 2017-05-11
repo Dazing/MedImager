@@ -1,5 +1,6 @@
 package com.MedImager.ExaminationServer;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,11 +13,16 @@ import medview.datahandling.NoSuchTermException;
 import medview.datahandling.PatientIdentifier;
 import medview.datahandling.examination.ExaminationIdentifier;
 import medview.datahandling.examination.ExaminationValueContainer;
+import medview.datahandling.examination.MVDHandler;
 import medview.datahandling.examination.NoSuchExaminationException;
+import medview.datahandling.examination.filter.ExaminationContentFilter;
+import misc.foundation.DefaultProgressNotifiable;
+import misc.foundation.ProgressNotifiable;
 
 public class ServerInitializer {
 	MedViewDataHandler handler;
 	InitValues initValues;
+	ExaminationIdentifier [] test;;
 	public ServerInitializer(){
 		handler = MedViewDataHandler.instance();
         handler.setExaminationDataLocation("TestData.mvd");
@@ -61,6 +67,7 @@ public class ServerInitializer {
 						} catch (NoSuchTermException e) {
 						}
 	                }
+				test = handler.getExaminations(pid);
 				}
 			return results;
 	}

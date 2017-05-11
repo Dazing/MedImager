@@ -28,6 +28,17 @@ public class ExaminationIDParser {
 		return null;
 		
 	}
+	public ExaminationIdentifier getExaminationIdentifier(String examinationID) throws IOException{
+		for(PatientIdentifier pid : handler.getPatients()){
+			for(ExaminationIdentifier eid : handler.getExaminations(pid)){
+				if(eid.getExaminationIDString().equals(examinationID)){
+					return eid;
+				}
+			}
+		}
+		return null;
+		
+	}
 	public Examination getMoreFromExamination(String examinationID) throws IOException{
 		ExaminationBuilder eidBuilder = new ExaminationBuilder();
 		for(PatientIdentifier pid : handler.getPatients()){
