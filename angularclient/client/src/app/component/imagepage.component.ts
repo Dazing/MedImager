@@ -37,21 +37,20 @@ export class ImagePageComponent {
 	private url;
 
 	constructor(private server: Server, private imagePageService: ImagePageService, private location: Location, private route:ActivatedRoute) {
-	}
-
-	ngOnInit(): void {
 		this.route.url.subscribe(url => {
 			if (url.length == 3) {
 				if (url[0].toString() == 'search') {
 					
 				}
-				this.examinationIn = +url[1].toString()
+				this.examinationIn = +url[1].toString();
 				this.imageIn = +url[2].toString();
 				console.log(url[1]);
 				console.log(url[2]);
 			}
 		});
-		
+	}
+
+	ngOnInit(): void {		
 		this.imagePageService.imageData.subscribe(imageData => {
 			if(imageData == null) {
 				this.error = true;
