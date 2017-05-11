@@ -21,6 +21,7 @@ import { ServerUnreachable } from './component/server-unreachable.component';
 import { PopupComponent } from './component/popup.component';
 import { AdvancedFormComponent } from './component/advanced-form.component';
 import { ImageThumbnailComponent } from './component/image-thumbnail.component';
+import { CollectionImageThumbnailComponent } from './component/collection-image-thumbnail.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -49,6 +50,7 @@ import { SearchCompletion } from './pipe/search-completion.pipe';
 		SearchComponent,
 		ThumbnailComponent,
 		ImageThumbnailComponent,
+		CollectionImageThumbnailComponent,
 		CollectionThumbnailComponent,
 		UserPageComponent,
 		ImagePageComponent,
