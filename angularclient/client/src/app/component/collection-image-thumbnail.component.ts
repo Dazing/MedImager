@@ -23,6 +23,7 @@ export class CollectionImageThumbnailComponent implements OnInit{
     @Output() confirmDelete = new EventEmitter();
     @Output() deleteConfirmed = new  EventEmitter();
     @Output() setNote = new EventEmitter();
+    @Output() cancelEdit = new EventEmitter();
 
     thumbnailLoaded: boolean = false;
     thumbnailUrl:any = '';

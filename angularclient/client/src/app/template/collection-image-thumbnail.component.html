@@ -43,7 +43,7 @@ editingThis
 	<a class="btn-floating btn-large waves-effect waves-light" (click)="setNote.emit(i)" *ngIf="editMode && editingThis">
 		<i class="material-icons" draggable="false">done</i>
 	</a>
-	<a class="btn-floating btn-large waves-effect waves-light" (click)="editMode=false" *ngIf="editMode && editingThis">
+	<a class="btn-floating btn-large waves-effect waves-light" (click)="cancelEdit.emit()" *ngIf="editMode && editingThis">
 		<i class="material-icons" style="transform: rotate(45deg)" draggable="false">add</i>
 	</a>
 </div>
