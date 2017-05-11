@@ -22,8 +22,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class ImagePageComponent {
 	@ViewChild('collectionsMenu') collectionsMenu: CollectionsMenu;
 
-	private examinationIn: number;
-	private imageIn: number;
+	private examinationIn: string;
+	private imageIn: string;
 
 	private collectionsMenuVisible = false;
 	
@@ -36,18 +36,25 @@ export class ImagePageComponent {
 	private otherExams:string[] = [];
 	private url;
 
-	constructor(private server: Server, private imagePageServiceOld: ImagePageService, private location: Location, private route:ActivatedRoute) {
+	constructor(
+		private server: Server, 
+		private imagePageServiceOld: ImagePageService, 
+		private location: Location, 
+		private route:ActivatedRoute) 
+	{
+
 	}
 
 	ngOnInit(): void {
 		this.route.url.subscribe(url => {
 			if (url.length == 3) {
-				if (url[0].toString() == 'search') {
-					
+				if (url[0].path == 'image') {
+					this.examinationIn = url[1].path;
+					this.imageIn = url[2].path;
+					if (!/[0-9]+\/[0-9]+/.test(this.examinationIn + '/' + this.imageIn)) {
+						console.warn('BAD IMAGE ROUTE');
+					}
 				}
-				console.log(url[0]);
-				console.log(url[1]);
-				console.log(url[2]);
 			}
 		});
 		/*
@@ -107,7 +114,7 @@ export class ImagePageComponent {
 		return string;
 	}
 
-	private getImageIn(): Number {
+	private getImageIn(): string {
         return this.imageIn;
     }
 

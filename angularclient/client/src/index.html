@@ -29,48 +29,6 @@
 			
 		</app-root>
 
-		<script>
-		$('document').ready(function() {
-				
-			$("#search-button").click(function(){
-				console.log("CLICK READY");
-				var delayMillis = 500; //1 second
-
-				setTimeout(function() {
-					//your code to be executed after 1 second
-					var token = sessionStorage.getItem("currentUser");
-					
-					var matches = [];
-					var searchEles = document.getElementById("thumbnailTemplate").children;
-
-					for(var i = 0; i < searchEles.length; i++) {
-						let examId = searchEles[i].dataset.examinationid;
-						let index = searchEles[i].dataset.imageindex;
-						
-						if (!examId || !index) {
-							continue;
-						}
-
-						console.log(searchEles[i].dataset);
-						let url = "https://www.medimager.com/api/thumbnail/"+examId+"/"+index;
-	
-						fetch(url, { headers: {
-							"Content-Type": "application/json", // this header is just an example, put your token here
-							"Authorization": token
-						} })
-						.then(response => response.blob())
-						.then(blob => {
-							let img = document.getElementById('result-image-'+examId+'-'+index);
-							if (!img){ return }
-							let url = URL.createObjectURL(blob);
-							img.style.backgroundImage = `url(${url})`;
-						})
-					}
-				}, delayMillis);
-				
-			});
-		});
 		
-	</script>
 </body>
 </html>
