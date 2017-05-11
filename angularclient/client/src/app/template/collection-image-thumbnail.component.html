@@ -21,7 +21,7 @@ editingThis
 <div class="opacity-wrapper wordwrap" (mouseenter)="showNote=false" (mouseleave)="showNote=true" *ngIf="getNote() && !editMode && !deleteConfirmation">{{getNote()}}</div>
 <i class="material-icons notes-exist-icon" 
 	id="note-icon-{{i}}" 
-	*ngIf="getNote(i) && !editMode && !deleteConfirmation" 
+	*ngIf="getNote() && !editMode && !deleteConfirmation" 
 	draggable="false" 
 	[hidden]="!showNote"
 >speaker_notes</i>
@@ -37,7 +37,7 @@ editingThis
 </div>
 		
 <div class="opacity-wrapper-always-on valign-wrapper" *ngIf="editMode && editingThis">
-	<textarea [attr.id]="'note-edit-'+i" [value]="editText" class="materialize-textarea valign-center" maxlength="128"></textarea>
+	<textarea [attr.id]="'note-edit-'+i" [value]="getNote() ? getNote() : ''" class="materialize-textarea valign-center" maxlength="128"></textarea>
 </div>
 <div class="collection-image-button-container-always-on" *ngIf="editMode && editingThis">
 	<a class="btn-floating btn-large waves-effect waves-light" (click)="setNote.emit(i)" *ngIf="editMode && editingThis">
