@@ -4,7 +4,7 @@
 
 * **URL**
 
-  /api/search?{Term1=a}&{Term2=b}&...&{AgeLower=x}&{AgeUpper=y}
+  /search?{Term1=a}&{Term2=b}&...&{AgeLower=x}&{AgeUpper=y}
 
 * **Method:**
 
@@ -20,7 +20,7 @@
     
     **Example URL:**
     
-    `/api/search?Dis-now=Psoriasisartrit&Snuff=2 dosor/vecka&AgeLower=60`
+    `/search?Dis-now=Psoriasisartrit&Snuff=2 dosor/vecka&AgeLower=60`
   
 *  **Header Params**
 
