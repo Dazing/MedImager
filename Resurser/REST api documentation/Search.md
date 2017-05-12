@@ -42,7 +42,7 @@
   {
     {
     "age": [
-      "62"
+      "82"
     ],
     "allergy": [
       "Nej"
@@ -88,7 +88,7 @@
       "Inte dagligen"
     ],
     "snuff": [
-      "2 dosor/vecka"
+      "Nej"
     ],
     "symptNow": [],
     "symptSite": [],
