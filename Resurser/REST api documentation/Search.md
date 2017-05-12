@@ -12,7 +12,7 @@
   
 *  **URL Params**
     
-    Refer to documentation about terms for a list of possible terms and more
+    Refer to documentation about available terms for a list of possible terms and more
 
     `Term_ = <string>` <br />
     `AgeLower = <integer>` <br />
