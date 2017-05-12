@@ -1,6 +1,6 @@
 **Search: Available terms**
 ----
-  Below is a table of available terms for the method Search and how they are translated in a returned Examination JSON object
+  Below is a table of available terms for the resource Search and how they are translated in a returned Examination JSON object
 
 | Term        	| Translation 	|
 |-------------	|-------------	|
