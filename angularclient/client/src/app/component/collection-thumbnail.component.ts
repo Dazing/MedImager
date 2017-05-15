@@ -108,7 +108,7 @@ export class CollectionThumbnailComponent implements OnInit {
 			console.log(res);
 			console.log(index);
 			console.log(this.images[index].examinationIndex + '/' + this.images[index].index);
-			this.popupService.setPopupWithSearchIndex(res, this.images[index].index, this.images[index].examinationIndex);
+			this.popupService.setPopupWithSearchIndex(res, this.images[index].index, index);
 		});
 		
 	}
