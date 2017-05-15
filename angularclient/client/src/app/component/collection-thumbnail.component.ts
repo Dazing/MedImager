@@ -92,10 +92,12 @@ export class CollectionThumbnailComponent implements OnInit {
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
+		console.log('exam index:'+examinationIndex);
 		this.onImageClick((examinationIndex + 1) % this.images.length);
 	}
 
 	showPreviousImage(examinationIndex: number, imageIndex: number): void {
+		console.log('exam index:'+examinationIndex);
 		this.onImageClick((examinationIndex - 1) % this.images.length);
 	}
 
