@@ -92,22 +92,20 @@ export class CollectionThumbnailComponent implements OnInit {
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
-		let newImageIndex = (examinationIndex + 1) % this.images.length;
-		this.getImage(newImageIndex, res => {
-			this.popupService.setPopupWithSearchIndex(res, this.images[newImageIndex].imageIndex, this.images[newImageIndex].examinationIndex);
-		});
+		this.onImageClick((examinationIndex + 1) % this.images.length);
 	}
 
 	showPreviousImage(examinationIndex: number, imageIndex: number): void {
-		let newImageIndex = (examinationIndex - 1) % this.images.length;
-		this.getImage(newImageIndex, res => {
-			this.popupService.setPopupWithSearchIndex(res, this.images[newImageIndex].imageIndex, this.images[newImageIndex].examinationIndex);
-		});
+		this.onImageClick((examinationIndex - 1) % this.images.length);
 	}
 
 	onImageClick(index: number):void{
 		this.getImage(index, res => {
-			this.popupService.setPopupWithSearchIndex(res, this.images[index].imageIndex, this.images[index].examinationIndex);
+			console.log('SET IMAGE:');
+			console.log(res);
+			console.log(index);
+			console.log(this.images[index].examinationIndex + '/' + this.images[index].index);
+			this.popupService.setPopupWithSearchIndex(res, this.images[index].index, this.images[index].examinationIndex);
 		});
 		
 	}
