@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Server } from '../model/server';
 import { Image, Collection } from '../model/image';
 import { CollectionService } from '../service/collection.service';
@@ -33,7 +34,8 @@ export class CollectionThumbnailComponent implements OnInit {
 		private collectionService: CollectionService,
 		private popupService: PopupService,
 		public ref: ChangeDetectorRef, 
-		private server: Server
+		private server: Server,
+		private http: Http
 	){}
 
 	ngOnInit(): void {
@@ -90,36 +92,42 @@ export class CollectionThumbnailComponent implements OnInit {
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
-		/*let newImageIndex = (imageIndex + 1) % this.images[examinationIndex].imagePaths.length;
-		if (newImageIndex == 0) {
-			do {
-				examinationIndex = (examinationIndex + 1) % this.images.length;
-			} while (this.images[examinationIndex].imagePaths.length < 1)
-		}
-		this.popupService.setPopupWithSearchIndex(this.images[examinationIndex], newImageIndex, examinationIndex);
-		*/
+		let newImageIndex = (examinationIndex + 1) % this.images.length;
+		this.getImage(newImageIndex, res => {
+			this.popupService.setPopupWithSearchIndex(res, this.images[newImageIndex].imageIndex, this.images[newImageIndex].examinationIndex);
+		});
 	}
 
 	showPreviousImage(examinationIndex: number, imageIndex: number): void {
-		/*let newImageIndex;
-		if (imageIndex < 1) {
-			do {
-				if (examinationIndex <= 0) {
-					examinationIndex = this.images.length -1;
-				} else {
-					examinationIndex -= 1;
-				}
-			} while (this.images[examinationIndex].imagePaths.length < 1)
-			newImageIndex = this.images[examinationIndex].imagePaths.length -1;
-		} else {
-			newImageIndex = imageIndex - 1;
-		}
-		this.popupService.setPopupWithSearchIndex(this.images[examinationIndex], newImageIndex, examinationIndex);
-		*/
+		let newImageIndex = (examinationIndex - 1) % this.images.length;
+		this.getImage(newImageIndex, res => {
+			this.popupService.setPopupWithSearchIndex(res, this.images[newImageIndex].imageIndex, this.images[newImageIndex].examinationIndex);
+		});
 	}
 
-	onImageClick(examinationIndex: number, imageIndex: number):void{
-		//this.popupService.setPopupWithSearchIndex(this.images[examinationIndex], imageIndex, examinationIndex);
+	onImageClick(index: number):void{
+		this.getImage(index, res => {
+			this.popupService.setPopupWithSearchIndex(res, this.images[index].imageIndex, this.images[index].examinationIndex);
+		});
+		
+	}
+
+	getImage(index: number, callback:(examination)=>void): void {
+		// Set authorization header
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+
+		this.http.get(
+			this.server.getUrl() + '/examination/'+this.images[index].examinationID,
+			options
+		).toPromise()
+		.then(res => {
+			callback(res.json());
+		})
+		.catch(e => {
+			console.error(e);
+		})
 	}
 
 	getDiagDef(index: number): string {
