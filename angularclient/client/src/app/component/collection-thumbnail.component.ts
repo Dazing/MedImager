@@ -100,6 +100,7 @@ export class CollectionThumbnailComponent implements OnInit {
 	}
 
 	onImageClick(index: number):void{
+		console.log('IMAGE CLICK:'+index);
 		this.getImage(index, res => {
 			console.log('SET IMAGE:');
 			console.log(res);
