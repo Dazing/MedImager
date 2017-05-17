@@ -545,13 +545,6 @@
   display: table;
   margin: 0 auto 20px; }
 
-#user-page-close-button {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.87); }
-
 .primary-colour {
   background-color: #1de9b6; }
 
@@ -717,6 +710,13 @@
     transition: max-height 0.2s; }
     #user-page .expandable-pane-content form {
       padding: 15px; }
+
+#user-page-close-button {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  color: #424242; }
 
 * {
   box-sizing: border-box !important;
