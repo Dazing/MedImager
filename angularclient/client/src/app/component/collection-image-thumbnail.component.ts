@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Http, RequestOptions, ResponseContentType, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
+import { CollectionThumbnailComponent } from '../component/collection-thumbnail.component';
 
 import { Server } from '../model/server';
 import { SearchService } from '../service/search.service';
@@ -36,7 +37,8 @@ export class CollectionImageThumbnailComponent implements OnInit{
     constructor(
         private http: Http,
         private server: Server,
-        private searchService: SearchService
+        private searchService: SearchService,
+        private collectionThumbnailComponent: CollectionThumbnailComponent
     ){
 
     }
@@ -77,5 +79,7 @@ export class CollectionImageThumbnailComponent implements OnInit{
         return this.note;
     }
 
-    
+    onImageClick(index: number):void {
+        this.collectionThumbnailComponent.onImageClick(index);
+    }
 }
