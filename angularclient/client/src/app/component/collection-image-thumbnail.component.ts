@@ -76,10 +76,7 @@ export class CollectionImageThumbnailComponent implements OnInit{
     }
 
     getNote():string {
-        if(this.note)
-            return this.note;
-        else
-            return "<i>Bilden saknar kommentar.</i>"
+        return this.note;
     }
 
     onImageClick(index: number):void {
