@@ -869,6 +869,9 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
   margin-top: 30px;
   margin-bottom: 20px; }
 
+.grey-icon {
+  color: rgba(0, 0, 0, 0.54); }
+
 #footer {
   position: fixed;
   width: 100%;
