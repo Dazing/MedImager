@@ -53,6 +53,7 @@
   box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8); }
   #menu-bar input {
     padding: 0 5px;
+    padding-left: 32px;
     background-color: #ffffff;
     border: 0;
     width: 100%;
@@ -870,7 +871,9 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
   margin-bottom: 20px; }
 
 .grey-icon {
-  color: rgba(0, 0, 0, 0.54); }
+  color: rgba(0, 0, 0, 0.3);
+  margin-top: 7px;
+  position: absolute; }
 
 #footer {
   position: fixed;
