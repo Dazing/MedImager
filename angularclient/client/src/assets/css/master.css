@@ -53,6 +53,7 @@
   box-shadow: 0px 0px 10px -6px rgba(0, 0, 0, 0.8); }
   #menu-bar input {
     padding: 0 5px;
+    padding-left: 32px;
     background-color: #ffffff;
     border: 0;
     width: 100%;
@@ -711,6 +712,13 @@
     #user-page .expandable-pane-content form {
       padding: 15px; }
 
+#user-page-close-button {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  color: #424242; }
+
 * {
   box-sizing: border-box !important;
   font-family: "Roboto Condensed"; }
@@ -861,6 +869,11 @@ input:not([type]), input[type=text], input[type=password], input[type=email], in
   width: 100%;
   margin-top: 30px;
   margin-bottom: 20px; }
+
+.search-icon {
+  color: rgba(0, 0, 0, 0.3);
+  margin-top: 7px;
+  position: absolute; }
 
 #footer {
   position: fixed;

@@ -7,6 +7,7 @@ import { UserService } from '../service/user.service'
 	templateUrl: '../template/user-page.component.html'
 })
 export class UserPageComponent implements OnInit {
+
     public visible = false;
     
     public unmatchingPasswords = false;
@@ -53,4 +54,7 @@ export class UserPageComponent implements OnInit {
         console.log(this.changePasswordForm);
     }
 
+    toggleUserPage():void {
+        this.userService.toggleUserPage();
+    }
 }

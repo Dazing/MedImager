@@ -18,7 +18,7 @@ editingThis
 >setNote
 -->
 
-<div class="opacity-wrapper wordwrap" (mouseenter)="showNote=false" (mouseleave)="showNote=true" *ngIf="getNote() && !editMode && !deleteConfirmation">{{getNote()}}</div>
+<div class="opacity-wrapper wordwrap" (mouseenter)="showNote=false" (mouseleave)="showNote=true" *ngIf="!editMode && !deleteConfirmation" (click)="onImageClick(i)">{{getNote()}}</div>
 <i class="material-icons notes-exist-icon" 
 	id="note-icon-{{i}}" 
 	*ngIf="getNote() && !editMode && !deleteConfirmation" 
