@@ -98,7 +98,7 @@ export class CollectionThumbnailComponent implements OnInit {
 
 	showPreviousImage(examinationIndex: number, imageIndex: number): void {
 		console.log('exam index:'+examinationIndex);
-		this.onImageClick((examinationIndex - 1) % this.images.length);
+		this.onImageClick(examinationIndex-1 < 0 ? this.images.length-1 : examinationIndex-1);
 	}
 
 	onImageClick(index: number):void{
@@ -107,7 +107,7 @@ export class CollectionThumbnailComponent implements OnInit {
 			console.log('SET IMAGE:');
 			console.log(res);
 			console.log(index);
-			console.log(this.images[index].examinationIndex + '/' + this.images[index].index);
+			console.log(this.images[index].examinationID + '/' + this.images[index].index);
 			this.popupService.setPopupWithSearchIndex(res, this.images[index].index, index);
 		});
 		
