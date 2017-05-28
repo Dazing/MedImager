@@ -53,7 +53,9 @@ export class ThumbnailComponent implements OnInit {
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
+		console.log('SHOW NEXT IMAGE (thumb)', imageIndex, this.searchresults[examinationIndex].imagePaths)
 		let newImageIndex = (imageIndex + 1) % this.searchresults[examinationIndex].imagePaths.length;
+		
 		if (newImageIndex == 0) {
 			do {
 				examinationIndex = (examinationIndex + 1) % this.searchresults.length;
