@@ -21,3 +21,5 @@ Thumbs.db
 # Sass #
 .sass-cache/
 /server/src/JavaApplication1/nbproject/private/
+
+.vscode
