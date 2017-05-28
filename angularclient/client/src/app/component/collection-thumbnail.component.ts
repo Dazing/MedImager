@@ -56,8 +56,6 @@ export class CollectionThumbnailComponent implements OnInit {
 		let thisHandle = this; //handle to 'this' because anonymous callback provides its own higher-scope 'this' object
 		this.collectionService.getCollection(collection.id, (collID, images) => {
 			if (this.collection.id == collID) {
-				console.log("collection thumbnail got images:");
-				console.log(images);
 				thisHandle.images = images;
 				thisHandle.loaded = true;
 				this.showNotes = new Array<number>(thisHandle.images.length);
@@ -213,7 +211,6 @@ export class CollectionThumbnailComponent implements OnInit {
 	
 
 	getOpacity(imageId): number {
-		console.log("hejsan");
 		return this.showNotes[imageId];
 	}
 }

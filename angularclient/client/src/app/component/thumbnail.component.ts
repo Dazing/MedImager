@@ -29,31 +29,19 @@ export class ThumbnailComponent implements OnInit {
 	){}
 
 	ngOnInit(): void {
-		console.log("Thumbnail init");
 		this.url = this.server.getUrl();
 		
-		var a = this.searchService.images;
-		console.log(a);
 
 		this.searchService.images.subscribe(images => {
 			this.searchresults = images;
 			this.searchMade = true;
 			
 		})
+		//this.searchService.getSearch();
 
-
-		/*this.popupService.searchResult.subscribe(searchResult => {
-			
-			if (searchResult.direction > 0) {
-				this.showNextImage(searchResult.examinationIndex, searchResult.imageIndex);
-			} else if (searchResult.direction < 0) {
-				this.showPreviousImage(searchResult.examinationIndex, searchResult.imageIndex);
-			}
-		})*/
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
-		console.log('SHOW NEXT IMAGE (thumb)', examinationIndex, ', ', imageIndex)
 		let newImageIndex = (imageIndex + 1) % this.searchresults[examinationIndex].imagePaths.length;
 		
 		if (newImageIndex == 0) {
@@ -168,13 +156,6 @@ export class ThumbnailComponent implements OnInit {
 
 	}
 
-	editCollectionImageNote(examinationID: number, imageIndex: number, examinationIndex: number): void {
-		console.log("examinationID: "+examinationID);
-		console.log("imageIndex: "+imageIndex);
-		this.searchresults[examinationIndex]["note"] = "hej";
-		console.log("note: " + this.searchresults[examinationIndex]["note"]);
-		
-	}
 
 	getNote(i:number, j: number): string {
 		return this.searchresults[i]["note"+j];

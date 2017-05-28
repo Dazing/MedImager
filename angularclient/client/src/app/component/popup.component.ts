@@ -80,7 +80,6 @@ export class PopupComponent {
     nextImage(): void {
         //this.popupService.setNextImage(this.popup.searchIndex, this.popup.imageIndex);
         if (this.popupService.callbackNext) {
-            console.log('GOTO NEXT', this.popup.callbackNext)
             this.popupService.callbackNext(this.popup.searchIndex, this.popup.imageIndex);
         }
     }
@@ -88,7 +87,6 @@ export class PopupComponent {
     prevImage(): void {
         //this.popupService.setPreviousImage(this.popup.searchIndex, this.popup.imageIndex);
         if (this.popupService.callbackPrev) {
-            console.log('GOTO PREV', this.popupService.callbackPrev)
             this.popupService.callbackPrev(this.popup.searchIndex, this.popup.imageIndex);
         }
     }

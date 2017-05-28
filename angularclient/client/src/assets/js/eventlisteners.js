@@ -22,13 +22,13 @@ $(document).ready(function () {
 	// });
 
 	// TODO set correct class
-	$('.img').click(function(){
+	/*$('.img').click(function(){
 		var imgId = this.id;
 		var url = "www.medimager.com/images/"+imgId;
 		$.get(url).then(function(res){
 			console.log(res);
 		});
-	});
+	});*/
 
 	var count = $('#resultLength').val();
 	if (count > 0) {
