@@ -14,24 +14,18 @@
 <div id="error404" *ngIf="error">
 	Bilden du försöker nå existerar tyvärr inte.
 </div>
-<div *ngIf="imageDataLoaded && display && !error">
+<div *ngIf="patient.length>0 && display && !error">
 	<table id="image-wrapper">
 		<tr><td>
-			<img src="{{getPhoto()}}" id="full-image" draggable="true" 
-			[attr.data-examinationid]="imageData.examinationID"
-			[attr.data-imageIndex]="getImageIn()"
-			draggableImage>
+			<img [src]="imageSrc" 
+			id="full-image" draggable="true">
 			
 			<div id="related-images">
-				<span *ngFor="let otherImage of otherImages; let cur=index"
+				<span *ngFor="let image of patient[selectedExamIndex].thumbnailUrls; let cur=index"
 				id="{{'other-image-'+cur}}"
 				class="unselectable"
-				[ngStyle]="{'background-image': 'url(' + url +'/thumbnail/' + examinationIn + '/' + cur + ')'}"
-				data-id="{{cur}}"
-				[attr.data-examinationid]="examinationIn"
-				[attr.data-imageIndex]="cur"
-				(click)="onRelatedClick(cur)"
-				draggableImage
+				[ngStyle]="{'background-image': 'url(' +image+ ')'}"
+				(click)="setCurrentImage(patient[selectedExamIndex].examinationID, cur)"
 				></span>
 			</div>
 		</td></tr>
@@ -39,90 +33,90 @@
 
 	<div id="image-data">
 		<div class="image-data-column">
-			<label *ngIf="notNull(imageData.examinationID)">Datum</label>
-			<p *ngIf="notNull(imageData.examinationID)">{{examinationIdToDate(imageData.examinationID)}}</p>
+			<label *ngIf="notNull(patient[selectedExamIndex].examinationID)">Datum</label>
+			<p *ngIf="notNull(patient[selectedExamIndex].examinationID)">{{examinationIdToDate(patient[selectedExamIndex].examinationID)}}</p>
 
-			<label *ngIf="notNull(imageData.examinationID)">Undersökningsnummer</label>
-			<p *ngIf="notNull(imageData.examinationID)">{{imageData.examinationID}}</p>
+			<label *ngIf="notNull(patient[selectedExamIndex].examinationID)">Undersökningsnummer</label>
+			<p *ngIf="notNull(patient[selectedExamIndex].examinationID)">{{patient[selectedExamIndex].examinationID}}</p>
 
-			<label *ngIf="imageData.diagDef.length > 0" >Diagnos</label>
-			<p *ngIf="imageData.diagDef.length > 0">{{listToText(imageData.diagDef)}}</p>
+			<label *ngIf="patient[selectedExamIndex].diagDef.length > 0" >Diagnos</label>
+			<p *ngIf="patient[selectedExamIndex].diagDef.length > 0">{{listToText(patient[selectedExamIndex].diagDef)}}</p>
 
-			<label *ngIf="imageData.diagTent.length > 0" >Tentativ diagnos</label>
-			<p *ngIf="imageData.diagTent.length > 0">{{listToText(imageData.diagTent)}}</p>
+			<label *ngIf="patient[selectedExamIndex].diagTent.length > 0" >Tentativ diagnos</label>
+			<p *ngIf="patient[selectedExamIndex].diagTent.length > 0">{{listToText(patient[selectedExamIndex].diagTent)}}</p>
 
-			<label *ngIf="imageData.diagHist.length > 0" >Tidigare diagnos</label>
-			<p *ngIf="imageData.diagHist.length > 0">{{listToText(imageData.diagHist)}}</p>
+			<label *ngIf="patient[selectedExamIndex].diagHist.length > 0" >Tidigare diagnos</label>
+			<p *ngIf="patient[selectedExamIndex].diagHist.length > 0">{{listToText(patient[selectedExamIndex].diagHist)}}</p>
 
-			<label *ngIf="imageData.disNow.length > 0 && imageData.disNow != 'Nej'" >Sjukdom</label>
-			<p *ngIf="imageData.disNow.length > 0 && imageData.disNow != 'Nej'">{{listToText(imageData.disNow)}}</p>
+			<label *ngIf="patient[selectedExamIndex].disNow.length > 0 && patient[selectedExamIndex].disNow != 'Nej'" >Sjukdom</label>
+			<p *ngIf="patient[selectedExamIndex].disNow.length > 0 && patient[selectedExamIndex].disNow != 'Nej'">{{listToText(patient[selectedExamIndex].disNow)}}</p>
 
-			<label *ngIf="imageData.disPast.length > 0 && imageData.disPast != 'Nej'" >Tidigare sjukdom</label>
-			<p *ngIf="imageData.disPast.length > 0  && imageData.disPast != 'Nej'">{{listToText(imageData.disPast)}}</p>
+			<label *ngIf="patient[selectedExamIndex].disPast.length > 0 && patient[selectedExamIndex].disPast != 'Nej'" >Tidigare sjukdom</label>
+			<p *ngIf="patient[selectedExamIndex].disPast.length > 0  && patient[selectedExamIndex].disPast != 'Nej'">{{listToText(patient[selectedExamIndex].disPast)}}</p>
 
-			<label *ngIf="imageData.gender == '1'|| imageData.gender == '2'" >Kön</label>
-			<p *ngIf="imageData.gender == '1'">Man</p>
-			<p *ngIf="imageData.gender == '2'">Kvinna</p>
+			<label *ngIf="patient[selectedExamIndex].gender == '1'|| patient[selectedExamIndex].gender == '2'" >Kön</label>
+			<p *ngIf="patient[selectedExamIndex].gender == '1'">Man</p>
+			<p *ngIf="patient[selectedExamIndex].gender == '2'">Kvinna</p>
 
-			<label *ngIf="notNull(imageData.age)" >Ålder</label>
-			<p  *ngIf="notNull(imageData.age)" >{{imageData.age}} år</p>
+			<label *ngIf="notNull(patient[selectedExamIndex].age)" >Ålder</label>
+			<p  *ngIf="notNull(patient[selectedExamIndex].age)" >{{patient[selectedExamIndex].age}} år</p>
 
-			<label *ngIf="notNull(imageData.allergy) && imageData.allergy != 'Nej'">Allergi</label>
-			<p *ngIf="notNull(imageData.allergy) && imageData.allergy != 'Nej'" >{{imageData.allergy}}</p>
+			<label *ngIf="notNull(patient[selectedExamIndex].allergy) && patient[selectedExamIndex].allergy != 'Nej'">Allergi</label>
+			<p *ngIf="notNull(patient[selectedExamIndex].allergy) && patient[selectedExamIndex].allergy != 'Nej'" >{{patient[selectedExamIndex].allergy}}</p>
 
-			<label *ngIf="imageData.drug.length > 0 && imageData.drug != 'Nej'" >Läkemedel</label>
-			<p *ngIf="imageData.drug.length > 0 && imageData.drug != 'Nej'">{{listToText(imageData.drug)}}</p>
+			<label *ngIf="patient[selectedExamIndex].drug.length > 0 && patient[selectedExamIndex].drug != 'Nej'" >Läkemedel</label>
+			<p *ngIf="patient[selectedExamIndex].drug.length > 0 && patient[selectedExamIndex].drug != 'Nej'">{{listToText(patient[selectedExamIndex].drug)}}</p>
 
-			<label *ngIf="imageData.biopsySite.length > 0 && imageData.biopsySite != 'Nej'" >Biopsiplats</label>
-			<p *ngIf="imageData.biopsySite.length > 0 && imageData.biopsySite != 'Nej'">{{listToText(imageData.biopsySite)}}</p>
+			<label *ngIf="patient[selectedExamIndex].biopsySite.length > 0 && patient[selectedExamIndex].biopsySite != 'Nej'" >Biopsiplats</label>
+			<p *ngIf="patient[selectedExamIndex].biopsySite.length > 0 && patient[selectedExamIndex].biopsySite != 'Nej'">{{listToText(patient[selectedExamIndex].biopsySite)}}</p>
 		</div>
 
 		<div class="image-data-column">
-			<label *ngIf="imageData.factorNeg.length > 0 && imageData.factorNeg != 'Nej'" >Negativ faktor</label>
-			<p *ngIf="imageData.factorNeg.length > 0 && imageData.factorNeg != 'Nej'">{{listToText(imageData.factorNeg)}}</p>
+			<label *ngIf="patient[selectedExamIndex].factorNeg.length > 0 && patient[selectedExamIndex].factorNeg != 'Nej'" >Negativ faktor</label>
+			<p *ngIf="patient[selectedExamIndex].factorNeg.length > 0 && patient[selectedExamIndex].factorNeg != 'Nej'">{{listToText(patient[selectedExamIndex].factorNeg)}}</p>
 
-			<label *ngIf="imageData.factorPos.length > 0 && imageData.factorPos != 'Nej'" >Positiv faktor</label>
-			<p *ngIf="imageData.factorPos.length > 0 && imageData.factorPos != 'Nej'">{{listToText(imageData.factorPos)}}</p>
+			<label *ngIf="patient[selectedExamIndex].factorPos.length > 0 && patient[selectedExamIndex].factorPos != 'Nej'" >Positiv faktor</label>
+			<p *ngIf="patient[selectedExamIndex].factorPos.length > 0 && patient[selectedExamIndex].factorPos != 'Nej'">{{listToText(patient[selectedExamIndex].factorPos)}}</p>
 
-			<label *ngIf="imageData.lesnOn.length > 0" >lesnOn</label>
-			<p *ngIf="imageData.lesnOn.length > 0">{{listToText(imageData.lesnOn)}}</p>
+			<label *ngIf="patient[selectedExamIndex].lesnOn.length > 0" >lesnOn</label>
+			<p *ngIf="patient[selectedExamIndex].lesnOn.length > 0">{{listToText(patient[selectedExamIndex].lesnOn)}}</p>
 
-			<label *ngIf="imageData.lesnSite.length > 0" >lesnSite</label>		
-			<p *ngIf="imageData.lesnSite.length > 0">{{listToText(imageData.lesnSite)}}</p>
+			<label *ngIf="patient[selectedExamIndex].lesnSite.length > 0" >lesnSite</label>		
+			<p *ngIf="patient[selectedExamIndex].lesnSite.length > 0">{{listToText(patient[selectedExamIndex].lesnSite)}}</p>
 
-			<label *ngIf="imageData.skinPbl.length > 0" >Hudproblem</label>
-			<p *ngIf="imageData.skinPbl.length > 0">{{listToText(imageData.skinPbl)}}</p>
+			<label *ngIf="patient[selectedExamIndex].skinPbl.length > 0" >Hudproblem</label>
+			<p *ngIf="patient[selectedExamIndex].skinPbl.length > 0">{{listToText(patient[selectedExamIndex].skinPbl)}}</p>
 
-			<label *ngIf="imageData.smoke.length > 0" >Rökare</label>
-			<p *ngIf="imageData.smoke.length > 0">{{listToText(imageData.smoke)}}</p>
+			<label *ngIf="patient[selectedExamIndex].smoke.length > 0" >Rökare</label>
+			<p *ngIf="patient[selectedExamIndex].smoke.length > 0">{{listToText(patient[selectedExamIndex].smoke)}}</p>
 
-			<label *ngIf="imageData.snuff.length > 0" >Snusare</label>
-			<p *ngIf="imageData.snuff.length > 0">{{listToText(imageData.snuff)}}</p>
+			<label *ngIf="patient[selectedExamIndex].snuff.length > 0" >Snusare</label>
+			<p *ngIf="patient[selectedExamIndex].snuff.length > 0">{{listToText(patient[selectedExamIndex].snuff)}}</p>
 
-			<label *ngIf="imageData.symptNow.length > 0" >Symptom</label>
-			<p *ngIf="imageData.symptNow.length > 0">{{listToText(imageData.symptNow)}}</p>
+			<label *ngIf="patient[selectedExamIndex].symptNow.length > 0" >Symptom</label>
+			<p *ngIf="patient[selectedExamIndex].symptNow.length > 0">{{listToText(patient[selectedExamIndex].symptNow)}}</p>
 
-			<label *ngIf="imageData.symptSite.length > 0" >Symptomplats</label>
-			<p *ngIf="imageData.symptSite.length > 0">{{listToText(imageData.symptSite)}}</p>
+			<label *ngIf="patient[selectedExamIndex].symptSite.length > 0" >Symptomplats</label>
+			<p *ngIf="patient[selectedExamIndex].symptSite.length > 0">{{listToText(patient[selectedExamIndex].symptSite)}}</p>
 
-			<label *ngIf="imageData.treatType.length > 0" >Behandling</label>
-			<p *ngIf="imageData.treatType.length > 0">{{listToText(imageData.treatType)}}</p>
+			<label *ngIf="patient[selectedExamIndex].treatType.length > 0" >Behandling</label>
+			<p *ngIf="patient[selectedExamIndex].treatType.length > 0">{{listToText(patient[selectedExamIndex].treatType)}}</p>
 
-			<label *ngIf="imageData.vasNow.length > 0" >vasNow</label>
-			<p *ngIf="imageData.vasNow.length > 0">{{listToText(imageData.vasNow)}}</p>
+			<label *ngIf="patient[selectedExamIndex].vasNow.length > 0" >vasNow</label>
+			<p *ngIf="patient[selectedExamIndex].vasNow.length > 0">{{listToText(patient[selectedExamIndex].vasNow)}}</p>
 		</div>
 	</div>
 
-	<div id="see-more-images-box" *ngIf="otherExams.length > 1">
+	<div id="see-more-images-box" *ngIf="patient.length > 1">
 		<h2>Andra undersökningar på samma patient</h2>
 		<div id="see-more-image-wrapper">
-			<span *ngFor="let otherExam of otherExams; let cur=index">
-				<a href="/image?examination={{otherExams[cur].examinationID}}&image=0" *ngIf="otherExams[cur].examinationID != imageData.examinationID && otherExams[cur].imagePaths.length > 0">
-					<span [ngStyle]="{'background-image': 'url(' + url +'/thumbnail/' + otherExams[cur].examinationID + '/' + 0 + ')'}" class="see-more-image">
+			<span *ngFor="let exam of patient; let examIndex=index">
+				<a (click)="setCurrentImage(exam.examinationID, 0)">
+					<span [ngStyle]="{'background-image': 'url(' +exam.thumbnailUrls[0]+ ')'}" class="see-more-image">
 						<span class="see-more-image-fade" (click)="changeExamination(otherExams[cur].examinationID)">
-							{{examinationIdToDate(otherExams[cur].examinationID)}}
+							{{examinationIdToDate(exam.examinationID)}}
 							<p class="see-more-image-number-of-images">
-								{{getNumberOfOtherExamImages(otherExams[cur].imagePaths.length)}}
+								{{exam.imagePaths.length + ' ' + (exam.imagePaths.length == 1 ? 'bild' : 'bilder')}}
 							</p>
 						</span>
 					</span>

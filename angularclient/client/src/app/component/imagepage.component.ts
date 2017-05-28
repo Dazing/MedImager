@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit, ViewChild, Input, SecurityContext } from '@angular/core';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Server } from '../model/server';
 import { Location } from '@angular/common';
@@ -34,14 +35,21 @@ export class ImagePageComponent {
 	private examination404 = false;
 	private otherImages:string[];
 	private otherExams:string[] = [];
-	private url;
+
+	private patient = [];
+	private selectedExamIndex = -1;
+	private imageLoaded = false;
+	public imageSrc: SafeResourceUrl;
 
 
 	constructor(
 		private server: Server, 
+		private http: Http,
 		private imagePageServiceOld: ImagePageService, 
 		private location: Location, 
-		private route:ActivatedRoute) 
+		private route:ActivatedRoute,
+		private sanitizer: DomSanitizer
+	) 
 	{
 
 	}
@@ -50,11 +58,10 @@ export class ImagePageComponent {
 		this.route.url.subscribe(url => {
 			if (url.length == 3) {
 				if (url[0].path == 'image') {
-					this.examinationIn = url[1].path;
-					this.imageIn = url[2].path;
-					if (!/[0-9]+\/[0-9]+/.test(this.examinationIn + '/' + this.imageIn)) {
+					if (!/[0-9]+\/[0-9]+/.test(url[1].path + '/' + url[2].path)) {
 						console.warn('BAD IMAGE ROUTE');
 					}
+					this.setCurrentImage(url[1].path, +url[2].path);
 				}
 			}
 		});
@@ -65,6 +72,85 @@ export class ImagePageComponent {
 		this.imagePageService.getImageData(this.examinationIn);
 		this.imagePageService.getOtherExaminations(this.examinationIn);
 		*/
+	}
+
+	loadPatient() {
+		this.patient = [];
+		this.display = false;
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+		let url = this.server.getUrl + '/patient/' + this.examinationIn;
+		this.http.get(url, options)
+		.toPromise()
+		.then(res => {
+			let patient = res.json();
+			let found = false;
+			patient.forEach(exam => {
+				exam.thumbnailUrls = [];
+				for (let i=0; i < exam.imagePaths.length; i++) {
+					exam.thumbnailUrls.push('');
+					this.http.get(this.server.getUrl() + '/thumbnail/' + exam.examinationID + '/' + i, options)
+					.toPromise()
+					.then(res => {
+						exam.thumbnailUrls[i] = window.URL.createObjectURL(res.blob());
+					});
+				}
+				
+			});
+			for(let i=0;i < patient.length; i++){
+				if (patient[i]['examinationID'] == this.examinationIn) {
+					this.selectedExamIndex = i;
+				}
+			}
+			if (!found) {
+				console.warn('requested patient does not contain selected exam id, this should not happen');
+			}
+			this.patient = patient;
+			this.error = false;
+			this.loadImage();
+		})
+		.then(e => {
+			this.error = true;
+		});
+	}
+
+	setCurrentImage(examinationID: string, imageIndex: number) {
+		let examChanged = this.examinationIn != examinationID;
+		let imageChanged = this.imageIn != ''+imageIndex;
+		let patientFound = !examChanged;
+		this.examinationIn = examinationID;
+		this.imageIn = ''+imageIndex;
+		if (examChanged) {
+			for (let i=0; i < this.patient.length; i++) {
+				if (this.patient[i]['examinationID'] == this.examinationIn) {
+					patientFound = true;
+					this.selectedExamIndex = i;
+				}
+			}
+		}
+		if (patientFound) {
+			this.loadImage();
+		} else {
+			this.loadPatient();
+		}
+	}
+
+	loadImage() {
+		let headers = new Headers();
+		headers.append('Authorization', sessionStorage.getItem("currentUser"));
+		let options = new RequestOptions({ headers: headers });
+		let url = this.server.getUrl + '/patient/' + this.examinationIn;
+		this.imageLoaded = false;
+		this.http.get(url, options)
+		.toPromise()
+		.then(res => {
+			this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
+				window.URL.createObjectURL(res.blob())
+			)
+			this.imageLoaded = true;
+			this.display = true;
+		});
 	}
 
 	notNull(value: any){
