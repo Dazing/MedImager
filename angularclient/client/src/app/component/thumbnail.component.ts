@@ -42,14 +42,14 @@ export class ThumbnailComponent implements OnInit {
 		})
 
 
-		this.popupService.searchResult.subscribe(searchResult => {
+		/*this.popupService.searchResult.subscribe(searchResult => {
 			
 			if (searchResult.direction > 0) {
 				this.showNextImage(searchResult.examinationIndex, searchResult.imageIndex);
 			} else if (searchResult.direction < 0) {
 				this.showPreviousImage(searchResult.examinationIndex, searchResult.imageIndex);
 			}
-		})
+		})*/
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
@@ -59,7 +59,7 @@ export class ThumbnailComponent implements OnInit {
 				examinationIndex = (examinationIndex + 1) % this.searchresults.length;
 			} while (this.searchresults[examinationIndex].imagePaths.length < 1)
 		}
-		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], newImageIndex, examinationIndex);
+		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], newImageIndex, examinationIndex, this.showPreviousImage, this.showNextImage);
 	}
 
 	showPreviousImage(examinationIndex: number, imageIndex: number): void {
@@ -76,11 +76,11 @@ export class ThumbnailComponent implements OnInit {
 		} else {
 			newImageIndex = imageIndex - 1;
 		}
-		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], newImageIndex, examinationIndex);
+		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], newImageIndex, examinationIndex, this.showPreviousImage, this.showNextImage);
 	}
 
 	onImageClick(examinationIndex: number, imageIndex: number):void{
-		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], imageIndex, examinationIndex);
+		this.popupService.setPopupWithSearchIndex(this.searchresults[examinationIndex], imageIndex, examinationIndex, this.showPreviousImage, this.showNextImage);
 	}
 
 	getDiagDef(index: number): string {

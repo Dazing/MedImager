@@ -62,10 +62,11 @@ export class PopupService{
 		this.privPopup.next(examination);
 	}
 
-	setPopupWithSearchIndex(examination: JSON, imageIndex: number, searchIndex: number):void {
+	setPopupWithSearchIndex(examination: JSON, imageIndex: number, searchIndex: number, callbackPrev?:(examinationIndex:number, imageIndex: number)=>void, callbackNext?:(examinationIndex:number, imageIndex: number)=>void):void {
 		examination['imageIndex'] = imageIndex;
 		examination['searchIndex'] = searchIndex;
-
+		examination['callbackNext'] = callbackNext;
+		examination['callbackPrev'] = callbackPrev;
 		this.privPopup.next(examination);
 	}
 

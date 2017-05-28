@@ -37,6 +37,10 @@ export class PopupComponent {
 	ngOnInit(): void {
 
 		this.popupService.popup.subscribe(popup => {
+            if (this.popup) {
+                this.popup.callbackNext = undefined;
+                this.popup.callbackPrev = undefined;
+            }
 			this.popup = popup;
             this.visible = true;
             this.resolutionLoaded = false;
@@ -68,6 +72,9 @@ export class PopupComponent {
 
     hidePopup(): void {
         this.visible = false;
+        this.popup.callbackNext = undefined;
+        this.popup.callbackPrev = undefined;
+        this.popup = null;
     }
 
   
@@ -77,11 +84,17 @@ export class PopupComponent {
     }
 
     nextImage(): void {
-        this.popupService.setNextImage(this.popup.searchIndex, this.popup.imageIndex);
+        //this.popupService.setNextImage(this.popup.searchIndex, this.popup.imageIndex);
+        if (this.popup.callbackNext) {
+            this.popup.callbackNext(this.popup.searchIndex, this.popup.imageIndex);
+        }
     }
 
     prevImage(): void {
-        this.popupService.setPreviousImage(this.popup.searchIndex, this.popup.imageIndex);
+        //this.popupService.setPreviousImage(this.popup.searchIndex, this.popup.imageIndex);
+        if (this.popup.callbackPrev) {
+            this.popup.callbackPrev(this.popup.searchIndex, this.popup.imageIndex);
+        }
     }
 
     listToText(items: string[]): string {
