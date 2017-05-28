@@ -48,6 +48,7 @@ export class ImagePageComponent {
 		private imagePageServiceOld: ImagePageService, 
 		private location: Location, 
 		private route:ActivatedRoute,
+		private router: Router,
 		private sanitizer: DomSanitizer
 	) 
 	{
@@ -65,18 +66,15 @@ export class ImagePageComponent {
 				}
 			}
 		});
-		/*
-		this.imagePageService.otherExams.subscribe(otherExams => {
-			this.otherExams = otherExams.sort(this.sortAlgorithm);
-		});
-		this.imagePageService.getImageData(this.examinationIn);
-		this.imagePageService.getOtherExaminations(this.examinationIn);
-		*/
+	}
+
+	navigateToImage(examinationID: string, imageIndex: string): void {
+		this.router.navigate(['/image/'+examinationID+'/'+imageIndex]);
 	}
 
 	loadPatient() {
-		this.patient = [];
 		this.display = false;
+		this.patient = [];
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		let options = new RequestOptions({ 

@@ -813,6 +813,8 @@ select {
     transition: opacity 0.4s; }
     #related-images span:hover {
       opacity: 1; }
+    #related-images span:selected {
+      opacity: 1; }
 
 #see-more-images-box {
   margin-bottom: 100px;
