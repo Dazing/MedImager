@@ -110,13 +110,14 @@ export class ImagePageComponent {
 				}
 			}
 			if (!found) {
-				console.warn('requested patient does not contain selected exam id, this should not happen');
+				console.warn('requested patient does not contain selected exam id, this should not happen'
+				+'\nexamID:'+this.examinationIn+', imageIn:'+this.imageIn);
 			}
 			this.patient = patient;
 			this.error = false;
 			this.loadImage();
 		})
-		.then(e => {
+		.catch(e => {
 			this.error = true;
 		});
 	}
@@ -151,6 +152,8 @@ export class ImagePageComponent {
 		this.http.get(url, options)
 		.toPromise()
 		.then(res => {
+			console.log('IMG RES:');
+			console.log(res);
 			this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
 				window.URL.createObjectURL(res.blob())
 			)
