@@ -94,8 +94,6 @@ export class ImagePageComponent {
 		.then(res => {
 			let patient = res.json();
 			let found = false;
-			console.log('PATIENT:');
-			console.log(patient);
 			patient.forEach(exam => {
 				exam.thumbnailUrls = [];
 				for (let i=0; i < exam.imagePaths.length; i++) {
@@ -103,13 +101,7 @@ export class ImagePageComponent {
 					this.http.get(this.server.getUrl() + '/thumbnail/' + exam.examinationID + '/' + i, imgOptions)
 					.toPromise()
 					.then(res => {
-						console.log('THUMB RES:');
-						console.log(res);
-						console.log('THUMB BLOB:');
-						console.log(res.blob());
 						exam.thumbnailUrls[i] = window.URL.createObjectURL(res.blob());
-						console.log('THUMB URL:');
-						console.log(exam.thumbnailUrls[i]);
 					});
 				}
 				
@@ -149,7 +141,7 @@ export class ImagePageComponent {
 					this.selectedExamIndex = i;
 				}
 			}
-			this.animTopScroll(window.pageYOffset/20,20);
+			this.animTopScroll(window.pageYOffset/30,10);
 		}
 		if (patientFound) {
 			this.loadImage();
