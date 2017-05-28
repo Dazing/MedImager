@@ -16,6 +16,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+declare function $(sel:string): any;
+
 @Component({
 	selector: 'imagepage',
 	templateUrl: '../template/imagepage.component.html'
@@ -141,7 +143,7 @@ export class ImagePageComponent {
 					this.selectedExamIndex = i;
 				}
 			}
-			this.animTopScroll(window.pageYOffset/30,10);
+			this.animTopScroll();
 		}
 		if (patientFound) {
 			this.loadImage();
@@ -285,12 +287,7 @@ export class ImagePageComponent {
 		this.collectionsMenu.show(this.collectionsMenuVisible);
 	}
 
-	private animTopScroll(distancePerInterval: number, intervalTimeInMS) {
-		scroll(0,window.pageYOffset-distancePerInterval);
-		if (window.pageYOffset > 0) {
-			setTimeout(()=>{
-				this.animTopScroll(distancePerInterval, intervalTimeInMS);
-			}, intervalTimeInMS);
-		}
+	private animTopScroll() {
+		$("html, body").animate({ scrollTop: "0" });
 	}
 }
