@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, SecurityContext } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SecurityContext, HostListener } from '@angular/core';
 import { Http, RequestOptions, Headers, ResponseContentType } from '@angular/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import { ImagePageService } from '../service/imagepage.service';
 import { Observable } from 'rxjs';
 import { CollectionsMenu } from './collections-menu.component';
 import { Subject } from 'rxjs/Subject';
+
 
 // Observable class extensions
 import 'rxjs/add/observable/of';
@@ -42,6 +43,7 @@ export class ImagePageComponent {
 	private selectedExamIndex = -1;
 	private imageLoaded = false;
 	public imageSrc: SafeResourceUrl;
+	private flagForNoscroll = false;
 
 
 	constructor(
@@ -143,7 +145,11 @@ export class ImagePageComponent {
 					this.selectedExamIndex = i;
 				}
 			}
-			this.animTopScroll();
+			if (this.flagForNoscroll) {
+				this.flagForNoscroll = false;
+			} else {
+				this.animTopScroll();
+			}
 		}
 		if (patientFound) {
 			this.loadImage();
@@ -289,5 +295,31 @@ export class ImagePageComponent {
 
 	private animTopScroll() {
 		$("html, body").animate({ scrollTop: "0" });
+	}
+
+	@HostListener('document:keydown', ['$event'])
+	onClick(event) {
+		if (event.ctrlKey) {
+			switch (event.key) {
+				case ('ArrowDown'): {
+					this.navigateToImage(this.examinationIn, ''+((+this.imageIn + 1) % this.patient[this.selectedExamIndex].thumbnailUrls.length));
+					break;
+				}
+				case ('ArrowDown'): {
+					this.navigateToImage(this.examinationIn, ''+((+this.imageIn < 1) ? this.patient[this.selectedExamIndex].thumbnailUrls.length-1 : +this.imageIn-1));
+					break;
+				}
+				case ('ArrowRight'): {
+					this.flagForNoscroll = true;
+					this.navigateToImage(this.patient[this.selectedExamIndex+1 % this.patient.length].examinationID, '0');
+					break;
+				}
+				case ('ArrowLeft'): {
+					this.flagForNoscroll = true;
+					this.navigateToImage(this.patient[this.selectedExamIndex < 1 ? this.patient.length-1 : this.selectedExamIndex-1].examinationID, '0');
+					break;
+				}
+			}
+		}
 	}
 }
