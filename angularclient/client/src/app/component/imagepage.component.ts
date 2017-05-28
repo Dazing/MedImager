@@ -136,6 +136,9 @@ export class ImagePageComponent {
 	setCurrentImage(examinationID: string, imageIndex: number) {
 		let examChanged = this.examinationIn != examinationID;
 		let imageChanged = this.imageIn != ''+imageIndex;
+		if (!(examChanged || imageChanged)) {
+			return;
+		}
 		let patientFound = !examChanged;
 		this.examinationIn = examinationID;
 		this.imageIn = ''+imageIndex;
@@ -146,6 +149,7 @@ export class ImagePageComponent {
 					this.selectedExamIndex = i;
 				}
 			}
+			scroll(0,0);//scroll to top if exam changed
 		}
 		if (patientFound) {
 			this.loadImage();

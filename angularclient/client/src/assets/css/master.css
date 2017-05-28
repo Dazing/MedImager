@@ -801,7 +801,8 @@ select {
 #related-images {
   position: absolute;
   top: 50%;
-  right: 5px; }
+  right: 5px;
+  transition: transform 0.4s; }
   #related-images span {
     width: 80px;
     height: 50px;
@@ -813,7 +814,7 @@ select {
     transition: opacity 0.4s; }
     #related-images span:hover {
       opacity: 1; }
-    #related-images span:selected {
+    #related-images span.selected {
       opacity: 1; }
 
 #see-more-images-box {
@@ -839,6 +840,15 @@ select {
   color: #ffffff;
   font-size: 25px;
   padding-top: 23%; }
+  .see-more-image-fade svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0; }
+    .see-more-image-fade svg polyline {
+      stroke-width: 3;
+      fill: none;
+      stroke: #1de9b6; }
 
 .see-more-image-number-of-images {
   font-size: 16px;

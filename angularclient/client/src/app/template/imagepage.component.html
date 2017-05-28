@@ -24,7 +24,8 @@
 				<span *ngFor="let image of patient[selectedExamIndex].thumbnailUrls; let cur=index"
 				id="{{'other-image-'+cur}}"
 				class="unselectable"
-				[ngStyle]="{'background-image': 'url(' +image+ ')'}"
+				[ngStyle]="{'background-image': 'url(' +image+ ')',
+				'transform': 'translateY(-' + (imageIn*(50)+25) + 'px)'}"
 				[ngClass]="{selected: imageIn == cur}"
 				(click)="navigateToImage(patient[selectedExamIndex].examinationID, cur)"
 				></span>
@@ -109,12 +110,20 @@
 	</div>
 
 	<div id="see-more-images-box" *ngIf="patient.length > 1">
-		<h2>Andra undersökningar på samma patient</h2>
+		<h2>Undersökningar på denna patient</h2>
 		<div id="see-more-image-wrapper">
 			<span *ngFor="let exam of patient; let examIndex=index">
-				<a (click)="navigateToImage(exam.examinationID, 0)">
-					<span [ngStyle]="{'background-image': 'url(' +exam.thumbnailUrls[0]+ ')'}" class="see-more-image">
+				<a (click)="navigateToImage(exam.examinationID, 0)" [ngStyle]="{'cursor': selectedExamIndex == examIndex ? 'default' : 'pointer'}">
+					<span 
+					[ngStyle]="{'background-image': 'url(' +exam.thumbnailUrls[0]+ ')'}" 
+					class="see-more-image">
 						<span class="see-more-image-fade">
+							<svg width: "300" height="210" *ngIf="selectedExamIndex == examIndex">
+  								<polyline points="10 30 10 10 30 10"></polyline>
+								<polyline points="290 30 290 10 270 10"></polyline>
+								<polyline points="290 180 290 200 270 200"></polyline>
+								<polyline points="10 180 10 200 30 200"></polyline>
+							</svg>
 							{{examinationIdToDate(exam.examinationID)}}
 							<p class="see-more-image-number-of-images">
 								{{exam.imagePaths.length + ' ' + (exam.imagePaths.length == 1 ? 'bild' : 'bilder')}}

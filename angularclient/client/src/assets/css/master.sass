@@ -97,6 +97,7 @@ select
 	position: absolute
 	top: 50%
 	right: 5px
+	transition: transform 0.4s
 	span
 		width: 80px
 		height: 50px
@@ -108,8 +109,9 @@ select
 		transition: opacity 0.4s
 		&:hover
 			opacity: 1
-		&:selected
+		&.selected
 			opacity: 1
+	
 
 #see-more-images-box
 	margin-bottom: 100px
@@ -136,6 +138,15 @@ select
 	color: #ffffff
 	font-size: 25px
 	padding-top: 23%
+	svg
+		display: block
+		position: absolute
+		top: 0
+		left: 0
+		polyline
+			stroke-width: 3
+			fill: none
+			stroke: $primary-colour
 
 .see-more-image-number-of-images
 	font-size: 16px
