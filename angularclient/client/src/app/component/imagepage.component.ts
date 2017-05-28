@@ -146,7 +146,7 @@ export class ImagePageComponent {
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
 		let options = new RequestOptions({ headers: headers });
-		let url = this.server.getUrl() + '/patient/' + this.examinationIn;
+		let url = this.server.getUrl() + '/image/' + this.examinationIn + '/' + this.imageIn;
 		this.imageLoaded = false;
 		this.http.get(url, options)
 		.toPromise()
