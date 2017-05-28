@@ -20,12 +20,11 @@
 			<img [src]="imageSrc" 
 			id="full-image" draggable="true">
 			
-			<div id="related-images">
+			<div id="related-images" [ngStyle]="{'transform': 'translateY(-' + (imageIn*(50)+25) + 'px)'}">
 				<span *ngFor="let image of patient[selectedExamIndex].thumbnailUrls; let cur=index"
 				id="{{'other-image-'+cur}}"
 				class="unselectable"
-				[ngStyle]="{'background-image': 'url(' +image+ ')',
-				'transform': 'translateY(-' + (imageIn*(50)+25) + 'px)'}"
+				[ngStyle]="{'background-image': 'url(' +image+ ')'}"
 				[ngClass]="{selected: imageIn == cur}"
 				(click)="navigateToImage(patient[selectedExamIndex].examinationID, cur)"
 				></span>

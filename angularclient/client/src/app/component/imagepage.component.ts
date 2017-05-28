@@ -149,7 +149,7 @@ export class ImagePageComponent {
 					this.selectedExamIndex = i;
 				}
 			}
-			scroll(0,0);//scroll to top if exam changed
+			this.animTopScroll(window.pageYOffset/20,20);
 		}
 		if (patientFound) {
 			this.loadImage();
@@ -171,13 +171,9 @@ export class ImagePageComponent {
 		this.http.get(url, options)
 		.toPromise()
 		.then(res => {
-			console.log('IMG RES:');
-			console.log(res);
 			this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
 				window.URL.createObjectURL(res.blob())
 			)
-			console.log('IMG SRC:');
-			console.log(this.imageSrc);
 			this.imageLoaded = true;
 			this.display = true;
 		});
@@ -295,5 +291,14 @@ export class ImagePageComponent {
 	toggleCollectionsMenu() {
 		this.collectionsMenuVisible = !this.collectionsMenuVisible;
 		this.collectionsMenu.show(this.collectionsMenuVisible);
+	}
+
+	private animTopScroll(distancePerInterval: number, intervalTimeInMS) {
+		scroll(0,window.pageYOffset-distancePerInterval);
+		if (window.pageYOffset > 0) {
+			setTimeout(()=>{
+				this.animTopScroll(distancePerInterval, intervalTimeInMS);
+			}, intervalTimeInMS);
+		}
 	}
 }
