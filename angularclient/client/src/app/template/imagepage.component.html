@@ -118,12 +118,15 @@
 					[ngStyle]="{'background-image': 'url(' +exam.thumbnailUrls[0]+ ')'}" 
 					class="see-more-image">
 						<span class="see-more-image-fade">
-							<svg viewBox="0 0 300 210" width: "100%" height="100%" *ngIf="selectedExamIndex == examIndex">
-  								<svg:polyline points="10 30 10 10 30 10" />
-								<svg:polyline points="290 30 290 10 270 10" />
-								<svg:polyline points="290 180 290 200 270 200" />
-								<svg:polyline points="10 180 10 200 30 200" />
-							</svg>
+							<div *ngIf="selectedExamIndex == examIndex" style="height: 100%">
+								<svg viewBox="0 0 300 210" width: "100%" height="100%">
+									<svg:polyline points="10 30 10 10 30 10" />
+									<svg:polyline points="290 30 290 10 270 10" />
+									<svg:polyline points="290 180 290 200 270 200" />
+									<svg:polyline points="10 180 10 200 30 200" />
+								</svg>
+							</div>
+							
 							{{examinationIdToDate(exam.examinationID)}}
 							<p class="see-more-image-number-of-images">
 								{{exam.imagePaths.length + ' ' + (exam.imagePaths.length == 1 ? 'bild' : 'bilder')}}
