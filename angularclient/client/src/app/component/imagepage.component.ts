@@ -97,6 +97,7 @@ export class ImagePageComponent {
 		.toPromise()
 		.then(res => {
 			let patient = res.json();
+			patient.sort(this.sortAlgorithm);
 			let found = false;
 			patient.forEach(exam => {
 				exam.thumbnailUrls = [];

@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import { Server } from '../model/server';
@@ -27,6 +28,7 @@ export class PopupComponent {
 		private searchService: SearchService,
 		private popupService: PopupService,
 		public ref: ChangeDetectorRef, 
+        private router: Router,
 		private server: Server
 	){
      
@@ -40,8 +42,6 @@ export class PopupComponent {
             this.resolutionLoaded = false;
 
             this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex,url=>{
-                console.log('RES URL: ');
-                console.log(url);
                 this.imgSrc=url;
             })
         })
@@ -103,6 +103,10 @@ export class PopupComponent {
 
     likeImage(like:boolean): void{
         this.liked = !this.liked;
+    }
+
+    goToExamination() {
+        this.router.navigate(['/image/'+this.popup.examinationID + '/' + this.popup.imageIndex]);
     }
 
     
