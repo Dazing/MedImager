@@ -79,9 +79,15 @@ export class ImagePageComponent {
 		this.display = false;
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
-		headers.append('Content-Type', 'image/jpg');
 		let options = new RequestOptions({ 
-			headers: headers, 
+			headers: headers
+		});
+
+		let imgHeaders = new Headers();
+		imgHeaders.append('Authorization', sessionStorage.getItem("currentUser"));
+		imgHeaders.append('Content-Type', 'image/jpg');
+		let imgOptions = new RequestOptions({ 
+			headers: imgHeaders,
 			responseType: ResponseContentType.Blob
 		});
 		let url = this.server.getUrl() + '/patient/' + this.examinationIn;
@@ -96,7 +102,7 @@ export class ImagePageComponent {
 				exam.thumbnailUrls = [];
 				for (let i=0; i < exam.imagePaths.length; i++) {
 					exam.thumbnailUrls.push('');
-					this.http.get(this.server.getUrl() + '/thumbnail/' + exam.examinationID + '/' + i, options)
+					this.http.get(this.server.getUrl() + '/thumbnail/' + exam.examinationID + '/' + i, imgOptions)
 					.toPromise()
 					.then(res => {
 						console.log('THUMB RES:');
