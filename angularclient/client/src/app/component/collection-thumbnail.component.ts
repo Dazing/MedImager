@@ -41,13 +41,13 @@ export class CollectionThumbnailComponent implements OnInit {
 	ngOnInit(): void {
 		this.url = this.server.getUrl();
 
-		this.popupService.searchResult.subscribe(image => {
+		/*this.popupService.searchResult.subscribe(image => {
 			if (image.direction > 0) {
 				this.showNextImage(image.examinationIndex, image.imageIndex);
 			} else if (image.direction < 0) {
 				this.showPreviousImage(image.examinationIndex, image.imageIndex);
 			}
-		})
+		})*/
 	}
 
 	setCollection(collection: Collection) {
@@ -92,23 +92,24 @@ export class CollectionThumbnailComponent implements OnInit {
 	}
 
 	showNextImage(examinationIndex: number, imageIndex: number): void {
-		console.log('exam index:'+examinationIndex);
 		this.onImageClick((examinationIndex + 1) % this.images.length);
 	}
 
 	showPreviousImage(examinationIndex: number, imageIndex: number): void {
-		console.log('exam index:'+examinationIndex);
 		this.onImageClick(examinationIndex-1 < 0 ? this.images.length-1 : examinationIndex-1);
 	}
 
 	onImageClick(index: number):void{
-		console.log('IMAGE CLICK:'+index);
+		let thisHandle = this;
 		this.getImage(index, res => {
-			console.log('SET IMAGE:');
-			console.log(res);
-			console.log(index);
-			console.log(this.images[index].examinationID + '/' + this.images[index].index);
-			this.popupService.setPopupWithSearchIndex(res, this.images[index].index, index);
+			this.popupService.setPopupWithSearchIndex(res, this.images[index].index, index,
+			(examinationIndex, imageIndex)=>{
+				//prev
+				thisHandle.showPreviousImage(examinationIndex, imageIndex);
+			},(examinationIndex, imageIndex)=>{
+				//next
+				thisHandle.showNextImage(examinationIndex, imageIndex);
+			});
 		});
 		
 	}
