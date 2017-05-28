@@ -66,6 +66,7 @@ export class ThumbnailComponent implements OnInit {
 
 	showPreviousImage(examinationIndex: number, imageIndex: number): void {
 		let newImageIndex;
+		
 		if (imageIndex < 1) {
 			do {
 				if (examinationIndex <= 0) {

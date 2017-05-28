@@ -25,6 +25,9 @@ export class PopupService{
 	private privDialogs: Subject<string>;
 	private booleanReturnSubject: Subject<boolean>;
 
+	public callbackPrev: (examinationIndex:number, imageIndex: number)=>void;
+	public callbackNext: (examinationIndex:number, imageIndex: number)=>void;
+
 
 	constructor(private http: Http, private router: Router, ) {
 		this.privPopup = new Subject<JSON>();
@@ -65,8 +68,8 @@ export class PopupService{
 	setPopupWithSearchIndex(examination: JSON, imageIndex: number, searchIndex: number, callbackPrev?:(examinationIndex:number, imageIndex: number)=>void, callbackNext?:(examinationIndex:number, imageIndex: number)=>void):void {
 		examination['imageIndex'] = imageIndex;
 		examination['searchIndex'] = searchIndex;
-		examination['callbackNext'] = callbackNext;
-		examination['callbackPrev'] = callbackPrev;
+		this.callbackNext = callbackNext;
+		this.callbackPrev = callbackPrev;
 		this.privPopup.next(examination);
 	}
 
