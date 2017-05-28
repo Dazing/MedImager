@@ -305,13 +305,13 @@ export class ImagePageComponent {
 					this.navigateToImage(this.examinationIn, ''+((+this.imageIn + 1) % this.patient[this.selectedExamIndex].thumbnailUrls.length));
 					break;
 				}
-				case ('ArrowDown'): {
+				case ('ArrowUp'): {
 					this.navigateToImage(this.examinationIn, ''+((+this.imageIn < 1) ? this.patient[this.selectedExamIndex].thumbnailUrls.length-1 : +this.imageIn-1));
 					break;
 				}
 				case ('ArrowRight'): {
 					this.flagForNoscroll = true;
-					this.navigateToImage(this.patient[this.selectedExamIndex+1 % this.patient.length].examinationID, '0');
+					this.navigateToImage(this.patient[(this.selectedExamIndex+1) % this.patient.length].examinationID, '0');
 					break;
 				}
 				case ('ArrowLeft'): {
