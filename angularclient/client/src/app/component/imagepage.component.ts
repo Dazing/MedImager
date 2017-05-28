@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input, SecurityContext } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+import { Http, RequestOptions, Headers, ResponseContentType } from '@angular/http';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Server } from '../model/server';
@@ -79,7 +79,11 @@ export class ImagePageComponent {
 		this.display = false;
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
-		let options = new RequestOptions({ headers: headers });
+		headers.append('Content-Type', 'image/jpg');
+		let options = new RequestOptions({ 
+			headers: headers, 
+			responseType: ResponseContentType.Blob
+		});
 		let url = this.server.getUrl() + '/patient/' + this.examinationIn;
 		this.http.get(url, options)
 		.toPromise()
@@ -149,7 +153,11 @@ export class ImagePageComponent {
 	loadImage() {
 		let headers = new Headers();
 		headers.append('Authorization', sessionStorage.getItem("currentUser"));
-		let options = new RequestOptions({ headers: headers });
+		headers.append('Content-Type', 'image/jpg');
+		let options = new RequestOptions({ 
+			headers: headers, 
+			responseType: ResponseContentType.Blob
+		});
 		let url = this.server.getUrl() + '/image/' + this.examinationIn + '/' + this.imageIn;
 		this.imageLoaded = false;
 		this.http.get(url, options)
