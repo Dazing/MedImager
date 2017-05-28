@@ -25,7 +25,7 @@
 				id="{{'other-image-'+cur}}"
 				class="unselectable"
 				[ngStyle]="{'background-image': 'url(' +image+ ')'}"
-
+				[ngClass]="{selected: imageIn == cur}"
 				(click)="navigateToImage(patient[selectedExamIndex].examinationID, cur)"
 				></span>
 			</div>
@@ -115,7 +115,7 @@
 				<a (click)="navigateToImage(exam.examinationID, 0)">
 					<span [ngStyle]="{'background-image': 'url(' +exam.thumbnailUrls[0]+ ')'}" class="see-more-image">
 						<span class="see-more-image-fade">
-							{examinationIdToDate(exam.examinationID)}
+							{{examinationIdToDate(exam.examinationID)}}
 							<p class="see-more-image-number-of-images">
 								{{exam.imagePaths.length + ' ' + (exam.imagePaths.length == 1 ? 'bild' : 'bilder')}}
 							</p>
