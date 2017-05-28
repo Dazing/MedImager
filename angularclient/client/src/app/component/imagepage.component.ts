@@ -97,6 +97,8 @@ export class ImagePageComponent {
 					.then(res => {
 						console.log('THUMB RES:');
 						console.log(res);
+						console.log('THUMB BLOB:');
+						console.log(res.blob());
 						exam.thumbnailUrls[i] = window.URL.createObjectURL(res.blob());
 						console.log('THUMB URL:');
 						console.log(exam.thumbnailUrls[i]);
@@ -107,6 +109,7 @@ export class ImagePageComponent {
 			for(let i=0;i < patient.length; i++){
 				if (patient[i]['examinationID'] == this.examinationIn) {
 					this.selectedExamIndex = i;
+					found = true;
 				}
 			}
 			if (!found) {
