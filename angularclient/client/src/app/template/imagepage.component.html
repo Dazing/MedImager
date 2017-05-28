@@ -25,7 +25,7 @@
 				id="{{'other-image-'+cur}}"
 				class="unselectable"
 				[ngStyle]="{'background-image': 'url(' +image+ ')'}"
-				[ngClass]="{selected: imageIn == cur}"
+
 				(click)="navigateToImage(patient[selectedExamIndex].examinationID, cur)"
 				></span>
 			</div>
