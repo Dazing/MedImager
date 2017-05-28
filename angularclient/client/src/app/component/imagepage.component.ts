@@ -86,6 +86,8 @@ export class ImagePageComponent {
 		.then(res => {
 			let patient = res.json();
 			let found = false;
+			console.log('PATIENT:');
+			console.log(patient);
 			patient.forEach(exam => {
 				exam.thumbnailUrls = [];
 				for (let i=0; i < exam.imagePaths.length; i++) {
@@ -93,7 +95,11 @@ export class ImagePageComponent {
 					this.http.get(this.server.getUrl() + '/thumbnail/' + exam.examinationID + '/' + i, options)
 					.toPromise()
 					.then(res => {
+						console.log('THUMB RES:');
+						console.log(res);
 						exam.thumbnailUrls[i] = window.URL.createObjectURL(res.blob());
+						console.log('THUMB URL:');
+						console.log(exam.thumbnailUrls[i]);
 					});
 				}
 				
@@ -148,6 +154,8 @@ export class ImagePageComponent {
 			this.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl(
 				window.URL.createObjectURL(res.blob())
 			)
+			console.log('IMG SRC:');
+			console.log(this.imageSrc);
 			this.imageLoaded = true;
 			this.display = true;
 		});
