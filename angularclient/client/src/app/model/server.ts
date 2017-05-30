@@ -21,6 +21,8 @@ export class Server {
 		"snuff": "Snusning",
 		"sympNow": "Nuvarande besvär",
 		"sympSite": "Besvärslokalisation",
+		"symptNow": "Nuvarande besvär",
+		"symptSite": "Besvärslokalisation",
 		"treatType": "Behandling",
 		"vasNow": "Besvärssvårighet",
 	}
