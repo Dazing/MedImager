@@ -546,6 +546,9 @@
   display: table;
   margin: 0 auto 20px; }
 
+.side-nav a {
+  height: auto; }
+
 .primary-colour {
   background-color: #1de9b6; }
 
