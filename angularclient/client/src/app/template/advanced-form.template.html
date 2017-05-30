@@ -8,7 +8,7 @@
 							-----
 						</option>
 						<option *ngFor="let parameterList of parameterLists; let i = index" [ngValue]="i">
-							{{parameterList}}
+							{{translateTerm(parameterList)}}
 						</option>
 					</select>
 

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms'
 
 import { SearchService } from '../service/search.service';
 import { AdvancedFormService } from '../service/advanced-form.service';
+import { Server } from '../model/server';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
@@ -29,7 +30,8 @@ export	 class AdvancedFormComponent {
 		private router: Router, 
 		private ar: ActivatedRoute,
 		private formBuilder: FormBuilder,
-		private searchService: SearchService
+		private searchService: SearchService,
+		private server: Server
 	){}
 
 	ngOnInit(): void {
@@ -120,5 +122,9 @@ export	 class AdvancedFormComponent {
 		return (15) +  //bottom padding
 		(this.selectedParameterLists.length*64.5) + //row heights
 		(this.selectedParameterLists[this.selectedParameterLists.length-1]!=-1 ? 55 : 0); //add button
+	}
+
+	public translateTerm(term: string): string {
+		return this.server.translateTerm(term);
 	}
 }
