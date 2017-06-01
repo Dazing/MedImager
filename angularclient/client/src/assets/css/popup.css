@@ -45,7 +45,8 @@
   min-width: 500px;
   position: relative; }
   #popup-image-container .popup-preloader {
-    border-color: #1de9b6;
+    border-color: #1de9b6; }
+  #popup-image-container .preloader-wrapper {
     position: absolute;
     top: calc(50% - 32px);
     left: calc(50% - 32px); }
