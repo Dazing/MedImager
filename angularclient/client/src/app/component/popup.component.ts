@@ -20,6 +20,7 @@ export class PopupComponent {
     public imageWidth: number;
     public liked:boolean = false;
     public imgSrc:SafeResourceUrl = '';
+    public imageLoaded = false;
 
     private dialogVisible = false;
     private dialogType: string;
@@ -40,9 +41,10 @@ export class PopupComponent {
 			this.popup = popup;
             this.visible = true;
             this.resolutionLoaded = false;
-
-            this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex,url=>{
+            this.imageLoaded = false;
+            this.searchService.getImage(this.popup.examinationID +'/' + this.popup.imageIndex, url=>{
                 this.imgSrc=url;
+                this.imageLoaded = true;
             })
         })
 

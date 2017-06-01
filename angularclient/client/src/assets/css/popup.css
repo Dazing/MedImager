@@ -44,6 +44,12 @@
   max-width: 100vw;
   min-width: 500px;
   position: relative; }
+  #popup-image-container .popup-preloader {
+    border-color: #1de9b6;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); }
 
 #popup-image-previous {
   position: absolute;
