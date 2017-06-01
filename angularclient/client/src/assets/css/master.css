@@ -307,14 +307,12 @@
   #popup-image-container .popup-preloader {
     border-color: #1de9b6;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%); }
+    top: calc(50% - 32px);
+    left: calc(50% - 32px); }
 
 #popup-image-previous {
   position: absolute;
-  top: 50%;
-  margin-top: -70px;
+  top: calc(50% - 45px);
   text-shadow: -1px -1px 0 #000000, 1px 1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
   color: #ffffff;
   z-index: 1000;
@@ -325,8 +323,7 @@
 
 #popup-image-next {
   position: absolute;
-  top: 50%;
-  margin-top: -70px;
+  top: calc(50% - 45px);
   text-shadow: -1px -1px 0 #000000, 1px 1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
   color: #ffffff;
   z-index: 1000;
